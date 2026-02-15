@@ -57,7 +57,6 @@
     button,input{font-family:inherit}
     .wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(18px,4vw,44px);position:relative;z-index:2}
 
-    /* ===== Header (Aivro-like: simple, centered, no white card) ===== */
     .topbar{
       position:sticky; top:0; z-index:50;
       background: rgba(0,0,0,.55);
@@ -101,7 +100,6 @@
     .score{opacity:.9}
     .score span{opacity:.7}
 
-    /* ===== Sections (black/white alternation like screenshots) ===== */
     section{
       position:relative;
       padding: clamp(84px,8vw,120px) 0;
@@ -118,7 +116,6 @@
       color: var(--ink);
     }
 
-    /* floating dust like Aivro */
     .dust{
       position:absolute; inset:-40px;
       pointer-events:none;
@@ -136,7 +133,6 @@
       50%{transform:translateY(16px)}
     }
 
-    /* blue glow */
     .glow{
       position:absolute; inset:-80px;
       pointer-events:none;
@@ -151,7 +147,6 @@
       50%{transform:translateY(-14px)}
     }
 
-    /* ===== Hero layout ===== */
     .hero{
       min-height: 92svh;
       display:grid;
@@ -198,7 +193,6 @@
       max-width: 62ch;
     }
 
-    /* ===== The city zone: colored, pulsating, shadow (NO extra cards everywhere) ===== */
     .cityZone{
       margin-top: 22px;
       width:min(560px, 100%);
@@ -250,7 +244,6 @@
     }
     .input::placeholder{color: rgba(255,255,255,.55); font-weight:850}
 
-    /* suggestions dropdown */
     .suggest{
       margin-top: 10px;
       border-radius: 16px;
@@ -281,7 +274,6 @@
       opacity:.75;
     }
 
-    /* CTA like screenshot: big, glossy, blue */
     .cta{
       margin-top: 12px;
       width:100%;
@@ -317,14 +309,6 @@
       60%{opacity:.55}
       100%{transform:translateX(60%);opacity:0}
     }
-    .cta.disabled{
-      background: rgba(255,255,255,.10);
-      color: rgba(255,255,255,.75);
-      border:1px solid rgba(255,255,255,.12);
-      opacity:.95;
-      box-shadow: 0 22px 70px rgba(0,0,0,.35);
-    }
-    .cta.disabled:before{display:none}
     .cta:hover{transform: translateY(-1px); filter:saturate(1.05)}
     .cta:active{transform: translateY(0)}
 
@@ -336,7 +320,31 @@
       text-align:center;
     }
 
-    /* mini chips under hero like Aivro */
+    /* NEW: petit lien local (sous le bouton) */
+    .localLinkWrap{
+      margin-top: 10px;
+      text-align:center;
+      display:none;
+      position:relative;
+      z-index:2;
+    }
+    .localLink{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-weight:850;
+      font-size:13px;
+      color: rgba(234,240,247,.82);
+      opacity:.95;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.10);
+      transition: transform .15s ease, background .15s ease;
+    }
+    .localLink:hover{transform: translateY(-1px); background: rgba(82,172,217,.14)}
+    .localLink svg{width:16px;height:16px;opacity:.9}
+
     .chips{
       margin-top: 14px;
       display:flex;
@@ -358,7 +366,6 @@
     }
     .chip svg{width:16px;height:16px;opacity:.9}
 
-    /* ===== Light sections titles like screenshot ===== */
     .h2{
       margin:0;
       font-size: clamp(32px, 4vw, 52px);
@@ -378,7 +385,6 @@
       font-size:16px;
     }
 
-    /* cards like screenshot (white section, blue top bar illusion) */
     .stepStack{margin-top: 28px; display:grid; gap:18px; max-width: 780px; margin-left:auto; margin-right:auto;}
     .step{
       border-radius: 26px;
@@ -429,7 +435,6 @@
       line-height:1.7;
     }
 
-    /* Dark section rows */
     .rows{margin-top:24px; display:grid; gap:12px; max-width: 860px; margin-left:auto; margin-right:auto;}
     .row{
       display:flex;justify-content:space-between;align-items:center;gap:14px;
@@ -442,7 +447,6 @@
     .row b{font-weight:950;letter-spacing:-.02em}
     .row small{opacity:.7;font-weight:750}
 
-    /* ===== Responsive: hero centered on mobile like your ask ===== */
     @media (max-width: 980px){
       .heroGrid{grid-template-columns:1fr}
       h1,.sub{text-align:center}
@@ -450,7 +454,6 @@
       .cityZone{margin-left:auto;margin-right:auto}
     }
 
-    /* ===== reduced motion ===== */
     @media (prefers-reduced-motion: reduce){
       .dust,.glow,.cityZone{animation:none!important}
       .cta:before{animation:none!important}
@@ -460,13 +463,11 @@
 
 <body>
 
-  <!-- HEADER -->
   <div class="topbar">
     <div class="wrap">
       <div class="inner">
         <div class="top-left">
           <div class="logo" aria-hidden="true">
-            <!-- Mets ton logo ici (chemin web, pas C:\...) -->
             <img src="media/logob.png" alt="">
           </div>
         </div>
@@ -487,7 +488,6 @@
     </div>
   </div>
 
-  <!-- 1) DARK HERO -->
   <section class="dark">
     <div class="dust" aria-hidden="true"></div>
     <div class="glow" aria-hidden="true"></div>
@@ -497,23 +497,40 @@
         <div>
           <div class="kicker">Plomberie d’urgence</div>
           <h1>Trouve un plombier <span class="accent">dans ta ville</span>.</h1>
-          <p class="sub">Entre ta ville, ouvre la page locale, puis appelle le professionnel disponible. Simple, rapide, clair.</p>
+          <p class="sub">On détecte ta localisation automatiquement et on t’affiche le bon numéro à appeler.</p>
 
-          <!-- CITY ZONE (color + pulse + shadow) -->
           <div class="cityZone" id="cityZone">
             <div class="field">
               <svg class="pin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke="rgba(255,255,255,.92)" stroke-width="2"/>
                 <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="rgba(255,255,255,.22)"/>
               </svg>
-              <input id="cityInput" class="input" type="text" placeholder="Ex : Trois-Rivières" autocomplete="off">
+
+              <!-- On garde le look input, mais il sert de statut -->
+              <input id="cityInput" class="input" type="text" placeholder="Autorise la localisation…" autocomplete="off" readonly>
             </div>
 
-            <div id="suggest" class="suggest" role="listbox" aria-label="Suggestions de villes"></div>
+            <!-- On garde la boîte suggest (même look) mais on l'utilise comme message -->
+            <div id="suggest" class="suggest on" role="status" aria-live="polite">
+              <div class="sItem" style="cursor:default;">
+                <div id="statusLine">Détection de ta ville…</div>
+                <div class="sMeta" id="statusMeta">Veuillez patienter</div>
+              </div>
+            </div>
 
-            <button id="goBtn" class="cta disabled" type="button" aria-disabled="true">Ouvrir la page locale</button>
+            <button id="goBtn" class="cta" type="button">Appeler maintenant</button>
 
-            <div class="hint">Écris ta ville. Si elle existe, elle apparaît. Le bouton devient actif.</div>
+            <div class="localLinkWrap" id="localLinkWrap">
+              <a class="localLink" id="localLink" href="trois-rivieres/" aria-label="Accéder à la page de Trois-Rivières">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M14 7l5 5-5 5" stroke="rgba(234,240,247,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M19 12H5" stroke="rgba(234,240,247,.92)" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Accéder à la page de Trois-Rivières
+              </a>
+            </div>
+
+            <div class="hint" id="hintLine">On te demandera peut-être d’autoriser la localisation.</div>
 
             <div class="chips" aria-label="Atouts">
               <span class="chip">
@@ -541,11 +558,10 @@
     </div>
   </section>
 
-  <!-- 2) LIGHT: How it works (stack cards like screenshot) -->
   <section class="light">
     <div class="wrap">
       <h2 class="h2">Comment ça <span class="blue">marche</span></h2>
-      <p class="pCenter">Tu restes dans la bonne ville, tu ouvres la page locale correspondante, puis tu appelles.</p>
+      <p class="pCenter">Tu autorises la localisation, on t’affiche le bon numéro, puis tu appelles.</p>
 
       <div class="stepStack" aria-label="Étapes">
         <div class="step">
@@ -553,8 +569,8 @@
           <div class="stepBody">
             <div class="num">1</div>
             <div>
-              <h3>Écris ta ville</h3>
-              <p>On te propose les villes disponibles automatiquement.</p>
+              <h3>Autorise la localisation</h3>
+              <p>On détecte ta ville automatiquement.</p>
             </div>
           </div>
         </div>
@@ -564,8 +580,8 @@
           <div class="stepBody">
             <div class="num">2</div>
             <div>
-              <h3>Sélectionne</h3>
-              <p>Tu ouvres la page locale correspondante (pas de perte de temps).</p>
+              <h3>Appelle</h3>
+              <p>Le bon numéro s’affiche selon ta ville.</p>
             </div>
           </div>
         </div>
@@ -575,8 +591,8 @@
           <div class="stepBody">
             <div class="num">3</div>
             <div>
-              <h3>Appelle</h3>
-              <p>Connexion selon disponibilité locale et l’heure.</p>
+              <h3>Accède à ta page locale</h3>
+              <p>Quand elle est disponible (ex: Trois-Rivières).</p>
             </div>
           </div>
         </div>
@@ -584,7 +600,6 @@
     </div>
   </section>
 
-  <!-- 3) DARK: Problems -->
   <section class="dark">
     <div class="dust" aria-hidden="true"></div>
     <div class="glow" aria-hidden="true"></div>
@@ -603,7 +618,6 @@
     </div>
   </section>
 
-  <!-- 4) LIGHT: Legal -->
   <section class="light">
     <div class="wrap">
       <h2 class="h2">Mentions <span class="blue">légales</span></h2>
@@ -615,22 +629,26 @@
   </section>
 
   <script>
-    // Villes + pages locales (mets TES vraies pages ici)
-    const CITIES = [
-      { name:"Trois-Rivières", slug:"trois-rivieres/" },
-      { name:"Montréal", slug:"montreal.html" },
-      { name:"Québec", slug:"quebec.html" },
-      { name:"Laval", slug:"laval.html" },
-      { name:"Longueuil", slug:"longueuil.html" },
-      { name:"Sherbrooke", slug:"sherbrooke.html" },
-      { name:"Gatineau", slug:"gatineau.html" },
-      { name:"Drummondville", slug:"drummondville.html" }
-    ];
+    // =========================
+    // CONFIG (TES NUMÉROS)
+    // =========================
+    const PHONE_TR = "+15555555555";      // Trois-Rivières
+    const PHONE_OTHER = "+18733391815";   // Autres villes
 
+    const SLUG_TR = "trois-rivieres/";    // page locale TR
+
+    // =========================
+    // UI refs
+    // =========================
     const input = document.getElementById("cityInput");
     const suggest = document.getElementById("suggest");
+    const statusLine = document.getElementById("statusLine");
+    const statusMeta = document.getElementById("statusMeta");
+    const hintLine = document.getElementById("hintLine");
     const goBtn = document.getElementById("goBtn");
+    const localLinkWrap = document.getElementById("localLinkWrap");
 
+    // Helpers
     const norm = (s) => (s||"")
       .toLowerCase()
       .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
@@ -638,88 +656,113 @@
       .replace(/\s+/g," ")
       .trim();
 
-    function setSelected(city){
-      if(city){
-        input.value = city.name;
-        goBtn.classList.remove("disabled");
-        goBtn.setAttribute("aria-disabled","false");
-        goBtn.dataset.slug = city.slug;
-      }else{
-        goBtn.classList.add("disabled");
-        goBtn.setAttribute("aria-disabled","true");
-        goBtn.dataset.slug = "";
+    function fmtPrettyPhone(e164){
+      // Affiche joli sur le bouton (mais utilise tel: en E164)
+      if(!e164) return "";
+      // si c'est +1XXXXXXXXXX
+      if(/^(\+1)(\d{10})$/.test(e164)){
+        const d = e164.replace("+1","");
+        return `+1 (${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`;
+      }
+      return e164;
+    }
+
+    function setRoute(isTrois){
+      if(isTrois){
+        input.value = "Trois-Rivières";
+        statusLine.textContent = "Ville détectée : Trois-Rivières";
+        statusMeta.textContent = "Numéro local disponible";
+        hintLine.textContent = "Appelle maintenant, ou ouvre la page locale.";
+        localLinkWrap.style.display = "block";
+        goBtn.textContent = `Appeler ${fmtPrettyPhone(PHONE_TR)}`;
+        goBtn.dataset.tel = PHONE_TR;
+      } else {
+        localLinkWrap.style.display = "none";
+        goBtn.textContent = `Appeler ${fmtPrettyPhone(PHONE_OTHER)}`;
+        goBtn.dataset.tel = PHONE_OTHER;
       }
     }
 
-    function filterCities(q){
-      const nq = norm(q);
-      if(!nq) return [];
-      const starts=[], includes=[];
-      for(const c of CITIES){
-        const nn = norm(c.name);
-        if(nn.startsWith(nq)) starts.push(c);
-        else if(nn.includes(nq)) includes.push(c);
-      }
-      return [...starts, ...includes].slice(0, 7);
+    async function reverseGeocode(lat, lon){
+      // Nominatim (OSM) reverse geocoding
+      const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}&accept-language=fr`;
+      const res = await fetch(url, { headers: { "Accept": "application/json" } });
+      if(!res.ok) throw new Error("Reverse geocode failed");
+      return await res.json();
     }
 
-    function renderSuggest(list){
-      if(!list.length){
-        suggest.classList.remove("on");
-        suggest.innerHTML = "";
+    async function detectCity(){
+      // Default UI
+      suggest.classList.add("on");
+      statusLine.textContent = "Détection de ta ville…";
+      statusMeta.textContent = "Veuillez patienter";
+      hintLine.textContent = "On te demandera peut-être d’autoriser la localisation.";
+      input.value = "";
+
+      if(!navigator.geolocation){
+        statusLine.textContent = "Localisation non supportée.";
+        statusMeta.textContent = "On affiche le numéro général";
+        hintLine.textContent = "Ton navigateur ne supporte pas la localisation.";
+        setRoute(false);
         return;
       }
-      suggest.innerHTML = list.map(c => `
-        <div class="sItem" role="option" tabindex="0" data-name="${c.name}" data-slug="${c.slug}">
-          <div>${c.name}</div>
-          <div class="sMeta">Sélectionner</div>
-        </div>
-      `).join("");
-      suggest.classList.add("on");
+
+      navigator.geolocation.getCurrentPosition(async (pos) => {
+        try{
+          const { latitude, longitude } = pos.coords;
+          statusLine.textContent = "Localisation trouvée…";
+          statusMeta.textContent = "On détecte ta ville";
+
+          const data = await reverseGeocode(latitude, longitude);
+          const addr = data.address || {};
+          const city =
+            addr.city || addr.town || addr.village || addr.municipality || addr.county || "";
+
+          const cityNorm = norm(city);
+          const isTrois =
+            cityNorm.includes("trois rivieres") || cityNorm.includes("trois-rivieres") || cityNorm === "trois rivieres";
+
+          if(city){
+            input.value = city;
+            statusLine.textContent = `Ville détectée : ${city}`;
+            statusMeta.textContent = "On te montre le bon numéro";
+          } else {
+            statusLine.textContent = "Ville non détectée.";
+            statusMeta.textContent = "On affiche le numéro général";
+          }
+
+          setRoute(isTrois);
+        } catch(err){
+          statusLine.textContent = "Impossible de détecter la ville.";
+          statusMeta.textContent = "On affiche le numéro général";
+          hintLine.textContent = "Tu peux quand même appeler le numéro affiché.";
+          setRoute(false);
+        }
+      }, (err) => {
+        // Permission denied / timeout / etc.
+        statusLine.textContent = "Localisation refusée.";
+        statusMeta.textContent = "On affiche le numéro général";
+        hintLine.textContent = "Autorise la localisation pour obtenir le numéro local si disponible.";
+        setRoute(false);
+      }, {
+        enableHighAccuracy: false,
+        timeout: 8000,
+        maximumAge: 60000
+      });
     }
 
-    input.addEventListener("input", () => {
-      setSelected(null);
-      renderSuggest(filterCities(input.value));
-    });
-
-    input.addEventListener("focus", () => {
-      renderSuggest(filterCities(input.value));
-    });
-
-    input.addEventListener("blur", () => {
-      const exact = CITIES.find(c => norm(c.name) === norm(input.value));
-      if(exact) setSelected(exact);
-      setTimeout(() => { suggest.classList.remove("on"); }, 140);
-    });
-
-    suggest.addEventListener("click", (e) => {
-      const item = e.target.closest(".sItem");
-      if(!item) return;
-      setSelected({ name: item.dataset.name, slug: item.dataset.slug });
-      suggest.classList.remove("on");
-    });
-
-    input.addEventListener("keydown", (e) => {
-      if(e.key === "Enter"){
-        const list = filterCities(input.value);
-        if(list.length){
-          setSelected(list[0]);
-          suggest.classList.remove("on");
-          e.preventDefault();
-        }
-      }
-      if(e.key === "Escape") suggest.classList.remove("on");
-    });
-
     goBtn.addEventListener("click", () => {
-      const slug = goBtn.dataset.slug;
-      if(!slug) return;
-      window.location.href = slug;
+      const tel = goBtn.dataset.tel || PHONE_OTHER;
+      // tel: doit être en format +1XXXXXXXXXX (E164)
+      window.location.href = `tel:${tel}`;
     });
+
+    // Auto-run
+    detectCity();
   </script>
 </body>
 </html>
+
 
 
 
