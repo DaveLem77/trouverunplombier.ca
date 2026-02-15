@@ -1,4 +1,4 @@
-<!doctype html> 
+<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
@@ -6,20 +6,19 @@
   <title>Trouver un plombier d’urgence | TrouverUnPlombier.ca</title>
   <meta name="description" content="Service indépendant de mise en relation avec des plombiers locaux. Urgence 24/7 selon disponibilité.">
 
-  <!-- ===== FAVICON ===== -->
+  <!-- FAVICON -->
   <link rel="icon" type="image/png" href="media/logob.png">
   <link rel="apple-touch-icon" href="media/logob.png">
 
-  <!-- ===== OPEN GRAPH / PARTAGE ===== -->
+  <!-- PARTAGE (mets ton domaine réel) -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Trouver un plombier d’urgence | TrouverUnPlombier.ca">
   <meta property="og:description" content="Service indépendant de mise en relation avec des plombiers locaux. Urgence 24/7 selon disponibilité.">
   <meta property="og:image" content="https://trouverunplombier.ca/media/share.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:url" content="https://www.trouverunplombier.ca/">
+  <meta property="og:url" content="https://trouverunplombier.ca/">
 
-  <!-- ===== TWITTER / X ===== -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Trouver un plombier d’urgence | TrouverUnPlombier.ca">
   <meta name="twitter:description" content="Service indépendant de mise en relation avec des plombiers locaux. Urgence 24/7 selon disponibilité.">
@@ -33,15 +32,22 @@
     :root{
       --blue:#52acd9;
       --blue2:#2f86b3;
+      --gold:#d8b255;
+
       --dark:#07090c;
       --dark2:#0b0f14;
-      --light:#ffffff;
+
       --paper:#f6f8fb;
       --ink:#0b1220;
-      --muted:#5b6778;
 
       --max:1100px;
       --r:26px;
+
+      /* bouton phone (identique à ta page TR) */
+      --btnTop:#ffffff;
+      --btnMid:#fbfbfd;
+      --btnBot:#eeeeF2;
+      --btnInk:#0b0f14;
     }
 
     *{box-sizing:border-box}
@@ -57,6 +63,7 @@
     button,input{font-family:inherit}
     .wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(18px,4vw,44px);position:relative;z-index:2}
 
+    /* ===== Header ===== */
     .topbar{
       position:sticky; top:0; z-index:50;
       background: rgba(0,0,0,.55);
@@ -96,10 +103,11 @@
     }
     .stars{display:inline-flex;gap:3px;transform:translateY(1px)}
     .star{width:14px;height:14px;display:block}
-    .star path{fill:#d8b255}
+    .star path{fill:var(--gold)}
     .score{opacity:.9}
     .score span{opacity:.7}
 
+    /* ===== Sections ===== */
     section{
       position:relative;
       padding: clamp(84px,8vw,120px) 0;
@@ -116,6 +124,7 @@
       color: var(--ink);
     }
 
+    /* dust + glow */
     .dust{
       position:absolute; inset:-40px;
       pointer-events:none;
@@ -128,10 +137,7 @@
         radial-gradient(2px 2px at 48% 44%, rgba(255,255,255,.12) 40%, transparent 42%);
       animation: dustMove 10s ease-in-out infinite;
     }
-    @keyframes dustMove{
-      0%,100%{transform:translateY(0)}
-      50%{transform:translateY(16px)}
-    }
+    @keyframes dustMove{0%,100%{transform:translateY(0)}50%{transform:translateY(16px)}}
 
     .glow{
       position:absolute; inset:-80px;
@@ -142,11 +148,9 @@
       opacity:.9;
       animation: glowDrift 9s ease-in-out infinite;
     }
-    @keyframes glowDrift{
-      0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-14px)}
-    }
+    @keyframes glowDrift{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 
+    /* ===== Hero ===== */
     .hero{
       min-height: 92svh;
       display:grid;
@@ -173,7 +177,6 @@
       background: linear-gradient(90deg, transparent, rgba(82,172,217,.95), transparent);
       opacity:.9;
     }
-
     h1{
       margin: 14px 0 0 0;
       font-weight:950;
@@ -193,6 +196,7 @@
       max-width: 62ch;
     }
 
+    /* ===== Zone ===== */
     .cityZone{
       margin-top: 22px;
       width:min(560px, 100%);
@@ -242,6 +246,7 @@
       letter-spacing:-.02em;
       font-size:16px;
     }
+    /* IMPORTANT: pas de “Activer…” dans le champ */
     .input::placeholder{color: rgba(255,255,255,.55); font-weight:850}
 
     .suggest{
@@ -261,7 +266,6 @@
       justify-content:space-between;
       align-items:center;
       gap:12px;
-      cursor:default;
       border-top:1px solid rgba(255,255,255,.08);
       font-weight:900;
     }
@@ -273,60 +277,215 @@
       white-space:nowrap;
     }
 
-    .cta{
+    /* ===== Bouton “Activer ma localisation” (super visible) ===== */
+    .locBtn{
       margin-top: 12px;
       width:100%;
       border:0;
-      border-radius: 18px;
-      padding: 15px 16px;
-      font-weight:950;
+      border-radius: 20px;
+      padding: 18px 16px;
+      cursor:pointer;
+      font-weight:980;
       letter-spacing:-.02em;
       font-size:16px;
-      cursor:pointer;
-      background: linear-gradient(180deg, rgba(82,172,217,1), rgba(47,134,179,1));
       color: rgba(8,10,12,.92);
-      box-shadow:
-        0 24px 80px rgba(0,0,0,.55),
-        0 18px 65px rgba(82,172,217,.22);
-      opacity:.85;
-      transform: translateY(0);
-      transition: transform .15s ease, opacity .15s ease, filter .15s ease;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
       position:relative;
       overflow:hidden;
+
+      background:
+        radial-gradient(900px 160px at 50% -15%, rgba(255,255,255,.60), transparent 65%),
+        linear-gradient(180deg, rgba(115,210,255,1), rgba(47,134,179,1));
+
+      box-shadow:
+        0 34px 140px rgba(0,0,0,.72),
+        0 0 0 1px rgba(255,255,255,.16) inset,
+        0 18px 70px rgba(82,172,217,.25);
+
+      transform: translateY(0);
+      transition: transform .15s ease, filter .15s ease;
+      z-index:2;
     }
-    .cta:before{
+    .locBtn:after{
       content:"";
       position:absolute; inset:0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent);
-      transform: translateX(-60%);
-      animation: sheen 3s ease-in-out infinite;
-      opacity:.65;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+      transform: translateX(-70%);
+      animation: sheen 2.2s ease-in-out infinite;
+      opacity:.75;
     }
     @keyframes sheen{
-      0%{transform:translateX(-60%);opacity:0}
-      25%{opacity:.55}
-      60%{opacity:.55}
-      100%{transform:translateX(60%);opacity:0}
+      0%{transform:translateX(-70%);opacity:0}
+      25%{opacity:.85}
+      65%{opacity:.85}
+      100%{transform:translateX(70%);opacity:0}
     }
-    .cta.disabled{
-      background: rgba(255,255,255,.10);
-      color: rgba(255,255,255,.75);
-      border:1px solid rgba(255,255,255,.12);
-      opacity:.95;
-      box-shadow: 0 22px 70px rgba(0,0,0,.35);
-      cursor:not-allowed;
+    @keyframes locPulse{
+      0%,100%{transform: translateY(0)}
+      50%{transform: translateY(-3px)}
     }
-    .cta.disabled:before{display:none}
-    .cta:hover{transform: translateY(-1px); filter:saturate(1.05)}
-    .cta.disabled:hover{transform:none; filter:none}
+    .locBtn:not(.disabled){ animation: locPulse 1.35s ease-in-out infinite; }
+    .locBtn:hover{ transform: translateY(-4px); filter: saturate(1.06) brightness(1.02); }
+    .locBtn:active{ transform: translateY(0); }
 
-    .hint{
-      margin-top: 10px;
-      color: rgba(234,240,247,.75);
-      font-weight:600;
-      line-height:1.6;
-      text-align:center;
+    .locBtn.disabled{
+      cursor:not-allowed;
+      opacity:.95;
+      background: rgba(255,255,255,.10);
+      color: rgba(255,255,255,.80);
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 22px 70px rgba(0,0,0,.35);
+      animation:none;
     }
+    .locBtn.disabled:after{display:none}
+
+    .locIcon{
+      width:22px;height:22px;
+      display:grid;place-items:center;
+      border-radius: 12px;
+      background: rgba(11,15,20,.06);
+      border:1px solid rgba(11,15,20,.10);
+      box-shadow: 0 16px 40px rgba(0,0,0,.06) inset;
+    }
+    .locIcon svg{width:18px;height:18px;opacity:.95}
+
+    /* ===== Bouton téléphone IDENTIQUE (copié) ===== */
+    .callBox{
+      margin-top: 12px;
+      width: 100%;
+      border-radius: 22px;
+      padding: 14px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 28px 90px rgba(0,0,0,.55);
+      position:relative;
+      overflow:hidden;
+      display:none; /* caché tant qu’on n’a pas la ville */
+      z-index:2;
+    }
+    .callBox.on{display:block}
+
+    .callBox:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(560px 280px at 18% 30%, rgba(82,172,217,.22), transparent 62%),
+        radial-gradient(520px 260px at 84% 70%, rgba(82,172,217,.14), transparent 62%);
+      opacity:.95;
+      pointer-events:none;
+      animation: boxDrift 7.5s ease-in-out infinite;
+    }
+    @keyframes boxDrift{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+    .callBtn{
+      width:100%;
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: 18px;
+      padding: 18px 16px;
+      cursor:pointer;
+
+      background:
+        radial-gradient(900px 140px at 50% -10%, rgba(255,255,255,.95), transparent 62%),
+        linear-gradient(180deg, var(--btnTop) 0%, var(--btnMid) 55%, var(--btnBot) 100%);
+
+      color: var(--btnInk);
+      font-weight:950;
+      letter-spacing:-.02em;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      position:relative;
+      overflow:hidden;
+
+      box-shadow:
+        0 34px 140px rgba(0,0,0,.72),
+        0 0 0 1px rgba(255,255,255,.75) inset,
+        0 18px 60px rgba(255,255,255,.12);
+
+      animation: callPulse 1.25s ease-in-out infinite;
+      transform: translateY(0);
+      transition: transform .15s ease, filter .15s ease;
+    }
+    @keyframes callPulse{
+      0%,100%{
+        transform: translateY(0);
+        box-shadow:
+          0 34px 140px rgba(0,0,0,.72),
+          0 0 0 1px rgba(255,255,255,.75) inset,
+          0 18px 60px rgba(255,255,255,.12);
+      }
+      50%{
+        transform: translateY(-4px);
+        box-shadow:
+          0 46px 170px rgba(0,0,0,.78),
+          0 0 0 1px rgba(255,255,255,.85) inset,
+          0 26px 80px rgba(255,255,255,.16);
+      }
+    }
+    .callBtn:after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent);
+      transform: translateX(-70%);
+      animation: sheen2 2.0s ease-in-out infinite;
+      opacity:.75;
+    }
+    @keyframes sheen2{
+      0%{transform:translateX(-70%);opacity:0}
+      25%{opacity:.85}
+      65%{opacity:.85}
+      100%{transform:translateX(70%);opacity:0}
+    }
+    .callBtn:hover{
+      transform: translateY(-4px);
+      filter: contrast(1.08) saturate(1.02);
+    }
+    .callBtn:active{transform: translateY(0)}
+
+    .callLeft{
+      display:flex; align-items:center; gap:12px;
+      min-width:0;
+    }
+    .callIcon{
+      width:44px;height:44px;border-radius:14px;
+      background: rgba(11,15,20,.05);
+      border: 1px solid rgba(11,15,20,.10);
+      display:grid;place-items:center;
+      box-shadow: 0 16px 40px rgba(0,0,0,.06) inset;
+      flex:0 0 auto;
+    }
+    .callIcon svg{width:20px;height:20px;opacity:.95}
+    .callText{min-width:0}
+    .callText b{
+      display:block;
+      font-size: 15px;
+      letter-spacing:-.02em;
+      line-height:1.1;
+    }
+    .callText span{
+      display:block;
+      margin-top:4px;
+      font-size: 19px;
+      font-weight:980;
+      letter-spacing:-.03em;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .callArrow{
+      width:46px;height:46px;border-radius:16px;
+      background: rgba(11,15,20,.05);
+      border: 1px solid rgba(11,15,20,.10);
+      display:grid;place-items:center;
+      flex:0 0 auto;
+      transition: transform .15s ease;
+    }
+    .callBtn:hover .callArrow{transform: translateX(2px)}
+    .callArrow svg{width:18px;height:18px;opacity:.95}
 
     .localLinkWrap{
       margin-top: 10px;
@@ -351,6 +510,14 @@
     }
     .localLink:hover{transform: translateY(-1px); background: rgba(82,172,217,.14)}
     .localLink svg{width:16px;height:16px;opacity:.9}
+
+    .hint{
+      margin-top: 10px;
+      color: rgba(234,240,247,.75);
+      font-weight:600;
+      line-height:1.6;
+      text-align:center;
+    }
 
     .chips{
       margin-top: 14px;
@@ -463,7 +630,9 @@
 
     @media (prefers-reduced-motion: reduce){
       .dust,.glow,.cityZone{animation:none!important}
-      .cta:before{animation:none!important}
+      .callBox:before,.callBtn,.callBtn:after{animation:none!important}
+      .locBtn:not(.disabled){animation:none!important}
+      .locBtn:after{animation:none!important}
     }
   </style>
 </head>
@@ -495,6 +664,7 @@
     </div>
   </div>
 
+  <!-- HERO -->
   <section class="dark">
     <div class="dust" aria-hidden="true"></div>
     <div class="glow" aria-hidden="true"></div>
@@ -504,7 +674,7 @@
         <div>
           <div class="kicker">Plomberie d’urgence</div>
           <h1>Trouve un plombier <span class="accent">dans ta ville</span>.</h1>
-          <p class="sub">Clique pour activer ta localisation. On détecte ta ville puis on t’affiche le bon numéro à appeler.</p>
+          <p class="sub">Active ta localisation, puis appelle immédiatement le bon numéro.</p>
 
           <div class="cityZone" id="cityZone">
             <div class="field">
@@ -513,17 +683,52 @@
                 <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="rgba(255,255,255,.22)"/>
               </svg>
 
-              <input id="cityInput" class="input" type="text" placeholder="Activer ma localisation" readonly>
+              <!-- pas de “Activer…” ici -->
+              <input id="cityInput" class="input" type="text" placeholder="Ville détectée (après activation)" readonly>
             </div>
 
-            <div id="suggest" class="suggest" role="status" aria-live="polite">
+            <div class="suggest" role="status" aria-live="polite">
               <div class="sItem">
-                <div id="statusLine">Clique sur “Activer ma localisation”.</div>
-                <div class="sMeta" id="statusMeta">On montrera le bon numéro</div>
+                <div id="statusLine">Clique sur le bouton pour activer la localisation.</div>
+                <div class="sMeta" id="statusMeta">On affichera le bon numéro</div>
               </div>
             </div>
 
-            <button id="goBtn" class="cta" type="button">Activer ma localisation</button>
+            <!-- Bouton visible (texte UNE seule fois) -->
+            <button id="locBtn" class="locBtn" type="button">
+              <span class="locIcon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke="rgba(11,15,20,.92)" stroke-width="2"/>
+                  <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="rgba(11,15,20,.20)"/>
+                </svg>
+              </span>
+              <span id="locLabel">Activer ma localisation</span>
+            </button>
+
+            <!-- Bouton téléphone IDENTIQUE (apparaît après détection) -->
+            <div class="callBox" id="callBox" aria-label="Appeler">
+              <button class="callBtn" id="callBtn" type="button">
+                <span class="callLeft">
+                  <span class="callIcon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M22 16.9v3a2 2 0 0 1-2.2 2c-9.1-.7-16.3-7.9-17-17A2 2 0 0 1 4.9 2h3a2 2 0 0 1 2 1.7c.1.8.3 1.7.6 2.4a2 2 0 0 1-.5 2.1L9 9.2c1.5 2.7 3.7 4.9 6.4 6.4l1-1a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.4.6A2 2 0 0 1 22 16.9z"
+                            stroke="rgba(11,15,20,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <span class="callText">
+                    <b>Appel immédiat</b>
+                    <span id="phoneText">+1 (000) 000-0000</span>
+                  </span>
+                </span>
+
+                <span class="callArrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12h12" stroke="rgba(11,15,20,.92)" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M13 6l6 6-6 6" stroke="rgba(11,15,20,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </button>
+            </div>
 
             <div class="localLinkWrap" id="localLinkWrap">
               <a class="localLink" id="localLink" href="trois-rivieres/" aria-label="Accéder à la page de Trois-Rivières">
@@ -563,6 +768,7 @@
     </div>
   </section>
 
+  <!-- LIGHT -->
   <section class="light">
     <div class="wrap">
       <h2 class="h2">Comment ça <span class="blue">marche</span></h2>
@@ -597,7 +803,7 @@
             <div class="num">3</div>
             <div>
               <h3>Appeler</h3>
-              <p>Tu appelles immédiatement (et page locale si Trois-Rivières).</p>
+              <p>Appel immédiat (page locale si Trois-Rivières).</p>
             </div>
           </div>
         </div>
@@ -605,6 +811,7 @@
     </div>
   </section>
 
+  <!-- DARK -->
   <section class="dark">
     <div class="dust" aria-hidden="true"></div>
     <div class="glow" aria-hidden="true"></div>
@@ -623,6 +830,7 @@
     </div>
   </section>
 
+  <!-- LIGHT -->
   <section class="light">
     <div class="wrap">
       <h2 class="h2">Mentions <span class="blue">légales</span></h2>
@@ -635,26 +843,35 @@
 
   <script>
     // =========================
-    // CONFIG (TES NUMÉROS)
+    // NUMÉROS (mets tes vrais)
     // =========================
-    const PHONE_TR = "+15555555555";      // Trois-Rivières (à changer)
-    const PHONE_OTHER = "+18733391815";   // Autres villes (OK)
-    const SLUG_TR = "trois-rivieres/";    // page locale TR
+    const PHONE_TR_TEL = "+1-555-555-5555";
+    const PHONE_TR_UI  = "+1 (555) 555-5555";
+
+    const PHONE_OTHER_TEL = "+1-873-339-1815";
+    const PHONE_OTHER_UI  = "+1 (873) 339-1815";
+
+    const SLUG_TR = "trois-rivieres/";
 
     // =========================
-    // UI refs
+    // UI
     // =========================
     const input = document.getElementById("cityInput");
     const statusLine = document.getElementById("statusLine");
     const statusMeta = document.getElementById("statusMeta");
     const hintLine = document.getElementById("hintLine");
-    const goBtn = document.getElementById("goBtn");
+
+    const locBtn = document.getElementById("locBtn");
+    const locLabel = document.getElementById("locLabel");
+
+    const callBox = document.getElementById("callBox");
+    const callBtn = document.getElementById("callBtn");
+    const phoneText = document.getElementById("phoneText");
+
     const localLinkWrap = document.getElementById("localLinkWrap");
     const localLink = document.getElementById("localLink");
 
-    // state
-    let mode = "activate"; // activate -> call
-    let activeTel = PHONE_OTHER;
+    let activeTel = PHONE_OTHER_TEL;
 
     const norm = (s) => (s||"")
       .toLowerCase()
@@ -662,15 +879,6 @@
       .replace(/[-’'.,]/g," ")
       .replace(/\s+/g," ")
       .trim();
-
-    function fmtPrettyPhone(e164){
-      if(!e164) return "";
-      if(/^(\+1)(\d{10})$/.test(e164)){
-        const d = e164.replace("+1","");
-        return `+1 (${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`;
-      }
-      return e164;
-    }
 
     function qs(name){
       return new URLSearchParams(location.search).get(name);
@@ -683,7 +891,16 @@
       return await res.json();
     }
 
-    function setRouteByCity(city){
+    function showLoading(){
+      locBtn.classList.add("disabled");
+      locBtn.setAttribute("aria-disabled","true");
+      locLabel.textContent = "Autorise la localisation…";
+      statusLine.textContent = "Demande de localisation…";
+      statusMeta.textContent = "Une permission peut apparaître en haut";
+      hintLine.textContent = "Si rien n’apparaît : vérifie HTTPS + permission du navigateur.";
+    }
+
+    function showCallForCity(city){
       const cityClean = (city || "").trim();
       const cityNorm = norm(cityClean);
 
@@ -691,76 +908,84 @@
         cityNorm.includes("trois rivieres") ||
         cityNorm.includes("trois-rivieres");
 
-      input.value = cityClean || (isTrois ? "Trois-Rivières" : "");
+      // champ = ville détectée (remplace le “Activer…”)
+      input.value = cityClean || (isTrois ? "Trois-Rivières" : "Ville détectée");
 
+      // Choix du numéro
       if(isTrois){
-        activeTel = PHONE_TR;
+        activeTel = PHONE_TR_TEL;
+        phoneText.textContent = PHONE_TR_UI;
+
         localLinkWrap.style.display = "block";
         localLink.href = SLUG_TR;
-        statusLine.textContent = `Ville détectée : ${cityClean || "Trois-Rivières"}`;
+
+        statusLine.textContent = `Ville détectée : ${input.value}`;
         statusMeta.textContent = "Numéro local disponible";
         hintLine.textContent = "Appelle maintenant, ou ouvre la page locale.";
       }else{
-        activeTel = PHONE_OTHER;
+        activeTel = PHONE_OTHER_TEL;
+        phoneText.textContent = PHONE_OTHER_UI;
+
         localLinkWrap.style.display = "none";
+
         statusLine.textContent = cityClean ? `Ville détectée : ${cityClean}` : "Ville détectée.";
         statusMeta.textContent = "Numéro général affiché";
         hintLine.textContent = "Appelle maintenant.";
       }
 
-      mode = "call";
-      goBtn.classList.remove("disabled");
-      goBtn.setAttribute("aria-disabled","false");
-      goBtn.textContent = `Appeler ${fmtPrettyPhone(activeTel)}`;
-      goBtn.dataset.tel = activeTel;
+      // On cache le bouton de localisation et on montre le call button identique
+      locBtn.style.display = "none";
+      callBox.classList.add("on");
     }
 
-    function setActivateIdle(){
-      mode = "activate";
-      input.value = "";
-      statusLine.textContent = "Clique sur “Activer ma localisation”.";
-      statusMeta.textContent = "On montrera le bon numéro";
-      hintLine.textContent = "Aucune demande de localisation sans ton clic.";
-      localLinkWrap.style.display = "none";
-      goBtn.classList.remove("disabled");
-      goBtn.setAttribute("aria-disabled","false");
-      goBtn.textContent = "Activer ma localisation";
-      goBtn.dataset.tel = "";
-    }
+    function failToGeneral(reasonLine, metaLine){
+      statusLine.textContent = reasonLine;
+      statusMeta.textContent = metaLine;
+      hintLine.textContent = "Tu peux quand même appeler le numéro général.";
+      input.value = "Ville non détectée";
+      activeTel = PHONE_OTHER_TEL;
+      phoneText.textContent = PHONE_OTHER_UI;
 
-    function setLoading(){
-      statusLine.textContent = "Demande de localisation…";
-      statusMeta.textContent = "Autorise pour afficher le bon numéro";
-      hintLine.textContent = "La localisation est demandée uniquement après ton clic.";
+      locBtn.style.display = "none";
       localLinkWrap.style.display = "none";
-      goBtn.classList.add("disabled");
-      goBtn.setAttribute("aria-disabled","true");
-      goBtn.textContent = "Chargement…";
+      callBox.classList.add("on");
     }
 
     async function requestLocation(){
-      // ===== TEST super simple via URL =====
+      // TEST : ?mock_city=Trois-Rivières
       const mockCity = qs("mock_city");
       if(mockCity){
-        statusLine.textContent = "Mode test activé";
-        statusMeta.textContent = "mock_city détecté";
-        setRouteByCity(mockCity);
+        showCallForCity(mockCity);
+        return;
+      }
+
+      // Bloqué sans HTTPS (sauf localhost)
+      if(location.protocol !== "https:" && location.hostname !== "localhost"){
+        failToGeneral("Localisation bloquée (pas en HTTPS).", "Utilise GitHub Pages / HTTPS");
         return;
       }
 
       if(!navigator.geolocation){
-        statusLine.textContent = "Localisation non supportée.";
-        statusMeta.textContent = "Numéro général affiché";
-        setRouteByCity("");
+        failToGeneral("Localisation non supportée.", "Numéro général affiché");
         return;
       }
 
-      setLoading();
+      // Permissions (si disponible) : message clair si denied
+      if(navigator.permissions && navigator.permissions.query){
+        try{
+          const p = await navigator.permissions.query({ name: "geolocation" });
+          if(p.state === "denied"){
+            failToGeneral("Localisation refusée dans le navigateur.", "Cadenas à gauche → Autoriser");
+            return;
+          }
+        }catch(e){}
+      }
+
+      showLoading();
 
       navigator.geolocation.getCurrentPosition(async (pos) => {
         try{
           const { latitude, longitude } = pos.coords;
-
           statusLine.textContent = "Localisation trouvée…";
           statusMeta.textContent = "Détection de la ville";
 
@@ -769,42 +994,32 @@
           const city =
             addr.city || addr.town || addr.village || addr.municipality || addr.county || "";
 
-          setRouteByCity(city || "");
-        } catch(e){
-          statusLine.textContent = "Impossible de détecter la ville.";
-          statusMeta.textContent = "Numéro général affiché";
-          setRouteByCity("");
+          showCallForCity(city || "");
+        }catch(e){
+          failToGeneral("Impossible de détecter la ville.", "Numéro général affiché");
         }
       }, () => {
-        statusLine.textContent = "Localisation refusée.";
-        statusMeta.textContent = "Numéro général affiché";
-        hintLine.textContent = "Tu peux quand même appeler le numéro général.";
-        setRouteByCity("");
+        failToGeneral("Localisation refusée ou indisponible.", "Numéro général affiché");
       }, {
         enableHighAccuracy: false,
-        timeout: 8000,
+        timeout: 9000,
         maximumAge: 60000
       });
     }
 
-    goBtn.addEventListener("click", () => {
-      if(goBtn.classList.contains("disabled")) return;
-
-      if(mode === "activate"){
-        requestLocation();
-        return;
-      }
-
-      const tel = goBtn.dataset.tel || PHONE_OTHER;
-      window.location.href = `tel:${tel}`;
+    // click “Activer ma localisation”
+    locBtn.addEventListener("click", () => {
+      if(locBtn.classList.contains("disabled")) return;
+      requestLocation();
     });
 
-    // Start idle (no popup)
-    setActivateIdle();
+    // click call
+    callBtn.addEventListener("click", () => {
+      window.location.href = `tel:${activeTel}`;
+    });
   </script>
 </body>
 </html>
-
 
 
 
