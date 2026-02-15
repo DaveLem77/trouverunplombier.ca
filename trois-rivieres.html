@@ -12,20 +12,23 @@
 
   <style>
     :root{
-      --blue:#52acd9;
-      --blue2:#2f86b3;
+      --blue:#52acd9; /* ambiance du site ok */
       --gold:#d8b255;
 
       --dark:#07090c;
       --dark2:#0b0f14;
 
       --paper:#f6f8fb;
-
       --ink:#0b1220;
-      --muted:#5b6778;
 
       --max:1100px;
       --topbarH:56px;
+
+      /* bouton (0 bleu) */
+      --btnTop:#ffffff;
+      --btnMid:#fbfbfd;
+      --btnBot:#f0f1f4;
+      --btnInk:#0b0f14;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -89,13 +92,14 @@
     /* ===== Sections ===== */
     section{
       position:relative;
-      padding: clamp(72px,7vw,110px) 0;
+      padding: clamp(68px,6.6vw,104px) 0;
       overflow:hidden;
       isolation:isolate;
     }
     .dark{
-      background: radial-gradient(1200px 700px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
-                  linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
+      background:
+        radial-gradient(1200px 700px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
+        linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
       color:#eaf0f7;
     }
     .light{
@@ -103,7 +107,7 @@
       color: var(--ink);
     }
 
-    /* moving dust + glow */
+    /* moving dust + glow (ambiance bleue ok) */
     .dust{
       position:absolute; inset:-40px; pointer-events:none; opacity:.22;
       background:
@@ -129,58 +133,44 @@
     .reveal{opacity:0; transform: translateY(14px); transition: opacity .9s ease, transform .9s ease;}
     .reveal.on{opacity:1; transform: translateY(0);}
 
-    /* ===== HERO LOCAL (espace réduit sous header) ===== */
+    /* ===== HERO LOCAL (encore plus tight) ===== */
     .heroSection{
-      /* réduit le vide en haut (au lieu d’un gros “center vertical”) */
-      padding: 28px 0 56px; /* <<< IMPORTANT */
+      padding: 14px 0 44px; /* <<< encore moins de vide */
     }
     .hero{
-      min-height: calc(100svh - var(--topbarH)); /* pas de gros vide */
+      min-height: calc(100svh - var(--topbarH));
       display:grid;
-      align-items:start;              /* <<< IMPORTANT */
-      padding-top: 10px;              /* <<< IMPORTANT */
+      align-items:start;
+      padding-top: 0;        /* <<< collé */
     }
     .heroGrid{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
-      gap: clamp(16px,3.6vw,40px);
+      gap: clamp(14px,3.2vw,36px);
       align-items:start;
-      padding-top: 6px;               /* petit push up */
+      padding-top: 0;        /* <<< collé */
     }
-    .kicker{
-      text-transform:uppercase;
-      letter-spacing:.18em;
-      font-weight:900;
-      font-size:12px;
-      color: rgba(234,240,247,.78);
-      display:flex;align-items:center;gap:10px;
-      margin: 0;                      /* <<< IMPORTANT (plus de marge inutile) */
-    }
-    .kicker:before{
-      content:"";
-      width:28px;height:2px;
-      background: linear-gradient(90deg, transparent, rgba(82,172,217,.95), transparent);
-      opacity:.95;
-    }
+
     h1{
-      margin: 12px 0 0 0;
+      margin: 0;             /* <<< kicker enlevé, donc on part direct */
       font-weight:950;
       letter-spacing:-.07em;
       line-height:.98;
       font-size: clamp(44px, 5.6vw, 84px);
+      text-align:left;
     }
     .accent{color: var(--blue); text-shadow: 0 18px 70px rgba(82,172,217,.22);}
     .sub{
-      margin: 12px 0 0 0;
+      margin: 10px 0 0 0;
       color: rgba(234,240,247,.72);
       font-weight:600;
       line-height:1.7;
       max-width: 64ch;
     }
 
-    /* ===== CTA NUMÉRO (bouton NON bleu) ===== */
+    /* ===== CTA NUMÉRO (0 BLEU DANS LE BOUTON) ===== */
     .callBox{
-      margin-top: 16px;
+      margin-top: 14px;
       width: min(520px, 100%);
       border-radius: 22px;
       padding: 14px;
@@ -193,28 +183,29 @@
     .callBox:before{
       content:"";
       position:absolute; inset:-2px;
+      /* halo BLEU OK mais PAS le bouton */
       background:
-        radial-gradient(560px 280px at 18% 30%, rgba(82,172,217,.26), transparent 62%),
-        radial-gradient(520px 260px at 84% 70%, rgba(82,172,217,.18), transparent 62%);
-      opacity:.9;
+        radial-gradient(560px 280px at 18% 30%, rgba(82,172,217,.22), transparent 62%),
+        radial-gradient(520px 260px at 84% 70%, rgba(82,172,217,.14), transparent 62%);
+      opacity:.95;
       pointer-events:none;
       animation: boxDrift 7.5s ease-in-out infinite;
     }
     @keyframes boxDrift{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
-    /* --- Bouton blanc premium + glow bleu (pas bleu plein) --- */
     .callBtn{
       width:100%;
-      border: 1px solid rgba(82,172,217,.42);
+      border: 1px solid rgba(255,255,255,.65);
       border-radius: 18px;
       padding: 18px 16px;
       cursor:pointer;
 
+      /* 0 BLEU */
       background:
-        radial-gradient(1000px 160px at 50% 0%, rgba(82,172,217,.18), transparent 62%),
-        linear-gradient(180deg, #ffffff 0%, #f2f7fb 55%, #eaf2f8 100%);
+        radial-gradient(900px 120px at 50% 0%, rgba(255,255,255,.75), transparent 62%),
+        linear-gradient(180deg, var(--btnTop) 0%, var(--btnMid) 60%, var(--btnBot) 100%);
 
-      color: rgba(6,10,14,.92);
+      color: var(--btnInk);
       font-weight:950;
       letter-spacing:-.02em;
       display:flex;
@@ -224,10 +215,11 @@
       position:relative;
       overflow:hidden;
 
+      /* shadow premium (neutre) + micro glow blanc */
       box-shadow:
-        0 36px 120px rgba(0,0,0,.62),
-        0 26px 120px rgba(82,172,217,.28),
-        0 0 0 1px rgba(255,255,255,.55) inset;
+        0 40px 140px rgba(0,0,0,.66),
+        0 0 0 1px rgba(255,255,255,.70) inset,
+        0 18px 60px rgba(255,255,255,.10);
 
       animation: callPulse 1.55s ease-in-out infinite;
       transform: translateY(0);
@@ -237,36 +229,36 @@
       0%,100%{
         transform: translateY(0);
         box-shadow:
-          0 36px 120px rgba(0,0,0,.62),
-          0 22px 110px rgba(82,172,217,.26),
-          0 0 0 1px rgba(255,255,255,.55) inset;
+          0 40px 140px rgba(0,0,0,.66),
+          0 0 0 1px rgba(255,255,255,.70) inset,
+          0 18px 60px rgba(255,255,255,.10);
       }
       50%{
         transform: translateY(-3px);
         box-shadow:
-          0 44px 140px rgba(0,0,0,.66),
-          0 34px 150px rgba(82,172,217,.34),
-          0 0 0 1px rgba(255,255,255,.62) inset;
+          0 52px 170px rgba(0,0,0,.72),
+          0 0 0 1px rgba(255,255,255,.78) inset,
+          0 26px 80px rgba(255,255,255,.14);
       }
     }
     .callBtn:after{
       content:"";
       position:absolute; inset:0;
-      background: linear-gradient(90deg, transparent, rgba(82,172,217,.18), transparent);
+      /* sheen neutre (0 bleu) */
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
       transform: translateX(-65%);
-      animation: sheen 2.4s ease-in-out infinite;
-      opacity:.85;
-      mix-blend-mode: multiply;
+      animation: sheen 2.2s ease-in-out infinite;
+      opacity:.75;
     }
     @keyframes sheen{
       0%{transform:translateX(-65%);opacity:0}
-      25%{opacity:.9}
-      65%{opacity:.9}
+      25%{opacity:.8}
+      65%{opacity:.8}
       100%{transform:translateX(65%);opacity:0}
     }
     .callBtn:hover{
       transform: translateY(-3px);
-      filter: contrast(1.05) saturate(1.05);
+      filter: contrast(1.06) saturate(1.02);
     }
     .callBtn:active{transform: translateY(0)}
 
@@ -276,10 +268,11 @@
     }
     .callIcon{
       width:42px;height:42px;border-radius:14px;
-      background: rgba(82,172,217,.14);
-      border: 1px solid rgba(82,172,217,.22);
+      /* 0 bleu */
+      background: rgba(11,15,20,.06);
+      border: 1px solid rgba(11,15,20,.10);
       display:grid;place-items:center;
-      box-shadow: 0 16px 40px rgba(82,172,217,.12) inset;
+      box-shadow: 0 16px 40px rgba(0,0,0,.06) inset;
       flex:0 0 auto;
     }
     .callIcon svg{width:20px;height:20px;opacity:.95}
@@ -302,8 +295,8 @@
     }
     .callArrow{
       width:44px;height:44px;border-radius:16px;
-      background: rgba(11,18,32,.08);
-      border: 1px solid rgba(11,18,32,.10);
+      background: rgba(11,15,20,.06);
+      border: 1px solid rgba(11,15,20,.10);
       display:grid;place-items:center;
       flex:0 0 auto;
     }
@@ -439,19 +432,19 @@
       margin: 0 auto;
       display:flex; gap:10px; align-items:center; justify-content:space-between;
     }
-    /* mini bouton aussi non-bleu */
+    /* mini bouton aussi 0 bleu */
     .callMini{
       flex:1;
-      border: 1px solid rgba(82,172,217,.42);
+      border: 1px solid rgba(255,255,255,.70);
       border-radius: 16px;
       padding: 14px 14px;
       font-weight:950;
       letter-spacing:-.02em;
       background:
-        radial-gradient(900px 120px at 50% 0%, rgba(82,172,217,.16), transparent 62%),
-        linear-gradient(180deg, #ffffff 0%, #f2f7fb 60%, #eaf2f8 100%);
-      color: rgba(6,10,14,.92);
-      box-shadow: 0 18px 65px rgba(82,172,217,.24), 0 18px 55px rgba(0,0,0,.45);
+        radial-gradient(900px 120px at 50% 0%, rgba(255,255,255,.75), transparent 62%),
+        linear-gradient(180deg, var(--btnTop) 0%, var(--btnMid) 60%, var(--btnBot) 100%);
+      color: var(--btnInk);
+      box-shadow: 0 18px 60px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.60) inset;
       cursor:pointer;
     }
     .callGhost{
@@ -467,14 +460,14 @@
     @media (max-width: 980px){
       .heroGrid{grid-template-columns:1fr}
       h1,.sub{text-align:center}
-      .kicker{justify-content:center}
       .callBox{margin-left:auto;margin-right:auto}
+
       .grid3{grid-template-columns:1fr}
       .callBar{display:block}
 
-      /* encore plus tight sur mobile */
-      .heroSection{padding: 22px 0 52px;}
-      .hero{min-height: calc(100svh - var(--topbarH)); padding-top: 6px;}
+      .heroSection{padding: 10px 0 40px;} /* <<< encore plus tight mobile */
+      .hero{padding-top: 0}
+      .heroGrid{padding-top: 0}
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -519,7 +512,6 @@
     <div class="wrap hero">
       <div class="heroGrid reveal">
         <div>
-          <div class="kicker">Plombier d’urgence • Trois-Rivières</div>
           <h1>Appelle un plombier <span class="accent">maintenant</span>.</h1>
           <p class="sub">
             Connexion directe au professionnel disponible dans <b>Trois-Rivières</b>.
@@ -532,7 +524,7 @@
                 <span class="callIcon" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none">
                     <path d="M22 16.9v3a2 2 0 0 1-2.2 2c-9.1-.7-16.3-7.9-17-17A2 2 0 0 1 4.9 2h3a2 2 0 0 1 2 1.7c.1.8.3 1.7.6 2.4a2 2 0 0 1-.5 2.1L9 9.2c1.5 2.7 3.7 4.9 6.4 6.4l1-1a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.4.6A2 2 0 0 1 22 16.9z"
-                          stroke="rgba(6,10,14,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          stroke="rgba(11,15,20,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </span>
                 <span class="callText">
@@ -543,8 +535,8 @@
 
               <span class="callArrow" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M5 12h12" stroke="rgba(6,10,14,.92)" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M13 6l6 6-6 6" stroke="rgba(6,10,14,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M5 12h12" stroke="rgba(11,15,20,.92)" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M13 6l6 6-6 6" stroke="rgba(11,15,20,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </span>
             </button>
@@ -601,7 +593,7 @@
     <div class="glow" aria-hidden="true"></div>
 
     <div class="wrap reveal">
-      <h2 class="h2" style="color:#eaf0f7">Plomberie d’urgence <span class="accent">Trois-Rivières</span></h2>
+      <h2 class="h2" style="color:#eaf0f7">Services d’urgence</h2>
       <p class="pCenter" style="color:rgba(234,240,247,.70)">Quelques demandes courantes.</p>
 
       <div class="rows" aria-label="Services">
@@ -679,4 +671,5 @@
   </script>
 </body>
 </html>
+
 
