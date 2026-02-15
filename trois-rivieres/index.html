@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Plombier à Trois-Rivières 24/7 | TrouverUnPlombier.ca</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Urgence plomberie à Trois-Rivières. Mise en relation 24/7 selon disponibilité. Appel sans engagement." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #070a12;
+      --panel: rgba(255,255,255,.06);
+      --stroke: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.66);
+      --muted2: rgba(255,255,255,.52);
+      --shadow: 0 24px 70px rgba(0,0,0,.45);
+      --shadow2: 0 14px 40px rgba(0,0,0,.30);
+      --blue: #3b82f6;
+      --cyan: #22d3ee;
+      --green: #22c55e;
+      --radius: 22px;
+      --max: 1120px;
+    }
+
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1000px 560px at 15% 10%, rgba(34,211,238,.18), transparent 60%),
+        radial-gradient(1000px 560px at 85% 15%, rgba(59,130,246,.22), transparent 60%),
+        radial-gradient(1000px 560px at 50% 100%, rgba(34,197,94,.10), transparent 60%),
+        linear-gradient(180deg, #050611, #070a12 40%, #070a12);
+      overflow-x:hidden;
+    }
+
+    .wrap{ max-width: var(--max); margin:0 auto; padding: 18px 18px 56px; }
+
+    .nav{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow2);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 12px;
+      z-index: 50;
+    }
+    .back{
+      text-decoration:none;
+      color: var(--text);
+      font-weight: 900;
+      letter-spacing: -.01em;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      transition: transform .18s ease, border-color .18s ease;
+      display:inline-flex; gap:10px; align-items:center;
+    }
+    .back:hover{ transform: translateY(-1px); border-color: rgba(34,211,238,.22); }
+    .tag{
+      display:flex; align-items:center; gap:10px;
+      color: var(--muted);
+      font-weight: 850;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .dot{
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 0 rgba(34,197,94,.25);
+      animation: dotPulse 1.8s infinite;
+    }
+    @keyframes dotPulse{
+      0%{ box-shadow:0 0 0 0 rgba(34,197,94,.25) }
+      70%{ box-shadow:0 0 0 12px rgba(34,197,94,0) }
+      100%{ box-shadow:0 0 0 0 rgba(34,197,94,0) }
+    }
+
+    .hero{
+      margin-top: 16px;
+      border-radius: calc(var(--radius) + 10px);
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(800px 320px at 18% 0%, rgba(34,211,238,.18), transparent 60%),
+        radial-gradient(800px 320px at 88% 10%, rgba(59,130,246,.22), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero-in{
+      padding: clamp(22px, 4vw, 40px);
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+      align-items:start;
+    }
+
+    h1{
+      margin:0;
+      font-size: clamp(38px, 4.6vw, 66px);
+      line-height: 1.02;
+      letter-spacing: -.05em;
+      font-weight: 950;
+    }
+    .accent{
+      background: linear-gradient(90deg, rgba(34,211,238,.95), rgba(59,130,246,.95));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      white-space:nowrap;
+    }
+
+    .lead{
+      margin: 14px 0 0 0;
+      max-width: 70ch;
+      color: var(--muted);
+      font-size: clamp(15px, 1.55vw, 18px);
+      line-height: 1.7;
+    }
+
+    .bullets{
+      margin-top: 14px;
+      display:flex; flex-wrap:wrap; gap:10px;
+      color: rgba(255,255,255,.72);
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .bullets span{
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .callbox{
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      padding: 16px;
+    }
+    .callbox b{
+      display:block;
+      font-weight: 950;
+      letter-spacing: -.02em;
+      font-size: 16px;
+    }
+    .callbox p{
+      margin: 6px 0 0 0;
+      color: var(--muted2);
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .call{
+      margin-top: 12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .btn-call{
+      position:relative; overflow:hidden;
+      display:flex; align-items:center; justify-content:center; gap:10px;
+      padding: 16px 16px;
+      border-radius: 18px;
+      text-decoration:none;
+      font-weight: 950;
+      color: #061024;
+      background: linear-gradient(90deg, rgba(34,211,238,.95), rgba(59,130,246,.95));
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 20px 60px rgba(59,130,246,.22);
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+      animation: softPulse 2.7s ease-in-out infinite;
+      user-select:none;
+    }
+    @keyframes softPulse{
+      0%{ transform: scale(1); }
+      45%{ transform: scale(1.03); }
+      70%{ transform: scale(.995); }
+      100%{ transform: scale(1); }
+    }
+    .btn-call::before{
+      content:"";
+      position:absolute; top:-60%; left:-45%;
+      width:60%; height:220%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+      transform: rotate(18deg);
+      animation: sheen 3.6s infinite;
+      pointer-events:none;
+      opacity:.9;
+    }
+    @keyframes sheen{
+      0%{ transform: translateX(-30%) rotate(18deg); opacity:0; }
+      15%{ opacity:1; }
+      45%{ transform: translateX(230%) rotate(18deg); opacity:0; }
+      100%{ opacity:0; }
+    }
+    .btn-call:hover{
+      animation:none;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 28px 86px rgba(59,130,246,.30);
+      filter:saturate(1.05);
+    }
+    .btn-call:active{ transform: translateY(0) scale(1); }
+
+    .row{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding: 12px 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      color: rgba(255,255,255,.78);
+      font-weight: 850;
+      font-size: 13px;
+    }
+    .copy{
+      appearance:none;
+      cursor:pointer;
+      border-radius: 12px;
+      padding: 9px 10px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.92);
+      font-weight: 900;
+      transition: transform .18s ease, border-color .18s ease;
+    }
+    .copy:hover{ transform: translateY(-1px); border-color: rgba(34,211,238,.22); }
+
+    /* Content */
+    .section{
+      margin-top: 26px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-items:start;
+    }
+    .box{
+      padding: 18px 18px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .h2{
+      margin:0;
+      font-size: 18px;
+      font-weight: 950;
+      letter-spacing: -.02em;
+    }
+    .p{
+      margin: 10px 0 0 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 15.5px;
+    }
+    .list{
+      margin: 10px 0 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 15.5px;
+      display:grid;
+      gap: 6px;
+    }
+
+    details{
+      margin-top: 10px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 12px 14px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight: 950;
+      color: rgba(255,255,255,.90);
+    }
+    details p{
+      margin: 10px 0 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .legal{
+      margin-top: 34px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.55);
+      font-size: 12.5px;
+      line-height: 1.7;
+    }
+
+    /* Reveal */
+    .reveal{ opacity:0; transform: translateY(12px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.on{ opacity:1; transform: translateY(0); }
+
+    @media(max-width: 980px){
+      .hero-in{ grid-template-columns: 1fr; }
+      .section{ grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .dot, .btn-call{ animation:none!important; }
+      .btn-call::before{ display:none!important; }
+      .reveal{ opacity:1!important; transform:none!important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="nav" aria-label="Barre du haut">
+      <a class="back" href="index.html" aria-label="Retour accueil">← Accueil</a>
+      <div class="tag"><span class="dot" aria-hidden="true"></span> Trois-Rivières • 24/7 selon disponibilité</div>
+    </div>
+
+    <section class="hero" aria-label="Trois-Rivières">
+      <div class="hero-in">
+        <div class="reveal">
+          <h1>Plombier à <span class="accent">Trois-Rivières</span>, urgence 24/7.</h1>
+          <p class="lead">
+            Service indépendant de <strong>mise en relation</strong> avec des plombiers locaux à Trois-Rivières selon la disponibilité.
+            <strong>Appel sans engagement.</strong>
+          </p>
+
+          <div class="bullets" aria-label="Points clés">
+            <span>Réponse rapide</span>
+            <span>Plombiers locaux</span>
+            <span>Paiement au pro</span>
+            <span>Service indépendant</span>
+          </div>
+        </div>
+
+        <aside class="callbox reveal" aria-label="Appeler">
+          <b>Besoin d’un plombier maintenant?</b>
+          <p>Appelle. On tente de te connecter à un pro disponible dans ta zone.</p>
+
+          <div class="call">
+            <a class="btn-call" href="tel:+18733391815" aria-label="Appeler maintenant au 873 339 1815">
+              Appeler maintenant — 873&nbsp;339&nbsp;1815
+            </a>
+
+            <div class="row" aria-label="Copier le numéro">
+              <span>Numéro : <strong>873 339 1815</strong></span>
+              <button class="copy" id="copyBtn" type="button">Copier</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Informations">
+      <div class="box reveal">
+        <div class="h2">Problèmes fréquents</div>
+        <p class="p">
+          Fuite d’eau, toilette bouchée, drain/égout, chauffe-eau, évier, sous-sol humide, urgence après dégât d’eau.
+        </p>
+
+        <div style="height:14px"></div>
+
+        <div class="h2">Zones desservies</div>
+        <ul class="list">
+          <li>Trois-Rivières-Ouest</li>
+          <li>Cap-de-la-Madeleine</li>
+          <li>Pointe-du-Lac</li>
+          <li>Centre-ville</li>
+          <li>Secteur St-Louis-de-France</li>
+        </ul>
+      </div>
+
+      <div class="box reveal">
+        <div class="h2">Comment ça marche</div>
+        <ul class="list">
+          <li>Tu appelles</li>
+          <li>On tente de te mettre en relation avec un plombier disponible</li>
+          <li>Tu paies directement le professionnel</li>
+        </ul>
+
+        <div style="height:14px"></div>
+
+        <div class="h2">FAQ</div>
+        <details>
+          <summary>Vous êtes une entreprise de plomberie?</summary>
+          <p>Non. TrouverUnPlombier.ca est un service indépendant de mise en relation. Les réparations sont faites par un plombier partenaire.</p>
+        </details>
+        <details>
+          <summary>Combien ça coûte?</summary>
+          <p>Le prix dépend du problème. Tu paies directement le professionnel selon son estimation.</p>
+        </details>
+        <details>
+          <summary>Disponible le soir / la nuit?</summary>
+          <p>On tente de te mettre en relation 24/7 selon la disponibilité locale.</p>
+        </details>
+      </div>
+    </section>
+
+    <div class="legal">
+      <strong>Mentions légales :</strong> TrouverUnPlombier.ca (Trois-Rivières) est un service indépendant de mise en relation.
+      Nous ne sommes pas une entreprise de plomberie et n’effectuons aucune réparation.
+      Vous contractez et payez directement le professionnel. Disponibilité variable selon l’heure et la demande.
+    </div>
+  </div>
+
+  <script>
+    // Copy number
+    (function(){
+      const phone = "873 339 1815";
+      const btn = document.getElementById("copyBtn");
+      if(!btn) return;
+
+      btn.addEventListener("click", async () => {
+        const old = btn.textContent;
+        try{
+          await navigator.clipboard.writeText(phone);
+          btn.textContent = "Copié ✓";
+          setTimeout(()=> btn.textContent = old, 1400);
+        }catch(e){
+          const ta = document.createElement("textarea");
+          ta.value = phone;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          document.body.removeChild(ta);
+          btn.textContent = "Copié ✓";
+          setTimeout(()=> btn.textContent = old, 1400);
+        }
+      });
+    })();
+
+    // Reveal
+    (function(){
+      const els = document.querySelectorAll(".reveal");
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if(e.isIntersecting) e.target.classList.add("on");
+        });
+      }, { threshold: 0.12 });
+      els.forEach(el => io.observe(el));
+    })();
+  </script>
+</body>
+</html>
