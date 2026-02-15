@@ -147,10 +147,8 @@
       align-items:start;
     }
 
-    /* >>> plus d'espace net entre header et titre */
-    .heroSpacer{
-      height: 22px; /* augmente/diminue ici */
-    }
+    /* >>> espace entre header et titre (augmenté) */
+    .heroSpacer{ height: 32px; }
 
     h1{
       margin: 0;
@@ -172,7 +170,7 @@
 
     /* ===== CTA area ===== */
     .callBox{
-      margin-top: 14px; /* le bouton arrive juste après la microLine */
+      margin-top: 14px;
       width: min(520px, 100%);
       border-radius: 22px;
       padding: 14px;
@@ -301,15 +299,11 @@
     .callBtn:hover .callArrow{transform: translateX(2px)}
     .callArrow svg{width:18px;height:18px;opacity:.95}
 
-    /* ===== 3 pastilles SOUS le bouton ===== */
+    /* ===== Chips (base style) ===== */
     .chips{
-      margin-top: 12px;
       display:flex;
       flex-wrap:wrap;
       gap:10px;
-      justify-content:flex-start;
-      position:relative;
-      z-index:2;
     }
     .chip{
       display:inline-flex; align-items:center; gap:8px;
@@ -326,12 +320,62 @@
     .chip svg{width:16px;height:16px;opacity:.9}
 
     .miniNote{
-      margin-top: 10px;
-      text-align:center;
       color: rgba(234,240,247,.72);
       font-weight:650;
       line-height:1.55;
       font-size:13px;
+      text-align:center;
+    }
+
+    /* ===== Outside call box stack ===== */
+    .afterCall{
+      margin-top: 14px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap: 12px;
+    }
+    .afterCall .chips{ justify-content:center; }
+    .afterCall .miniNote{ max-width: 62ch; }
+
+    /* ===== scroll hint ===== */
+    .scrollHint{
+      margin-top: 8px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap: 8px;
+      opacity:.92;
+      user-select:none;
+    }
+    .scrollHint .dot{
+      width:46px; height:46px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 18px 70px rgba(0,0,0,.35);
+      display:grid; place-items:center;
+      cursor:pointer;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .scrollHint .dot:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.08);
+      border-color: rgba(82,172,217,.28);
+    }
+    .scrollHint svg{
+      width:18px; height:18px;
+      opacity:.9;
+      animation: scrollBounce 1.15s ease-in-out infinite;
+    }
+    @keyframes scrollBounce{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(6px)}
+    }
+    .scrollHint .label{
+      font-size: 12.5px;
+      font-weight: 750;
+      color: rgba(234,240,247,.68);
     }
 
     /* ===== Content ===== */
@@ -444,13 +488,13 @@
       .heroGrid{grid-template-columns:1fr}
       h1,.microLine{text-align:center}
       .callBox{margin-left:auto;margin-right:auto}
-      .chips{justify-content:center}
       .grid3{grid-template-columns:1fr}
       .heroSection{padding: 8px 0 40px;}
     }
     @media (prefers-reduced-motion: reduce){
       .dust,.glow,.callBox,.callBtn{animation:none!important}
       .callBtn:after{animation:none!important}
+      .scrollHint svg{animation:none!important}
       .reveal{opacity:1!important;transform:none!important}
     }
   </style>
@@ -497,7 +541,7 @@
 
           <p class="microLine">Connexion directe au pro disponible à <b>Trois-Rivières</b>.</p>
 
-          <!-- CTA DIRECTEMENT SOUS LA MICROLINE -->
+          <!-- CTA box = SEULEMENT le bouton -->
           <div class="callBox" aria-label="Appeler">
             <button class="callBtn" id="callBtn" type="button">
               <span class="callLeft">
@@ -520,8 +564,14 @@
                 </svg>
               </span>
             </button>
+          </div>
 
-            <!-- 3 pastilles SOUS le bouton -->
+          <!-- OUTSIDE the callBox -->
+          <div class="afterCall">
+            <div class="miniNote">
+              Service indépendant de mise en relation • Tu payes directement le professionnel.
+            </div>
+
             <div class="chips" aria-label="Avantages rapides">
               <div class="chip">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -537,8 +587,15 @@
               </div>
             </div>
 
-            <div class="miniNote">
-              Service indépendant de mise en relation • Tu payes directement le professionnel.
+            <!-- scroll hint -->
+            <div class="scrollHint" aria-label="Scroll">
+              <div class="dot" id="scrollHintBtn" role="button" tabindex="0" aria-label="Descendre">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M7 14l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="label">Scroll</div>
             </div>
           </div>
         </div>
@@ -635,6 +692,7 @@
 
     const phoneText = document.getElementById("phoneText");
     const callBtn = document.getElementById("callBtn");
+    const scrollHintBtn = document.getElementById("scrollHintBtn");
 
     phoneText.textContent = PHONE_NUMBER_UI;
 
@@ -642,6 +700,15 @@
       window.location.href = `tel:${PHONE_NUMBER_TEL}`;
     }
     callBtn.addEventListener("click", doCall);
+
+    function scrollToNext(){
+      const next = document.querySelector('section.light');
+      if(next) next.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+    if(scrollHintBtn){
+      scrollHintBtn.addEventListener("click", scrollToNext);
+      scrollHintBtn.addEventListener("keydown", (e)=>{ if(e.key==="Enter") scrollToNext(); });
+    }
 
     (function(){
       const els = document.querySelectorAll(".reveal");
@@ -651,8 +718,15 @@
       els.forEach(el => io.observe(el));
     })();
   </script>
+
+  <!--
+    IMPORTANT POUR L’URL SANS .html :
+    Mets ce fichier dans un dossier: /trois-rivieres/index.html
+    -> l’URL devient automatiquement: www.trouverunplombier.ca/trois-rivieres
+  -->
 </body>
 </html>
+
 
 
 
