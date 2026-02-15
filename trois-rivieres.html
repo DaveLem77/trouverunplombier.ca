@@ -12,7 +12,7 @@
 
   <style>
     :root{
-      --blue:#52acd9;          /* ambiance du site ok */
+      --blue:#52acd9;
       --gold:#d8b255;
 
       --dark:#07090c;
@@ -24,7 +24,7 @@
       --max:1100px;
       --topbarH:56px;
 
-      /* bouton premium (0 bleu dedans) */
+      /* bouton (0 bleu dedans) */
       --btnTop:#ffffff;
       --btnMid:#fbfbfd;
       --btnBot:#eeeeF2;
@@ -107,7 +107,7 @@
       color: var(--ink);
     }
 
-    /* moving dust + glow (ambiance bleue) */
+    /* moving dust + glow */
     .dust{
       position:absolute; inset:-40px; pointer-events:none; opacity:.22;
       background:
@@ -133,20 +133,23 @@
     .reveal{opacity:0; transform: translateY(14px); transition: opacity .9s ease, transform .9s ease;}
     .reveal.on{opacity:1; transform: translateY(0);}
 
-    /* ===== HERO (tight + conversion) ===== */
+    /* ===== HERO ===== */
     .heroSection{padding: 10px 0 44px;}
     .hero{
       min-height: calc(100svh - var(--topbarH));
       display:grid;
       align-items:start;
-      padding-top: 0;
     }
     .heroGrid{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
       gap: clamp(14px,3.2vw,36px);
       align-items:start;
-      padding-top: 0;
+    }
+
+    /* >>> plus d'espace net entre header et titre */
+    .heroSpacer{
+      height: 22px; /* augmente/diminue ici */
     }
 
     h1{
@@ -159,7 +162,6 @@
     }
     .accent{color: var(--blue); text-shadow: 0 18px 70px rgba(82,172,217,.22);}
 
-    /* micro texte + trust chips */
     .microLine{
       margin: 10px 0 0;
       color: rgba(234,240,247,.74);
@@ -167,51 +169,10 @@
       line-height:1.65;
       max-width: 60ch;
     }
-    .chips{
-      margin-top: 12px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-    }
-    .chip{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      color: rgba(234,240,247,.86);
-      font-weight:800;
-      font-size:13px;
-      letter-spacing:-.01em;
-      box-shadow: 0 18px 60px rgba(0,0,0,.35);
-    }
-    .chip svg{width:16px;height:16px;opacity:.9}
 
-    /* arrow nudge to CTA */
-    .nudge{
-      margin-top: 14px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      color: rgba(234,240,247,.70);
-      font-weight:800;
-      font-size:13px;
-      user-select:none;
-    }
-    .nudge .arr{
-      width:34px;height:34px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      display:grid;place-items:center;
-      box-shadow: 0 18px 60px rgba(0,0,0,.35);
-      animation: nudgeBounce 1.05s ease-in-out infinite;
-    }
-    @keyframes nudgeBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
-    .nudge svg{width:18px;height:18px;opacity:.9}
-
-    /* ===== CTA card ===== */
+    /* ===== CTA area ===== */
     .callBox{
-      margin-top: 16px;
+      margin-top: 14px; /* le bouton arrive juste après la microLine */
       width: min(520px, 100%);
       border-radius: 22px;
       padding: 14px;
@@ -224,7 +185,6 @@
     .callBox:before{
       content:"";
       position:absolute; inset:-2px;
-      /* halo BLEU autour OK */
       background:
         radial-gradient(560px 280px at 18% 30%, rgba(82,172,217,.22), transparent 62%),
         radial-gradient(520px 260px at 84% 70%, rgba(82,172,217,.14), transparent 62%);
@@ -234,7 +194,6 @@
     }
     @keyframes boxDrift{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
-    /* ===== CALL BUTTON (premium, high-contrast, not fade) ===== */
     .callBtn{
       width:100%;
       border: 1px solid rgba(0,0,0,.10);
@@ -242,7 +201,6 @@
       padding: 18px 16px;
       cursor:pointer;
 
-      /* 0 bleu */
       background:
         radial-gradient(900px 140px at 50% -10%, rgba(255,255,255,.95), transparent 62%),
         linear-gradient(180deg, var(--btnTop) 0%, var(--btnMid) 55%, var(--btnBot) 100%);
@@ -257,7 +215,6 @@
       position:relative;
       overflow:hidden;
 
-      /* plus punch premium */
       box-shadow:
         0 34px 140px rgba(0,0,0,.72),
         0 0 0 1px rgba(255,255,255,.75) inset,
@@ -265,7 +222,7 @@
 
       animation: callPulse 1.25s ease-in-out infinite;
       transform: translateY(0);
-      transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+      transition: transform .15s ease, filter .15s ease;
     }
     @keyframes callPulse{
       0%,100%{
@@ -286,7 +243,6 @@
     .callBtn:after{
       content:"";
       position:absolute; inset:0;
-      /* sheen neutre (0 bleu) */
       background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent);
       transform: translateX(-70%);
       animation: sheen 2.0s ease-in-out infinite;
@@ -327,7 +283,7 @@
     .callText span{
       display:block;
       margin-top:4px;
-      font-size: 19px; /* plus visible */
+      font-size: 19px;
       font-weight:980;
       letter-spacing:-.03em;
       white-space:nowrap;
@@ -344,6 +300,30 @@
     }
     .callBtn:hover .callArrow{transform: translateX(2px)}
     .callArrow svg{width:18px;height:18px;opacity:.95}
+
+    /* ===== 3 pastilles SOUS le bouton ===== */
+    .chips{
+      margin-top: 12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:flex-start;
+      position:relative;
+      z-index:2;
+    }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(234,240,247,.86);
+      font-weight:800;
+      font-size:13px;
+      letter-spacing:-.01em;
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+    }
+    .chip svg{width:16px;height:16px;opacity:.9}
 
     .miniNote{
       margin-top: 10px;
@@ -463,14 +443,13 @@
     @media (max-width: 980px){
       .heroGrid{grid-template-columns:1fr}
       h1,.microLine{text-align:center}
-      .chips{justify-content:center}
-      .nudge{justify-content:center}
       .callBox{margin-left:auto;margin-right:auto}
+      .chips{justify-content:center}
       .grid3{grid-template-columns:1fr}
       .heroSection{padding: 8px 0 40px;}
     }
     @media (prefers-reduced-motion: reduce){
-      .dust,.glow,.callBox,.callBtn,.nudge .arr{animation:none!important}
+      .dust,.glow,.callBox,.callBtn{animation:none!important}
       .callBtn:after{animation:none!important}
       .reveal{opacity:1!important;transform:none!important}
     }
@@ -510,39 +489,15 @@
 
     <div class="wrap hero">
       <div class="heroGrid reveal">
+
         <div>
+          <div class="heroSpacer" aria-hidden="true"></div>
+
           <h1>Appelle un plombier <span class="accent">maintenant</span>.</h1>
 
-          <!-- texte beaucoup plus court -->
           <p class="microLine">Connexion directe au pro disponible à <b>Trois-Rivières</b>.</p>
 
-          <!-- trust chips (ça remplace le long paragraphe) -->
-          <div class="chips" aria-label="Avantages rapides">
-            <div class="chip">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Appel direct
-            </div>
-            <div class="chip">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M12 1l7 4v6c0 5-3.8 9.4-7 10-3.2-.6-7-5-7-10V5l7-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Indépendant
-            </div>
-            <div class="chip">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M12 8v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2"/></svg>
-              Selon dispo
-            </div>
-          </div>
-
-          <!-- petite flèche qui attire l’œil vers CTA -->
-          <div class="nudge" aria-hidden="true">
-            <div class="arr">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M7 14l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <span>Tape pour appeler</span>
-          </div>
-
+          <!-- CTA DIRECTEMENT SOUS LA MICROLINE -->
           <div class="callBox" aria-label="Appeler">
             <button class="callBtn" id="callBtn" type="button">
               <span class="callLeft">
@@ -565,6 +520,22 @@
                 </svg>
               </span>
             </button>
+
+            <!-- 3 pastilles SOUS le bouton -->
+            <div class="chips" aria-label="Avantages rapides">
+              <div class="chip">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Appel direct
+              </div>
+              <div class="chip">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 1l7 4v6c0 5-3.8 9.4-7 10-3.2-.6-7-5-7-10V5l7-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Indépendant
+              </div>
+              <div class="chip">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 8v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2"/></svg>
+                Selon dispo
+              </div>
+            </div>
 
             <div class="miniNote">
               Service indépendant de mise en relation • Tu payes directement le professionnel.
@@ -682,7 +653,6 @@
   </script>
 </body>
 </html>
-
 
 
 
