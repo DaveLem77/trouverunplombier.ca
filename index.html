@@ -14,8 +14,8 @@
     :root{
       /* LIGHT */
       --bg:#e9ebef;
-      --paper:#eef0f4;
-      --paper2:#e3e7ef;
+      --light:#eef1f6;
+      --light2:#e2e8f2;
 
       /* DARK */
       --dark:#0f1115;
@@ -40,11 +40,8 @@
       --gold2:#caa24a;
 
       --max:1160px;
-
-      /* section rhythm */
-      --secY: clamp(78px, 7.8vw, 130px);
-      --waveH: 96px;
-
+      --secY: clamp(72px, 7vw, 120px);
+      --waveH: 92px;
       --r: 18px;
     }
 
@@ -59,15 +56,15 @@
     }
     a{color:inherit}
     input,button{font-family:inherit}
-    svg{display:block} /* kills seams */
+    svg{display:block} /* important: no white seams */
 
     .wrap{
       max-width: var(--max);
       margin:0 auto;
-      padding: 0 clamp(18px, 4vw, 52px);
+      padding: 0 clamp(18px, 4vw, 56px);
     }
 
-    /* grain */
+    /* subtle grain */
     .grain{
       position:fixed; inset:0; pointer-events:none;
       background:
@@ -75,29 +72,34 @@
         radial-gradient(900px 520px at 85% 18%, rgba(0,0,0,.02), transparent 62%),
         repeating-linear-gradient(0deg, rgba(0,0,0,.010) 0px, rgba(0,0,0,.010) 1px, transparent 1px, transparent 10px);
       opacity:.50;
+      z-index:0;
     }
 
-    /* animated blue life on light sections */
+    /* subtle animated blue life ONLY on light sections */
     .alive{
-      position:absolute; inset:-260px -240px;
+      position:absolute;
+      inset:-260px -240px;
       pointer-events:none;
       z-index:0;
       filter: blur(18px);
-      opacity:.40;
+      opacity:.42;
       background:
-        radial-gradient(760px 520px at 16% 22%, rgba(82,172,217,.32), transparent 62%),
-        radial-gradient(640px 520px at 84% 42%, rgba(82,172,217,.18), transparent 60%),
-        radial-gradient(520px 380px at 52% 86%, rgba(82,172,217,.12), transparent 58%);
+        radial-gradient(760px 520px at 15% 25%, rgba(82,172,217,.26), transparent 62%),
+        radial-gradient(620px 520px at 85% 40%, rgba(82,172,217,.16), transparent 60%),
+        radial-gradient(520px 380px at 50% 85%, rgba(82,172,217,.10), transparent 58%);
       animation: aqua 14s ease-in-out infinite;
       transform: translate3d(0,0,0);
     }
-    @keyframes aqua{0%,100%{transform:translate(-18px,-10px) scale(1)}50%{transform:translate(20px,14px) scale(1.05)}}
+    @keyframes aqua{
+      0%,100%{transform:translate(-18px,-10px) scale(1)}
+      50%{transform:translate(22px,14px) scale(1.05)}
+    }
 
-    /* ===== TOPBAR (compact premium) ===== */
+    /* ===== Sticky minimal premium header ===== */
     .topbar{
       position:sticky; top:0; z-index:50;
-      background: rgba(15,17,21,.92);
-      backdrop-filter: blur(10px);
+      background: rgba(15,17,21,.94);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
     .topbarInner{
@@ -108,12 +110,12 @@
     .brand{display:flex; align-items:center; gap:10px; min-width:0;}
     .logo{
       width:28px;height:28px;border-radius:10px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
       overflow:hidden; flex:0 0 auto;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
     }
-    .logo img{width:100%;height:100%;object-fit:cover;display:block}
+    .logo img{width:100%;height:100%;object-fit:cover}
     .domain{
       color: rgba(255,255,255,.92);
       font-weight: 950;
@@ -137,20 +139,21 @@
       white-space:nowrap;
     }
     .stars{display:inline-flex; gap:3px; filter: drop-shadow(0 1px 0 rgba(0,0,0,.35));}
-    .star{width:14px;height:14px; display:block;}
+    .star{width:14px;height:14px;}
     .star .fill{fill: url(#goldGrad); stroke: rgba(0,0,0,.22); stroke-width: .6;}
     .score{display:inline-flex; align-items:baseline; gap:6px; font-weight: 900;}
     .score span{color: rgba(255,255,255,.55); font-weight: 850;}
 
-    /* ===== SECTIONS: consistent spacing + wave safe zones ===== */
+    /* ===== Sections: consistent spacing + wave safe zones ===== */
     .section{
       position:relative;
       isolation:isolate;
       overflow:hidden;
-      background: var(--paper);
+      z-index:1;
     }
-    .section.light2{ background: var(--paper2); }
-    .section.dark{
+    .light{ background: var(--light); }
+    .light2{ background: var(--light2); }
+    .dark{
       background: linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
       color: var(--darkInk);
     }
@@ -168,19 +171,20 @@
       height: var(--waveH);
       pointer-events:none;
       z-index:3;
-      transform: translateY(1px); /* overlap seam */
+      transform: translateY(1px);
     }
     .wave.top{ top:-1px; transform: rotate(180deg) translateY(1px); }
     .wave.bottom{ bottom:-1px; }
 
-    /* ===== HERO layout ===== */
+    /* ===== HERO: no cards, strong money spot ===== */
     .hero{
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns: 1.05fr .95fr;
       gap: clamp(18px, 4vw, 44px);
       align-items:start;
     }
 
+    .heroLeft{padding-right: clamp(0px, 2vw, 18px);}
     h1{
       margin:0;
       font-size: clamp(44px, 4.8vw, 88px);
@@ -201,66 +205,69 @@
     }
     @keyframes underline{0%,100%{transform:scaleX(.55); opacity:.12;}50%{transform:scaleX(1); opacity:.28;}}
 
-    /* ===== NEW CITY INPUT: colorful, pulse, shadow, NO big frame ===== */
-    .moneyStack{
-      margin-top: 18px;
-      max-width: 560px;
+    /* MONEY SPOT: input + button (different, colorful, pulse, shadow) */
+    .money{
+      margin-top: 22px;
+      max-width: 640px;
     }
 
-    /* one clean component */
-    .cityFocus{
+    .cityShell{
       position:relative;
-      padding: 18px 0 10px;
+      border-radius: 20px;
+      padding: 18px 16px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.78));
+      border: 1px solid rgba(12,17,27,.10);
+      box-shadow:
+        0 28px 80px rgba(0,0,0,.14),
+        inset 0 1px 0 rgba(255,255,255,.70);
+      overflow: visible;
     }
 
-    /* glow aura that moves/pulses */
-    .cityGlow{
+    /* animated aura behind the input area */
+    .cityShell:before{
+      content:"";
       position:absolute;
-      left:-18px; right:-18px;
-      top: 2px;
-      height: 86px;
-      border-radius: 999px;
+      left:-22px; right:-22px;
+      top:-14px; bottom:-14px;
+      border-radius: 26px;
       background:
-        radial-gradient(420px 80px at 20% 50%, rgba(82,172,217,.42), transparent 65%),
-        radial-gradient(420px 80px at 80% 50%, rgba(82,172,217,.26), transparent 65%);
-      filter: blur(10px);
-      opacity:.85;
-      animation: glow 2.35s ease-in-out infinite;
-      pointer-events:none;
+        radial-gradient(520px 140px at 20% 30%, rgba(82,172,217,.34), transparent 60%),
+        radial-gradient(520px 140px at 80% 60%, rgba(82,172,217,.20), transparent 62%);
+      filter: blur(12px);
+      opacity:.78;
+      z-index:-1;
+      animation: glow 2.2s ease-in-out infinite;
     }
     @keyframes glow{
-      0%,100%{transform:translateY(0) scale(1); opacity:.78;}
-      50%{transform:translateY(-2px) scale(1.02); opacity:1;}
+      0%,100%{transform:translateY(0) scale(1); opacity:.68;}
+      50%{transform:translateY(-2px) scale(1.02); opacity:.95;}
     }
 
-    /* input base: minimal but strong */
     .cityRow{
-      position:relative;
       display:flex;
       align-items:center;
       gap:12px;
-      padding: 16px 16px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.92);
+      padding: 14px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.86);
       border: 1px solid rgba(12,17,27,.10);
-      box-shadow:
-        0 22px 70px rgba(0,0,0,.14),
-        inset 0 1px 0 rgba(255,255,255,.70);
-      transform: translateZ(0);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.62);
+      position:relative;
     }
 
-    /* thin accent line (premium, not childish) */
-    .cityRow:before{
+    /* minimal accent stroke (not “blue inside”) */
+    .cityRow:after{
       content:"";
       position:absolute;
-      left:14px; right:14px; bottom:8px;
+      left:12px; right:12px; bottom:-1px;
       height:2px;
       border-radius:999px;
-      background: linear-gradient(90deg, rgba(82,172,217,0), rgba(82,172,217,.72), rgba(82,172,217,0));
-      opacity:.55;
+      background: linear-gradient(90deg, rgba(82,172,217,0), rgba(82,172,217,.70), rgba(82,172,217,0));
+      opacity:.62;
     }
 
-    .pin{width:18px;height:18px; opacity:.74; flex:0 0 auto;}
+    .pin{width:18px;height:18px; opacity:.78; flex:0 0 auto;}
     input[type="text"]{
       width:100%;
       border:0; outline:none;
@@ -274,48 +281,48 @@
     }
     input::placeholder{color: rgba(12,17,27,.42); font-weight: 850;}
 
-    /* suggestions */
+    /* suggestions dropdown */
     .suggest{
       position:absolute;
       left:0; right:0;
       top: calc(100% + 10px);
       display:none;
-      z-index:25;
+      z-index:30;
       opacity:0;
       transform: translateY(-6px);
       transition: opacity .18s ease, transform .18s ease;
     }
     .suggest.on{display:block; opacity:1; transform: translateY(0);}
     .sList{
-      background: rgba(255,255,255,.95);
-      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(12px);
       border: 1px solid rgba(12,17,27,.12);
-      border-radius: 18px;
+      border-radius: 16px;
       overflow:hidden;
-      box-shadow: 0 24px 70px rgba(0,0,0,.14);
+      box-shadow: 0 26px 80px rgba(0,0,0,.16);
     }
     .sItem{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
-      padding: 14px 16px;
+      padding: 14px 14px;
       border-top: 1px solid rgba(12,17,27,.08);
       cursor:pointer;
       user-select:none;
     }
     .sItem:first-child{border-top:0;}
     .sName{font-weight:980; letter-spacing:-.02em;}
-    .sMeta{color: var(--muted2); font-weight:800; font-size:13px;}
+    .sMeta{color: var(--muted2); font-weight:850; font-size:13px;}
     .sItem:hover{ background: rgba(82,172,217,.12); }
 
-    /* CTA */
+    /* CTA under input */
     .cta{
-      margin-top: 14px;
-      width: 100%;
+      margin-top: 12px;
+      width:100%;
       justify-content:center;
-      border-radius: 999px;
-      padding: 14px 18px;
+      border-radius: 14px;
+      padding: 14px 16px;
       font-weight: 980;
       letter-spacing:-.01em;
       display:inline-flex;
@@ -323,16 +330,14 @@
       gap:10px;
       text-decoration:none;
       user-select:none;
-      white-space:nowrap;
 
-      opacity: .70;
+      opacity: .72;
       pointer-events:none;
       cursor:not-allowed;
 
       border: 1px solid rgba(12,17,27,.14);
-      background: rgba(255,255,255,.65);
-      color: rgba(12,17,27,.82);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.65);
+      background: rgba(12,17,27,.04);
+      color: rgba(12,17,27,.74);
       transition: transform .16s ease, background .16s ease, border-color .16s ease, box-shadow .16s ease, opacity .16s ease;
     }
     .cta svg{width:18px;height:18px; opacity:.85;}
@@ -343,23 +348,21 @@
       background: var(--a);
       border-color: rgba(82,172,217,.90);
       color: rgba(255,255,255,.95);
-      box-shadow: 0 18px 48px rgba(82,172,217,.28);
-      animation: breathe 2.2s ease-in-out infinite;
+      box-shadow: 0 22px 60px rgba(82,172,217,.30);
+      animation: breathe 2.1s ease-in-out infinite;
     }
     @keyframes breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-1px)}}
-    .cta.ready:hover{ transform: translateY(-2px); animation:none; box-shadow: 0 22px 62px rgba(82,172,217,.34); }
+    .cta.ready:hover{ transform: translateY(-2px); animation:none; box-shadow: 0 26px 72px rgba(82,172,217,.36); }
     .cta.ready:active{ transform: translateY(0); }
 
     .helper{
-      margin-top: 14px;
+      margin: 12px 2px 0;
       color: var(--muted);
-      font-weight: 560;
-      font-size: 17px;
-      line-height: 1.7;
-      max-width: 62ch;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 1.6;
     }
 
-    /* chips: simple, not boxed heavy */
     .chips{
       margin-top: 14px;
       display:flex;
@@ -373,92 +376,93 @@
       gap:10px;
       padding: 10px 12px;
       border-radius: 999px;
-      background: rgba(255,255,255,.55);
+      background: rgba(255,255,255,.56);
       border: 1px solid rgba(12,17,27,.10);
       color: rgba(12,17,27,.80);
-      font-weight: 820;
+      font-weight: 880;
       font-size: 12.5px;
-      letter-spacing:-.01em;
       backdrop-filter: blur(8px);
       box-shadow: inset 0 1px 0 rgba(255,255,255,.55);
     }
     .chip svg{width:16px;height:16px; opacity:.72;}
 
-    /* RIGHT: less “cardy”, more premium structure */
-    .side{
-      border-radius: 22px;
-      background: rgba(255,255,255,.55);
-      border: 1px solid rgba(12,17,27,.10);
-      box-shadow: 0 28px 70px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.55);
-      overflow:hidden;
+    /* HERO right: premium list (not cards everywhere) */
+    .heroRight{
+      padding-top: 8px;
     }
-    .sideHead{
-      padding: 16px 16px 12px;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    .miniTitle{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(12,17,27,.10);
+    }
+    .miniTitle b{font-weight:980; letter-spacing:-.03em; font-size:14px;}
+    .miniTitle span{color: rgba(12,17,27,.55); font-weight:850; font-size:12px;}
+
+    .miniList{margin-top: 14px; display:grid; gap:12px;}
+    .miniRow{
+      display:flex; gap:12px; align-items:flex-start;
+      padding: 10px 0;
       border-bottom: 1px solid rgba(12,17,27,.08);
     }
-    .sideHead b{font-weight:980; letter-spacing:-.03em; font-size:14px;}
-    .sideHead span{color: rgba(12,17,27,.56); font-weight:850; font-size:12px;}
-    .sideList{padding: 12px 16px 16px; display:grid; gap:10px;}
-    .sideItem{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      padding: 12px 0;
-      border-top: 1px solid rgba(12,17,27,.07);
-    }
-    .sideItem:first-child{border-top:0;}
-    .iBox{
-      width:34px;height:34px;border-radius: 14px;
-      display:grid; place-items:center;
-      background: rgba(82,172,217,.14);
-      border: 1px solid rgba(82,172,217,.26);
-      flex:0 0 auto;
-    }
-    .iBox svg{ width:18px;height:18px; }
-    .sideItem b{display:block; font-weight:980; letter-spacing:-.02em;}
-    .sideItem p{ margin:6px 0 0 0; color: rgba(12,17,27,.68); font-weight:600; font-size:13px; line-height: 1.5; }
-
-    /* DARK section content: centered + readable, no floating */
-    .darkBox{
-      border-radius: 22px;
-      padding: 26px 22px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
-    }
-    .secTop{
-      display:flex; align-items:center; gap:12px;
-      margin-bottom: 14px;
-    }
-    .dot{
-      width:10px;height:10px;border-radius:999px;
+    .miniRow:last-child{border-bottom:0;}
+    .iDot{
+      width:12px;height:12px;border-radius:999px; margin-top:4px;
       background: rgba(82,172,217,.95);
       box-shadow: 0 0 0 6px rgba(82,172,217,.14);
       flex:0 0 auto;
     }
-    .pillNum{
-      display:inline-flex; align-items:center; justify-content:center;
-      height: 26px; padding: 0 10px; border-radius: 999px;
-      background: rgba(82,172,217,.14);
-      border: 1px solid rgba(82,172,217,.26);
-      color: rgba(255,255,255,.86);
-      font-weight: 950;
-      letter-spacing:-.02em;
-      font-size: 13px;
+    .miniRow b{display:block; font-weight:980; letter-spacing:-.02em;}
+    .miniRow p{margin:6px 0 0 0; color: rgba(12,17,27,.68); font-weight:650; font-size:13px; line-height:1.55;}
+
+    /* ===== Section heads 01/02/03 (NOT just text) ===== */
+    .secHead{
+      display:flex; align-items:center; gap:14px;
+      margin-bottom: 18px;
     }
-    .rail{
+    .secNum{
+      width:44px;height:44px;border-radius: 16px;
+      display:grid; place-items:center;
+      font-weight: 980;
+      letter-spacing:-.02em;
+      color: rgba(255,255,255,.90);
+      background: rgba(82,172,217,.18);
+      border: 1px solid rgba(82,172,217,.28);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+    }
+    .secLine{
       height:1px; flex:1;
-      background: linear-gradient(90deg, rgba(82,172,217,.58), rgba(255,255,255,.10), transparent);
+      background: linear-gradient(90deg, rgba(82,172,217,.65), rgba(255,255,255,.10), transparent);
       border-radius:999px;
       opacity:.95;
     }
 
-    .h2{ margin:0; font-size: clamp(22px, 2.8vw, 40px); line-height: 1.12; letter-spacing:-.055em; font-weight: 980; }
-    .descD{ margin: 12px 0 0 0; max-width: 78ch; color: rgba(255,255,255,.70); font-weight: 560; line-height: 1.75; font-size: 16px; }
-    .descL{ margin: 10px 0 0 0; max-width: 78ch; color: var(--muted); font-weight: 560; line-height: 1.75; font-size: 16px; }
+    .h2{
+      margin:0;
+      font-size: clamp(22px, 2.8vw, 40px);
+      line-height: 1.12;
+      letter-spacing:-.055em;
+      font-weight: 980;
+    }
+    .descL{
+      margin: 10px 0 0 0;
+      max-width: 78ch;
+      color: var(--muted);
+      font-weight: 650;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+    .descD{
+      margin: 10px 0 0 0;
+      max-width: 78ch;
+      color: var(--darkMuted);
+      font-weight: 650;
+      line-height: 1.7;
+      font-size: 16px;
+    }
 
-    .grid2{
+    /* Dark content blocks: clean grid (no random cards) */
+    .svcGrid{
       margin-top: 18px;
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -473,33 +477,29 @@
       display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
     }
     .svc b{ font-weight: 980; letter-spacing:-.02em; }
-    .svc small{ color: rgba(255,255,255,.64); font-weight: 700; white-space:nowrap; }
+    .svc small{ color: rgba(255,255,255,.64); font-weight: 750; white-space:nowrap; }
 
-    .steps{
-      margin-top: 18px;
-      display:grid;
-      gap: 14px;
-    }
+    /* Light steps: simple, premium lines */
+    .steps{ margin-top: 18px; display:grid; gap:14px; }
     .step{
-      display:flex;
-      gap:14px;
-      align-items:flex-start;
+      display:flex; gap:14px; align-items:flex-start;
       padding: 14px 0;
       border-top: 1px solid rgba(12,17,27,.10);
     }
     .step:first-child{border-top:0;}
     .n{
-      width:38px;height:38px;border-radius: 14px;
+      width:40px;height:40px;border-radius: 16px;
       display:grid; place-items:center;
       background: rgba(82,172,217,.14);
       border: 1px solid rgba(82,172,217,.26);
       font-weight: 980;
-      color: rgba(12,17,27,.82);
+      color: rgba(12,17,27,.84);
       flex:0 0 auto;
     }
     .step b{display:block; font-weight:980; letter-spacing:-.02em;}
-    .step span{display:block; margin-top:6px; color: var(--muted); font-weight:600; line-height:1.55;}
+    .step span{display:block; margin-top:6px; color: var(--muted); font-weight:650; line-height:1.55;}
 
+    /* FAQ (dark) */
     details{ margin-top: 10px; }
     .faq{
       border-radius: 16px;
@@ -515,7 +515,7 @@
     }
     summary::after{content:"›"; font-size:22px; transform: translateY(-1px); opacity:.75;}
     details[open] summary::after{content:"⌄"; opacity:.9;}
-    details p{ margin: 10px 0 0 0; color: rgba(255,255,255,.72); font-weight: 560; line-height: 1.7; max-width: 90ch; }
+    details p{ margin: 10px 0 0 0; color: rgba(255,255,255,.72); font-weight: 600; line-height: 1.7; max-width: 90ch; }
 
     .legal{
       padding: 18px 0 0;
@@ -527,31 +527,27 @@
       margin-top: 18px;
     }
 
+    /* reveal */
     .reveal{opacity:0; transform: translateY(14px); transition: opacity .85s ease, transform .85s ease;}
     .reveal.on{opacity:1; transform: translateY(0);}
 
-    /* ===== MOBILE: center money stack ===== */
+    /* ===== Mobile: money stack centered vertically ===== */
     @media (max-width: 980px){
-      .hero{ grid-template-columns:1fr; gap: 18px; align-items:start; }
+      .hero{ grid-template-columns:1fr; gap: 18px; }
 
       .heroLeft{
-        min-height: calc(100svh - 54px - 22px);
+        min-height: calc(100svh - 54px);
         display:flex;
         flex-direction:column;
         justify-content:center;
-        align-items:center;
-        text-align:center;
+        align-items:stretch;
       }
-      .moneyStack{ margin-left:auto; margin-right:auto; }
-      .chips{ justify-content:center; }
-      .side{ order:2; }
-      .heroLeft{ order:1; }
-      .grid2{ grid-template-columns: 1fr; }
-      .helper{ margin-left:auto; margin-right:auto; }
+      .heroRight{ margin-top: 22px; }
+      .svcGrid{ grid-template-columns: 1fr; }
     }
 
     @media (prefers-reduced-motion: reduce){
-      .alive,.cityGlow,.cta.ready,.accent:after{animation:none!important;}
+      .alive, .cityShell:before, .cta.ready, .accent:after{animation:none!important;}
       .reveal{opacity:1!important; transform:none!important;}
     }
   </style>
@@ -596,23 +592,19 @@
     </div>
   </div>
 
-  <!-- 01: LIGHT -->
-  <section class="section hasBottomWave" aria-label="Hero">
+  <!-- 01 LIGHT (Hero) -->
+  <section class="section light hasBottomWave" aria-label="Hero">
     <div class="alive" aria-hidden="true"></div>
 
     <div class="wrap reveal">
       <div class="hero">
-
-        <!-- LEFT: main -->
         <div class="heroLeft">
           <h1>Trouve un plombier <span class="accent">dans ta ville</span>.</h1>
 
-          <div class="moneyStack">
-            <!-- INPUT -> BUTTON -> TEXT -> CHIPS -->
-            <div class="cityFocus">
-              <div class="cityGlow" aria-hidden="true"></div>
-
-              <div class="cityRow" id="cityRow">
+          <!-- ORDER EXACT: input -> button -> text -> chips -->
+          <div class="money">
+            <div class="cityShell">
+              <div class="cityRow">
                 <svg class="pin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke="currentColor" stroke-width="2"/>
                   <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="currentColor" opacity=".12"/>
@@ -621,71 +613,58 @@
               </div>
 
               <div id="suggest" class="suggest" role="listbox" aria-label="Suggestions de villes"></div>
-            </div>
 
-            <a id="goBtn" class="cta" href="#" aria-disabled="true">
-              Ouvrir la page locale
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M5 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
+              <a id="goBtn" class="cta" href="#" aria-disabled="true">
+                Ouvrir la page locale
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
 
-            <p class="helper">Écris ta ville. Si elle existe, elle apparaît. Le bouton devient actif.</p>
+              <p class="helper">Écris ta ville. Si elle existe, elle apparaît. Le bouton devient actif.</p>
 
-            <div class="chips" aria-label="Confiance">
-              <div class="chip">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                Appel direct
-              </div>
-              <div class="chip">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v6c0 5-3 8-7 8s-7-3-7-8V7l7-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-                Indépendant
-              </div>
-              <div class="chip">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2"/><path d="M12 7v6l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                Selon dispo
+              <div class="chips" aria-label="Confiance">
+                <div class="chip">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Appel direct
+                </div>
+                <div class="chip">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v6c0 5-3 8-7 8s-7-3-7-8V7l7-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+                  Indépendant
+                </div>
+                <div class="chip">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2"/><path d="M12 7v6l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Selon dispo
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- RIGHT -->
-        <div class="side" aria-label="Infos">
-          <div class="sideHead">
+        <div class="heroRight" aria-label="Infos">
+          <div class="miniTitle">
             <b>Simple. Rapide. Clair.</b>
             <span>sans friction</span>
           </div>
-          <div class="sideList">
-            <div class="sideItem">
-              <div class="iBox" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M20 6L9 17l-5-5" stroke="rgba(82,172,217,.95)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
+
+          <div class="miniList">
+            <div class="miniRow">
+              <span class="iDot" aria-hidden="true"></span>
               <div>
                 <b>Page locale</b>
                 <p>Tu restes dans la bonne ville, pas de perte de temps.</p>
               </div>
             </div>
-            <div class="sideItem">
-              <div class="iBox" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M12 3l7 4v6c0 5-3 8-7 8s-7-3-7-8V7l7-4z" stroke="rgba(82,172,217,.95)" stroke-width="2" stroke-linejoin="round"/>
-                </svg>
-              </div>
+            <div class="miniRow">
+              <span class="iDot" aria-hidden="true"></span>
               <div>
-                <b>Indépendant</b>
+                <b>Service indépendant</b>
                 <p>Tu paies directement le professionnel.</p>
               </div>
             </div>
-            <div class="sideItem">
-              <div class="iBox" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="rgba(82,172,217,.95)" stroke-width="2"/>
-                  <path d="M12 7v6l3 2" stroke="rgba(82,172,217,.95)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
+            <div class="miniRow">
+              <span class="iDot" aria-hidden="true"></span>
               <div>
                 <b>Connexion</b>
                 <p>Selon disponibilité locale et l’heure.</p>
@@ -703,47 +682,51 @@
     </svg>
   </section>
 
-  <!-- 02: DARK -->
+  <!-- 02 DARK -->
   <section class="section dark hasTopWave hasBottomWave" aria-label="Services">
     <svg class="wave top" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
       <path d="M0,28 C240,8 480,8 720,34 C960,60 1200,60 1440,34 L1440,80 L0,80 Z" fill="#0f1115"></path>
     </svg>
 
     <div class="wrap reveal">
-      <div class="darkBox">
-        <div class="secTop" aria-hidden="true">
-          <span class="dot"></span><span class="pillNum">01</span><span class="rail"></span>
-        </div>
+      <div class="secHead" aria-hidden="true">
+        <div class="secNum">01</div>
+        <div class="secLine"></div>
+      </div>
 
-        <h2 class="h2">Problèmes fréquents.</h2>
-        <p class="descD">Courant. Clair. Sans blabla.</p>
+      <h2 class="h2">Problèmes fréquents.</h2>
+      <p class="descD">Courant. Clair. Sans blabla.</p>
 
-        <div class="grid2" aria-label="Liste services">
-          <div class="svc"><b>Fuite d’eau</b><small>valve • tuyau</small></div>
-          <div class="svc"><b>Toilette bouchée</b><small>déblocage</small></div>
-          <div class="svc"><b>Chauffe-eau</b><small>remplacement</small></div>
-          <div class="svc"><b>Drain / égout</b><small>refoulement</small></div>
-          <div class="svc"><b>Robinet / pression</b><small>cartouche</small></div>
-          <div class="svc"><b>Urgence</b><small>selon dispo</small></div>
-        </div>
+      <div class="svcGrid" aria-label="Liste services">
+        <div class="svc"><b>Fuite d’eau</b><small>valve • tuyau</small></div>
+        <div class="svc"><b>Toilette bouchée</b><small>déblocage</small></div>
+        <div class="svc"><b>Chauffe-eau</b><small>remplacement</small></div>
+        <div class="svc"><b>Drain / égout</b><small>refoulement</small></div>
+        <div class="svc"><b>Robinet / pression</b><small>cartouche</small></div>
+        <div class="svc"><b>Urgence</b><small>selon dispo</small></div>
       </div>
     </div>
 
     <!-- DARK -> LIGHT -->
     <svg class="wave bottom" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,24 C240,68 480,68 720,40 C960,12 1200,12 1440,40 L1440,80 L0,80 Z" fill="#e3e7ef"></path>
+      <path d="M0,24 C240,68 480,68 720,40 C960,12 1200,12 1440,40 L1440,80 L0,80 Z" fill="#e2e8f2"></path>
     </svg>
   </section>
 
-  <!-- 03: LIGHT -->
+  <!-- 03 LIGHT -->
   <section class="section light2 hasTopWave hasBottomWave" aria-label="Comment ça marche">
     <div class="alive" aria-hidden="true"></div>
 
     <svg class="wave top" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,24 C240,68 480,68 720,40 C960,12 1200,12 1440,40 L1440,80 L0,80 Z" fill="#e3e7ef"></path>
+      <path d="M0,24 C240,68 480,68 720,40 C960,12 1200,12 1440,40 L1440,80 L0,80 Z" fill="#e2e8f2"></path>
     </svg>
 
     <div class="wrap reveal">
+      <div class="secHead" aria-hidden="true">
+        <div class="secNum" style="color:rgba(12,17,27,.88); background:rgba(82,172,217,.14); border-color:rgba(82,172,217,.24);">02</div>
+        <div class="secLine" style="background:linear-gradient(90deg, rgba(82,172,217,.55), rgba(12,17,27,.10), transparent)"></div>
+      </div>
+
       <h2 class="h2">Comment ça marche.</h2>
       <p class="descL">3 étapes. Point.</p>
 
@@ -769,41 +752,40 @@
     </svg>
   </section>
 
-  <!-- 04: DARK -->
+  <!-- 04 DARK -->
   <section class="section dark hasTopWave" aria-label="FAQ">
     <svg class="wave top" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
       <path d="M0,28 C240,8 480,8 720,34 C960,60 1200,60 1440,34 L1440,80 L0,80 Z" fill="#0f1115"></path>
     </svg>
 
     <div class="wrap reveal">
-      <div class="darkBox">
-        <div class="secTop" aria-hidden="true">
-          <span class="dot"></span><span class="pillNum">02</span><span class="rail"></span>
-        </div>
+      <div class="secHead" aria-hidden="true">
+        <div class="secNum">03</div>
+        <div class="secLine"></div>
+      </div>
 
-        <h2 class="h2">FAQ.</h2>
-        <p class="descD">Réponses rapides.</p>
+      <h2 class="h2">FAQ.</h2>
+      <p class="descD">Réponses rapides.</p>
 
-        <details class="faq">
-          <summary>Êtes-vous une entreprise de plomberie?</summary>
-          <p>Non. Service indépendant de mise en relation. Les réparations sont effectuées par un professionnel.</p>
-        </details>
+      <details class="faq">
+        <summary>Êtes-vous une entreprise de plomberie?</summary>
+        <p>Non. Service indépendant de mise en relation. Les réparations sont effectuées par un professionnel.</p>
+      </details>
 
-        <details class="faq">
-          <summary>Combien ça coûte?</summary>
-          <p>Le prix dépend du problème. Vous payez directement le plombier.</p>
-        </details>
+      <details class="faq">
+        <summary>Combien ça coûte?</summary>
+        <p>Le prix dépend du problème. Vous payez directement le plombier.</p>
+      </details>
 
-        <details class="faq">
-          <summary>Est-ce garanti 24/7?</summary>
-          <p>On tente 24/7, mais la disponibilité varie selon l’heure, la demande et la zone.</p>
-        </details>
+      <details class="faq">
+        <summary>Est-ce garanti 24/7?</summary>
+        <p>On tente 24/7, mais la disponibilité varie selon l’heure, la demande et la zone.</p>
+      </details>
 
-        <div class="legal">
-          <strong>Mentions légales :</strong> TrouverUnPlombier.ca est un service indépendant de mise en relation.
-          Nous ne sommes pas une entreprise de plomberie et n’effectuons aucune réparation.
-          Vous contractez et payez directement le professionnel.
-        </div>
+      <div class="legal">
+        <strong>Mentions légales :</strong> TrouverUnPlombier.ca est un service indépendant de mise en relation.
+        Nous ne sommes pas une entreprise de plomberie et n’effectuons aucune réparation.
+        Vous contractez et payez directement le professionnel.
       </div>
     </div>
   </section>
@@ -853,18 +835,6 @@
       suggest.innerHTML = "";
     }
 
-    function renderSuggest(list){
-      if(!list.length){ hideSuggest(); return; }
-      const items = list.map(c => `
-        <div class="sItem" role="option" tabindex="0" data-slug="${c.slug}" data-name="${c.name}">
-          <div class="sName">${c.name}</div>
-          <div class="sMeta">Sélectionner</div>
-        </div>
-      `).join("");
-      suggest.innerHTML = `<div class="sList">${items}</div>`;
-      suggest.classList.add("on");
-    }
-
     function filterCities(q){
       const nq = norm(q);
       if(!nq) return [];
@@ -876,6 +846,18 @@
         else if(nn.includes(nq)) includes.push(c);
       }
       return [...starts, ...includes].slice(0, 6);
+    }
+
+    function renderSuggest(list){
+      if(!list.length){ hideSuggest(); return; }
+      const items = list.map(c => `
+        <div class="sItem" role="option" tabindex="0" data-slug="${c.slug}" data-name="${c.name}">
+          <div class="sName">${c.name}</div>
+          <div class="sMeta">Sélectionner</div>
+        </div>
+      `).join("");
+      suggest.innerHTML = `<div class="sList">${items}</div>`;
+      suggest.classList.add("on");
     }
 
     input.addEventListener("focus", () => renderSuggest(filterCities(input.value)));
@@ -925,3 +907,5 @@
   </script>
 </body>
 </html>
+
+
