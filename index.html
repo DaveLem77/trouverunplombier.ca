@@ -155,7 +155,7 @@
       min-height: 92svh;
       display:grid;
       align-items:center;
-      padding-top: 22px;
+      padding-top: 22px; /* desktop */
     }
     .heroGrid{
       display:grid;
@@ -569,11 +569,23 @@
     .row b{font-weight:950;letter-spacing:-.02em}
     .row small{opacity:.7;font-weight:750}
 
+    /* ===== Responsive ===== */
     @media (max-width: 980px){
       .heroGrid{grid-template-columns:1fr}
       h1,.sub{text-align:center}
       .kicker{justify-content:center}
       .cityZone{margin-left:auto;margin-right:auto}
+    }
+
+    /* ===== MOBILE FIX: réduire l’espace entre header et “Plomberie d’urgence” ===== */
+    @media (max-width: 980px){
+      section{ padding: 64px 0; }  /* moins haut que 84px+ */
+      .hero{ padding-top: 6px; }  /* réduit l’espace sous le header sticky */
+      .kicker{ margin-top: 0; }
+    }
+    @media (max-width: 420px){
+      section{ padding: 56px 0; }
+      .hero{ padding-top: 2px; }
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -780,8 +792,6 @@
     const localLinkWrap = document.getElementById("localLinkWrap");
     const localLink     = document.getElementById("localLink");
 
-    let activeTel = PHONE_OTHER_TEL;
-
     const norm = (s) => (s||"")
       .toLowerCase()
       .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
@@ -810,7 +820,6 @@
     }
 
     function mountPhoneButton(phoneUI, phoneTel){
-      // Remplace le contenu de la zone “suggest” par le bouton téléphone
       switchZone.innerHTML = `
         <button class="callBtn" id="callBtn" type="button">
           <span class="callLeft">
@@ -852,6 +861,8 @@
       // cache le bouton de localisation
       locBtn.style.display = "none";
 
+      // IMPORTANT: le bouton “Activer ma localisation” devient le nom de ville
+      // (mais on l’a caché; on met la ville dans le hint)
       if(isTrois){
         mountPhoneButton(PHONE_TR_UI, PHONE_TR_TEL);
 
@@ -878,7 +889,6 @@
     }
 
     async function requestLocation(){
-      // TEST : ?mock_city=Trois-Rivières
       const mockCity = qs("mock_city");
       if(mockCity){
         showResult(mockCity);
@@ -939,6 +949,7 @@
   </script>
 </body>
 </html>
+
 
 
 
