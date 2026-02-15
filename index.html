@@ -12,10 +12,12 @@
 
   <style>
     :root{
+      /* LIGHT */
       --bg:#e9ebef;
       --paper:#eef0f4;
       --paper2:#e3e7ef;
 
+      /* DARK */
       --dark:#0f1115;
       --dark2:#151821;
 
@@ -39,8 +41,7 @@
 
       --max:1160px;
       --r:18px;
-
-      --secPad: 78px;
+      --secPad: 82px;
     }
 
     *{box-sizing:border-box}
@@ -61,18 +62,17 @@
       padding: 0 clamp(18px, 4vw, 52px);
     }
 
-    /* grain */
+    /* subtle grain */
     .grain{
       position:fixed; inset:0; pointer-events:none;
       background:
         radial-gradient(900px 520px at 18% 12%, rgba(0,0,0,.03), transparent 58%),
         radial-gradient(900px 520px at 85% 18%, rgba(0,0,0,.02), transparent 62%),
-        radial-gradient(700px 500px at 50% 110%, rgba(0,0,0,.05), transparent 55%),
         repeating-linear-gradient(0deg, rgba(0,0,0,.010) 0px, rgba(0,0,0,.010) 1px, transparent 1px, transparent 10px);
-      opacity:.52;
+      opacity:.50;
     }
 
-    /* ===== Slim top bar ===== */
+    /* ===== Top bar ===== */
     .topbar{
       position:sticky;
       top:0;
@@ -96,10 +96,10 @@
       background: rgba(255,255,255,.06);
       border: 1px solid rgba(255,255,255,.10);
       box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
-      flex:0 0 auto;
       overflow:hidden;
+      flex:0 0 auto;
     }
-    .mark img{ width:100%; height:100%; object-fit:cover; display:block; opacity:.98; transform: scale(1.03); }
+    .mark img{width:100%;height:100%;object-fit:cover;display:block;opacity:.98}
     .domain{
       color: rgba(255,255,255,.92);
       font-weight: 950;
@@ -124,25 +124,7 @@
       font-weight: 850;
       font-size: 12.5px;
       white-space:nowrap;
-      position:relative;
-      overflow:hidden;
     }
-    .ratingMini:after{
-      content:"";
-      position:absolute;
-      inset:-40% -40%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent);
-      transform: rotate(12deg) translateX(-35%);
-      opacity:.10;
-      animation: sheen 9s ease-in-out infinite;
-      pointer-events:none;
-    }
-    @keyframes sheen{
-      0%{transform: rotate(12deg) translateX(-35%); opacity:.06;}
-      45%{opacity:.10;}
-      100%{transform: rotate(12deg) translateX(35%); opacity:.06;}
-    }
-
     .stars{display:inline-flex; gap:3px; filter: drop-shadow(0 1px 0 rgba(0,0,0,.35));}
     .star{width:14px;height:14px; display:block;}
     .star .fill{fill: url(#goldGrad); stroke: rgba(0,0,0,.22); stroke-width: .6;}
@@ -165,11 +147,11 @@
     }
     .section > .wrap{ position:relative; z-index:1; }
 
-    /* Waves */
+    /* waves */
     .wave{ position:absolute; left:0; right:0; bottom:-1px; height: 92px; pointer-events:none; z-index:2; }
     .wave.top{ top:-1px; bottom:auto; transform: rotate(180deg); }
 
-    /* ===== Bleu animé VISIBLE sur fond clair ===== */
+    /* subtle animated blue life on LIGHT backgrounds */
     .section:not(.dark)::before,
     .section:not(.dark)::after{
       content:"";
@@ -178,58 +160,39 @@
       pointer-events:none;
       z-index:0;
       filter: blur(18px);
-      transform: translate3d(0,0,0);
       mix-blend-mode: multiply;
+      transform: translate3d(0,0,0);
     }
     .section:not(.dark)::before{
-      opacity:.46;
+      opacity:.42;
       background:
         radial-gradient(760px 520px at 16% 20%, rgba(82,172,217,.34), transparent 62%),
         radial-gradient(640px 520px at 84% 46%, rgba(82,172,217,.22), transparent 60%),
-        radial-gradient(520px 380px at 52% 86%, rgba(82,172,217,.16), transparent 58%);
+        radial-gradient(520px 380px at 52% 86%, rgba(82,172,217,.14), transparent 58%);
       animation: aqua1 13.5s ease-in-out infinite;
     }
     .section:not(.dark)::after{
-      opacity:.36;
+      opacity:.32;
       background:
-        radial-gradient(780px 520px at 82% 84%, rgba(82,172,217,.30), transparent 62%),
-        radial-gradient(560px 420px at 32% 74%, rgba(82,172,217,.18), transparent 60%),
-        linear-gradient(120deg, transparent 0%, rgba(82,172,217,.12) 34%, transparent 70%);
+        radial-gradient(780px 520px at 82% 84%, rgba(82,172,217,.28), transparent 62%),
+        radial-gradient(560px 420px at 32% 74%, rgba(82,172,217,.18), transparent 60%);
       animation: aqua2 17.5s ease-in-out infinite;
     }
-    .section:not(.dark) .dotgrid{
-      position:absolute; inset:0; pointer-events:none; z-index:0;
-      opacity:.18;
-      background: radial-gradient(circle at 1px 1px, rgba(82,172,217,.35) 1px, transparent 1.6px);
-      background-size: 22px 22px;
-      mask-image: radial-gradient(55% 45% at 50% 20%, rgba(0,0,0,.8), transparent 70%);
-    }
-    @keyframes aqua1{
-      0%,100%{ transform: translate(-18px,-10px) scale(1); }
-      50%{ transform: translate(20px,14px) scale(1.05); }
-    }
-    @keyframes aqua2{
-      0%,100%{ transform: translate(18px,12px) scale(1.02); }
-      50%{ transform: translate(-24px,-18px) scale(1); }
-    }
+    @keyframes aqua1{0%,100%{transform:translate(-18px,-10px) scale(1)}50%{transform:translate(20px,14px) scale(1.05)}}
+    @keyframes aqua2{0%,100%{transform:translate(18px,12px) scale(1.02)}50%{transform:translate(-24px,-18px) scale(1)}}
 
-    /* ===== Smart appear animation (cascade) ===== */
+    /* reveal (smart, clean) */
     .reveal{opacity:0; transform: translateY(14px); transition: opacity .85s ease, transform .85s ease;}
     .reveal.on{opacity:1; transform: translateY(0);}
     .stagger > *{ opacity:0; transform: translateY(10px); }
-    .stagger.on > *{
-      opacity:1;
-      transform: translateY(0);
-      transition: opacity .75s ease, transform .75s ease;
-    }
-    .stagger.on > *:nth-child(1){transition-delay:.02s}
-    .stagger.on > *:nth-child(2){transition-delay:.10s}
-    .stagger.on > *:nth-child(3){transition-delay:.18s}
-    .stagger.on > *:nth-child(4){transition-delay:.26s}
-    .stagger.on > *:nth-child(5){transition-delay:.34s}
-    .stagger.on > *:nth-child(6){transition-delay:.42s}
+    .stagger.on > *{ opacity:1; transform: translateY(0); transition: opacity .75s ease, transform .75s ease; }
+    .stagger.on > *:nth-child(1){transition-delay:.03s}
+    .stagger.on > *:nth-child(2){transition-delay:.11s}
+    .stagger.on > *:nth-child(3){transition-delay:.19s}
+    .stagger.on > *:nth-child(4){transition-delay:.27s}
+    .stagger.on > *:nth-child(5){transition-delay:.35s}
 
-    /* ===== Hero ===== */
+    /* ===== HERO ===== */
     .hero{
       display:grid;
       grid-template-columns: 1.05fr .95fr;
@@ -237,25 +200,8 @@
       align-items:start;
     }
 
-    .kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      color: var(--muted2);
-      font-weight: 900;
-      font-size: 12px;
-      letter-spacing:.14em;
-      text-transform: uppercase;
-    }
-    .kicker:before{
-      content:"";
-      width: 24px; height: 2px;
-      background: linear-gradient(90deg, rgba(82,172,217,0), rgba(82,172,217,.95), rgba(82,172,217,0));
-      opacity:.95;
-    }
-
     h1{
-      margin: 18px 0 0 0;
+      margin: 0;
       font-size: clamp(44px, 4.8vw, 88px);
       line-height: .98;
       letter-spacing:-.075em;
@@ -272,22 +218,149 @@
       opacity:.18;
       animation: underline 3.2s ease-in-out infinite;
     }
-    @keyframes underline{
-      0%,100%{transform:scaleX(.55); opacity:.12;}
-      50%{transform:scaleX(1); opacity:.30;}
+    @keyframes underline{0%,100%{transform:scaleX(.55); opacity:.12;}50%{transform:scaleX(1); opacity:.30;}}
+
+    /* money spot */
+    .moneySpot{
+      margin-top: 18px;
+      width: 100%;
+      max-width: 560px;
     }
-    .lead{
-      margin-top: 16px;
-      max-width: 62ch;
+
+    .label{
+      display:block;
+      font-weight: 900;
+      letter-spacing:-.02em;
+      font-size: 13px;
+      color: var(--muted2);
+      margin-bottom: 10px;
+    }
+
+    /* ✅ clean premium input (no weird blue inside) */
+    .inputCard{
+      border-radius: 16px;
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(12,17,27,.12);
+      box-shadow: 0 18px 54px rgba(0,0,0,.09), inset 0 1px 0 rgba(255,255,255,.70);
+      padding: 10px;
+      transition: box-shadow .18s ease, border-color .18s ease, transform .18s ease;
+      position:relative;
+    }
+    .inputCard.focused{
+      border-color: rgba(82,172,217,.46);
+      box-shadow: 0 22px 66px rgba(0,0,0,.12), 0 0 0 4px rgba(82,172,217,.12), inset 0 1px 0 rgba(255,255,255,.70);
+    }
+    .inputRow{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.64);
+      border: 1px solid rgba(12,17,27,.10);
+    }
+    .pin{width:18px;height:18px; opacity:.70; flex:0 0 auto;}
+    input[type="text"]{
+      width:100%;
+      border:0; outline:none;
+      background:transparent;
+      font-weight: 950;
+      letter-spacing:-.02em;
+      font-size: 18px;
+      color: var(--ink);
+      padding: 4px 0;
+      min-width:0;
+    }
+    input::placeholder{color: rgba(12,17,27,.42); font-weight: 850;}
+
+    /* ✅ suggestions: stable + works */
+    .suggest{
+      position:absolute;
+      left:0; right:0;
+      top: calc(100% + 10px);
+      display:none;
+      z-index:20;
+      opacity:0;
+      transform: translateY(-6px);
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .suggest.on{display:block; opacity:1; transform: translateY(0);}
+    .sList{
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(12,17,27,.12);
+      border-radius: 16px;
+      overflow:hidden;
+      box-shadow: 0 24px 70px rgba(0,0,0,.14);
+    }
+    .sItem{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 14px 14px;
+      border-top: 1px solid rgba(12,17,27,.08);
+      cursor:pointer;
+      user-select:none;
+    }
+    .sItem:first-child{border-top:0;}
+    .sName{font-weight:980; letter-spacing:-.02em;}
+    .sMeta{color: var(--muted2); font-weight:800; font-size:13px;}
+    .sItem:hover{ background: rgba(82,172,217,.12); }
+
+    .cta{
+      margin-top: 12px;
+      width: 100%;
+      justify-content:center;
+      border-radius: 999px;
+      padding: 14px 18px;
+      font-weight: 980;
+      letter-spacing:-.01em;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      user-select:none;
+      white-space:nowrap;
+
+      /* visible even disabled */
+      opacity: .92;
+      pointer-events:none;
+      cursor:not-allowed;
+
+      border: 1px solid rgba(12,17,27,.16);
+      background: rgba(255,255,255,.74);
+      color: rgba(12,17,27,.86);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.65);
+      transition: transform .16s ease, background .16s ease, border-color .16s ease, box-shadow .16s ease, opacity .16s ease;
+    }
+    .cta svg{width:18px;height:18px; opacity:.85;}
+    .cta.ready{
+      pointer-events:auto;
+      cursor:pointer;
+      opacity: 1;
+      background: var(--a);
+      border-color: rgba(82,172,217,.86);
+      color: rgba(255,255,255,.95);
+      box-shadow: 0 18px 44px rgba(82,172,217,.26);
+      animation: breathe 2.4s ease-in-out infinite;
+    }
+    @keyframes breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-1px)}}
+    .cta.ready:hover{ transform: translateY(-2px); animation:none; box-shadow: 0 22px 56px rgba(82,172,217,.32); }
+    .cta.ready:active{ transform: translateY(0); }
+
+    /* under CTA text */
+    .leadUnder{
+      margin-top: 14px;
       color: var(--muted);
       font-weight: 560;
       font-size: 17px;
-      line-height: 1.75;
+      line-height: 1.7;
     }
 
-    /* Chips */
+    /* chips under lead */
     .trustStrip{
-      margin-top: 18px;
+      margin-top: 14px;
       display:flex;
       gap:10px;
       flex-wrap:wrap;
@@ -310,167 +383,8 @@
       transition: transform .18s ease, box-shadow .18s ease;
     }
     .chip svg{width:16px;height:16px; opacity:.72;}
-    .chip:hover{ transform: translateY(-1px); box-shadow: 0 16px 44px rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.55); }
 
-    /* Money spot (Ville + CTA) */
-    .moneySpot{
-      margin-top: 18px;
-      width: 100%;
-      max-width: 560px;
-    }
-
-    .picker{
-      margin-top: 0;
-      display:grid;
-      grid-template-columns: 1fr auto;
-      gap: 14px;
-      align-items:end;
-      position:relative;
-    }
-
-    .label{
-      display:block;
-      font-weight: 900;
-      letter-spacing:-.02em;
-      font-size: 13px;
-      color: var(--muted2);
-      margin-bottom: 10px;
-    }
-
-    .inputCard{
-      border-radius: 16px;
-      background: rgba(255,255,255,.82);
-      border: 1px solid rgba(12,17,27,.10);
-      box-shadow: 0 18px 54px rgba(0,0,0,.09), inset 0 1px 0 rgba(255,255,255,.65);
-      padding: 12px 12px;
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-      position:relative;
-      overflow:hidden;
-    }
-    .inputCard:before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(700px 180px at 30% 8%, rgba(82,172,217,.22), transparent 62%),
-        linear-gradient(120deg, transparent 0%, rgba(82,172,217,.12) 35%, transparent 70%);
-      opacity:.80;
-      pointer-events:none;
-      animation: inputGlow 6.2s ease-in-out infinite;
-    }
-    @keyframes inputGlow{
-      0%,100%{ transform: translateX(-10px); opacity:.70; }
-      50%{ transform: translateX(10px); opacity:.92; }
-    }
-    .inputCard.focused{
-      border-color: rgba(82,172,217,.46);
-      box-shadow: 0 22px 66px rgba(0,0,0,.12), 0 0 0 4px rgba(82,172,217,.14), inset 0 1px 0 rgba(255,255,255,.65);
-    }
-    .inputRow{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(255,255,255,.50);
-      border: 1px solid rgba(12,17,27,.08);
-      position:relative;
-      z-index:1;
-    }
-    .pin{width:18px;height:18px; opacity:.70; flex:0 0 auto;}
-    input[type="text"]{
-      width:100%;
-      border:0; outline:none;
-      background:transparent;
-      font-weight: 950;
-      letter-spacing:-.02em;
-      font-size: 18px;
-      color: var(--ink);
-      padding: 6px 0;
-      min-width:0;
-    }
-    input::placeholder{color: rgba(12,17,27,.44); font-weight: 850;}
-
-    .suggest{
-      position:absolute; left:0; right:0; top: 112px;
-      display:none; z-index:10;
-      opacity:0; transform: translateY(-8px);
-      transition: opacity .18s ease, transform .18s ease;
-    }
-    .suggest.on{display:block; opacity:1; transform: translateY(0);}
-    .sList{
-      background: rgba(255,255,255,.86);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(12,17,27,.10);
-      border-radius: 16px;
-      overflow:hidden;
-      box-shadow: 0 24px 70px rgba(0,0,0,.14);
-    }
-    .sItem{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      padding: 14px 14px;
-      border-top: 1px solid rgba(12,17,27,.08);
-      cursor:pointer; user-select:none;
-    }
-    .sItem:first-child{border-top:0;}
-    .sName{font-weight:980; letter-spacing:-.02em;}
-    .sMeta{color: var(--muted2); font-weight:800; font-size:13px; white-space:nowrap;}
-    .sItem:hover{ background: rgba(82,172,217,.12); }
-
-    .cta{
-      border-radius: 999px;
-      padding: 14px 18px;
-      font-weight: 980;
-      letter-spacing:-.01em;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      text-decoration:none;
-      user-select:none;
-      white-space:nowrap;
-
-      opacity: .88;  /* ✅ plus visible même quand disabled */
-      pointer-events:none;
-      cursor:not-allowed;
-
-      border: 1px solid rgba(12,17,27,.16);
-      background: rgba(255,255,255,.70);
-      color: rgba(12,17,27,.86);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
-      transition: transform .16s ease, background .16s ease, border-color .16s ease, box-shadow .16s ease, opacity .16s ease;
-      position:relative;
-      overflow:hidden;
-    }
-    .cta:before{
-      content:"";
-      position:absolute; inset:0;
-      background: linear-gradient(90deg, transparent, rgba(82,172,217,.18), transparent);
-      transform: translateX(-55%);
-      opacity:.18;
-      animation: ctaSheen 5.8s ease-in-out infinite;
-      pointer-events:none;
-    }
-    @keyframes ctaSheen{
-      0%{transform: translateX(-55%); opacity:.10;}
-      45%{opacity:.18;}
-      100%{transform: translateX(55%); opacity:.10;}
-    }
-    .cta svg{width:18px;height:18px; opacity:.85;}
-    .cta.ready{
-      pointer-events:auto;
-      cursor:pointer;
-      opacity: 1;
-      background: var(--a);
-      border-color: rgba(82,172,217,.86);
-      color: rgba(255,255,255,.95);
-      box-shadow: 0 18px 44px rgba(82,172,217,.26);
-      animation: breathe 2.4s ease-in-out infinite;
-    }
-    @keyframes breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-1px)}}
-    .cta.ready:hover{ transform: translateY(-2px); animation:none; box-shadow: 0 22px 56px rgba(82,172,217,.32); }
-    .cta.ready:active{ transform: translateY(0); }
-
-    /* Right panel (desktop) */
+    /* right panel */
     .frame{
       border-radius: var(--r);
       background: rgba(255,255,255,.62);
@@ -490,12 +404,7 @@
       gap:10px;
     }
     .miniTitle small{ font-weight: 850; color: rgba(12,17,27,.56); }
-    .miniRow{
-      margin-top: 12px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
+    .miniRow{ margin-top: 12px; display:flex; flex-direction:column; gap:10px; }
     .miniCard{
       border-radius: 16px;
       padding: 14px 14px;
@@ -505,9 +414,7 @@
       display:flex;
       gap:12px;
       align-items:flex-start;
-      transition: transform .18s ease, box-shadow .18s ease;
     }
-    .miniCard:hover{ transform: translateY(-2px); box-shadow: 0 24px 60px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.55); }
     .iconBox{
       width:34px;height:34px;
       border-radius: 14px;
@@ -520,7 +427,7 @@
     .miniCard b{display:block; font-weight: 980; letter-spacing:-.02em;}
     .miniCard p{ margin: 6px 0 0 0; color: rgba(12,17,27,.68); font-weight: 600; font-size: 13px; line-height: 1.5; }
 
-    /* Dark section frame */
+    /* dark section framing */
     .sectionFrame{
       border-radius: 22px;
       padding: 26px 22px;
@@ -554,8 +461,10 @@
       background: linear-gradient(90deg, rgba(82,172,217,.58), rgba(255,255,255,.10), transparent);
       border-radius: 999px; opacity:.9;
     }
+
     .h2{ margin:0; font-size: clamp(22px, 2.8vw, 40px); line-height: 1.12; letter-spacing:-.055em; font-weight: 980; }
-    .desc{ margin: 12px 0 0 0; max-width: 78ch; color: rgba(255,255,255,.70); font-weight: 560; line-height: 1.75; font-size: 16px; }
+    .descDark{ margin: 12px 0 0 0; max-width: 78ch; color: rgba(255,255,255,.70); font-weight: 560; line-height: 1.75; font-size: 16px; }
+    .descLight{ margin: 10px 0 0 0; max-width: 78ch; color: var(--muted); font-weight: 560; line-height: 1.75; font-size: 16px; }
 
     .rowsGrid{
       margin-top: 18px;
@@ -569,13 +478,38 @@
       background: rgba(255,255,255,.03);
       border: 1px solid rgba(255,255,255,.10);
       box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
-      transition: transform .18s ease, box-shadow .18s ease;
       display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
     }
-    .serviceItem:hover{ transform: translateY(-2px); box-shadow: 0 22px 56px rgba(0,0,0,.30), inset 0 1px 0 rgba(255,255,255,.06); }
     .serviceItem b{ font-weight: 980; letter-spacing:-.02em; }
-    .serviceItem small{ color: rgba(255,255,255,.64); font-weight: 700; white-space:nowrap; opacity:.9; }
+    .serviceItem small{ color: rgba(255,255,255,.64); font-weight: 700; white-space:nowrap; }
 
+    /* steps (light section) */
+    .steps{ margin-top: 18px; display:grid; gap:12px; }
+    .stepCard{
+      border-radius: 18px;
+      background: rgba(255,255,255,.70);
+      border: 1px solid rgba(12,17,27,.10);
+      box-shadow: 0 20px 60px rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.6);
+      padding: 16px 16px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .stepLeft{ display:flex; align-items:flex-start; gap:12px; }
+    .stepNum{
+      width:38px;height:38px;border-radius: 14px;
+      display:grid; place-items:center;
+      background: rgba(82,172,217,.14);
+      border: 1px solid rgba(82,172,217,.26);
+      font-weight: 980;
+      color: rgba(12,17,27,.82);
+      flex:0 0 auto;
+    }
+    .stepCard b{ display:block; font-weight:980; letter-spacing:-.02em; }
+    .stepCard span{ display:block; margin-top:6px; color: var(--muted); font-weight:600; line-height:1.55; }
+
+    /* faq */
     details{ margin-top: 10px; }
     summary{
       cursor:pointer; font-weight: 980; letter-spacing:-.02em;
@@ -584,7 +518,6 @@
     summary::after{content:"›"; font-size:22px; transform: translateY(-1px); opacity:.75;}
     details[open] summary::after{content:"⌄"; opacity:.9;}
     details p{ margin: 10px 0 0 0; color: rgba(255,255,255,.72); font-weight: 560; line-height: 1.7; max-width: 90ch; }
-
     .faqItem{
       border-radius: 16px;
       background: rgba(255,255,255,.03);
@@ -592,7 +525,6 @@
       box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
       padding: 14px 14px;
     }
-
     .legal{
       padding: 18px 0 0;
       border-top: 1px solid rgba(255,255,255,.12);
@@ -603,44 +535,35 @@
       margin-top: 18px;
     }
 
-    /* ===== Mobile: money spot centered vertically on load ===== */
+    /* ===== mobile ===== */
     @media (max-width: 980px){
       .hero{grid-template-columns:1fr; gap: 18px;}
 
-      /* ✅ centre verticalement la zone Ville + CTA */
+      /* center the whole hero block visually */
       .heroLeft{
-        min-height: calc(100svh - 54px - 28px); /* viewport - header - padding */
+        min-height: calc(100svh - 54px);
         display:flex;
         flex-direction:column;
         justify-content:center;
         align-items:center;
-        padding: 18px 0 8px;
+        text-align:center;
+        padding: 22px 0 18px;
       }
 
-      .kicker{ justify-content:center; width:100%; }
-      h1, .lead{ text-align:center; margin-left:auto; margin-right:auto; }
       .moneySpot{ margin-left:auto; margin-right:auto; }
-      .label{ text-align:center; }
-      .picker{grid-template-columns: 1fr;}
-      .cta{width:100%; justify-content:center;}
+      .label{ text-align:left; width:100%; }
+      .trustStrip{ justify-content:center; }
       .rowsGrid{ grid-template-columns: 1fr; }
-
-      /* ✅ chips sous le money spot */
-      .trustStrip{ justify-content:center; margin-top: 14px; }
-
-      /* right panel devient en dessous (garde le contenu) */
-      .frame{ margin-top: 14px; width:100%; }
+      .frame{ width:100%; }
     }
 
     @media (prefers-reduced-motion: reduce){
       .reveal{opacity:1!important; transform:none!important;}
-      .accent:after,
+      .stagger > *{opacity:1!important; transform:none!important;}
       .section:not(.dark)::before,
       .section:not(.dark)::after,
-      .inputCard:before,
-      .ratingMini:after,
-      .cta:before{animation:none!important;}
-      .stagger > *{opacity:1!important; transform:none!important;}
+      .accent:after,
+      .cta.ready{animation:none!important;}
     }
   </style>
 </head>
@@ -648,6 +571,7 @@
 <body>
   <div class="grain" aria-hidden="true"></div>
 
+  <!-- gold gradient ONLY for stars -->
   <svg width="0" height="0" style="position:absolute">
     <defs>
       <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
@@ -658,11 +582,13 @@
     </defs>
   </svg>
 
+  <!-- topbar -->
   <div class="topbar" role="banner" aria-label="Navigation">
     <div class="wrap">
       <div class="topbarInner">
         <div class="brandLine">
           <div class="mark" aria-hidden="true">
+            <!-- IMPORTANT: chemin relatif GitHub pages -->
             <img src="media/logob.png" alt="">
           </div>
           <a class="domain" href="#">TrouverUnPlombier.ca</a>
@@ -684,47 +610,38 @@
 
   <!-- 01: LIGHT (Hero) -->
   <section class="section" aria-label="Hero">
-    <div class="dotgrid" aria-hidden="true"></div>
-
     <div class="wrap reveal">
       <div class="hero">
         <!-- LEFT -->
-        <div class="heroLeft stagger">
-          <div class="kicker">Plomberie d’urgence</div>
-
+        <div class="heroLeft stagger" id="heroLeft">
           <h1>Trouve un plombier <span class="accent">dans ta ville</span>.</h1>
 
-          <p class="lead">Écris ta ville. Si elle existe, elle apparaît. Le bouton devient actif.</p>
-
-          <!-- ✅ MONEY SPOT centre vertical mobile -->
+          <!-- ✅ ordre demandé -->
           <div class="moneySpot">
-            <div class="picker" aria-label="Choix de ville">
-              <div class="field" style="width:100%; position:relative;">
-                <label class="label" for="cityInput">Ville</label>
+            <label class="label" for="cityInput">Ville</label>
 
-                <div class="inputCard" id="inputCard">
-                  <div class="inputRow" id="inputRow">
-                    <svg class="pin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                      <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke="currentColor" stroke-width="2"/>
-                      <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="currentColor" opacity=".12"/>
-                    </svg>
-                    <input id="cityInput" type="text" placeholder="Ex : Trois-Rivières" autocomplete="off" />
-                  </div>
-
-                  <div id="suggest" class="suggest" role="listbox" aria-label="Suggestions de villes"></div>
-                </div>
+            <div class="inputCard" id="inputCard">
+              <div class="inputRow">
+                <svg class="pin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke="currentColor" stroke-width="2"/>
+                  <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="currentColor" opacity=".12"/>
+                </svg>
+                <input id="cityInput" type="text" placeholder="Ex : Trois-Rivières" autocomplete="off" />
               </div>
 
-              <a id="goBtn" class="cta" href="#" aria-disabled="true">
-                Ouvrir la page locale
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M5 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </a>
+              <div id="suggest" class="suggest" role="listbox" aria-label="Suggestions de villes"></div>
             </div>
 
-            <!-- ✅ chips sous le money spot -->
+            <a id="goBtn" class="cta" href="#" aria-disabled="true">
+              Ouvrir la page locale
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+
+            <p class="leadUnder">Écris ta ville. Si elle existe, elle apparaît. Le bouton devient actif.</p>
+
             <div class="trustStrip" aria-label="Confiance">
               <div class="chip">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -742,7 +659,7 @@
           </div>
         </div>
 
-        <!-- RIGHT (desktop + mobile en dessous, pas supprimé) -->
+        <!-- RIGHT (desktop support content, pas supprimé) -->
         <div class="frame stagger">
           <div class="framePad">
             <div class="miniTitle">
@@ -771,7 +688,7 @@
                 </div>
                 <div>
                   <b>Indépendant</b>
-                  <p>Tu paies directement le professionnel, sans intermédiaire.</p>
+                  <p>Tu paies directement le professionnel.</p>
                 </div>
               </div>
 
@@ -783,12 +700,12 @@
                   </svg>
                 </div>
                 <div>
-                  <b>Connexion rapide</b>
+                  <b>Connexion</b>
                   <p>Selon disponibilité locale et l’heure.</p>
                 </div>
               </div>
-
             </div>
+
           </div>
         </div>
 
@@ -815,7 +732,7 @@
         </div>
 
         <h2 class="h2">Problèmes fréquents.</h2>
-        <p class="desc">Courant. Clair. Sans blabla.</p>
+        <p class="descDark">Courant. Clair. Sans blabla.</p>
 
         <div class="rowsGrid" aria-label="Liste services">
           <div class="serviceItem"><b>Fuite d’eau</b><small>valve • tuyau</small></div>
@@ -827,10 +744,57 @@
         </div>
       </div>
     </div>
+
+    <!-- DARK -> LIGHT -->
+    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,24 C240,68 480,68 720,40 C960,12 1200,12 1440,40 L1440,80 L0,80 Z" fill="#e3e7ef"></path>
+    </svg>
   </section>
 
-  <!-- 03: DARK (FAQ) -->
-  <section class="section dark" aria-label="FAQ" style="padding-top:38px;">
+  <!-- 03: LIGHT (How it works) -->
+  <section class="section light2" aria-label="Comment ça marche">
+    <svg class="wave top" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,24 C240,68 480,68 720,40 C960,12 1200,12 1440,40 L1440,80 L0,80 Z" fill="#e3e7ef"></path>
+    </svg>
+
+    <div class="wrap reveal">
+      <h2 class="h2">Comment ça marche.</h2>
+      <p class="descLight">3 étapes. Point.</p>
+
+      <div class="steps">
+        <div class="stepCard">
+          <div class="stepLeft">
+            <div class="stepNum">01</div>
+            <div><b>Écris ta ville</b><span>On te propose les villes disponibles.</span></div>
+          </div>
+        </div>
+        <div class="stepCard">
+          <div class="stepLeft">
+            <div class="stepNum">02</div>
+            <div><b>Sélectionne</b><span>Tu ouvres la page locale correspondante.</span></div>
+          </div>
+        </div>
+        <div class="stepCard">
+          <div class="stepLeft">
+            <div class="stepNum">03</div>
+            <div><b>Appelle</b><span>Connexion selon disponibilité locale.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIGHT -> DARK -->
+    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,28 C240,8 480,8 720,34 C960,60 1200,60 1440,34 L1440,80 L0,80 Z" fill="#0f1115"></path>
+    </svg>
+  </section>
+
+  <!-- 04: DARK (FAQ) -->
+  <section class="section dark" aria-label="FAQ">
+    <svg class="wave top" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,28 C240,8 480,8 720,34 C960,60 1200,60 1440,34 L1440,80 L0,80 Z" fill="#0f1115"></path>
+    </svg>
+
     <div class="wrap reveal">
       <div class="sectionFrame">
         <div class="secTop">
@@ -839,7 +803,7 @@
         </div>
 
         <h2 class="h2">FAQ.</h2>
-        <p class="desc">Réponses rapides.</p>
+        <p class="descDark">Réponses rapides.</p>
 
         <details class="faqItem">
           <summary>Êtes-vous une entreprise de plomberie?</summary>
@@ -897,11 +861,11 @@
       if(city){
         input.value = city.name;
         goBtn.classList.add("ready");
-        goBtn.setAttribute("href", city.slug);
+        goBtn.href = city.slug;
         goBtn.setAttribute("aria-disabled", "false");
       }else{
         goBtn.classList.remove("ready");
-        goBtn.setAttribute("href", "#");
+        goBtn.href = "#";
         goBtn.setAttribute("aria-disabled", "true");
       }
     }
@@ -943,8 +907,13 @@
 
     input.addEventListener("blur", () => {
       inputCard.classList.remove("focused");
-      const exact = CITIES.find(c => norm(c.name) === norm(input.value));
-      if(exact) setSelected(exact);
+      // petit délai pour laisser click suggestion
+      setTimeout(() => {
+        if(document.activeElement && suggest.contains(document.activeElement)) return;
+        const exact = CITIES.find(c => norm(c.name) === norm(input.value));
+        if(exact) setSelected(exact);
+        else hideSuggest();
+      }, 80);
     });
 
     input.addEventListener("input", () => {
@@ -953,15 +922,17 @@
     });
 
     document.addEventListener("click", (e) => {
-      if(!suggest.contains(e.target) && e.target !== input) hideSuggest();
+      if(!inputCard.contains(e.target)) hideSuggest();
     });
 
-    suggest.addEventListener("click", (e) => {
+    suggest.addEventListener("mousedown", (e) => {
+      // mousedown pour éviter que blur ferme avant sélection
       const item = e.target.closest(".sItem");
       if(!item) return;
       setSelected({ name: item.getAttribute("data-name"), slug: item.getAttribute("data-slug") });
       hideSuggest();
       goBtn.focus();
+      e.preventDefault();
     });
 
     input.addEventListener("keydown", (e) => {
@@ -977,13 +948,13 @@
       if(e.key === "Escape") hideSuggest();
     });
 
-    /* ✅ Intelligent appear (no gimmicks) */
+    /* animations (smart) */
     (function(){
-      const heroBlocks = document.querySelectorAll(".stagger");
+      const hero = document.querySelectorAll(".stagger");
       const ioHero = new IntersectionObserver((entries)=>{
         entries.forEach(e => { if(e.isIntersecting) e.target.classList.add("on"); });
       }, {threshold: 0.15});
-      heroBlocks.forEach(el => ioHero.observe(el));
+      hero.forEach(el => ioHero.observe(el));
 
       const els = document.querySelectorAll(".reveal");
       const io = new IntersectionObserver((entries)=>{
@@ -994,3 +965,4 @@
   </script>
 </body>
 </html>
+
