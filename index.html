@@ -251,27 +251,26 @@
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(0,0,0,.55);
       backdrop-filter: blur(10px);
-      display:none;
+      display:block;
       position:relative;
       z-index:2;
     }
-    .suggest.on{display:block}
     .sItem{
       padding: 12px 14px;
       display:flex;
       justify-content:space-between;
       align-items:center;
       gap:12px;
-      cursor:pointer;
+      cursor:default;
       border-top:1px solid rgba(255,255,255,.08);
       font-weight:900;
     }
     .sItem:first-child{border-top:0}
-    .sItem:hover{background: rgba(82,172,217,.18)}
     .sMeta{
       font-size:12px;
       font-weight:800;
       opacity:.75;
+      white-space:nowrap;
     }
 
     .cta{
@@ -309,8 +308,17 @@
       60%{opacity:.55}
       100%{transform:translateX(60%);opacity:0}
     }
+    .cta.disabled{
+      background: rgba(255,255,255,.10);
+      color: rgba(255,255,255,.75);
+      border:1px solid rgba(255,255,255,.12);
+      opacity:.95;
+      box-shadow: 0 22px 70px rgba(0,0,0,.35);
+      cursor:not-allowed;
+    }
+    .cta.disabled:before{display:none}
     .cta:hover{transform: translateY(-1px); filter:saturate(1.05)}
-    .cta:active{transform: translateY(0)}
+    .cta.disabled:hover{transform:none; filter:none}
 
     .hint{
       margin-top: 10px;
@@ -320,7 +328,6 @@
       text-align:center;
     }
 
-    /* NEW: petit lien local (sous le bouton) */
     .localLinkWrap{
       margin-top: 10px;
       text-align:center;
@@ -497,7 +504,7 @@
         <div>
           <div class="kicker">Plomberie d’urgence</div>
           <h1>Trouve un plombier <span class="accent">dans ta ville</span>.</h1>
-          <p class="sub">On détecte ta localisation automatiquement et on t’affiche le bon numéro à appeler.</p>
+          <p class="sub">Clique pour activer ta localisation. On détecte ta ville puis on t’affiche le bon numéro à appeler.</p>
 
           <div class="cityZone" id="cityZone">
             <div class="field">
@@ -506,19 +513,17 @@
                 <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="rgba(255,255,255,.22)"/>
               </svg>
 
-              <!-- On garde le look input, mais il sert de statut -->
-              <input id="cityInput" class="input" type="text" placeholder="Autorise la localisation…" autocomplete="off" readonly>
+              <input id="cityInput" class="input" type="text" placeholder="Activer ma localisation" readonly>
             </div>
 
-            <!-- On garde la boîte suggest (même look) mais on l'utilise comme message -->
-            <div id="suggest" class="suggest on" role="status" aria-live="polite">
-              <div class="sItem" style="cursor:default;">
-                <div id="statusLine">Détection de ta ville…</div>
-                <div class="sMeta" id="statusMeta">Veuillez patienter</div>
+            <div id="suggest" class="suggest" role="status" aria-live="polite">
+              <div class="sItem">
+                <div id="statusLine">Clique sur “Activer ma localisation”.</div>
+                <div class="sMeta" id="statusMeta">On montrera le bon numéro</div>
               </div>
             </div>
 
-            <button id="goBtn" class="cta" type="button">Appeler maintenant</button>
+            <button id="goBtn" class="cta" type="button">Activer ma localisation</button>
 
             <div class="localLinkWrap" id="localLinkWrap">
               <a class="localLink" id="localLink" href="trois-rivieres/" aria-label="Accéder à la page de Trois-Rivières">
@@ -530,7 +535,7 @@
               </a>
             </div>
 
-            <div class="hint" id="hintLine">On te demandera peut-être d’autoriser la localisation.</div>
+            <div class="hint" id="hintLine">Aucune demande de localisation sans ton clic.</div>
 
             <div class="chips" aria-label="Atouts">
               <span class="chip">
@@ -561,7 +566,7 @@
   <section class="light">
     <div class="wrap">
       <h2 class="h2">Comment ça <span class="blue">marche</span></h2>
-      <p class="pCenter">Tu autorises la localisation, on t’affiche le bon numéro, puis tu appelles.</p>
+      <p class="pCenter">1) Tu actives ta localisation. 2) On détecte ta ville. 3) Tu appelles.</p>
 
       <div class="stepStack" aria-label="Étapes">
         <div class="step">
@@ -569,8 +574,8 @@
           <div class="stepBody">
             <div class="num">1</div>
             <div>
-              <h3>Autorise la localisation</h3>
-              <p>On détecte ta ville automatiquement.</p>
+              <h3>Activer</h3>
+              <p>La localisation est demandée seulement après ton clic.</p>
             </div>
           </div>
         </div>
@@ -580,8 +585,8 @@
           <div class="stepBody">
             <div class="num">2</div>
             <div>
-              <h3>Appelle</h3>
-              <p>Le bon numéro s’affiche selon ta ville.</p>
+              <h3>Détection</h3>
+              <p>On détecte ta ville et on choisit le bon numéro.</p>
             </div>
           </div>
         </div>
@@ -591,8 +596,8 @@
           <div class="stepBody">
             <div class="num">3</div>
             <div>
-              <h3>Accède à ta page locale</h3>
-              <p>Quand elle est disponible (ex: Trois-Rivières).</p>
+              <h3>Appeler</h3>
+              <p>Tu appelles immédiatement (et page locale si Trois-Rivières).</p>
             </div>
           </div>
         </div>
@@ -632,23 +637,25 @@
     // =========================
     // CONFIG (TES NUMÉROS)
     // =========================
-    const PHONE_TR = "+15555555555";      // Trois-Rivières
-    const PHONE_OTHER = "+18733391815";   // Autres villes
-
+    const PHONE_TR = "+15555555555";      // Trois-Rivières (à changer)
+    const PHONE_OTHER = "+18733391815";   // Autres villes (OK)
     const SLUG_TR = "trois-rivieres/";    // page locale TR
 
     // =========================
     // UI refs
     // =========================
     const input = document.getElementById("cityInput");
-    const suggest = document.getElementById("suggest");
     const statusLine = document.getElementById("statusLine");
     const statusMeta = document.getElementById("statusMeta");
     const hintLine = document.getElementById("hintLine");
     const goBtn = document.getElementById("goBtn");
     const localLinkWrap = document.getElementById("localLinkWrap");
+    const localLink = document.getElementById("localLink");
 
-    // Helpers
+    // state
+    let mode = "activate"; // activate -> call
+    let activeTel = PHONE_OTHER;
+
     const norm = (s) => (s||"")
       .toLowerCase()
       .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
@@ -657,9 +664,7 @@
       .trim();
 
     function fmtPrettyPhone(e164){
-      // Affiche joli sur le bouton (mais utilise tel: en E164)
       if(!e164) return "";
-      // si c'est +1XXXXXXXXXX
       if(/^(\+1)(\d{10})$/.test(e164)){
         const d = e164.replace("+1","");
         return `+1 (${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`;
@@ -667,83 +672,114 @@
       return e164;
     }
 
-    function setRoute(isTrois){
-      if(isTrois){
-        input.value = "Trois-Rivières";
-        statusLine.textContent = "Ville détectée : Trois-Rivières";
-        statusMeta.textContent = "Numéro local disponible";
-        hintLine.textContent = "Appelle maintenant, ou ouvre la page locale.";
-        localLinkWrap.style.display = "block";
-        goBtn.textContent = `Appeler ${fmtPrettyPhone(PHONE_TR)}`;
-        goBtn.dataset.tel = PHONE_TR;
-      } else {
-        localLinkWrap.style.display = "none";
-        goBtn.textContent = `Appeler ${fmtPrettyPhone(PHONE_OTHER)}`;
-        goBtn.dataset.tel = PHONE_OTHER;
-      }
+    function qs(name){
+      return new URLSearchParams(location.search).get(name);
     }
 
     async function reverseGeocode(lat, lon){
-      // Nominatim (OSM) reverse geocoding
       const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}&accept-language=fr`;
       const res = await fetch(url, { headers: { "Accept": "application/json" } });
       if(!res.ok) throw new Error("Reverse geocode failed");
       return await res.json();
     }
 
-    async function detectCity(){
-      // Default UI
-      suggest.classList.add("on");
-      statusLine.textContent = "Détection de ta ville…";
-      statusMeta.textContent = "Veuillez patienter";
-      hintLine.textContent = "On te demandera peut-être d’autoriser la localisation.";
+    function setRouteByCity(city){
+      const cityClean = (city || "").trim();
+      const cityNorm = norm(cityClean);
+
+      const isTrois =
+        cityNorm.includes("trois rivieres") ||
+        cityNorm.includes("trois-rivieres");
+
+      input.value = cityClean || (isTrois ? "Trois-Rivières" : "");
+
+      if(isTrois){
+        activeTel = PHONE_TR;
+        localLinkWrap.style.display = "block";
+        localLink.href = SLUG_TR;
+        statusLine.textContent = `Ville détectée : ${cityClean || "Trois-Rivières"}`;
+        statusMeta.textContent = "Numéro local disponible";
+        hintLine.textContent = "Appelle maintenant, ou ouvre la page locale.";
+      }else{
+        activeTel = PHONE_OTHER;
+        localLinkWrap.style.display = "none";
+        statusLine.textContent = cityClean ? `Ville détectée : ${cityClean}` : "Ville détectée.";
+        statusMeta.textContent = "Numéro général affiché";
+        hintLine.textContent = "Appelle maintenant.";
+      }
+
+      mode = "call";
+      goBtn.classList.remove("disabled");
+      goBtn.setAttribute("aria-disabled","false");
+      goBtn.textContent = `Appeler ${fmtPrettyPhone(activeTel)}`;
+      goBtn.dataset.tel = activeTel;
+    }
+
+    function setActivateIdle(){
+      mode = "activate";
       input.value = "";
+      statusLine.textContent = "Clique sur “Activer ma localisation”.";
+      statusMeta.textContent = "On montrera le bon numéro";
+      hintLine.textContent = "Aucune demande de localisation sans ton clic.";
+      localLinkWrap.style.display = "none";
+      goBtn.classList.remove("disabled");
+      goBtn.setAttribute("aria-disabled","false");
+      goBtn.textContent = "Activer ma localisation";
+      goBtn.dataset.tel = "";
+    }
+
+    function setLoading(){
+      statusLine.textContent = "Demande de localisation…";
+      statusMeta.textContent = "Autorise pour afficher le bon numéro";
+      hintLine.textContent = "La localisation est demandée uniquement après ton clic.";
+      localLinkWrap.style.display = "none";
+      goBtn.classList.add("disabled");
+      goBtn.setAttribute("aria-disabled","true");
+      goBtn.textContent = "Chargement…";
+    }
+
+    async function requestLocation(){
+      // ===== TEST super simple via URL =====
+      const mockCity = qs("mock_city");
+      if(mockCity){
+        statusLine.textContent = "Mode test activé";
+        statusMeta.textContent = "mock_city détecté";
+        setRouteByCity(mockCity);
+        return;
+      }
 
       if(!navigator.geolocation){
         statusLine.textContent = "Localisation non supportée.";
-        statusMeta.textContent = "On affiche le numéro général";
-        hintLine.textContent = "Ton navigateur ne supporte pas la localisation.";
-        setRoute(false);
+        statusMeta.textContent = "Numéro général affiché";
+        setRouteByCity("");
         return;
       }
+
+      setLoading();
 
       navigator.geolocation.getCurrentPosition(async (pos) => {
         try{
           const { latitude, longitude } = pos.coords;
+
           statusLine.textContent = "Localisation trouvée…";
-          statusMeta.textContent = "On détecte ta ville";
+          statusMeta.textContent = "Détection de la ville";
 
           const data = await reverseGeocode(latitude, longitude);
           const addr = data.address || {};
           const city =
             addr.city || addr.town || addr.village || addr.municipality || addr.county || "";
 
-          const cityNorm = norm(city);
-          const isTrois =
-            cityNorm.includes("trois rivieres") || cityNorm.includes("trois-rivieres") || cityNorm === "trois rivieres";
-
-          if(city){
-            input.value = city;
-            statusLine.textContent = `Ville détectée : ${city}`;
-            statusMeta.textContent = "On te montre le bon numéro";
-          } else {
-            statusLine.textContent = "Ville non détectée.";
-            statusMeta.textContent = "On affiche le numéro général";
-          }
-
-          setRoute(isTrois);
-        } catch(err){
+          setRouteByCity(city || "");
+        } catch(e){
           statusLine.textContent = "Impossible de détecter la ville.";
-          statusMeta.textContent = "On affiche le numéro général";
-          hintLine.textContent = "Tu peux quand même appeler le numéro affiché.";
-          setRoute(false);
+          statusMeta.textContent = "Numéro général affiché";
+          setRouteByCity("");
         }
-      }, (err) => {
-        // Permission denied / timeout / etc.
+      }, () => {
         statusLine.textContent = "Localisation refusée.";
-        statusMeta.textContent = "On affiche le numéro général";
-        hintLine.textContent = "Autorise la localisation pour obtenir le numéro local si disponible.";
-        setRoute(false);
+        statusMeta.textContent = "Numéro général affiché";
+        hintLine.textContent = "Tu peux quand même appeler le numéro général.";
+        setRouteByCity("");
       }, {
         enableHighAccuracy: false,
         timeout: 8000,
@@ -752,17 +788,22 @@
     }
 
     goBtn.addEventListener("click", () => {
+      if(goBtn.classList.contains("disabled")) return;
+
+      if(mode === "activate"){
+        requestLocation();
+        return;
+      }
+
       const tel = goBtn.dataset.tel || PHONE_OTHER;
-      // tel: doit être en format +1XXXXXXXXXX (E164)
       window.location.href = `tel:${tel}`;
     });
 
-    // Auto-run
-    detectCity();
+    // Start idle (no popup)
+    setActivateIdle();
   </script>
 </body>
 </html>
-
 
 
 
