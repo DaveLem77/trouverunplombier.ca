@@ -20,15 +20,12 @@
       --dark2:#0b0f14;
 
       --paper:#f6f8fb;
-      --light:#ffffff;
 
       --ink:#0b1220;
       --muted:#5b6778;
 
       --max:1100px;
-      --r:26px;
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -42,7 +39,7 @@
     button{font-family:inherit}
     .wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(18px,4vw,44px);position:relative;z-index:2}
 
-    /* ===== Header (identique) ===== */
+    /* ===== Header (même style) ===== */
     .topbar{
       position:sticky; top:0; z-index:50;
       background: rgba(0,0,0,.55);
@@ -56,12 +53,11 @@
       padding: 14px 0;
       gap:12px;
     }
-    .top-left{display:flex;align-items:center;gap:10px;min-width:0}
     .logo{
       width:30px;height:30px;border-radius:10px;
       background: rgba(255,255,255,.08);
       border:1px solid rgba(255,255,255,.12);
-      overflow:hidden; flex:0 0 auto;
+      overflow:hidden;
     }
     .logo img{width:100%;height:100%;object-fit:cover;display:block}
     .titleCenter{
@@ -86,7 +82,7 @@
     .score{opacity:.9}
     .score span{opacity:.7}
 
-    /* ===== Sections (alternance noir/blanc) ===== */
+    /* ===== Sections (noir/blanc) ===== */
     section{
       position:relative;
       padding: clamp(84px,8vw,120px) 0;
@@ -103,11 +99,9 @@
       color: var(--ink);
     }
 
-    /* dust + glow */
+    /* moving dust + glow (premium) */
     .dust{
-      position:absolute; inset:-40px;
-      pointer-events:none;
-      opacity:.25;
+      position:absolute; inset:-40px; pointer-events:none; opacity:.22;
       background:
         radial-gradient(2px 2px at 12% 20%, rgba(255,255,255,.35) 40%, transparent 42%),
         radial-gradient(2px 2px at 70% 30%, rgba(255,255,255,.18) 40%, transparent 42%),
@@ -119,12 +113,11 @@
     @keyframes dustMove{0%,100%{transform:translateY(0)}50%{transform:translateY(16px)}}
 
     .glow{
-      position:absolute; inset:-80px;
-      pointer-events:none;
+      position:absolute; inset:-90px; pointer-events:none; opacity:.95;
       background:
-        radial-gradient(700px 420px at 20% 20%, rgba(82,172,217,.20), transparent 60%),
-        radial-gradient(620px 420px at 80% 40%, rgba(82,172,217,.14), transparent 62%);
-      opacity:.9;
+        radial-gradient(760px 460px at 20% 20%, rgba(82,172,217,.22), transparent 60%),
+        radial-gradient(700px 460px at 80% 40%, rgba(82,172,217,.16), transparent 62%),
+        radial-gradient(520px 340px at 50% 110%, rgba(82,172,217,.10), transparent 62%);
       animation: glowDrift 9s ease-in-out infinite;
     }
     @keyframes glowDrift{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
@@ -142,7 +135,7 @@
     }
     .heroGrid{
       display:grid;
-      grid-template-columns: 1.25fr .75fr;
+      grid-template-columns: 1.2fr .8fr;
       gap: clamp(18px,4vw,44px);
       align-items:center;
     }
@@ -176,163 +169,140 @@
       max-width: 64ch;
     }
 
-    /* ===== Call Zone (convertir en appel) ===== */
-    .callZone{
-      margin-top: 22px;
-      width:min(620px, 100%);
+    /* ===== CTA numéro (ULTRA click & clean) ===== */
+    .callBox{
+      margin-top: 18px;
+      width: min(520px, 100%);
       border-radius: 22px;
-      padding: 18px;
-      background: linear-gradient(180deg, rgba(82,172,217,.18), rgba(82,172,217,.10));
-      border: 1px solid rgba(82,172,217,.28);
-      box-shadow:
-        0 30px 90px rgba(0,0,0,.65),
-        0 18px 65px rgba(82,172,217,.20),
-        0 0 0 1px rgba(82,172,217,.08) inset;
+      padding: 16px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 28px 90px rgba(0,0,0,.55);
       position:relative;
-      animation: zonePulse 2.2s ease-in-out infinite;
+      overflow:hidden;
     }
-    @keyframes zonePulse{
-      0%,100%{transform:translateY(0); filter:saturate(1)}
-      50%{transform:translateY(-2px); filter:saturate(1.05)}
-    }
-    .callZone:before{
+    .callBox:before{
       content:"";
       position:absolute; inset:-2px;
-      border-radius: 24px;
-      background: radial-gradient(520px 260px at 20% 30%, rgba(82,172,217,.35), transparent 60%);
-      opacity:.75;
+      background:
+        radial-gradient(540px 260px at 20% 30%, rgba(82,172,217,.30), transparent 62%),
+        radial-gradient(520px 260px at 80% 70%, rgba(82,172,217,.18), transparent 62%);
+      opacity:.95;
       pointer-events:none;
+      animation: boxDrift 7.5s ease-in-out infinite;
     }
+    @keyframes boxDrift{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
-    .choiceRow{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      position:relative;
-      z-index:1;
-    }
-    .pill{
-      border-radius: 16px;
-      padding: 12px 12px;
-      background: rgba(0,0,0,.35);
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: 0 18px 55px rgba(0,0,0,.35);
-      cursor:pointer;
-      transition: transform .12s ease, border-color .12s ease, background .12s ease;
-      user-select:none;
-    }
-    .pill:hover{transform: translateY(-1px); border-color: rgba(82,172,217,.30)}
-    .pill.active{
-      border-color: rgba(82,172,217,.55);
-      background: rgba(82,172,217,.14);
-    }
-    .pillTop{
-      display:flex;align-items:center;justify-content:space-between;gap:10px;
-      font-weight:950; letter-spacing:-.02em;
-      color: rgba(255,255,255,.92);
-    }
-    .pillTop small{opacity:.75; font-weight:850}
-    .pillSub{
-      margin-top:6px;
-      color: rgba(234,240,247,.74);
-      font-weight:600;
-      line-height:1.55;
-      font-size:13px;
-    }
-
-    .ctaRow{margin-top: 12px; display:grid; gap:10px; position:relative; z-index:1;}
-
-    .ctaCall{
+    .callBtn{
       width:100%;
       border:0;
       border-radius: 18px;
-      padding: 16px 16px;
-      font-weight:950;
-      letter-spacing:-.02em;
-      font-size:16px;
+      padding: 18px 16px;
       cursor:pointer;
       background: linear-gradient(180deg, rgba(82,172,217,1), rgba(47,134,179,1));
       color: rgba(8,10,12,.92);
-      box-shadow:
-        0 24px 80px rgba(0,0,0,.55),
-        0 18px 65px rgba(82,172,217,.22);
-      transform: translateY(0);
-      transition: transform .15s ease, filter .15s ease;
+      font-weight:950;
+      letter-spacing:-.02em;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
       position:relative;
       overflow:hidden;
-      animation: callBreathe 2.2s ease-in-out infinite;
+
+      /* GROS SHADOW + PALPITATION */
+      box-shadow:
+        0 30px 95px rgba(0,0,0,.62),
+        0 22px 90px rgba(82,172,217,.28),
+        0 0 0 1px rgba(255,255,255,.22) inset;
+
+      animation: callPulse 1.7s ease-in-out infinite;
+      transform: translateY(0);
+      transition: transform .15s ease, filter .15s ease;
     }
-    @keyframes callBreathe{
-      0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-2px)}
+    @keyframes callPulse{
+      0%,100%{
+        transform: translateY(0);
+        box-shadow:
+          0 30px 95px rgba(0,0,0,.62),
+          0 22px 90px rgba(82,172,217,.26),
+          0 0 0 1px rgba(255,255,255,.22) inset;
+        filter:saturate(1);
+      }
+      50%{
+        transform: translateY(-2px);
+        box-shadow:
+          0 36px 120px rgba(0,0,0,.68),
+          0 30px 120px rgba(82,172,217,.34),
+          0 0 0 1px rgba(255,255,255,.26) inset;
+        filter:saturate(1.05);
+      }
     }
-    .ctaCall:before{
+    .callBtn:before{
       content:"";
       position:absolute; inset:0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.30), transparent);
       transform: translateX(-60%);
-      animation: sheen 3s ease-in-out infinite;
-      opacity:.65;
+      animation: sheen 2.8s ease-in-out infinite;
+      opacity:.7;
     }
     @keyframes sheen{
       0%{transform:translateX(-60%);opacity:0}
-      25%{opacity:.55}
-      60%{opacity:.55}
+      25%{opacity:.6}
+      65%{opacity:.6}
       100%{transform:translateX(60%);opacity:0}
     }
-    .ctaCall:hover{transform: translateY(-1px); filter:saturate(1.05)}
-    .ctaCall:active{transform: translateY(0)}
-    .ctaCall svg{width:18px;height:18px;opacity:.9;vertical-align:-3px;margin-right:10px}
 
-    .ctaSecondary{
-      width:100%;
-      border-radius: 18px;
-      padding: 14px 16px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.12);
-      color: rgba(255,255,255,.90);
-      font-weight:900;
-      letter-spacing:-.02em;
-      cursor:pointer;
-      transition: transform .12s ease, border-color .12s ease;
+    .callBtn:hover{transform: translateY(-2px); filter:saturate(1.08)}
+    .callBtn:active{transform: translateY(0)}
+
+    .callLeft{
+      display:flex; align-items:center; gap:12px;
+      min-width:0;
     }
-    .ctaSecondary:hover{transform: translateY(-1px); border-color: rgba(82,172,217,.30)}
-    .ctaSecondary:active{transform: translateY(0)}
+    .callIcon{
+      width:42px;height:42px;border-radius:14px;
+      background: rgba(255,255,255,.20);
+      display:grid;place-items:center;
+      box-shadow: 0 16px 40px rgba(0,0,0,.20) inset;
+      flex:0 0 auto;
+    }
+    .callIcon svg{width:20px;height:20px;opacity:.95}
+    .callText{min-width:0}
+    .callText b{
+      display:block;
+      font-size: 15px;
+      letter-spacing:-.02em;
+      line-height:1.1;
+    }
+    .callText span{
+      display:block;
+      margin-top:4px;
+      font-size: 18px;
+      font-weight:950;
+      letter-spacing:-.03em;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .callArrow{
+      width:44px;height:44px;border-radius:16px;
+      background: rgba(0,0,0,.22);
+      display:grid;place-items:center;
+      border: 1px solid rgba(0,0,0,.10);
+      flex:0 0 auto;
+    }
+    .callArrow svg{width:18px;height:18px;opacity:.95}
 
-    .hint{
+    .miniNote{
       margin-top: 10px;
-      color: rgba(234,240,247,.75);
+      text-align:center;
+      color: rgba(234,240,247,.72);
       font-weight:600;
       line-height:1.6;
-      text-align:center;
-      position:relative;
-      z-index:1;
     }
 
-    .badges{
-      margin-top: 14px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:center;
-      position:relative;
-      z-index:1;
-    }
-    .badge{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      padding: 10px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.10);
-      color: rgba(234,240,247,.84);
-      font-weight:850;
-      font-size:13px;
-    }
-    .badge svg{width:16px;height:16px;opacity:.9}
-
-    /* ===== Light sections ===== */
+    /* ===== Content ===== */
     .h2{
       margin:0;
       font-size: clamp(32px, 4vw, 52px);
@@ -352,7 +322,6 @@
       font-size:16px;
     }
 
-    /* info cards (style identique) */
     .grid3{
       margin-top: 26px;
       display:grid;
@@ -395,7 +364,6 @@
       font-size:14px;
     }
 
-    /* dark rows */
     .rows{margin-top:24px; display:grid; gap:12px; max-width: 860px; margin-left:auto; margin-right:auto;}
     .row{
       display:flex;justify-content:space-between;align-items:center;gap:14px;
@@ -408,7 +376,6 @@
     .row b{font-weight:950;letter-spacing:-.02em}
     .row small{opacity:.7;font-weight:750}
 
-    /* FAQ */
     .faq{max-width: 860px; margin: 26px auto 0; display:grid; gap:12px;}
     details{
       border-radius: 20px;
@@ -479,19 +446,17 @@
       cursor:pointer;
     }
 
-    /* responsive */
     @media (max-width: 980px){
       .heroGrid{grid-template-columns:1fr}
       h1,.sub{text-align:center}
       .kicker{justify-content:center}
-      .callZone{margin-left:auto;margin-right:auto}
+      .callBox{margin-left:auto;margin-right:auto}
       .grid3{grid-template-columns:1fr}
       .callBar{display:block}
     }
-
     @media (prefers-reduced-motion: reduce){
-      .dust,.glow,.callZone,.ctaCall{animation:none!important}
-      .ctaCall:before{animation:none!important}
+      .dust,.glow,.callBox,.callBtn{animation:none!important}
+      .callBtn:before{animation:none!important}
       .reveal{opacity:1!important;transform:none!important}
     }
   </style>
@@ -502,7 +467,7 @@
   <div class="topbar">
     <div class="wrap">
       <div class="inner">
-        <div class="top-left">
+        <div style="display:flex;align-items:center;gap:10px;">
           <div class="logo" aria-hidden="true">
             <img src="media/logob.png" alt="">
           </div>
@@ -524,7 +489,7 @@
     </div>
   </div>
 
-  <!-- 1) DARK HERO -->
+  <!-- 1) HERO DARK -->
   <section class="dark">
     <div class="dust" aria-hidden="true"></div>
     <div class="glow" aria-hidden="true"></div>
@@ -539,60 +504,32 @@
             Service indépendant de mise en relation. Tu payes directement le plombier.
           </p>
 
-          <!-- ZONE CONVERSION APPEL -->
-          <div class="callZone" aria-label="Appel">
-            <div class="choiceRow" role="group" aria-label="Type de problème">
-              <div class="pill active" data-issue="Fuite d’eau">
-                <div class="pillTop"><span>Fuite d’eau</span><small>urgent</small></div>
-                <div class="pillSub">Valve, tuyau, dégâts.</div>
-              </div>
-              <div class="pill" data-issue="Toilette bouchée">
-                <div class="pillTop"><span>Toilette bouchée</span><small>déblocage</small></div>
-                <div class="pillSub">Drain, refoulement.</div>
-              </div>
+          <!-- CTA NUMÉRO (le vrai “envie de cliquer”) -->
+          <div class="callBox" aria-label="Appeler">
+            <button class="callBtn" id="callBtn" type="button">
+              <span class="callLeft">
+                <span class="callIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M22 16.9v3a2 2 0 0 1-2.2 2c-9.1-.7-16.3-7.9-17-17A2 2 0 0 1 4.9 2h3a2 2 0 0 1 2 1.7c.1.8.3 1.7.6 2.4a2 2 0 0 1-.5 2.1L9 9.2c1.5 2.7 3.7 4.9 6.4 6.4l1-1a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.4.6A2 2 0 0 1 22 16.9z"
+                          stroke="rgba(8,10,12,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="callText">
+                  <b>Appel immédiat</b>
+                  <span id="phoneText">+1 (555) 555-5555</span>
+                </span>
+              </span>
 
-              <div class="pill" data-issue="Chauffe-eau">
-                <div class="pillTop"><span>Chauffe-eau</span><small>panne</small></div>
-                <div class="pillSub">Réparation / remplacement.</div>
-              </div>
-              <div class="pill" data-issue="Drain / égout">
-                <div class="pillTop"><span>Drain / égout</span><small>odeur</small></div>
-                <div class="pillSub">Refoulement, blocage.</div>
-              </div>
-            </div>
-
-            <div class="ctaRow">
-              <!-- IMPORTANT: change le numéro -->
-              <button class="ctaCall" id="callBtn" type="button">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M22 16.9v3a2 2 0 0 1-2.2 2c-9.1-.7-16.3-7.9-17-17A2 2 0 0 1 4.9 2h3a2 2 0 0 1 2 1.7c.1.8.3 1.7.6 2.4a2 2 0 0 1-.5 2.1L9 9.2c1.5 2.7 3.7 4.9 6.4 6.4l1-1a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.4.6A2 2 0 0 1 22 16.9z"
-                        stroke="rgba(8,10,12,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <span class="callArrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M5 12h12" stroke="rgba(8,10,12,.9)" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M13 6l6 6-6 6" stroke="rgba(8,10,12,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                Appeler maintenant (Trois-Rivières)
-              </button>
-
-              <button class="ctaSecondary" id="backBtn" type="button">Retour à la recherche de ville</button>
-            </div>
-
-            <div class="hint" id="hintTxt">Problème sélectionné : <b>Fuite d’eau</b>. Appel direct au professionnel disponible.</div>
-
-            <div class="badges" aria-label="Garanties">
-              <span class="badge">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M20 6L9 17l-5-5" stroke="rgba(234,240,247,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg> Appel direct
               </span>
-              <span class="badge">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke="rgba(234,240,247,.92)" stroke-width="2"/>
-                </svg> Indépendant
-              </span>
-              <span class="badge">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M12 8v5l3 2" stroke="rgba(234,240,247,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="rgba(234,240,247,.92)" stroke-width="2"/>
-                </svg> Selon dispo
-              </span>
+            </button>
+
+            <div class="miniNote">
+              Tu payes directement le professionnel • Disponibilité variable selon l’heure.
             </div>
           </div>
         </div>
@@ -601,13 +538,13 @@
     </div>
   </section>
 
-  <!-- 2) LIGHT: pourquoi ça marche / rassurance -->
+  <!-- 2) LIGHT -->
   <section class="light">
     <div class="wrap reveal">
       <h2 class="h2">Simple. <span class="blue">Rapide</span>. Clair.</h2>
       <p class="pCenter">
         Objectif : te connecter vite à un plombier disponible à <b>Trois-Rivières</b>.
-        Pas d’inscription, pas de blabla.
+        Pas d’inscription, pas de friction.
       </p>
 
       <div class="grid3" aria-label="Avantages">
@@ -615,20 +552,20 @@
           <div class="infoTop"></div>
           <div class="infoBody">
             <b>Page locale</b>
-            <p>Tu restes dans la bonne ville. Moins de friction, plus rapide.</p>
+            <p>Tu restes dans la bonne ville. Moins de pertes de temps.</p>
           </div>
         </div>
         <div class="infoCard">
           <div class="infoTop"></div>
           <div class="infoBody">
             <b>Appel direct</b>
-            <p>Connexion au pro disponible. Tu payes directement le plombier.</p>
+            <p>Connexion au pro disponible. Paiement direct au plombier.</p>
           </div>
         </div>
         <div class="infoCard">
           <div class="infoTop"></div>
           <div class="infoBody">
-            <b>Disponibilité variable</b>
+            <b>Selon disponibilité</b>
             <p>Selon l’heure et la demande. On tente de te connecter au plus vite.</p>
           </div>
         </div>
@@ -636,7 +573,7 @@
     </div>
   </section>
 
-  <!-- 3) DARK: problèmes fréquents (pour SEO + confiance) -->
+  <!-- 3) DARK -->
   <section class="dark">
     <div class="dust" aria-hidden="true"></div>
     <div class="glow" aria-hidden="true"></div>
@@ -656,7 +593,7 @@
       <div class="faq" aria-label="FAQ">
         <details>
           <summary>Êtes-vous une entreprise de plomberie?</summary>
-          <p>Non. Nous sommes un service indépendant de mise en relation. Les réparations sont faites par un professionnel.</p>
+          <p>Non. Service indépendant de mise en relation. Les réparations sont effectuées par un professionnel.</p>
         </details>
         <details>
           <summary>Combien ça coûte?</summary>
@@ -670,7 +607,7 @@
     </div>
   </section>
 
-  <!-- 4) LIGHT: mentions légales -->
+  <!-- 4) LIGHT -->
   <section class="light">
     <div class="wrap reveal">
       <h2 class="h2">Mentions <span class="blue">légales</span></h2>
@@ -690,48 +627,23 @@
   </div>
 
   <script>
-    // ====== À MODIFIER: le numéro de téléphone (format tel:) ======
-    // Mets ton numéro tracké (CallRail/Twilio) ici.
-    const PHONE_NUMBER = "+1-555-555-5555";
+    // ====== METS TON VRAI NUMÉRO ICI ======
+    // idéalement un numéro tracké (CallRail / Twilio) si tu veux savoir combien d'appels.
+    const PHONE_NUMBER_TEL = "+1-555-555-5555";      // format tel:
+    const PHONE_NUMBER_UI  = "+1 (555) 555-5555";    // affichage
 
-    // tracking (optionnel) : ce qu’on envoie comme label
-    let selectedIssue = "Fuite d’eau";
-
-    const pills = document.querySelectorAll(".pill");
-    const hintTxt = document.getElementById("hintTxt");
+    const phoneText = document.getElementById("phoneText");
     const callBtn = document.getElementById("callBtn");
     const callMini = document.getElementById("callMini");
-    const backBtn = document.getElementById("backBtn");
     const scrollTop = document.getElementById("scrollTop");
 
-    function setIssue(issue){
-      selectedIssue = issue;
-      hintTxt.innerHTML = `Problème sélectionné : <b>${issue}</b>. Appel direct au professionnel disponible.`;
-    }
-
-    pills.forEach(p => {
-      p.addEventListener("click", () => {
-        pills.forEach(x => x.classList.remove("active"));
-        p.classList.add("active");
-        setIssue(p.dataset.issue || "Plomberie");
-      });
-    });
+    phoneText.textContent = PHONE_NUMBER_UI;
 
     function doCall(){
-      // Option: ajoute un hash pour analytics simple
-      const url = `tel:${PHONE_NUMBER}`;
-      // Petit log (tu peux brancher GA plus tard)
-      try { console.log("CALL", {city:"Trois-Rivières", issue:selectedIssue}); } catch(e){}
-      window.location.href = url;
+      window.location.href = `tel:${PHONE_NUMBER_TEL}`;
     }
-
     callBtn.addEventListener("click", doCall);
     callMini.addEventListener("click", doCall);
-
-    backBtn.addEventListener("click", () => {
-      // retourne à la page de recherche (index)
-      window.location.href = "index.html";
-    });
 
     scrollTop.addEventListener("click", () => {
       window.scrollTo({top:0, behavior:"smooth"});
