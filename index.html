@@ -12,21 +12,16 @@
 
   <style>
     :root{
-      --blue:#52acd9;         /* ta couleur */
+      --blue:#52acd9;
       --blue2:#2f86b3;
-      --gold1:#f6d365;
-      --gold2:#caa24a;
+      --dark:#07090c;
+      --dark2:#0b0f14;
+      --light:#ffffff;
+      --paper:#f6f8fb;
+      --ink:#0b1220;
+      --muted:#5b6778;
 
-      --dark:#0b0f14;
-      --dark2:#101722;
-      --dark3:#0f141b;
-
-      --light:#eef3f7;
-      --paper:#f6f9fc;
-      --ink:#0c111b;
-      --muted:#556375;
-
-      --max:1120px;
+      --max:1100px;
       --r:26px;
     }
 
@@ -35,747 +30,437 @@
     body{
       margin:0;
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background: var(--dark); /* important: évite les "lignes blanches" entre sections */
-      color: #e9eef5;
+      background: var(--dark);
+      color:#eaf0f7;
       overflow-x:hidden;
     }
-    a{color:inherit}
+    a{color:inherit;text-decoration:none}
     button,input{font-family:inherit}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(18px,4vw,44px);position:relative;z-index:2}
 
-    .wrap{
-      max-width:var(--max);
-      margin:0 auto;
-      padding: 0 clamp(18px, 4vw, 46px);
-      position:relative;
-      z-index:2;
-    }
-
-    /* ====== Background life (premium, discret) ====== */
-    .particles{
-      position:absolute; inset:0;
-      pointer-events:none;
-      z-index:0;
-      opacity:.55;
-      filter: blur(.2px);
-      background:
-        radial-gradient(2px 2px at 14% 20%, rgba(255,255,255,.22) 40%, transparent 42%),
-        radial-gradient(2px 2px at 80% 35%, rgba(255,255,255,.18) 40%, transparent 42%),
-        radial-gradient(2px 2px at 62% 78%, rgba(255,255,255,.14) 40%, transparent 42%),
-        radial-gradient(2px 2px at 28% 68%, rgba(255,255,255,.10) 40%, transparent 42%),
-        radial-gradient(2px 2px at 48% 44%, rgba(255,255,255,.10) 40%, transparent 42%);
-      animation: floatDust 10s ease-in-out infinite;
-    }
-    @keyframes floatDust{
-      0%,100%{transform: translateY(0)}
-      50%{transform: translateY(14px)}
-    }
-
-    /* blue glow blobs (dark sections) */
-    .glow{
-      position:absolute;
-      inset:-40px;
-      pointer-events:none;
-      z-index:1;
-      background:
-        radial-gradient(520px 360px at 18% 22%, rgba(82,172,217,.25), transparent 60%),
-        radial-gradient(620px 420px at 78% 38%, rgba(82,172,217,.16), transparent 62%),
-        radial-gradient(420px 340px at 62% 86%, rgba(82,172,217,.12), transparent 65%);
-      filter: blur(0px);
-      opacity:.85;
-      animation: drift 9.5s ease-in-out infinite;
-    }
-    @keyframes drift{
-      0%,100%{transform: translate3d(0,0,0) scale(1)}
-      50%{transform: translate3d(0,-12px,0) scale(1.02)}
-    }
-
-    /* light sections: subtle blue motion but CLEAN */
-    .lightGlow{
-      position:absolute; inset:-40px;
-      pointer-events:none; z-index:1;
-      background:
-        radial-gradient(520px 320px at 20% 10%, rgba(82,172,217,.14), transparent 60%),
-        radial-gradient(600px 360px at 85% 35%, rgba(82,172,217,.10), transparent 62%);
-      opacity:.85;
-      animation: drift2 10.5s ease-in-out infinite;
-    }
-    @keyframes drift2{
-      0%,100%{transform: translateY(0)}
-      50%{transform: translateY(10px)}
-    }
-
-    /* ====== Sections + separators (NO white gaps) ====== */
-    .section{
-      position:relative;
-      padding: clamp(72px, 7vw, 110px) 0;
-      isolation:isolate;
-      overflow:hidden;
-    }
-    .darkSec{
-      background: radial-gradient(1200px 700px at 50% 0%, rgba(255,255,255,.06), transparent 60%),
-                  linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
-      color:#e9eef5;
-    }
-    .lightSec{
-      background: linear-gradient(180deg, var(--light) 0%, #eef4fa 100%);
-      color:var(--ink);
-    }
-
-    .sep{
-      position:absolute; left:0; right:0;
-      height:88px;
-      pointer-events:none;
-      z-index:3;
-    }
-    .sep.bottom{bottom:-1px}
-    .sep.top{top:-1px; transform: rotate(180deg)}
-    .sep path{shape-rendering:geometricPrecision}
-
-    /* ====== Top bar (premium + simple) ====== */
+    /* ===== Header (Aivro-like: simple, centered, no white card) ===== */
     .topbar{
-      position:sticky;
-      top:0;
-      z-index:30;
+      position:sticky; top:0; z-index:50;
+      background: rgba(0,0,0,.55);
       backdrop-filter: blur(10px);
-      background: rgba(9,12,16,.62);
-      border-bottom: 1px solid rgba(255,255,255,.08);
+      border-bottom: 1px solid rgba(255,255,255,.10);
     }
-    .topInner{
-      display:flex;
+    .topbar .inner{
+      display:grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      padding: 12px 0;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
+      padding: 14px 0;
       gap:12px;
-      min-width:0;
-      text-decoration:none;
     }
-    .logoWrap{
-      width:34px;height:34px;
-      border-radius:12px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      flex:0 0 auto;
-      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    .top-left{display:flex;align-items:center;gap:10px;min-width:0}
+    .logo{
+      width:30px;height:30px;border-radius:10px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      overflow:hidden; flex:0 0 auto;
     }
-    .logoWrap img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-    .brandText{
-      display:flex;
-      flex-direction:column;
-      line-height:1.05;
-      min-width:0;
-    }
-    .domain{
-      font-weight:950;
-      letter-spacing:-.03em;
-      font-size:14px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-    .tagline{
-      font-size:12px;
-      color: rgba(255,255,255,.68);
-      font-weight:650;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .ratingPill{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 9px 12px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.05);
-      box-shadow: 0 18px 44px rgba(0,0,0,.35);
-      white-space:nowrap;
-    }
-    .stars{display:inline-flex; gap:3px}
-    .star{width:14px;height:14px; display:block}
-    .star .fill{fill: url(#goldGrad); stroke: rgba(0,0,0,.18); stroke-width: .6;}
-    .score{
+    .logo img{width:100%;height:100%;object-fit:cover;display:block}
+    .titleCenter{
+      text-align:center;
       font-weight:900;
-      letter-spacing:-.01em;
-      color: rgba(255,255,255,.92);
+      letter-spacing:-.03em;
+      font-size:15px;
+      opacity:.95;
+      white-space:nowrap;
     }
-    .score span{color: rgba(255,255,255,.60); font-weight:800}
+    .top-right{
+      justify-self:end;
+      display:flex;align-items:center;gap:10px;
+      white-space:nowrap;
+      color: rgba(255,255,255,.86);
+      font-weight:800;
+      font-size:13px;
+    }
+    .stars{display:inline-flex;gap:3px;transform:translateY(1px)}
+    .star{width:14px;height:14px;display:block}
+    .star path{fill:#d8b255}
+    .score{opacity:.9}
+    .score span{opacity:.7}
 
-    /* ====== HERO layout (centered on mobile) ====== */
+    /* ===== Sections (black/white alternation like screenshots) ===== */
+    section{
+      position:relative;
+      padding: clamp(84px,8vw,120px) 0;
+      overflow:hidden;
+      isolation:isolate;
+    }
+    .dark{
+      background: radial-gradient(1200px 700px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
+                  linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
+      color:#eaf0f7;
+    }
+    .light{
+      background: linear-gradient(180deg, #ffffff 0%, var(--paper) 100%);
+      color: var(--ink);
+    }
+
+    /* floating dust like Aivro */
+    .dust{
+      position:absolute; inset:-40px;
+      pointer-events:none;
+      opacity:.25;
+      background:
+        radial-gradient(2px 2px at 12% 20%, rgba(255,255,255,.35) 40%, transparent 42%),
+        radial-gradient(2px 2px at 70% 30%, rgba(255,255,255,.18) 40%, transparent 42%),
+        radial-gradient(2px 2px at 80% 70%, rgba(255,255,255,.14) 40%, transparent 42%),
+        radial-gradient(2px 2px at 30% 75%, rgba(255,255,255,.12) 40%, transparent 42%),
+        radial-gradient(2px 2px at 48% 44%, rgba(255,255,255,.12) 40%, transparent 42%);
+      animation: dustMove 10s ease-in-out infinite;
+    }
+    @keyframes dustMove{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(16px)}
+    }
+
+    /* blue glow */
+    .glow{
+      position:absolute; inset:-80px;
+      pointer-events:none;
+      background:
+        radial-gradient(700px 420px at 20% 20%, rgba(82,172,217,.20), transparent 60%),
+        radial-gradient(620px 420px at 80% 40%, rgba(82,172,217,.14), transparent 62%);
+      opacity:.9;
+      animation: glowDrift 9s ease-in-out infinite;
+    }
+    @keyframes glowDrift{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-14px)}
+    }
+
+    /* ===== Hero layout ===== */
     .hero{
-      min-height: 100svh;
+      min-height: 92svh;
       display:grid;
       align-items:center;
-      padding-top: 16px; /* topbar already exists */
+      padding-top: 22px;
     }
     .heroGrid{
       display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: clamp(18px, 4vw, 46px);
+      grid-template-columns: 1.25fr .75fr;
+      gap: clamp(18px,4vw,44px);
       align-items:center;
     }
-
     .kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      font-weight:900;
-      letter-spacing:.14em;
       text-transform:uppercase;
+      letter-spacing:.18em;
+      font-weight:900;
       font-size:12px;
-      color: rgba(233,238,245,.72);
+      color: rgba(234,240,247,.72);
+      display:flex;align-items:center;gap:10px;
     }
     .kicker:before{
       content:"";
-      width:26px;height:2px;
+      width:28px;height:2px;
       background: linear-gradient(90deg, transparent, rgba(82,172,217,.95), transparent);
       opacity:.9;
     }
 
     h1{
       margin: 14px 0 0 0;
-      font-size: clamp(40px, 5vw, 78px);
-      line-height: .98;
+      font-weight:950;
       letter-spacing:-.07em;
-      font-weight:980;
+      line-height:.98;
+      font-size: clamp(44px, 5.6vw, 86px);
     }
     .accent{
-      background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(82,172,217,.95));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color: transparent;
+      color: var(--blue);
+      text-shadow: 0 18px 70px rgba(82,172,217,.20);
     }
     .sub{
       margin: 14px 0 0 0;
+      color: rgba(234,240,247,.70);
+      font-weight:600;
+      line-height:1.7;
       max-width: 62ch;
-      font-size: 16.5px;
-      line-height: 1.7;
-      color: rgba(233,238,245,.72);
-      font-weight:560;
     }
 
-    /* ====== Search block (DIFFÉRENT + coloré + pulse + shadow, sans "plein d’encadrés") ====== */
-    .action{
-      margin-top: 18px;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      max-width: 520px;
-    }
-
-    .cityShell{
-      position:relative;
-      border-radius: 999px;
-      padding: 2px;
-      background: linear-gradient(90deg, rgba(82,172,217,.95), rgba(82,172,217,.35));
+    /* ===== The city zone: colored, pulsating, shadow (NO extra cards everywhere) ===== */
+    .cityZone{
+      margin-top: 22px;
+      width:min(560px, 100%);
+      border-radius: 22px;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(82,172,217,.18), rgba(82,172,217,.10));
+      border: 1px solid rgba(82,172,217,.28);
       box-shadow:
-        0 20px 60px rgba(0,0,0,.48),
-        0 0 0 1px rgba(82,172,217,.22);
-      transform: translateZ(0);
-      animation: shellPulse 2.6s ease-in-out infinite;
-    }
-    @keyframes shellPulse{
-      0%,100%{transform: translateY(0); filter: saturate(1)}
-      50%{transform: translateY(-1px); filter: saturate(1.06)}
-    }
-
-    .cityInner{
-      border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
-      border: 1px solid rgba(255,255,255,.10);
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding: 14px 16px;
+        0 30px 90px rgba(0,0,0,.65),
+        0 18px 65px rgba(82,172,217,.20),
+        0 0 0 1px rgba(82,172,217,.08) inset;
       position:relative;
-      overflow:hidden;
+      animation: zonePulse 2.2s ease-in-out infinite;
     }
-    .cityInner:before{
+    @keyframes zonePulse{
+      0%,100%{transform:translateY(0); filter:saturate(1)}
+      50%{transform:translateY(-2px); filter:saturate(1.05)}
+    }
+    .cityZone:before{
       content:"";
-      position:absolute;
-      inset:0;
-      background: radial-gradient(420px 180px at 20% 50%, rgba(82,172,217,.18), transparent 60%);
-      opacity:.65;
+      position:absolute; inset:-2px;
+      border-radius: 24px;
+      background: radial-gradient(420px 220px at 20% 30%, rgba(82,172,217,.35), transparent 60%);
+      opacity:.75;
       pointer-events:none;
     }
-    .pin{
-      width:18px;height:18px;
-      opacity:.85;
-      flex:0 0 auto;
-      color: rgba(255,255,255,.86);
+
+    .field{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 18px 55px rgba(0,0,0,.35);
       position:relative;
       z-index:1;
     }
-    .cityInput{
+    .pin{width:18px;height:18px;opacity:.9}
+    .input{
       width:100%;
-      border:0;
-      outline:none;
+      border:0; outline:0;
       background:transparent;
-      color: rgba(255,255,255,.94);
+      color: rgba(255,255,255,.92);
       font-weight:900;
       letter-spacing:-.02em;
-      font-size: 17px;
-      position:relative;
-      z-index:1;
-      min-width:0;
+      font-size:16px;
     }
-    .cityInput::placeholder{
-      color: rgba(255,255,255,.50);
-      font-weight:850;
-    }
+    .input::placeholder{color: rgba(255,255,255,.55); font-weight:850}
 
-    /* suggestions */
+    /* suggestions dropdown */
     .suggest{
-      position:absolute;
-      left:0; right:0;
-      top: calc(100% + 10px);
-      display:none;
-      z-index:50;
-      opacity:0;
-      transform: translateY(-8px);
-      transition: opacity .18s ease, transform .18s ease;
-    }
-    .suggest.on{
-      display:block;
-      opacity:1;
-      transform: translateY(0);
-    }
-    .sList{
-      border-radius: 18px;
-      background: rgba(12,16,22,.92);
-      border:1px solid rgba(255,255,255,.10);
+      margin-top: 10px;
+      border-radius: 16px;
       overflow:hidden;
-      box-shadow: 0 22px 70px rgba(0,0,0,.55);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.55);
       backdrop-filter: blur(10px);
+      display:none;
+      position:relative;
+      z-index:2;
     }
+    .suggest.on{display:block}
     .sItem{
+      padding: 12px 14px;
       display:flex;
-      align-items:center;
       justify-content:space-between;
-      gap:10px;
-      padding: 14px 14px;
-      border-top:1px solid rgba(255,255,255,.08);
+      align-items:center;
+      gap:12px;
       cursor:pointer;
-      user-select:none;
+      border-top:1px solid rgba(255,255,255,.08);
+      font-weight:900;
     }
     .sItem:first-child{border-top:0}
-    .sName{font-weight:950; letter-spacing:-.02em}
+    .sItem:hover{background: rgba(82,172,217,.18)}
     .sMeta{
       font-size:12px;
-      font-weight:850;
-      color: rgba(233,238,245,.65);
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-    .sItem:hover{
-      background: rgba(82,172,217,.10);
-    }
-    .sItem:hover .sName{
-      text-decoration: underline;
-      text-underline-offset: 6px;
-      text-decoration-thickness: 2px;
-      text-decoration-color: rgba(82,172,217,.75);
+      font-weight:800;
+      opacity:.75;
     }
 
-    /* CTA button visible even disabled */
+    /* CTA like screenshot: big, glossy, blue */
     .cta{
+      margin-top: 12px;
+      width:100%;
       border:0;
-      border-radius: 999px;
-      padding: 14px 16px;
+      border-radius: 18px;
+      padding: 15px 16px;
       font-weight:950;
       letter-spacing:-.02em;
-      font-size: 16px;
+      font-size:16px;
       cursor:pointer;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
+      background: linear-gradient(180deg, rgba(82,172,217,1), rgba(47,134,179,1));
+      color: rgba(8,10,12,.92);
+      box-shadow:
+        0 24px 80px rgba(0,0,0,.55),
+        0 18px 65px rgba(82,172,217,.22);
+      opacity:.85;
+      transform: translateY(0);
+      transition: transform .15s ease, opacity .15s ease, filter .15s ease;
       position:relative;
       overflow:hidden;
-      background: rgba(255,255,255,.10);
-      color: rgba(255,255,255,.72);
-      box-shadow: 0 18px 50px rgba(0,0,0,.35);
-      border: 1px solid rgba(255,255,255,.12);
-      transition: transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease;
     }
-    .cta svg{width:18px;height:18px; opacity:.9}
-    .cta:hover{transform: translateY(-1px); background: rgba(255,255,255,.13)}
-    .cta:active{transform: translateY(0)}
-    .cta.ready{
-      background: linear-gradient(180deg, rgba(82,172,217,1), rgba(47,134,179,1));
-      color: rgba(9,12,16,.92);
-      border-color: rgba(82,172,217,.55);
-      box-shadow:
-        0 24px 70px rgba(0,0,0,.55),
-        0 14px 50px rgba(82,172,217,.22);
-      animation: ctaPulse 2.1s ease-in-out infinite;
-    }
-    @keyframes ctaPulse{
-      0%,100%{transform: translateY(0)}
-      50%{transform: translateY(-2px)}
-    }
-    .cta.ready:before{
+    .cta:before{
       content:"";
-      position:absolute;
-      inset:0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.26), transparent);
-      transform: translateX(-55%);
-      animation: sheen 2.9s ease-in-out infinite;
-      opacity:.55;
+      position:absolute; inset:0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent);
+      transform: translateX(-60%);
+      animation: sheen 3s ease-in-out infinite;
+      opacity:.65;
     }
     @keyframes sheen{
-      0%{transform: translateX(-55%); opacity:0}
-      25%{opacity:.45}
-      60%{opacity:.45}
-      100%{transform: translateX(55%); opacity:0}
+      0%{transform:translateX(-60%);opacity:0}
+      25%{opacity:.55}
+      60%{opacity:.55}
+      100%{transform:translateX(60%);opacity:0}
     }
-
-    .helperText{
-      margin-top: 4px;
-      text-align:center;
-      color: rgba(233,238,245,.70);
-      font-weight:650;
-      line-height:1.6;
+    .cta.disabled{
+      background: rgba(255,255,255,.10);
+      color: rgba(255,255,255,.75);
+      border:1px solid rgba(255,255,255,.12);
+      opacity:.95;
+      box-shadow: 0 22px 70px rgba(0,0,0,.35);
     }
+    .cta.disabled:before{display:none}
+    .cta:hover{transform: translateY(-1px); filter:saturate(1.05)}
+    .cta:active{transform: translateY(0)}
 
-    .pills{
+    .hint{
       margin-top: 10px;
+      color: rgba(234,240,247,.75);
+      font-weight:600;
+      line-height:1.6;
+      text-align:center;
+    }
+
+    /* mini chips under hero like Aivro */
+    .chips{
+      margin-top: 14px;
       display:flex;
       gap:10px;
       flex-wrap:wrap;
       justify-content:center;
     }
-    .pill{
+    .chip{
       display:inline-flex;
-      align-items:center;
       gap:10px;
+      align-items:center;
       padding: 10px 12px;
       border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-      color: rgba(233,238,245,.78);
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(234,240,247,.84);
       font-weight:850;
-      font-size: 13px;
+      font-size:13px;
     }
-    .pill svg{width:16px;height:16px; opacity:.85}
+    .chip svg{width:16px;height:16px;opacity:.9}
 
-    /* right-side card (desktop) */
-    .sideCard{
-      border-radius: var(--r);
-      padding: 20px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: 0 28px 90px rgba(0,0,0,.55);
-      position:relative;
-      overflow:hidden;
-    }
-    .sideCard:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(520px 260px at 20% 30%, rgba(82,172,217,.22), transparent 60%);
-      opacity:.8;
-      pointer-events:none;
-    }
-    .sideCard h3{
-      margin:0;
-      font-size: 15px;
-      font-weight:950;
-      letter-spacing:-.02em;
-      position:relative;
-      z-index:1;
-    }
-    .sideCard p{
-      margin:10px 0 0 0;
-      color: rgba(233,238,245,.70);
-      font-weight:650;
-      line-height:1.7;
-      font-size: 13.5px;
-      position:relative;
-      z-index:1;
-    }
-    .sideList{margin-top:14px; display:grid; gap:10px; position:relative; z-index:1;}
-    .sideItem{
-      display:flex; gap:10px; align-items:flex-start;
-      padding: 12px 12px;
-      border-radius: 16px;
-      background: rgba(0,0,0,.20);
-      border: 1px solid rgba(255,255,255,.10);
-    }
-    .sideItem svg{width:18px;height:18px; opacity:.9; flex:0 0 auto}
-    .sideItem b{display:block; font-weight:950; letter-spacing:-.02em}
-    .sideItem span{display:block; margin-top:4px; color: rgba(233,238,245,.70); font-weight:650; font-size: 13px; line-height:1.6}
-
-    /* ====== Content blocks (not "just text") ====== */
-    .secTitle{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      margin-bottom: 16px;
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      font-weight:950;
-      letter-spacing:-.02em;
-      font-size: 13px;
-      border: 1px solid rgba(12,17,27,.12);
-      background: rgba(255,255,255,.55);
-      color: rgba(12,17,27,.88);
-      box-shadow: 0 18px 50px rgba(0,0,0,.08);
-    }
-    .darkSec .badge{
-      border-color: rgba(255,255,255,.10);
-      background: rgba(255,255,255,.06);
-      color: rgba(233,238,245,.86);
-      box-shadow: 0 28px 90px rgba(0,0,0,.35);
-    }
-    .badgeDot{
-      width:9px;height:9px;border-radius:999px;
-      background: rgba(82,172,217,1);
-      box-shadow: 0 0 0 6px rgba(82,172,217,.14);
-    }
-
+    /* ===== Light sections titles like screenshot ===== */
     .h2{
       margin:0;
-      font-size: clamp(26px, 3.4vw, 44px);
-      line-height:1.05;
+      font-size: clamp(32px, 4vw, 52px);
       letter-spacing:-.06em;
-      font-weight:980;
+      line-height:1.05;
+      font-weight:950;
+      text-align:center;
     }
-    .desc{
-      margin: 10px 0 0 0;
-      max-width: 78ch;
-      color: var(--muted);
+    .h2 .blue{color: var(--blue)}
+    .pCenter{
+      margin: 12px auto 0;
+      max-width: 70ch;
+      text-align:center;
+      color: rgba(11,18,32,.65);
       font-weight:600;
       line-height:1.75;
-      font-size: 16px;
+      font-size:16px;
     }
-    .darkSec .desc{color: rgba(233,238,245,.70)}
 
-    /* cards grid */
-    .grid{
-      margin-top: 18px;
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
+    /* cards like screenshot (white section, blue top bar illusion) */
+    .stepStack{margin-top: 28px; display:grid; gap:18px; max-width: 780px; margin-left:auto; margin-right:auto;}
+    .step{
+      border-radius: 26px;
+      overflow:hidden;
+      border: 1px solid rgba(11,18,32,.10);
+      box-shadow: 0 26px 90px rgba(0,0,0,.10);
+      background: #fff;
     }
-    .card{
-      border-radius: var(--r);
-      padding: 16px;
-      background: rgba(255,255,255,.72);
-      border: 1px solid rgba(12,17,27,.10);
-      box-shadow: 0 22px 70px rgba(0,0,0,.10);
+    .stepTop{
+      height: 82px;
+      background: linear-gradient(90deg, rgba(47,134,179,1), rgba(82,172,217,1));
       position:relative;
-      overflow:hidden;
     }
-    .card:before{
+    .stepTop:after{
       content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(420px 240px at 20% 20%, rgba(82,172,217,.18), transparent 60%);
-      opacity:.6;
-      pointer-events:none;
+      position:absolute; left:0; right:0; bottom:-1px;
+      height: 34px;
+      background: #fff;
+      transform: skewY(-3deg);
+      transform-origin:left;
     }
-    .cardTop{
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      position:relative; z-index:1;
-    }
-    .cardIcon{
-      width:42px;height:42px;border-radius:16px;
-      background: rgba(82,172,217,.14);
-      border: 1px solid rgba(82,172,217,.30);
-      display:grid; place-items:center;
-      box-shadow: 0 18px 50px rgba(82,172,217,.10);
-    }
-    .cardIcon svg{width:20px;height:20px; color: rgba(12,17,27,.80)}
-    .darkSec .card{
-      background: rgba(255,255,255,.06);
-      border-color: rgba(255,255,255,.10);
-      box-shadow: 0 28px 90px rgba(0,0,0,.45);
-    }
-    .darkSec .card:before{
-      background: radial-gradient(420px 240px at 20% 20%, rgba(82,172,217,.22), transparent 60%);
-      opacity:.75;
-    }
-    .darkSec .cardIcon{
-      background: rgba(82,172,217,.10);
-      border-color: rgba(82,172,217,.22);
-    }
-    .darkSec .cardIcon svg{color: rgba(233,238,245,.88)}
-    .cardNum{
-      font-weight:950;
-      letter-spacing:-.02em;
-      font-size: 12px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(12,17,27,.06);
-      border:1px solid rgba(12,17,27,.10);
-      color: rgba(12,17,27,.72);
-    }
-    .darkSec .cardNum{
-      background: rgba(255,255,255,.06);
-      border-color: rgba(255,255,255,.10);
-      color: rgba(233,238,245,.70);
-    }
-    .card h4{
-      margin: 12px 0 0 0;
-      font-size: 18px;
-      font-weight:980;
-      letter-spacing:-.03em;
-      position:relative; z-index:1;
-    }
-    .card p{
-      margin: 10px 0 0 0;
-      color: rgba(12,17,27,.72);
-      font-weight:650;
-      line-height:1.7;
-      position:relative; z-index:1;
-    }
-    .darkSec .card p{color: rgba(233,238,245,.70)}
-
-    /* rows for problems */
-    .rows{margin-top: 18px; display:grid; gap:10px}
-    .row{
+    .stepBody{
+      padding: 18px 18px 20px;
       display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding: 14px 14px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: 0 22px 70px rgba(0,0,0,.22);
-    }
-    .row b{font-weight:980; letter-spacing:-.02em}
-    .row small{color: rgba(233,238,245,.65); font-weight:750}
-
-    /* FAQ */
-    .faq{margin-top: 16px; display:grid; gap:10px}
-    details{
-      border-radius: 18px;
-      background: rgba(255,255,255,.72);
-      border: 1px solid rgba(12,17,27,.10);
-      box-shadow: 0 22px 70px rgba(0,0,0,.10);
-      overflow:hidden;
-    }
-    summary{
-      list-style:none;
-      cursor:pointer;
-      padding: 16px 14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
       gap:14px;
+      align-items:flex-start;
+    }
+    .num{
+      width:40px;height:40px;border-radius:999px;
+      display:grid;place-items:center;
+      background: rgba(82,172,217,.16);
+      border: 1px solid rgba(82,172,217,.35);
       font-weight:950;
-      letter-spacing:-.02em;
-      color: rgba(12,17,27,.92);
+      color: rgba(11,18,32,.85);
+      flex:0 0 auto;
     }
-    summary::-webkit-details-marker{display:none}
-    summary:after{
-      content:"›";
-      font-size:22px;
-      opacity:.75;
+    .stepBody h3{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.03em;
+      font-weight:950;
+      color: rgba(11,18,32,.92);
     }
-    details[open] summary:after{content:"⌄"; opacity:.9}
-    details .ans{
-      padding: 0 14px 16px;
-      color: rgba(12,17,27,.72);
-      font-weight:650;
+    .stepBody p{
+      margin:8px 0 0 0;
+      color: rgba(11,18,32,.70);
+      font-weight:600;
       line-height:1.7;
     }
 
-    .legal{
-      margin-top: 16px;
-      padding: 14px 14px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.62);
-      border: 1px solid rgba(12,17,27,.10);
-      color: rgba(12,17,27,.70);
-      font-size: 12.5px;
-      line-height:1.7;
+    /* Dark section rows */
+    .rows{margin-top:24px; display:grid; gap:12px; max-width: 860px; margin-left:auto; margin-right:auto;}
+    .row{
+      display:flex;justify-content:space-between;align-items:center;gap:14px;
+      padding: 16px 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 22px 70px rgba(0,0,0,.35);
     }
+    .row b{font-weight:950;letter-spacing:-.02em}
+    .row small{opacity:.7;font-weight:750}
 
-    /* ====== Reveal animation ====== */
-    .reveal{opacity:0; transform: translateY(14px); transition: opacity .75s ease, transform .75s ease}
-    .reveal.on{opacity:1; transform: translateY(0)}
-    .delay1{transition-delay:.08s}
-    .delay2{transition-delay:.16s}
-    .delay3{transition-delay:.24s}
-
-    /* ====== Responsive ====== */
+    /* ===== Responsive: hero centered on mobile like your ask ===== */
     @media (max-width: 980px){
       .heroGrid{grid-template-columns:1fr}
-      .sideCard{display:none}
-      .action{max-width: 560px; margin-left:auto; margin-right:auto}
-      .sub{text-align:center; margin-left:auto; margin-right:auto}
-      h1{text-align:center}
-      .kicker{justify-content:center; width:100%}
-      .hero{padding-top: 10px}
-    }
-    @media (max-width: 900px){
-      .grid{grid-template-columns:1fr}
+      h1,.sub{text-align:center}
+      .kicker{justify-content:center}
+      .cityZone{margin-left:auto;margin-right:auto}
     }
 
+    /* ===== reduced motion ===== */
     @media (prefers-reduced-motion: reduce){
-      .particles,.glow,.lightGlow,.cityShell,.cta.ready,.cta.ready:before{animation:none!important}
-      .reveal{opacity:1!important; transform:none!important}
+      .dust,.glow,.cityZone{animation:none!important}
+      .cta:before{animation:none!important}
     }
   </style>
 </head>
 
 <body>
 
-  <!-- defs for gold stars -->
-  <svg width="0" height="0" style="position:absolute">
-    <defs>
-      <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#f6d365"/>
-        <stop offset="0.55" stop-color="#e6c15a"/>
-        <stop offset="1" stop-color="#caa24a"/>
-      </linearGradient>
-    </defs>
-  </svg>
-
-  <!-- TOP BAR -->
+  <!-- HEADER -->
   <div class="topbar">
     <div class="wrap">
-      <div class="topInner">
-        <a class="brand" href="#" aria-label="TrouverUnPlombier.ca">
-          <span class="logoWrap" aria-hidden="true">
-            <!-- Mets ton image ici (idéal: media/logob.png dans le même dossier que ton HTML) -->
+      <div class="inner">
+        <div class="top-left">
+          <div class="logo" aria-hidden="true">
+            <!-- Mets ton logo ici (chemin web, pas C:\...) -->
             <img src="media/logob.png" alt="">
-          </span>
-          <span class="brandText">
-            <span class="domain">TrouverUnPlombier.ca</span>
-            <span class="tagline">Mise en relation • Urgence selon disponibilité</span>
-          </span>
-        </a>
+          </div>
+        </div>
 
-        <div class="ratingPill" aria-label="Note 4.9 sur 5">
+        <div class="titleCenter">TrouverUnPlombier.ca</div>
+
+        <div class="top-right" aria-label="Note 4.9 sur 5">
           <span class="stars" aria-hidden="true">
-            <svg class="star" viewBox="0 0 24 24"><path class="fill" d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path class="fill" d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path class="fill" d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path class="fill" d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path class="fill" d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
           </span>
           <span class="score">4.9 <span>/ 5</span></span>
         </div>
@@ -783,303 +468,174 @@
     </div>
   </div>
 
-  <!-- 01: DARK HERO (centered on mobile) -->
-  <section class="section darkSec" aria-label="Hero">
-    <div class="particles" aria-hidden="true"></div>
+  <!-- 1) DARK HERO -->
+  <section class="dark">
+    <div class="dust" aria-hidden="true"></div>
     <div class="glow" aria-hidden="true"></div>
 
     <div class="wrap hero">
       <div class="heroGrid">
-        <div class="reveal on">
+        <div>
           <div class="kicker">Plomberie d’urgence</div>
           <h1>Trouve un plombier <span class="accent">dans ta ville</span>.</h1>
+          <p class="sub">Entre ta ville, ouvre la page locale, puis appelle le professionnel disponible. Simple, rapide, clair.</p>
 
-          <!-- ORDRE EXACT demandé: input -> bouton -> phrase -> pastilles -->
-          <div class="action">
-            <div class="cityShell reveal on delay1" id="cityShell">
-              <div class="cityInner">
-                <svg class="pin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke="currentColor" stroke-width="2"/>
-                  <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="currentColor" opacity=".16"/>
-                </svg>
-
-                <input id="cityInput" class="cityInput" type="text" placeholder="Ex : Trois-Rivières" autocomplete="off" />
-
-                <div id="suggest" class="suggest" role="listbox" aria-label="Suggestions de villes"></div>
-              </div>
-            </div>
-
-            <button id="goBtn" class="cta reveal on delay2" type="button" aria-disabled="true">
-              Ouvrir la page locale
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M5 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- CITY ZONE (color + pulse + shadow) -->
+          <div class="cityZone" id="cityZone">
+            <div class="field">
+              <svg class="pin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke="rgba(255,255,255,.92)" stroke-width="2"/>
+                <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="rgba(255,255,255,.22)"/>
               </svg>
-            </button>
-
-            <div class="helperText reveal on delay3">
-              Écris ta ville. Si elle existe, elle apparaît. Le bouton devient actif.
+              <input id="cityInput" class="input" type="text" placeholder="Ex : Trois-Rivières" autocomplete="off">
             </div>
 
-            <div class="pills reveal on delay3" aria-label="Atouts">
-              <span class="pill">
+            <div id="suggest" class="suggest" role="listbox" aria-label="Suggestions de villes"></div>
+
+            <button id="goBtn" class="cta disabled" type="button" aria-disabled="true">Ouvrir la page locale</button>
+
+            <div class="hint">Écris ta ville. Si elle existe, elle apparaît. Le bouton devient actif.</div>
+
+            <div class="chips" aria-label="Atouts">
+              <span class="chip">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                Appel direct
+                  <path d="M20 6L9 17l-5-5" stroke="rgba(234,240,247,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg> Appel direct
               </span>
-              <span class="pill">
+              <span class="chip">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke="currentColor" stroke-width="2"/>
-                </svg>
-                Indépendant
+                  <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke="rgba(234,240,247,.92)" stroke-width="2"/>
+                </svg> Service indépendant
               </span>
-              <span class="pill">
+              <span class="chip">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M12 8v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2"/>
-                </svg>
-                Selon dispo
+                  <path d="M12 8v5l3 2" stroke="rgba(234,240,247,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="rgba(234,240,247,.92)" stroke-width="2"/>
+                </svg> Selon dispo
               </span>
             </div>
           </div>
-
-          <p class="sub reveal on delay2" style="margin-top:16px">
-            Service indépendant de mise en relation. Vous payez directement le professionnel.
-          </p>
         </div>
 
-        <!-- Desktop side card -->
-        <aside class="sideCard reveal on delay2" aria-label="Résumé">
-          <h3>Simple. Rapide. Clair.</h3>
-          <p>Tu choisis ta ville, tu ouvres la page locale, tu appelles. Point.</p>
-          <div class="sideList">
-            <div class="sideItem">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              <div>
-                <b>Pages locales</b>
-                <span>Chaque ville a sa page, pas de confusion.</span>
-              </div>
-            </div>
-            <div class="sideItem">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke="currentColor" stroke-width="2"/>
-              </svg>
-              <div>
-                <b>Indépendant</b>
-                <span>Vous payez le plombier, pas nous.</span>
-              </div>
-            </div>
-            <div class="sideItem">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M12 8v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2"/>
-              </svg>
-              <div>
-                <b>Disponibilité</b>
-                <span>Variable selon l’heure et la zone.</span>
-              </div>
-            </div>
-          </div>
-        </aside>
+        <div></div>
       </div>
     </div>
-
-    <!-- dark -> light separator (no gap) -->
-    <svg class="sep bottom" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,28 C240,8 480,8 720,34 C960,60 1200,60 1440,34 L1440,80 L0,80 Z" fill="var(--light)"></path>
-    </svg>
   </section>
 
-  <!-- 02: LIGHT (How it works) -->
-  <section class="section lightSec" aria-label="Comment ça marche">
-    <div class="lightGlow" aria-hidden="true"></div>
+  <!-- 2) LIGHT: How it works (stack cards like screenshot) -->
+  <section class="light">
+    <div class="wrap">
+      <h2 class="h2">Comment ça <span class="blue">marche</span></h2>
+      <p class="pCenter">Tu restes dans la bonne ville, tu ouvres la page locale correspondante, puis tu appelles.</p>
 
-    <svg class="sep top" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,28 C240,8 480,8 720,34 C960,60 1200,60 1440,34 L1440,80 L0,80 Z" fill="var(--light)"></path>
-    </svg>
-
-    <div class="wrap reveal">
-      <div class="secTitle">
-        <div class="badge"><span class="badgeDot"></span> 01 • Comment ça marche</div>
-      </div>
-      <h2 class="h2">3 étapes. Point.</h2>
-      <p class="desc">Une structure visuelle (pas juste du texte) — claire et premium.</p>
-
-      <div class="grid" aria-label="Étapes">
-        <div class="card reveal on delay1">
-          <div class="cardTop">
-            <div class="cardIcon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke="currentColor" stroke-width="2"/>
-              </svg>
+      <div class="stepStack" aria-label="Étapes">
+        <div class="step">
+          <div class="stepTop"></div>
+          <div class="stepBody">
+            <div class="num">1</div>
+            <div>
+              <h3>Écris ta ville</h3>
+              <p>On te propose les villes disponibles automatiquement.</p>
             </div>
-            <div class="cardNum">01</div>
           </div>
-          <h4>Écris ta ville</h4>
-          <p>On te propose les villes disponibles automatiquement.</p>
         </div>
 
-        <div class="card reveal on delay2">
-          <div class="cardTop">
-            <div class="cardIcon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M4 7h16M4 12h10M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
+        <div class="step">
+          <div class="stepTop"></div>
+          <div class="stepBody">
+            <div class="num">2</div>
+            <div>
+              <h3>Sélectionne</h3>
+              <p>Tu ouvres la page locale correspondante (pas de perte de temps).</p>
             </div>
-            <div class="cardNum">02</div>
           </div>
-          <h4>Sélectionne</h4>
-          <p>Tu ouvres la page locale correspondante, sans friction.</p>
         </div>
 
-        <div class="card reveal on delay3">
-          <div class="cardTop">
-            <div class="cardIcon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.7 19.7 0 0 1-8.6-3.1 19.2 19.2 0 0 1-6-6A19.7 19.7 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6.4 6.4l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"
-                      stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-              </svg>
+        <div class="step">
+          <div class="stepTop"></div>
+          <div class="stepBody">
+            <div class="num">3</div>
+            <div>
+              <h3>Appelle</h3>
+              <p>Connexion selon disponibilité locale et l’heure.</p>
             </div>
-            <div class="cardNum">03</div>
           </div>
-          <h4>Appelle</h4>
-          <p>Connexion selon disponibilité locale et l’heure.</p>
         </div>
       </div>
     </div>
-
-    <!-- light -> dark separator -->
-    <svg class="sep bottom" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,24 C240,68 480,68 720,40 C960,12 1200,12 1440,40 L1440,80 L0,80 Z" fill="var(--dark2)"></path>
-    </svg>
   </section>
 
-  <!-- 03: DARK (Problems) -->
-  <section class="section darkSec" aria-label="Problèmes fréquents">
-    <div class="particles" aria-hidden="true"></div>
+  <!-- 3) DARK: Problems -->
+  <section class="dark">
+    <div class="dust" aria-hidden="true"></div>
     <div class="glow" aria-hidden="true"></div>
 
-    <svg class="sep top" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,24 C240,68 480,68 720,40 C960,12 1200,12 1440,40 L1440,80 L0,80 Z" fill="var(--dark2)"></path>
-    </svg>
+    <div class="wrap">
+      <h2 class="h2" style="color:#eaf0f7">Problèmes <span class="accent">fréquents</span>.</h2>
+      <p class="pCenter" style="color:rgba(234,240,247,.70)">Courant. Clair. Sans blabla.</p>
 
-    <div class="wrap reveal">
-      <div class="secTitle">
-        <div class="badge"><span class="badgeDot"></span> 02 • Services</div>
-      </div>
-      <h2 class="h2">Problèmes fréquents.</h2>
-      <p class="desc">Courant. Clair. Sans blabla.</p>
-
-      <div class="rows" aria-label="Liste services">
-        <div class="row reveal on delay1"><b>Fuite d’eau</b><small>valve • tuyau • dégâts</small></div>
-        <div class="row reveal on delay1"><b>Toilette bouchée</b><small>déblocage • drain</small></div>
-        <div class="row reveal on delay2"><b>Chauffe-eau</b><small>panne • remplacement</small></div>
-        <div class="row reveal on delay2"><b>Drain / égout</b><small>odeur • refoulement</small></div>
-        <div class="row reveal on delay3"><b>Robinet / pression</b><small>fuite • cartouche • ajustement</small></div>
+      <div class="rows" aria-label="Services">
+        <div class="row"><b>Fuite d’eau</b><small>tuyau • valve • dégâts</small></div>
+        <div class="row"><b>Toilette bouchée</b><small>déblocage</small></div>
+        <div class="row"><b>Chauffe-eau</b><small>panne • remplacement</small></div>
+        <div class="row"><b>Drain / égout</b><small>refoulement</small></div>
+        <div class="row"><b>Robinet / pression</b><small>cartouche • ajustement</small></div>
       </div>
     </div>
-
-    <!-- dark -> light separator -->
-    <svg class="sep bottom" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,28 C240,8 480,8 720,34 C960,60 1200,60 1440,34 L1440,80 L0,80 Z" fill="var(--light)"></path>
-    </svg>
   </section>
 
-  <!-- 04: LIGHT (FAQ + legal) -->
-  <section class="section lightSec" aria-label="FAQ">
-    <div class="lightGlow" aria-hidden="true"></div>
-
-    <svg class="sep top" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,28 C240,8 480,8 720,34 C960,60 1200,60 1440,34 L1440,80 L0,80 Z" fill="var(--light)"></path>
-    </svg>
-
-    <div class="wrap reveal">
-      <div class="secTitle">
-        <div class="badge"><span class="badgeDot"></span> 03 • FAQ</div>
-      </div>
-      <h2 class="h2">Réponses rapides.</h2>
-      <p class="desc">Simple, clair, et légalement propre.</p>
-
-      <div class="faq" aria-label="Questions fréquentes">
-        <details>
-          <summary>Êtes-vous une entreprise de plomberie?</summary>
-          <div class="ans">Non. Service indépendant de mise en relation. Les réparations sont effectuées par un professionnel.</div>
-        </details>
-        <details>
-          <summary>Combien ça coûte?</summary>
-          <div class="ans">Le prix dépend du problème. Vous payez directement le plombier.</div>
-        </details>
-        <details>
-          <summary>Est-ce garanti 24/7?</summary>
-          <div class="ans">On tente 24/7, mais la disponibilité varie selon l’heure, la demande et la zone.</div>
-        </details>
-      </div>
-
-      <div class="legal">
-        <strong>Mentions légales :</strong>
-        TrouverUnPlombier.ca est un service indépendant de mise en relation.
-        Nous ne sommes pas une entreprise de plomberie et n’effectuons aucune réparation.
+  <!-- 4) LIGHT: Legal -->
+  <section class="light">
+    <div class="wrap">
+      <h2 class="h2">Mentions <span class="blue">légales</span></h2>
+      <p class="pCenter">
+        TrouverUnPlombier.ca est un service indépendant de mise en relation. Nous n’effectuons aucune réparation.
         Vous contractez et payez directement le professionnel.
-      </div>
+      </p>
     </div>
   </section>
 
   <script>
-    // ====== DATA ======
+    // Villes + pages locales (mets TES vraies pages ici)
     const CITIES = [
-      { name: "Trois-Rivières", slug: "trois-rivieres.html" },
-      { name: "Montréal", slug: "montreal.html" },
-      { name: "Québec", slug: "quebec.html" },
-      { name: "Laval", slug: "laval.html" },
-      { name: "Longueuil", slug: "longueuil.html" },
-      { name: "Sherbrooke", slug: "sherbrooke.html" },
-      { name: "Gatineau", slug: "gatineau.html" },
-      { name: "Drummondville", slug: "drummondville.html" },
-      { name: "Terrebonne", slug: "terrebonne.html" },
-      { name: "Lévis", slug: "levis.html" },
-      { name: "Repentigny", slug: "repentigny.html" },
-      { name: "Brossard", slug: "brossard.html" }
+      { name:"Trois-Rivières", slug:"trois-rivieres.html" },
+      { name:"Montréal", slug:"montreal.html" },
+      { name:"Québec", slug:"quebec.html" },
+      { name:"Laval", slug:"laval.html" },
+      { name:"Longueuil", slug:"longueuil.html" },
+      { name:"Sherbrooke", slug:"sherbrooke.html" },
+      { name:"Gatineau", slug:"gatineau.html" },
+      { name:"Drummondville", slug:"drummondville.html" }
     ];
 
-    // ====== ELEMENTS ======
     const input = document.getElementById("cityInput");
     const suggest = document.getElementById("suggest");
     const goBtn = document.getElementById("goBtn");
 
-    // ====== HELPERS ======
-    const norm = (s) => (s || "")
+    const norm = (s) => (s||"")
       .toLowerCase()
-      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-      .replace(/[-’'.,]/g, " ")
-      .replace(/\s+/g, " ")
+      .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+      .replace(/[-’'.,]/g," ")
+      .replace(/\s+/g," ")
       .trim();
 
     function setSelected(city){
       if(city){
         input.value = city.name;
-        goBtn.classList.add("ready");
-        goBtn.setAttribute("aria-disabled", "false");
+        goBtn.classList.remove("disabled");
+        goBtn.setAttribute("aria-disabled","false");
         goBtn.dataset.slug = city.slug;
       }else{
-        goBtn.classList.remove("ready");
-        goBtn.setAttribute("aria-disabled", "true");
+        goBtn.classList.add("disabled");
+        goBtn.setAttribute("aria-disabled","true");
         goBtn.dataset.slug = "";
       }
-    }
-
-    function hideSuggest(){
-      suggest.classList.remove("on");
-      suggest.innerHTML = "";
     }
 
     function filterCities(q){
       const nq = norm(q);
       if(!nq) return [];
-      const starts = [];
-      const includes = [];
+      const starts=[], includes=[];
       for(const c of CITIES){
         const nn = norm(c.name);
         if(nn.startsWith(nq)) starts.push(c);
@@ -1089,26 +645,20 @@
     }
 
     function renderSuggest(list){
-      if(!list.length){ hideSuggest(); return; }
-
-      const items = list.map(c => `
+      if(!list.length){
+        suggest.classList.remove("on");
+        suggest.innerHTML = "";
+        return;
+      }
+      suggest.innerHTML = list.map(c => `
         <div class="sItem" role="option" tabindex="0" data-name="${c.name}" data-slug="${c.slug}">
-          <div class="sName">${c.name}</div>
-          <div class="sMeta">
-            Sélectionner
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" style="width:16px;height:16px;opacity:.9">
-              <path d="M5 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              <path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
+          <div>${c.name}</div>
+          <div class="sMeta">Sélectionner</div>
         </div>
       `).join("");
-
-      suggest.innerHTML = `<div class="sList">${items}</div>`;
       suggest.classList.add("on");
     }
 
-    // ====== EVENTS ======
     input.addEventListener("input", () => {
       setSelected(null);
       renderSuggest(filterCities(input.value));
@@ -1119,23 +669,16 @@
     });
 
     input.addEventListener("blur", () => {
-      // si exact match, active
       const exact = CITIES.find(c => norm(c.name) === norm(input.value));
       if(exact) setSelected(exact);
-      // petit délai pour permettre click sur suggestion
-      setTimeout(() => hideSuggest(), 120);
-    });
-
-    document.addEventListener("click", (e) => {
-      if(!suggest.contains(e.target) && e.target !== input) hideSuggest();
+      setTimeout(() => { suggest.classList.remove("on"); }, 140);
     });
 
     suggest.addEventListener("click", (e) => {
       const item = e.target.closest(".sItem");
       if(!item) return;
       setSelected({ name: item.dataset.name, slug: item.dataset.slug });
-      hideSuggest();
-      goBtn.focus();
+      suggest.classList.remove("on");
     });
 
     input.addEventListener("keydown", (e) => {
@@ -1143,12 +686,11 @@
         const list = filterCities(input.value);
         if(list.length){
           setSelected(list[0]);
-          hideSuggest();
-          goBtn.focus();
+          suggest.classList.remove("on");
           e.preventDefault();
         }
       }
-      if(e.key === "Escape") hideSuggest();
+      if(e.key === "Escape") suggest.classList.remove("on");
     });
 
     goBtn.addEventListener("click", () => {
@@ -1156,17 +698,6 @@
       if(!slug) return;
       window.location.href = slug;
     });
-
-    // reveal on scroll
-    (function(){
-      const els = document.querySelectorAll(".reveal");
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(e => {
-          if(e.isIntersecting) e.target.classList.add("on");
-        });
-      }, {threshold: 0.14});
-      els.forEach(el => io.observe(el));
-    })();
   </script>
 </body>
 </html>
