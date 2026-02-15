@@ -13,7 +13,7 @@
   <style>
     :root{
       /* LIGHT */
-      --bg:#e9ebef;
+      --bg:#eef1f6;          /* IMPORTANT: match the light vibe to avoid “white seams” */
       --light:#eef1f6;
       --light2:#e2e8f2;
 
@@ -53,10 +53,15 @@
       color: var(--ink);
       background: var(--bg);
       overflow-x:hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
     }
     a{color:inherit}
     input,button{font-family:inherit}
-    svg{display:block} /* important: no white seams */
+
+    /* Critical: prevent svg seams */
+    svg{display:block}
+    .wave svg, .wave{display:block}
 
     .wrap{
       max-width: var(--max);
@@ -71,28 +76,8 @@
         radial-gradient(900px 520px at 18% 12%, rgba(0,0,0,.03), transparent 58%),
         radial-gradient(900px 520px at 85% 18%, rgba(0,0,0,.02), transparent 62%),
         repeating-linear-gradient(0deg, rgba(0,0,0,.010) 0px, rgba(0,0,0,.010) 1px, transparent 1px, transparent 10px);
-      opacity:.50;
+      opacity:.48;
       z-index:0;
-    }
-
-    /* subtle animated blue life ONLY on light sections */
-    .alive{
-      position:absolute;
-      inset:-260px -240px;
-      pointer-events:none;
-      z-index:0;
-      filter: blur(18px);
-      opacity:.42;
-      background:
-        radial-gradient(760px 520px at 15% 25%, rgba(82,172,217,.26), transparent 62%),
-        radial-gradient(620px 520px at 85% 40%, rgba(82,172,217,.16), transparent 60%),
-        radial-gradient(520px 380px at 50% 85%, rgba(82,172,217,.10), transparent 58%);
-      animation: aqua 14s ease-in-out infinite;
-      transform: translate3d(0,0,0);
-    }
-    @keyframes aqua{
-      0%,100%{transform:translate(-18px,-10px) scale(1)}
-      50%{transform:translate(22px,14px) scale(1.05)}
     }
 
     /* ===== Sticky minimal premium header ===== */
@@ -166,17 +151,53 @@
     .section.hasTopWave .wrap{ padding-top: calc(var(--secY) + 22px); }
     .section.hasBottomWave .wrap{ padding-bottom: calc(var(--secY) + 22px); }
 
+    /* WAVES: overlap to kill the 1px white seam on iOS */
     .wave{
-      position:absolute; left:0; right:0;
+      position:absolute;
+      left:-2px; right:-2px;          /* wider */
+      width: calc(100% + 4px);
       height: var(--waveH);
       pointer-events:none;
       z-index:3;
-      transform: translateY(1px);
+      transform: translateY(0);
     }
-    .wave.top{ top:-1px; transform: rotate(180deg) translateY(1px); }
-    .wave.bottom{ bottom:-1px; }
+    .wave.top{ top:-3px; transform: rotate(180deg); }
+    .wave.bottom{ bottom:-3px; }
 
-    /* ===== HERO: no cards, strong money spot ===== */
+    /* ===== HERO LIFE: premium, not loud ===== */
+    .alive{
+      position:absolute;
+      inset:-280px -240px;
+      pointer-events:none;
+      z-index:0;
+      filter: blur(18px);
+      opacity:.46;
+      background:
+        radial-gradient(780px 560px at 18% 26%, rgba(82,172,217,.26), transparent 62%),
+        radial-gradient(640px 520px at 86% 44%, rgba(82,172,217,.16), transparent 60%),
+        radial-gradient(520px 420px at 52% 84%, rgba(82,172,217,.10), transparent 58%);
+      animation: aqua 14s ease-in-out infinite;
+      transform: translate3d(0,0,0);
+    }
+    @keyframes aqua{
+      0%,100%{transform:translate(-18px,-10px) scale(1)}
+      50%{transform:translate(22px,14px) scale(1.06)}
+    }
+
+    /* tiny grid texture so it feels “designed” (removes the empty/fade feeling) */
+    .grid{
+      position:absolute; inset:0;
+      pointer-events:none; z-index:1;
+      background:
+        radial-gradient(600px 240px at 50% 30%, rgba(0,0,0,.06), transparent 60%),
+        linear-gradient(to right, rgba(12,17,27,.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(12,17,27,.04) 1px, transparent 1px);
+      background-size: auto, 48px 48px, 48px 48px;
+      opacity:.10;
+      mask-image: radial-gradient(900px 520px at 50% 30%, black 0%, transparent 70%);
+    }
+
+    /* ===== HERO layout ===== */
     .hero{
       display:grid;
       grid-template-columns: 1.05fr .95fr;
@@ -185,13 +206,47 @@
     }
 
     .heroLeft{padding-right: clamp(0px, 2vw, 18px);}
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-weight: 950;
+      letter-spacing:.14em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: rgba(12,17,27,.56);
+      margin-bottom: 14px;
+    }
+    .kicker:before{
+      content:"";
+      width: 26px; height: 2px;
+      background: linear-gradient(90deg, rgba(82,172,217,0), rgba(82,172,217,.85), rgba(82,172,217,0));
+      opacity:.95;
+    }
+
     h1{
       margin:0;
       font-size: clamp(44px, 4.8vw, 88px);
       line-height:.98;
       letter-spacing:-.075em;
       font-weight: 980;
+      position:relative;
     }
+    /* subtle “shine” behind title so it pops (fix fade) */
+    h1:before{
+      content:"";
+      position:absolute;
+      left:-24px; right:-24px;
+      top:-24px; bottom:-18px;
+      background:
+        radial-gradient(520px 220px at 35% 35%, rgba(82,172,217,.22), transparent 60%),
+        radial-gradient(520px 220px at 70% 55%, rgba(82,172,217,.12), transparent 62%);
+      filter: blur(10px);
+      opacity:.55;
+      z-index:-1;
+    }
+
     .accent{position:relative; display:inline-block;}
     .accent:after{
       content:"";
@@ -200,23 +255,21 @@
       background: rgba(82,172,217,.95);
       transform-origin:left;
       transform: scaleX(.55);
-      opacity:.16;
+      opacity:.18;
       animation: underline 3.2s ease-in-out infinite;
     }
-    @keyframes underline{0%,100%{transform:scaleX(.55); opacity:.12;}50%{transform:scaleX(1); opacity:.28;}}
+    @keyframes underline{0%,100%{transform:scaleX(.55); opacity:.14;}50%{transform:scaleX(1); opacity:.28;}}
 
-    /* MONEY SPOT: input + button (different, colorful, pulse, shadow) */
+    /* MONEY SPOT */
     .money{
       margin-top: 22px;
       max-width: 640px;
     }
-
     .cityShell{
       position:relative;
       border-radius: 20px;
       padding: 18px 16px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.78));
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.78));
       border: 1px solid rgba(12,17,27,.10);
       box-shadow:
         0 28px 80px rgba(0,0,0,.14),
@@ -224,7 +277,7 @@
       overflow: visible;
     }
 
-    /* animated aura behind the input area */
+    /* animated aura (more visible, premium) */
     .cityShell:before{
       content:"";
       position:absolute;
@@ -232,16 +285,16 @@
       top:-14px; bottom:-14px;
       border-radius: 26px;
       background:
-        radial-gradient(520px 140px at 20% 30%, rgba(82,172,217,.34), transparent 60%),
-        radial-gradient(520px 140px at 80% 60%, rgba(82,172,217,.20), transparent 62%);
+        radial-gradient(560px 160px at 22% 30%, rgba(82,172,217,.40), transparent 60%),
+        radial-gradient(520px 160px at 80% 65%, rgba(82,172,217,.22), transparent 62%);
       filter: blur(12px);
-      opacity:.78;
+      opacity:.85;
       z-index:-1;
-      animation: glow 2.2s ease-in-out infinite;
+      animation: glow 2.1s ease-in-out infinite;
     }
     @keyframes glow{
-      0%,100%{transform:translateY(0) scale(1); opacity:.68;}
-      50%{transform:translateY(-2px) scale(1.02); opacity:.95;}
+      0%,100%{transform:translateY(0) scale(1); opacity:.70;}
+      50%{transform:translateY(-2px) scale(1.03); opacity:1;}
     }
 
     .cityRow{
@@ -255,8 +308,6 @@
       box-shadow: inset 0 1px 0 rgba(255,255,255,.62);
       position:relative;
     }
-
-    /* minimal accent stroke (not “blue inside”) */
     .cityRow:after{
       content:"";
       position:absolute;
@@ -281,7 +332,7 @@
     }
     input::placeholder{color: rgba(12,17,27,.42); font-weight: 850;}
 
-    /* suggestions dropdown */
+    /* suggestions */
     .suggest{
       position:absolute;
       left:0; right:0;
@@ -316,7 +367,7 @@
     .sMeta{color: var(--muted2); font-weight:850; font-size:13px;}
     .sItem:hover{ background: rgba(82,172,217,.12); }
 
-    /* CTA under input */
+    /* CTA */
     .cta{
       margin-top: 12px;
       width:100%;
@@ -348,11 +399,11 @@
       background: var(--a);
       border-color: rgba(82,172,217,.90);
       color: rgba(255,255,255,.95);
-      box-shadow: 0 22px 60px rgba(82,172,217,.30);
+      box-shadow: 0 22px 60px rgba(82,172,217,.32);
       animation: breathe 2.1s ease-in-out infinite;
     }
     @keyframes breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-1px)}}
-    .cta.ready:hover{ transform: translateY(-2px); animation:none; box-shadow: 0 26px 72px rgba(82,172,217,.36); }
+    .cta.ready:hover{ transform: translateY(-2px); animation:none; box-shadow: 0 26px 72px rgba(82,172,217,.40); }
     .cta.ready:active{ transform: translateY(0); }
 
     .helper{
@@ -361,6 +412,7 @@
       font-weight: 600;
       font-size: 16px;
       line-height: 1.6;
+      text-align:center;
     }
 
     .chips{
@@ -369,6 +421,7 @@
       gap:10px;
       flex-wrap:wrap;
       align-items:center;
+      justify-content:center;
     }
     .chip{
       display:inline-flex;
@@ -386,10 +439,8 @@
     }
     .chip svg{width:16px;height:16px; opacity:.72;}
 
-    /* HERO right: premium list (not cards everywhere) */
-    .heroRight{
-      padding-top: 8px;
-    }
+    /* right (desktop only) */
+    .heroRight{padding-top: 8px;}
     .miniTitle{
       display:flex; align-items:center; justify-content:space-between;
       gap:12px;
@@ -415,11 +466,8 @@
     .miniRow b{display:block; font-weight:980; letter-spacing:-.02em;}
     .miniRow p{margin:6px 0 0 0; color: rgba(12,17,27,.68); font-weight:650; font-size:13px; line-height:1.55;}
 
-    /* ===== Section heads 01/02/03 (NOT just text) ===== */
-    .secHead{
-      display:flex; align-items:center; gap:14px;
-      margin-bottom: 18px;
-    }
+    /* ===== Section head ===== */
+    .secHead{ display:flex; align-items:center; gap:14px; margin-bottom: 18px; }
     .secNum{
       width:44px;height:44px;border-radius: 16px;
       display:grid; place-items:center;
@@ -461,7 +509,7 @@
       font-size: 16px;
     }
 
-    /* Dark content blocks: clean grid (no random cards) */
+    /* Dark grid */
     .svcGrid{
       margin-top: 18px;
       display:grid;
@@ -479,7 +527,7 @@
     .svc b{ font-weight: 980; letter-spacing:-.02em; }
     .svc small{ color: rgba(255,255,255,.64); font-weight: 750; white-space:nowrap; }
 
-    /* Light steps: simple, premium lines */
+    /* Light steps */
     .steps{ margin-top: 18px; display:grid; gap:14px; }
     .step{
       display:flex; gap:14px; align-items:flex-start;
@@ -499,7 +547,7 @@
     .step b{display:block; font-weight:980; letter-spacing:-.02em;}
     .step span{display:block; margin-top:6px; color: var(--muted); font-weight:650; line-height:1.55;}
 
-    /* FAQ (dark) */
+    /* FAQ */
     details{ margin-top: 10px; }
     .faq{
       border-radius: 16px;
@@ -531,10 +579,9 @@
     .reveal{opacity:0; transform: translateY(14px); transition: opacity .85s ease, transform .85s ease;}
     .reveal.on{opacity:1; transform: translateY(0);}
 
-    /* ===== Mobile: money stack centered vertically ===== */
+    /* Mobile: center hero vertically */
     @media (max-width: 980px){
       .hero{ grid-template-columns:1fr; gap: 18px; }
-
       .heroLeft{
         min-height: calc(100svh - 54px);
         display:flex;
@@ -542,7 +589,7 @@
         justify-content:center;
         align-items:stretch;
       }
-      .heroRight{ margin-top: 22px; }
+      .heroRight{ display:none; } /* mobile: keep the hero clean, not empty */
       .svcGrid{ grid-template-columns: 1fr; }
     }
 
@@ -595,13 +642,15 @@
   <!-- 01 LIGHT (Hero) -->
   <section class="section light hasBottomWave" aria-label="Hero">
     <div class="alive" aria-hidden="true"></div>
+    <div class="grid" aria-hidden="true"></div>
 
     <div class="wrap reveal">
       <div class="hero">
         <div class="heroLeft">
+          <div class="kicker">Plomberie d’urgence</div>
+
           <h1>Trouve un plombier <span class="accent">dans ta ville</span>.</h1>
 
-          <!-- ORDER EXACT: input -> button -> text -> chips -->
           <div class="money">
             <div class="cityShell">
               <div class="cityRow">
