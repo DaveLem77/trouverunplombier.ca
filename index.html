@@ -41,7 +41,10 @@
 
       --max:1160px;
       --r:18px;
-      --secPad: 82px;
+
+      /* spacing system (fixes centering issues) */
+      --secPad: clamp(70px, 7.5vw, 110px);
+      --waveH: 92px;
     }
 
     *{box-sizing:border-box}
@@ -55,6 +58,10 @@
     }
     a{color:inherit}
     input,button{font-family:inherit}
+
+    /* IMPORTANT: fixes thin white seams caused by inline svg baseline */
+    svg{display:block}
+    .wave{display:block}
 
     .wrap{
       max-width: var(--max);
@@ -132,7 +139,7 @@
     .score b{font-weight: 980;}
     .score span{color: rgba(255,255,255,.55); font-weight: 850;}
 
-    /* ===== Sections ===== */
+    /* ===== Sections (fix spacing + overlaps) ===== */
     .section{
       position:relative;
       padding: var(--secPad) 0;
@@ -145,13 +152,30 @@
       background: linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
       color: var(--darkInk);
     }
+    /* create consistent breathing room relative to waves */
+    .section.hasTopWave{ padding-top: calc(var(--secPad) + 14px); }
+    .section.hasBottomWave{ padding-bottom: calc(var(--secPad) + 12px); }
+
     .section > .wrap{ position:relative; z-index:1; }
 
-    /* waves */
-    .wave{ position:absolute; left:0; right:0; bottom:-1px; height: 92px; pointer-events:none; z-index:2; }
-    .wave.top{ top:-1px; bottom:auto; transform: rotate(180deg); }
+    /* waves: slight overlap to remove seams */
+    .wave{
+      position:absolute; left:0; right:0;
+      height: var(--waveH);
+      pointer-events:none;
+      z-index:2;
+      transform: translateY(1px); /* overlap */
+    }
+    .wave.top{
+      top:-1px;
+      bottom:auto;
+      transform: rotate(180deg) translateY(1px);
+    }
+    .wave.bottom{
+      bottom:-1px;
+    }
 
-    /* subtle animated blue life on LIGHT backgrounds (not inside the input) */
+    /* subtle animated blue life on LIGHT backgrounds */
     .section:not(.dark)::before,
     .section:not(.dark)::after{
       content:"";
@@ -166,22 +190,22 @@
     .section:not(.dark)::before{
       opacity:.42;
       background:
-        radial-gradient(760px 520px at 16% 20%, rgba(82,172,217,.34), transparent 62%),
-        radial-gradient(640px 520px at 84% 46%, rgba(82,172,217,.22), transparent 60%),
-        radial-gradient(520px 380px at 52% 86%, rgba(82,172,217,.14), transparent 58%);
+        radial-gradient(760px 520px at 16% 20%, rgba(82,172,217,.32), transparent 62%),
+        radial-gradient(640px 520px at 84% 46%, rgba(82,172,217,.20), transparent 60%),
+        radial-gradient(520px 380px at 52% 86%, rgba(82,172,217,.13), transparent 58%);
       animation: aqua1 13.5s ease-in-out infinite;
     }
     .section:not(.dark)::after{
-      opacity:.32;
+      opacity:.30;
       background:
-        radial-gradient(780px 520px at 82% 84%, rgba(82,172,217,.28), transparent 62%),
-        radial-gradient(560px 420px at 32% 74%, rgba(82,172,217,.18), transparent 60%);
+        radial-gradient(780px 520px at 82% 84%, rgba(82,172,217,.26), transparent 62%),
+        radial-gradient(560px 420px at 32% 74%, rgba(82,172,217,.17), transparent 60%);
       animation: aqua2 17.5s ease-in-out infinite;
     }
     @keyframes aqua1{0%,100%{transform:translate(-18px,-10px) scale(1)}50%{transform:translate(20px,14px) scale(1.05)}}
     @keyframes aqua2{0%,100%{transform:translate(18px,12px) scale(1.02)}50%{transform:translate(-24px,-18px) scale(1)}}
 
-    /* reveal (smart, clean) */
+    /* reveal */
     .reveal{opacity:0; transform: translateY(14px); transition: opacity .85s ease, transform .85s ease;}
     .reveal.on{opacity:1; transform: translateY(0);}
     .stagger > *{ opacity:0; transform: translateY(10px); }
@@ -196,8 +220,8 @@
     .hero{
       display:grid;
       grid-template-columns: 1.05fr .95fr;
-      gap: 44px;
-      align-items:start;
+      gap: clamp(18px, 4vw, 44px);
+      align-items:center; /* ✅ fixes “imbalance” */
     }
 
     h1{
@@ -236,19 +260,43 @@
       margin-bottom: 10px;
     }
 
-    /* clean premium input */
+    /* ✅ MONEY INPUT: colored + pulse + big shadow */
+    .moneyWrap{
+      position:relative;
+      border-radius: 18px;
+      padding: 12px;
+      background: linear-gradient(135deg, rgba(82,172,217,.14), rgba(82,172,217,.06));
+      border: 1px solid rgba(82,172,217,.22);
+      box-shadow:
+        0 26px 72px rgba(0,0,0,.14),
+        inset 0 1px 0 rgba(255,255,255,.50);
+      animation: moneyPulse 2.6s ease-in-out infinite;
+      transform: translateZ(0);
+    }
+    @keyframes moneyPulse{
+      0%,100%{
+        box-shadow: 0 26px 72px rgba(0,0,0,.14), 0 0 0 0 rgba(82,172,217,.00), inset 0 1px 0 rgba(255,255,255,.50);
+        transform: translateY(0);
+      }
+      50%{
+        box-shadow: 0 30px 84px rgba(0,0,0,.18), 0 0 0 10px rgba(82,172,217,.12), inset 0 1px 0 rgba(255,255,255,.55);
+        transform: translateY(-1px);
+      }
+    }
+
+    /* inner card stays clean (no weird blue inside) */
     .inputCard{
       border-radius: 16px;
-      background: rgba(255,255,255,.90);
-      border: 1px solid rgba(12,17,27,.12);
-      box-shadow: 0 18px 54px rgba(0,0,0,.09), inset 0 1px 0 rgba(255,255,255,.72);
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(12,17,27,.10);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.72);
       padding: 10px;
       transition: box-shadow .18s ease, border-color .18s ease;
       position:relative;
     }
     .inputCard.focused{
       border-color: rgba(82,172,217,.42);
-      box-shadow: 0 22px 66px rgba(0,0,0,.12), 0 0 0 4px rgba(82,172,217,.10), inset 0 1px 0 rgba(255,255,255,.72);
+      box-shadow: 0 0 0 4px rgba(82,172,217,.10), inset 0 1px 0 rgba(255,255,255,.72);
     }
     .inputRow{
       display:flex;
@@ -256,7 +304,7 @@
       gap:10px;
       padding: 14px 14px;
       border-radius: 14px;
-      background: rgba(255,255,255,.62);
+      background: rgba(255,255,255,.64);
       border: 1px solid rgba(12,17,27,.10);
     }
     .pin{width:18px;height:18px; opacity:.70; flex:0 0 auto;}
@@ -273,7 +321,7 @@
     }
     input::placeholder{color: rgba(12,17,27,.42); font-weight: 850;}
 
-    /* suggestions (fixed) */
+    /* suggestions */
     .suggest{
       position:absolute;
       left:0; right:0;
@@ -286,7 +334,7 @@
     }
     .suggest.on{display:block; opacity:1; transform: translateY(0);}
     .sList{
-      background: rgba(255,255,255,.92);
+      background: rgba(255,255,255,.94);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(12,17,27,.12);
       border-radius: 16px;
@@ -308,7 +356,7 @@
     .sMeta{color: var(--muted2); font-weight:800; font-size:13px;}
     .sItem:hover{ background: rgba(82,172,217,.12); }
 
-    /* CTA under input */
+    /* CTA */
     .cta{
       margin-top: 12px;
       width: 100%;
@@ -324,13 +372,12 @@
       user-select:none;
       white-space:nowrap;
 
-      /* visible even disabled */
       opacity: .92;
       pointer-events:none;
       cursor:not-allowed;
 
       border: 1px solid rgba(12,17,27,.16);
-      background: rgba(255,255,255,.74);
+      background: rgba(255,255,255,.78);
       color: rgba(12,17,27,.86);
       box-shadow: inset 0 1px 0 rgba(255,255,255,.65);
       transition: transform .16s ease, background .16s ease, border-color .16s ease, box-shadow .16s ease, opacity .16s ease;
@@ -350,7 +397,6 @@
     .cta.ready:hover{ transform: translateY(-2px); animation:none; box-shadow: 0 22px 56px rgba(82,172,217,.32); }
     .cta.ready:active{ transform: translateY(0); }
 
-    /* text under CTA */
     .leadUnder{
       margin-top: 14px;
       color: var(--muted);
@@ -359,7 +405,6 @@
       line-height: 1.7;
     }
 
-    /* chips under lead */
     .trustStrip{
       margin-top: 14px;
       display:flex;
@@ -391,6 +436,7 @@
       border: 1px solid rgba(12,17,27,.10);
       box-shadow: 0 28px 70px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.55);
       overflow:hidden;
+      align-self:stretch;
     }
     .framePad{ padding: 16px 16px; }
     .miniTitle{
@@ -535,8 +581,9 @@
       margin-top: 18px;
     }
 
-    /* ===== mobile: REAL center for the money spot stack ===== */
+    /* ===== mobile: real center stack ===== */
     @media (max-width: 980px){
+      /* give hero its own controlled breathing room */
       section[aria-label="Hero"]{
         padding-top: 26px;
         padding-bottom: 46px;
@@ -544,6 +591,7 @@
       .hero{
         grid-template-columns:1fr;
         gap: 16px;
+        align-items:start;
       }
       .frame{ order:2; width:100%; }
       .heroLeft{ order:1; }
@@ -572,7 +620,8 @@
       .section:not(.dark)::before,
       .section:not(.dark)::after,
       .accent:after,
-      .cta.ready{animation:none!important;}
+      .cta.ready,
+      .moneyWrap{animation:none!important;}
     }
   </style>
 </head>
@@ -597,7 +646,6 @@
       <div class="topbarInner">
         <div class="brandLine">
           <div class="mark" aria-hidden="true">
-            <!-- IMPORTANT: use relative path for GitHub Pages -->
             <img src="media/logob.png" alt="">
           </div>
           <a class="domain" href="#">TrouverUnPlombier.ca</a>
@@ -618,27 +666,28 @@
   </div>
 
   <!-- 01: LIGHT (Hero) -->
-  <section class="section" aria-label="Hero">
+  <section class="section hasBottomWave" aria-label="Hero">
     <div class="wrap reveal">
       <div class="hero">
         <!-- LEFT -->
         <div class="heroLeft stagger">
           <h1>Trouve un plombier <span class="accent">dans ta ville</span>.</h1>
 
-          <!-- ✅ order: input -> button -> text -> chips -->
           <div class="moneySpot">
             <label class="label" for="cityInput">Ville</label>
 
-            <div class="inputCard" id="inputCard">
-              <div class="inputRow">
-                <svg class="pin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke="currentColor" stroke-width="2"/>
-                  <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="currentColor" opacity=".12"/>
-                </svg>
-                <input id="cityInput" type="text" placeholder="Ex : Trois-Rivières" autocomplete="off" />
+            <!-- ✅ pulsing money wrapper -->
+            <div class="moneyWrap">
+              <div class="inputCard" id="inputCard">
+                <div class="inputRow">
+                  <svg class="pin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="currentColor" opacity=".12"/>
+                  </svg>
+                  <input id="cityInput" type="text" placeholder="Ex : Trois-Rivières" autocomplete="off" />
+                </div>
+                <div id="suggest" class="suggest" role="listbox" aria-label="Suggestions de villes"></div>
               </div>
-
-              <div id="suggest" class="suggest" role="listbox" aria-label="Suggestions de villes"></div>
             </div>
 
             <a id="goBtn" class="cta" href="#" aria-disabled="true">
@@ -668,7 +717,7 @@
           </div>
         </div>
 
-        <!-- RIGHT (support content) -->
+        <!-- RIGHT -->
         <div class="frame stagger" aria-label="Infos">
           <div class="framePad">
             <div class="miniTitle">
@@ -722,13 +771,13 @@
     </div>
 
     <!-- LIGHT -> DARK -->
-    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+    <svg class="wave bottom" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
       <path d="M0,28 C240,8 480,8 720,34 C960,60 1200,60 1440,34 L1440,80 L0,80 Z" fill="#0f1115"></path>
     </svg>
   </section>
 
   <!-- 02: DARK (Services) -->
-  <section class="section dark" aria-label="Services">
+  <section class="section dark hasTopWave hasBottomWave" aria-label="Services">
     <svg class="wave top" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
       <path d="M0,28 C240,8 480,8 720,34 C960,60 1200,60 1440,34 L1440,80 L0,80 Z" fill="#0f1115"></path>
     </svg>
@@ -755,13 +804,13 @@
     </div>
 
     <!-- DARK -> LIGHT -->
-    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+    <svg class="wave bottom" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
       <path d="M0,24 C240,68 480,68 720,40 C960,12 1200,12 1440,40 L1440,80 L0,80 Z" fill="#e3e7ef"></path>
     </svg>
   </section>
 
   <!-- 03: LIGHT (How it works) -->
-  <section class="section light2" aria-label="Comment ça marche">
+  <section class="section light2 hasTopWave hasBottomWave" aria-label="Comment ça marche">
     <svg class="wave top" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
       <path d="M0,24 C240,68 480,68 720,40 C960,12 1200,12 1440,40 L1440,80 L0,80 Z" fill="#e3e7ef"></path>
     </svg>
@@ -793,13 +842,13 @@
     </div>
 
     <!-- LIGHT -> DARK -->
-    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+    <svg class="wave bottom" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
       <path d="M0,28 C240,8 480,8 720,34 C960,60 1200,60 1440,34 L1440,80 L0,80 Z" fill="#0f1115"></path>
     </svg>
   </section>
 
   <!-- 04: DARK (FAQ) -->
-  <section class="section dark" aria-label="FAQ">
+  <section class="section dark hasTopWave" aria-label="FAQ">
     <svg class="wave top" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
       <path d="M0,28 C240,8 480,8 720,34 C960,60 1200,60 1440,34 L1440,80 L0,80 Z" fill="#0f1115"></path>
     </svg>
@@ -916,7 +965,6 @@
 
     input.addEventListener("blur", () => {
       inputCard.classList.remove("focused");
-      // delay so click on suggestion doesn't get cancelled by blur
       setTimeout(() => {
         const exact = CITIES.find(c => norm(c.name) === norm(input.value));
         if(exact) setSelected(exact);
@@ -929,12 +977,11 @@
       renderSuggest(filterCities(input.value));
     });
 
-    // close only when clicking outside the inputCard
     document.addEventListener("mousedown", (e) => {
-      if(!inputCard.contains(e.target)) hideSuggest();
+      const container = document.getElementById("inputCard");
+      if(container && !container.contains(e.target) && !suggest.contains(e.target)) hideSuggest();
     });
 
-    // mousedown to select BEFORE blur closes it
     suggest.addEventListener("mousedown", (e) => {
       const item = e.target.closest(".sItem");
       if(!item) return;
@@ -957,7 +1004,6 @@
       if(e.key === "Escape") hideSuggest();
     });
 
-    /* animations */
     (function(){
       const hero = document.querySelectorAll(".stagger");
       const ioHero = new IntersectionObserver((entries)=>{
