@@ -1,9 +1,8 @@
-<!doctype html>
+<!doctype html> 
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <title>Trouver un plombier d’urgence | TrouverUnPlombier.ca</title>
   <meta name="description" content="Service indépendant de mise en relation avec des plombiers locaux. Urgence 24/7 selon disponibilité.">
 
@@ -18,7 +17,7 @@
   <meta property="og:image" content="https://trouverunplombier.ca/media/share.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:url" content="https://trouverunplombier.ca/">
+  <meta property="og:url" content="https://www.trouverunplombier.ca/">
 
   <!-- ===== TWITTER / X ===== -->
   <meta name="twitter:card" content="summary_large_image">
@@ -40,6 +39,7 @@
       --paper:#f6f8fb;
       --ink:#0b1220;
       --muted:#5b6778;
+
       --max:1100px;
       --r:26px;
     }
@@ -57,6 +57,7 @@
     button,input{font-family:inherit}
     .wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(18px,4vw,44px);position:relative;z-index:2}
 
+    /* ===== Header (Aivro-like: simple, centered, no white card) ===== */
     .topbar{
       position:sticky; top:0; z-index:50;
       background: rgba(0,0,0,.55);
@@ -70,101 +71,653 @@
       padding: 14px 0;
       gap:12px;
     }
-    .top-left{display:flex;align-items:center;gap:10px}
+    .top-left{display:flex;align-items:center;gap:10px;min-width:0}
     .logo{
       width:30px;height:30px;border-radius:10px;
       background: rgba(255,255,255,.08);
       border:1px solid rgba(255,255,255,.12);
-      overflow:hidden;
+      overflow:hidden; flex:0 0 auto;
     }
-    .logo img{width:100%;height:100%;object-fit:cover}
+    .logo img{width:100%;height:100%;object-fit:cover;display:block}
     .titleCenter{
       text-align:center;
       font-weight:900;
       letter-spacing:-.03em;
       font-size:15px;
+      opacity:.95;
+      white-space:nowrap;
     }
     .top-right{
       justify-self:end;
       display:flex;align-items:center;gap:10px;
+      white-space:nowrap;
+      color: rgba(255,255,255,.86);
       font-weight:800;
       font-size:13px;
     }
-    .stars{display:inline-flex;gap:3px}
-    .star{width:14px;height:14px}
+    .stars{display:inline-flex;gap:3px;transform:translateY(1px)}
+    .star{width:14px;height:14px;display:block}
     .star path{fill:#d8b255}
+    .score{opacity:.9}
     .score span{opacity:.7}
 
+    /* ===== Sections (black/white alternation like screenshots) ===== */
     section{
       position:relative;
       padding: clamp(84px,8vw,120px) 0;
       overflow:hidden;
+      isolation:isolate;
     }
     .dark{
       background: radial-gradient(1200px 700px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
                   linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
+      color:#eaf0f7;
     }
     .light{
       background: linear-gradient(180deg, #ffffff 0%, var(--paper) 100%);
       color: var(--ink);
     }
 
-    .hero{min-height:92svh;display:grid;align-items:center}
-    .heroGrid{display:grid;grid-template-columns:1.25fr .75fr;gap:40px}
+    /* floating dust like Aivro */
+    .dust{
+      position:absolute; inset:-40px;
+      pointer-events:none;
+      opacity:.25;
+      background:
+        radial-gradient(2px 2px at 12% 20%, rgba(255,255,255,.35) 40%, transparent 42%),
+        radial-gradient(2px 2px at 70% 30%, rgba(255,255,255,.18) 40%, transparent 42%),
+        radial-gradient(2px 2px at 80% 70%, rgba(255,255,255,.14) 40%, transparent 42%),
+        radial-gradient(2px 2px at 30% 75%, rgba(255,255,255,.12) 40%, transparent 42%),
+        radial-gradient(2px 2px at 48% 44%, rgba(255,255,255,.12) 40%, transparent 42%);
+      animation: dustMove 10s ease-in-out infinite;
+    }
+    @keyframes dustMove{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(16px)}
+    }
+
+    /* blue glow */
+    .glow{
+      position:absolute; inset:-80px;
+      pointer-events:none;
+      background:
+        radial-gradient(700px 420px at 20% 20%, rgba(82,172,217,.20), transparent 60%),
+        radial-gradient(620px 420px at 80% 40%, rgba(82,172,217,.14), transparent 62%);
+      opacity:.9;
+      animation: glowDrift 9s ease-in-out infinite;
+    }
+    @keyframes glowDrift{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-14px)}
+    }
+
+    /* ===== Hero layout ===== */
+    .hero{
+      min-height: 92svh;
+      display:grid;
+      align-items:center;
+      padding-top: 22px;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: clamp(18px,4vw,44px);
+      align-items:center;
+    }
+    .kicker{
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-weight:900;
+      font-size:12px;
+      color: rgba(234,240,247,.72);
+      display:flex;align-items:center;gap:10px;
+    }
+    .kicker:before{
+      content:"";
+      width:28px;height:2px;
+      background: linear-gradient(90deg, transparent, rgba(82,172,217,.95), transparent);
+      opacity:.9;
+    }
+
     h1{
+      margin: 14px 0 0 0;
       font-weight:950;
       letter-spacing:-.07em;
       line-height:.98;
       font-size: clamp(44px, 5.6vw, 86px);
     }
-    .accent{color:var(--blue)}
-    .sub{opacity:.7;max-width:62ch;line-height:1.7}
+    .accent{
+      color: var(--blue);
+      text-shadow: 0 18px 70px rgba(82,172,217,.20);
+    }
+    .sub{
+      margin: 14px 0 0 0;
+      color: rgba(234,240,247,.70);
+      font-weight:600;
+      line-height:1.7;
+      max-width: 62ch;
+    }
 
-    @media(max-width:980px){
+    /* ===== The city zone: colored, pulsating, shadow (NO extra cards everywhere) ===== */
+    .cityZone{
+      margin-top: 22px;
+      width:min(560px, 100%);
+      border-radius: 22px;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(82,172,217,.18), rgba(82,172,217,.10));
+      border: 1px solid rgba(82,172,217,.28);
+      box-shadow:
+        0 30px 90px rgba(0,0,0,.65),
+        0 18px 65px rgba(82,172,217,.20),
+        0 0 0 1px rgba(82,172,217,.08) inset;
+      position:relative;
+      animation: zonePulse 2.2s ease-in-out infinite;
+    }
+    @keyframes zonePulse{
+      0%,100%{transform:translateY(0); filter:saturate(1)}
+      50%{transform:translateY(-2px); filter:saturate(1.05)}
+    }
+    .cityZone:before{
+      content:"";
+      position:absolute; inset:-2px;
+      border-radius: 24px;
+      background: radial-gradient(420px 220px at 20% 30%, rgba(82,172,217,.35), transparent 60%);
+      opacity:.75;
+      pointer-events:none;
+    }
+
+    .field{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 18px 55px rgba(0,0,0,.35);
+      position:relative;
+      z-index:1;
+    }
+    .pin{width:18px;height:18px;opacity:.9}
+    .input{
+      width:100%;
+      border:0; outline:0;
+      background:transparent;
+      color: rgba(255,255,255,.92);
+      font-weight:900;
+      letter-spacing:-.02em;
+      font-size:16px;
+    }
+    .input::placeholder{color: rgba(255,255,255,.55); font-weight:850}
+
+    /* suggestions dropdown */
+    .suggest{
+      margin-top: 10px;
+      border-radius: 16px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
+      display:none;
+      position:relative;
+      z-index:2;
+    }
+    .suggest.on{display:block}
+    .sItem{
+      padding: 12px 14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      cursor:pointer;
+      border-top:1px solid rgba(255,255,255,.08);
+      font-weight:900;
+    }
+    .sItem:first-child{border-top:0}
+    .sItem:hover{background: rgba(82,172,217,.18)}
+    .sMeta{
+      font-size:12px;
+      font-weight:800;
+      opacity:.75;
+    }
+
+    /* CTA like screenshot: big, glossy, blue */
+    .cta{
+      margin-top: 12px;
+      width:100%;
+      border:0;
+      border-radius: 18px;
+      padding: 15px 16px;
+      font-weight:950;
+      letter-spacing:-.02em;
+      font-size:16px;
+      cursor:pointer;
+      background: linear-gradient(180deg, rgba(82,172,217,1), rgba(47,134,179,1));
+      color: rgba(8,10,12,.92);
+      box-shadow:
+        0 24px 80px rgba(0,0,0,.55),
+        0 18px 65px rgba(82,172,217,.22);
+      opacity:.85;
+      transform: translateY(0);
+      transition: transform .15s ease, opacity .15s ease, filter .15s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .cta:before{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent);
+      transform: translateX(-60%);
+      animation: sheen 3s ease-in-out infinite;
+      opacity:.65;
+    }
+    @keyframes sheen{
+      0%{transform:translateX(-60%);opacity:0}
+      25%{opacity:.55}
+      60%{opacity:.55}
+      100%{transform:translateX(60%);opacity:0}
+    }
+    .cta.disabled{
+      background: rgba(255,255,255,.10);
+      color: rgba(255,255,255,.75);
+      border:1px solid rgba(255,255,255,.12);
+      opacity:.95;
+      box-shadow: 0 22px 70px rgba(0,0,0,.35);
+    }
+    .cta.disabled:before{display:none}
+    .cta:hover{transform: translateY(-1px); filter:saturate(1.05)}
+    .cta:active{transform: translateY(0)}
+
+    .hint{
+      margin-top: 10px;
+      color: rgba(234,240,247,.75);
+      font-weight:600;
+      line-height:1.6;
+      text-align:center;
+    }
+
+    /* mini chips under hero like Aivro */
+    .chips{
+      margin-top: 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .chip{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(234,240,247,.84);
+      font-weight:850;
+      font-size:13px;
+    }
+    .chip svg{width:16px;height:16px;opacity:.9}
+
+    /* ===== Light sections titles like screenshot ===== */
+    .h2{
+      margin:0;
+      font-size: clamp(32px, 4vw, 52px);
+      letter-spacing:-.06em;
+      line-height:1.05;
+      font-weight:950;
+      text-align:center;
+    }
+    .h2 .blue{color: var(--blue)}
+    .pCenter{
+      margin: 12px auto 0;
+      max-width: 70ch;
+      text-align:center;
+      color: rgba(11,18,32,.65);
+      font-weight:600;
+      line-height:1.75;
+      font-size:16px;
+    }
+
+    /* cards like screenshot (white section, blue top bar illusion) */
+    .stepStack{margin-top: 28px; display:grid; gap:18px; max-width: 780px; margin-left:auto; margin-right:auto;}
+    .step{
+      border-radius: 26px;
+      overflow:hidden;
+      border: 1px solid rgba(11,18,32,.10);
+      box-shadow: 0 26px 90px rgba(0,0,0,.10);
+      background: #fff;
+    }
+    .stepTop{
+      height: 82px;
+      background: linear-gradient(90deg, rgba(47,134,179,1), rgba(82,172,217,1));
+      position:relative;
+    }
+    .stepTop:after{
+      content:"";
+      position:absolute; left:0; right:0; bottom:-1px;
+      height: 34px;
+      background: #fff;
+      transform: skewY(-3deg);
+      transform-origin:left;
+    }
+    .stepBody{
+      padding: 18px 18px 20px;
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+    }
+    .num{
+      width:40px;height:40px;border-radius:999px;
+      display:grid;place-items:center;
+      background: rgba(82,172,217,.16);
+      border: 1px solid rgba(82,172,217,.35);
+      font-weight:950;
+      color: rgba(11,18,32,.85);
+      flex:0 0 auto;
+    }
+    .stepBody h3{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.03em;
+      font-weight:950;
+      color: rgba(11,18,32,.92);
+    }
+    .stepBody p{
+      margin:8px 0 0 0;
+      color: rgba(11,18,32,.70);
+      font-weight:600;
+      line-height:1.7;
+    }
+
+    /* Dark section rows */
+    .rows{margin-top:24px; display:grid; gap:12px; max-width: 860px; margin-left:auto; margin-right:auto;}
+    .row{
+      display:flex;justify-content:space-between;align-items:center;gap:14px;
+      padding: 16px 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 22px 70px rgba(0,0,0,.35);
+    }
+    .row b{font-weight:950;letter-spacing:-.02em}
+    .row small{opacity:.7;font-weight:750}
+
+    /* ===== Responsive: hero centered on mobile like your ask ===== */
+    @media (max-width: 980px){
       .heroGrid{grid-template-columns:1fr}
       h1,.sub{text-align:center}
+      .kicker{justify-content:center}
+      .cityZone{margin-left:auto;margin-right:auto}
+    }
+
+    /* ===== reduced motion ===== */
+    @media (prefers-reduced-motion: reduce){
+      .dust,.glow,.cityZone{animation:none!important}
+      .cta:before{animation:none!important}
     }
   </style>
 </head>
 
 <body>
 
-<div class="topbar">
-  <div class="wrap">
-    <div class="inner">
-      <div class="top-left">
-        <div class="logo">
-          <img src="media/logob.png" alt="">
+  <!-- HEADER -->
+  <div class="topbar">
+    <div class="wrap">
+      <div class="inner">
+        <div class="top-left">
+          <div class="logo" aria-hidden="true">
+            <!-- Mets ton logo ici (chemin web, pas C:\...) -->
+            <img src="media/logob.png" alt="">
+          </div>
+        </div>
+
+        <div class="titleCenter">TrouverUnPlombier.ca</div>
+
+        <div class="top-right" aria-label="Note 4.9 sur 5">
+          <span class="stars" aria-hidden="true">
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
+          </span>
+          <span class="score">4.9 <span>/ 5</span></span>
         </div>
       </div>
-
-      <div class="titleCenter">TrouverUnPlombier.ca</div>
-
-      <div class="top-right">
-        <span class="stars">
-          <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
-          <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
-          <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
-          <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
-          <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
-        </span>
-        <span class="score">4.9 <span>/ 5</span></span>
-      </div>
     </div>
   </div>
-</div>
 
-<section class="dark">
-  <div class="wrap hero">
-    <div class="heroGrid">
-      <div>
-        <h1>Trouve un plombier <span class="accent">dans ta ville</span>.</h1>
-        <p class="sub">Entre ta ville, ouvre la page locale, puis appelle le professionnel disponible.</p>
+  <!-- 1) DARK HERO -->
+  <section class="dark">
+    <div class="dust" aria-hidden="true"></div>
+    <div class="glow" aria-hidden="true"></div>
+
+    <div class="wrap hero">
+      <div class="heroGrid">
+        <div>
+          <div class="kicker">Plomberie d’urgence</div>
+          <h1>Trouve un plombier <span class="accent">dans ta ville</span>.</h1>
+          <p class="sub">Entre ta ville, ouvre la page locale, puis appelle le professionnel disponible. Simple, rapide, clair.</p>
+
+          <!-- CITY ZONE (color + pulse + shadow) -->
+          <div class="cityZone" id="cityZone">
+            <div class="field">
+              <svg class="pin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke="rgba(255,255,255,.92)" stroke-width="2"/>
+                <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="rgba(255,255,255,.22)"/>
+              </svg>
+              <input id="cityInput" class="input" type="text" placeholder="Ex : Trois-Rivières" autocomplete="off">
+            </div>
+
+            <div id="suggest" class="suggest" role="listbox" aria-label="Suggestions de villes"></div>
+
+            <button id="goBtn" class="cta disabled" type="button" aria-disabled="true">Ouvrir la page locale</button>
+
+            <div class="hint">Écris ta ville. Si elle existe, elle apparaît. Le bouton devient actif.</div>
+
+            <div class="chips" aria-label="Atouts">
+              <span class="chip">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M20 6L9 17l-5-5" stroke="rgba(234,240,247,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg> Appel direct
+              </span>
+              <span class="chip">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke="rgba(234,240,247,.92)" stroke-width="2"/>
+                </svg> Service indépendant
+              </span>
+              <span class="chip">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 8v5l3 2" stroke="rgba(234,240,247,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="rgba(234,240,247,.92)" stroke-width="2"/>
+                </svg> Selon dispo
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
+  <!-- 2) LIGHT: How it works (stack cards like screenshot) -->
+  <section class="light">
+    <div class="wrap">
+      <h2 class="h2">Comment ça <span class="blue">marche</span></h2>
+      <p class="pCenter">Tu restes dans la bonne ville, tu ouvres la page locale correspondante, puis tu appelles.</p>
+
+      <div class="stepStack" aria-label="Étapes">
+        <div class="step">
+          <div class="stepTop"></div>
+          <div class="stepBody">
+            <div class="num">1</div>
+            <div>
+              <h3>Écris ta ville</h3>
+              <p>On te propose les villes disponibles automatiquement.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="stepTop"></div>
+          <div class="stepBody">
+            <div class="num">2</div>
+            <div>
+              <h3>Sélectionne</h3>
+              <p>Tu ouvres la page locale correspondante (pas de perte de temps).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="stepTop"></div>
+          <div class="stepBody">
+            <div class="num">3</div>
+            <div>
+              <h3>Appelle</h3>
+              <p>Connexion selon disponibilité locale et l’heure.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3) DARK: Problems -->
+  <section class="dark">
+    <div class="dust" aria-hidden="true"></div>
+    <div class="glow" aria-hidden="true"></div>
+
+    <div class="wrap">
+      <h2 class="h2" style="color:#eaf0f7">Problèmes <span class="accent">fréquents</span>.</h2>
+      <p class="pCenter" style="color:rgba(234,240,247,.70)">Courant. Clair. Sans blabla.</p>
+
+      <div class="rows" aria-label="Services">
+        <div class="row"><b>Fuite d’eau</b><small>tuyau • valve • dégâts</small></div>
+        <div class="row"><b>Toilette bouchée</b><small>déblocage</small></div>
+        <div class="row"><b>Chauffe-eau</b><small>panne • remplacement</small></div>
+        <div class="row"><b>Drain / égout</b><small>refoulement</small></div>
+        <div class="row"><b>Robinet / pression</b><small>cartouche • ajustement</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4) LIGHT: Legal -->
+  <section class="light">
+    <div class="wrap">
+      <h2 class="h2">Mentions <span class="blue">légales</span></h2>
+      <p class="pCenter">
+        TrouverUnPlombier.ca est un service indépendant de mise en relation. Nous n’effectuons aucune réparation.
+        Vous contractez et payez directement le professionnel.
+      </p>
+    </div>
+  </section>
+
+  <script>
+    // Villes + pages locales (mets TES vraies pages ici)
+    const CITIES = [
+      { name:"Trois-Rivières", slug:"trois-rivieres/" },
+      { name:"Montréal", slug:"montreal.html" },
+      { name:"Québec", slug:"quebec.html" },
+      { name:"Laval", slug:"laval.html" },
+      { name:"Longueuil", slug:"longueuil.html" },
+      { name:"Sherbrooke", slug:"sherbrooke.html" },
+      { name:"Gatineau", slug:"gatineau.html" },
+      { name:"Drummondville", slug:"drummondville.html" }
+    ];
+
+    const input = document.getElementById("cityInput");
+    const suggest = document.getElementById("suggest");
+    const goBtn = document.getElementById("goBtn");
+
+    const norm = (s) => (s||"")
+      .toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+      .replace(/[-’'.,]/g," ")
+      .replace(/\s+/g," ")
+      .trim();
+
+    function setSelected(city){
+      if(city){
+        input.value = city.name;
+        goBtn.classList.remove("disabled");
+        goBtn.setAttribute("aria-disabled","false");
+        goBtn.dataset.slug = city.slug;
+      }else{
+        goBtn.classList.add("disabled");
+        goBtn.setAttribute("aria-disabled","true");
+        goBtn.dataset.slug = "";
+      }
+    }
+
+    function filterCities(q){
+      const nq = norm(q);
+      if(!nq) return [];
+      const starts=[], includes=[];
+      for(const c of CITIES){
+        const nn = norm(c.name);
+        if(nn.startsWith(nq)) starts.push(c);
+        else if(nn.includes(nq)) includes.push(c);
+      }
+      return [...starts, ...includes].slice(0, 7);
+    }
+
+    function renderSuggest(list){
+      if(!list.length){
+        suggest.classList.remove("on");
+        suggest.innerHTML = "";
+        return;
+      }
+      suggest.innerHTML = list.map(c => `
+        <div class="sItem" role="option" tabindex="0" data-name="${c.name}" data-slug="${c.slug}">
+          <div>${c.name}</div>
+          <div class="sMeta">Sélectionner</div>
+        </div>
+      `).join("");
+      suggest.classList.add("on");
+    }
+
+    input.addEventListener("input", () => {
+      setSelected(null);
+      renderSuggest(filterCities(input.value));
+    });
+
+    input.addEventListener("focus", () => {
+      renderSuggest(filterCities(input.value));
+    });
+
+    input.addEventListener("blur", () => {
+      const exact = CITIES.find(c => norm(c.name) === norm(input.value));
+      if(exact) setSelected(exact);
+      setTimeout(() => { suggest.classList.remove("on"); }, 140);
+    });
+
+    suggest.addEventListener("click", (e) => {
+      const item = e.target.closest(".sItem");
+      if(!item) return;
+      setSelected({ name: item.dataset.name, slug: item.dataset.slug });
+      suggest.classList.remove("on");
+    });
+
+    input.addEventListener("keydown", (e) => {
+      if(e.key === "Enter"){
+        const list = filterCities(input.value);
+        if(list.length){
+          setSelected(list[0]);
+          suggest.classList.remove("on");
+          e.preventDefault();
+        }
+      }
+      if(e.key === "Escape") suggest.classList.remove("on");
+    });
+
+    goBtn.addEventListener("click", () => {
+      const slug = goBtn.dataset.slug;
+      if(!slug) return;
+      window.location.href = slug;
+    });
+  </script>
 </body>
 </html>
 
