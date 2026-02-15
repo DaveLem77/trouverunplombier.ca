@@ -60,7 +60,7 @@
       overflow-x:hidden;
     }
     a{color:inherit;text-decoration:none}
-    button,input{font-family:inherit}
+    button{font-family:inherit}
     .wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(18px,4vw,44px);position:relative;z-index:2}
 
     /* ===== Header ===== */
@@ -224,33 +224,8 @@
       pointer-events:none;
     }
 
-    .field{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding: 14px 14px;
-      border-radius: 16px;
-      background: rgba(0,0,0,.35);
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: 0 18px 55px rgba(0,0,0,.35);
-      position:relative;
-      z-index:1;
-    }
-    .pin{width:18px;height:18px;opacity:.9}
-    .input{
-      width:100%;
-      border:0; outline:0;
-      background:transparent;
-      color: rgba(255,255,255,.92);
-      font-weight:900;
-      letter-spacing:-.02em;
-      font-size:16px;
-    }
-    /* IMPORTANT: pas de “Activer…” dans le champ */
-    .input::placeholder{color: rgba(255,255,255,.55); font-weight:850}
-
     .suggest{
-      margin-top: 10px;
+      margin-top: 2px;
       border-radius: 16px;
       overflow:hidden;
       border: 1px solid rgba(255,255,255,.10);
@@ -352,34 +327,7 @@
     }
     .locIcon svg{width:18px;height:18px;opacity:.95}
 
-    /* ===== Bouton téléphone IDENTIQUE (copié) ===== */
-    .callBox{
-      margin-top: 12px;
-      width: 100%;
-      border-radius: 22px;
-      padding: 14px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: 0 28px 90px rgba(0,0,0,.55);
-      position:relative;
-      overflow:hidden;
-      display:none; /* caché tant qu’on n’a pas la ville */
-      z-index:2;
-    }
-    .callBox.on{display:block}
-
-    .callBox:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(560px 280px at 18% 30%, rgba(82,172,217,.22), transparent 62%),
-        radial-gradient(520px 260px at 84% 70%, rgba(82,172,217,.14), transparent 62%);
-      opacity:.95;
-      pointer-events:none;
-      animation: boxDrift 7.5s ease-in-out infinite;
-    }
-    @keyframes boxDrift{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-
+    /* ===== Bouton téléphone IDENTIQUE (dans la zone “suggest”) ===== */
     .callBtn{
       width:100%;
       border: 1px solid rgba(0,0,0,.10);
@@ -630,9 +578,8 @@
 
     @media (prefers-reduced-motion: reduce){
       .dust,.glow,.cityZone{animation:none!important}
-      .callBox:before,.callBtn,.callBtn:after{animation:none!important}
-      .locBtn:not(.disabled){animation:none!important}
-      .locBtn:after{animation:none!important}
+      .callBtn,.callBtn:after{animation:none!important}
+      .locBtn:not(.disabled),.locBtn:after{animation:none!important}
     }
   </style>
 </head>
@@ -676,25 +623,16 @@
           <h1>Trouve un plombier <span class="accent">dans ta ville</span>.</h1>
           <p class="sub">Active ta localisation, puis appelle immédiatement le bon numéro.</p>
 
-          <div class="cityZone" id="cityZone">
-            <div class="field">
-              <svg class="pin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke="rgba(255,255,255,.92)" stroke-width="2"/>
-                <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="rgba(255,255,255,.22)"/>
-              </svg>
-
-              <!-- pas de “Activer…” ici -->
-              <input id="cityInput" class="input" type="text" placeholder="Ville détectée (après activation)" readonly>
-            </div>
-
-            <div class="suggest" role="status" aria-live="polite">
+          <div class="cityZone">
+            <!-- ZONE QUI SE TRANSFORME -->
+            <div id="switchZone" class="suggest" role="status" aria-live="polite">
               <div class="sItem">
-                <div id="statusLine">Clique sur le bouton pour activer la localisation.</div>
+                <div id="statusLine">Ville détectée (après activation)</div>
                 <div class="sMeta" id="statusMeta">On affichera le bon numéro</div>
               </div>
             </div>
 
-            <!-- Bouton visible (texte UNE seule fois) -->
+            <!-- Bouton visible -->
             <button id="locBtn" class="locBtn" type="button">
               <span class="locIcon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none">
@@ -704,31 +642,6 @@
               </span>
               <span id="locLabel">Activer ma localisation</span>
             </button>
-
-            <!-- Bouton téléphone IDENTIQUE (apparaît après détection) -->
-            <div class="callBox" id="callBox" aria-label="Appeler">
-              <button class="callBtn" id="callBtn" type="button">
-                <span class="callLeft">
-                  <span class="callIcon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                      <path d="M22 16.9v3a2 2 0 0 1-2.2 2c-9.1-.7-16.3-7.9-17-17A2 2 0 0 1 4.9 2h3a2 2 0 0 1 2 1.7c.1.8.3 1.7.6 2.4a2 2 0 0 1-.5 2.1L9 9.2c1.5 2.7 3.7 4.9 6.4 6.4l1-1a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.4.6A2 2 0 0 1 22 16.9z"
-                            stroke="rgba(11,15,20,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </span>
-                  <span class="callText">
-                    <b>Appel immédiat</b>
-                    <span id="phoneText">+1 (000) 000-0000</span>
-                  </span>
-                </span>
-
-                <span class="callArrow" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M5 12h12" stroke="rgba(11,15,20,.92)" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M13 6l6 6-6 6" stroke="rgba(11,15,20,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
-              </button>
-            </div>
 
             <div class="localLinkWrap" id="localLinkWrap">
               <a class="localLink" id="localLink" href="trois-rivieres/" aria-label="Accéder à la page de Trois-Rivières">
@@ -856,20 +769,16 @@
     // =========================
     // UI
     // =========================
-    const input = document.getElementById("cityInput");
+    const switchZone = document.getElementById("switchZone");
     const statusLine = document.getElementById("statusLine");
     const statusMeta = document.getElementById("statusMeta");
-    const hintLine = document.getElementById("hintLine");
+    const hintLine   = document.getElementById("hintLine");
 
-    const locBtn = document.getElementById("locBtn");
-    const locLabel = document.getElementById("locLabel");
-
-    const callBox = document.getElementById("callBox");
-    const callBtn = document.getElementById("callBtn");
-    const phoneText = document.getElementById("phoneText");
+    const locBtn    = document.getElementById("locBtn");
+    const locLabel  = document.getElementById("locLabel");
 
     const localLinkWrap = document.getElementById("localLinkWrap");
-    const localLink = document.getElementById("localLink");
+    const localLink     = document.getElementById("localLink");
 
     let activeTel = PHONE_OTHER_TEL;
 
@@ -900,7 +809,39 @@
       hintLine.textContent = "Si rien n’apparaît : vérifie HTTPS + permission du navigateur.";
     }
 
-    function showCallForCity(city){
+    function mountPhoneButton(phoneUI, phoneTel){
+      // Remplace le contenu de la zone “suggest” par le bouton téléphone
+      switchZone.innerHTML = `
+        <button class="callBtn" id="callBtn" type="button">
+          <span class="callLeft">
+            <span class="callIcon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M22 16.9v3a2 2 0 0 1-2.2 2c-9.1-.7-16.3-7.9-17-17A2 2 0 0 1 4.9 2h3a2 2 0 0 1 2 1.7c.1.8.3 1.7.6 2.4a2 2 0 0 1-.5 2.1L9 9.2c1.5 2.7 3.7 4.9 6.4 6.4l1-1a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.4.6A2 2 0 0 1 22 16.9z"
+                      stroke="rgba(11,15,20,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="callText">
+              <b>Appel immédiat</b>
+              <span>${phoneUI}</span>
+            </span>
+          </span>
+
+          <span class="callArrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M5 12h12" stroke="rgba(11,15,20,.92)" stroke-width="2" stroke-linecap="round"/>
+              <path d="M13 6l6 6-6 6" stroke="rgba(11,15,20,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+      `;
+
+      const btn = document.getElementById("callBtn");
+      btn.addEventListener("click", () => {
+        window.location.href = `tel:${phoneTel}`;
+      });
+    }
+
+    function showResult(city){
       const cityClean = (city || "").trim();
       const cityNorm = norm(cityClean);
 
@@ -908,58 +849,42 @@
         cityNorm.includes("trois rivieres") ||
         cityNorm.includes("trois-rivieres");
 
-      // champ = ville détectée (remplace le “Activer…”)
-      input.value = cityClean || (isTrois ? "Trois-Rivières" : "Ville détectée");
+      // cache le bouton de localisation
+      locBtn.style.display = "none";
 
-      // Choix du numéro
       if(isTrois){
-        activeTel = PHONE_TR_TEL;
-        phoneText.textContent = PHONE_TR_UI;
+        mountPhoneButton(PHONE_TR_UI, PHONE_TR_TEL);
 
         localLinkWrap.style.display = "block";
         localLink.href = SLUG_TR;
 
-        statusLine.textContent = `Ville détectée : ${input.value}`;
-        statusMeta.textContent = "Numéro local disponible";
-        hintLine.textContent = "Appelle maintenant, ou ouvre la page locale.";
+        hintLine.textContent = `Ville détectée : ${cityClean || "Trois-Rivières"}`;
       }else{
-        activeTel = PHONE_OTHER_TEL;
-        phoneText.textContent = PHONE_OTHER_UI;
+        mountPhoneButton(PHONE_OTHER_UI, PHONE_OTHER_TEL);
 
         localLinkWrap.style.display = "none";
 
-        statusLine.textContent = cityClean ? `Ville détectée : ${cityClean}` : "Ville détectée.";
-        statusMeta.textContent = "Numéro général affiché";
-        hintLine.textContent = "Appelle maintenant.";
+        hintLine.textContent = cityClean ? `Ville détectée : ${cityClean}` : "Ville détectée.";
       }
-
-      // On cache le bouton de localisation et on montre le call button identique
-      locBtn.style.display = "none";
-      callBox.classList.add("on");
     }
 
     function failToGeneral(reasonLine, metaLine){
       statusLine.textContent = reasonLine;
       statusMeta.textContent = metaLine;
-      hintLine.textContent = "Tu peux quand même appeler le numéro général.";
-      input.value = "Ville non détectée";
-      activeTel = PHONE_OTHER_TEL;
-      phoneText.textContent = PHONE_OTHER_UI;
-
+      hintLine.textContent = "Localisation non disponible → numéro général affiché.";
       locBtn.style.display = "none";
       localLinkWrap.style.display = "none";
-      callBox.classList.add("on");
+      mountPhoneButton(PHONE_OTHER_UI, PHONE_OTHER_TEL);
     }
 
     async function requestLocation(){
       // TEST : ?mock_city=Trois-Rivières
       const mockCity = qs("mock_city");
       if(mockCity){
-        showCallForCity(mockCity);
+        showResult(mockCity);
         return;
       }
 
-      // Bloqué sans HTTPS (sauf localhost)
       if(location.protocol !== "https:" && location.hostname !== "localhost"){
         failToGeneral("Localisation bloquée (pas en HTTPS).", "Utilise GitHub Pages / HTTPS");
         return;
@@ -970,7 +895,6 @@
         return;
       }
 
-      // Permissions (si disponible) : message clair si denied
       if(navigator.permissions && navigator.permissions.query){
         try{
           const p = await navigator.permissions.query({ name: "geolocation" });
@@ -986,6 +910,7 @@
       navigator.geolocation.getCurrentPosition(async (pos) => {
         try{
           const { latitude, longitude } = pos.coords;
+
           statusLine.textContent = "Localisation trouvée…";
           statusMeta.textContent = "Détection de la ville";
 
@@ -994,7 +919,7 @@
           const city =
             addr.city || addr.town || addr.village || addr.municipality || addr.county || "";
 
-          showCallForCity(city || "");
+          showResult(city || "");
         }catch(e){
           failToGeneral("Impossible de détecter la ville.", "Numéro général affiché");
         }
@@ -1007,19 +932,14 @@
       });
     }
 
-    // click “Activer ma localisation”
     locBtn.addEventListener("click", () => {
       if(locBtn.classList.contains("disabled")) return;
       requestLocation();
     });
-
-    // click call
-    callBtn.addEventListener("click", () => {
-      window.location.href = `tel:${activeTel}`;
-    });
   </script>
 </body>
 </html>
+
 
 
 
