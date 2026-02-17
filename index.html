@@ -3,8 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Trouver un plombier d’urgence | TrouverUnPlombier.ca</title>
-  <meta name="description" content="Service indépendant de mise en relation avec des plombiers locaux. Urgence 24/7 selon disponibilité.">
+  <title>Trouver un plombier d’urgence dans votre ville | TrouverUnPlombier.ca</title>
+  <meta name="description" content="Trouver rapidement un plombier d’urgence dans votre ville. Localisation uniquement après votre clic, puis appel immédiat. Service indépendant de mise en relation." />
+
+  <!-- SEO -->
+  <link rel="canonical" href="https://trouverunplombier.ca/">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="theme-color" content="#07090c">
+  <meta name="language" content="fr">
 
   <!-- FAVICON -->
   <link rel="icon" type="image/png" href="media/logob.png">
@@ -12,21 +18,82 @@
 
   <!-- PARTAGE -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Trouver un plombier d’urgence | TrouverUnPlombier.ca">
-  <meta property="og:description" content="Service indépendant de mise en relation avec des plombiers locaux. Urgence 24/7 selon disponibilité.">
+  <meta property="og:title" content="Trouver un plombier d’urgence dans votre ville | TrouverUnPlombier.ca">
+  <meta property="og:description" content="Localisation uniquement après votre clic, puis appel immédiat. Service indépendant de mise en relation.">
   <meta property="og:image" content="https://trouverunplombier.ca/media/share.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:url" content="https://trouverunplombier.ca/">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Trouver un plombier d’urgence | TrouverUnPlombier.ca">
-  <meta name="twitter:description" content="Service indépendant de mise en relation avec des plombiers locaux. Urgence 24/7 selon disponibilité.">
+  <meta name="twitter:title" content="Trouver un plombier d’urgence dans votre ville | TrouverUnPlombier.ca">
+  <meta name="twitter:description" content="Localisation uniquement après votre clic, puis appel immédiat. Service indépendant de mise en relation.">
   <meta name="twitter:image" content="https://trouverunplombier.ca/media/share.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Structured Data (SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"TrouverUnPlombier.ca",
+    "url":"https://trouverunplombier.ca/",
+    "inLanguage":"fr-CA",
+    "potentialAction":{
+      "@type":"SearchAction",
+      "target":"https://trouverunplombier.ca/?q={search_term_string}",
+      "query-input":"required name=search_term_string"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"TrouverUnPlombier.ca",
+    "url":"https://trouverunplombier.ca/",
+    "logo":"https://trouverunplombier.ca/media/logob.png",
+    "sameAs":[],
+    "description":"Service indépendant de mise en relation pour trouver un plombier d’urgence local. Localisation uniquement après clic, puis appel immédiat."
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Est-ce que le site est une compagnie de plomberie ?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Non. TrouverUnPlombier.ca est un service indépendant de mise en relation. Les réparations et paiements se font directement avec le professionnel."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"La localisation est-elle automatique ?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Non. La localisation est demandée seulement après votre clic."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Comment contacter rapidement un plombier d’urgence ?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Activez la localisation (optionnel) pour afficher le bon numéro, puis appelez immédiatement."
+        }
+      }
+    ]
+  }
+  </script>
 
   <style>
     :root{
@@ -48,7 +115,7 @@
       --btnBot:#eeeeF2;
       --btnInk:#0b0f14;
 
-      --headerH: 58px; /* approx. hauteur topbar (sert au hero) */
+      --headerH: 58px;
     }
 
     *{box-sizing:border-box}
@@ -154,29 +221,26 @@
     @keyframes glowDrift{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 
     /* ===== Hero ===== */
-    /* IMPORTANT: le hero “remplit” la zone sombre (plus de vide) */
+    /* Remplit la zone sombre SANS créer une droite trop longue */
     .hero{
       min-height: calc(100svh - var(--headerH));
       display:grid;
-      align-items:center;          /* centre vertical = moins de vide */
+      align-items:center;
       padding-top: 0;
       padding-bottom: 0;
     }
 
-    /* Desktop: gauche = droite */
     .heroGrid{
       display:grid;
-      grid-template-columns: 1fr 1fr;  /* égal */
+      grid-template-columns: 1fr 1fr;
       gap: 28px;
-      align-items: stretch;            /* les 2 colonnes prennent la même hauteur */
+      align-items: start; /* IMPORTANT: on arrête la colonne droite à son contenu */
     }
 
-    /* Colonne gauche en layout vertical */
     .leftCol{
       display:flex;
       flex-direction:column;
       justify-content:center;
-      min-height: 100%;
     }
 
     .kicker{
@@ -214,7 +278,7 @@
       max-width: 54ch;
     }
 
-    /* ===== Zone localisation (plus large + plus “présente”) ===== */
+    /* ===== Zone localisation ===== */
     .cityZone{
       margin-top: 16px;
       width: 100%;
@@ -352,7 +416,7 @@
 
       background:
         radial-gradient(900px 140px at 50% -10%, rgba(255,255,255,.95), transparent 62%),
-        linear-gradient(180deg, var(--btnTop) 0%, var(--btnMid) 55%, var(--btnBot) 100%);
+        linear-gradient(180deg, #ffffff 0%, #fbfbfd 55%, #eeeeF2 100%);
 
       color: var(--btnInk);
       font-weight:950;
@@ -448,7 +512,6 @@
 
     .hint{margin-top: 10px;color: rgba(234,240,247,.75);font-weight:600;line-height:1.6;text-align:center;}
 
-    /* chips + un petit “footer” du hero pour remplir la hauteur */
     .chips{margin-top: 14px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
     .chip{
       display:inline-flex;gap:10px;align-items:center;
@@ -460,33 +523,86 @@
     }
     .chip svg{width:16px;height:16px;opacity:.9}
 
-    .heroBottom{
-      margin-top: 18px;
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:flex-start;
-      color: rgba(234,240,247,.72);
-      font-weight:700;
-      font-size:13px;
+    /* ===== Side Card (droite) ===== */
+    .sideCard{
+      border-radius: 22px;
+      padding: 16px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 22px 70px rgba(0,0,0,.50);
+      overflow:hidden;
+      position:relative;
+
+      /* IMPORTANT: plus de "stretch" -> elle s'arrête à son contenu */
+      height: fit-content;
     }
-    .hbPill{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      background: rgba(0,0,0,.26);
+    .sideCard:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(420px 220px at 30% 10%, rgba(82,172,217,.16), transparent 62%),
+        radial-gradient(420px 220px at 70% 40%, rgba(216,178,85,.08), transparent 62%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .sideInner{position:relative;z-index:2;}
+    .miniTitle{font-weight:950;letter-spacing:-.04em;font-size:18px;margin:0;}
+    .miniSub{
+      margin:8px 0 0 0;
+      color: rgba(234,240,247,.72);
+      font-weight:600;
+      line-height:1.65;
+      font-size:14px;
+      max-width: 46ch;
+    }
+    .trustList{margin-top: 14px;display:grid;gap:10px;}
+    .trustItem{
+      display:flex;gap:12px;align-items:flex-start;
+      padding: 12px 12px;border-radius: 16px;
+      background: rgba(0,0,0,.28);
       border: 1px solid rgba(255,255,255,.10);
     }
-    .hbDot{
+    .trustIcon{
+      width:34px;height:34px;border-radius:12px;
+      display:grid;place-items:center;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      flex:0 0 auto;
+    }
+    .trustIcon svg{width:18px;height:18px}
+    .trustIcon path{stroke: rgba(234,240,247,.92)}
+    .trustText b{display:block;font-weight:950;letter-spacing:-.02em;font-size:14px;}
+    .trustText span{
+      display:block;margin-top:4px;
+      color: rgba(234,240,247,.72);
+      font-weight:650;line-height:1.45;font-size:13px;
+    }
+
+    /* ===== Notice sous les 2 colonnes (au niveau de ta ligne rouge) ===== */
+    .heroNotice{
+      margin-top: 16px;
+      border-radius: 18px;
+      padding: 12px 14px;
+      background: rgba(0,0,0,.24);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(234,240,247,.80);
+      font-weight:650;
+      line-height:1.55;
+      font-size:12.8px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.38);
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .heroNotice .dot{
       width:8px;height:8px;border-radius:99px;
       background: var(--gold);
       box-shadow: 0 0 0 4px rgba(216,178,85,.10);
+      margin-top: 6px;
+      flex:0 0 auto;
     }
 
-    /* ===== TITRES SECTIONS ===== */
+    /* ===== Titres sections ===== */
     .h2{
       margin:0;
       font-size: clamp(32px, 4vw, 52px);
@@ -506,105 +622,7 @@
       font-size:16px;
     }
 
-    /* ===== SIDE CARD (stretch hauteur = remplit la zone) ===== */
-    .sideCard{
-      border-radius: 22px;
-      padding: 16px;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: 0 22px 70px rgba(0,0,0,.50);
-      overflow:hidden;
-      position:relative;
-
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;  /* prend toute la hauteur dispo */
-      min-height: 100%;
-    }
-    .sideCard:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(420px 220px at 30% 10%, rgba(82,172,217,.16), transparent 62%),
-        radial-gradient(420px 220px at 70% 40%, rgba(216,178,85,.08), transparent 62%);
-      pointer-events:none;
-      opacity:.9;
-    }
-    .sideInner{position:relative;z-index:2; display:flex; flex-direction:column; min-height:100%;}
-    .miniTitle{
-      font-weight:950;
-      letter-spacing:-.04em;
-      font-size:18px;
-      margin:0;
-    }
-    .miniSub{
-      margin:8px 0 0 0;
-      color: rgba(234,240,247,.72);
-      font-weight:600;
-      line-height:1.65;
-      font-size:14px;
-      max-width: 46ch;
-    }
-
-    .trustList{
-      margin-top: 14px;
-      display:grid;
-      gap:10px;
-    }
-    .trustItem{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      padding: 12px 12px;
-      border-radius: 16px;
-      background: rgba(0,0,0,.28);
-      border: 1px solid rgba(255,255,255,.10);
-    }
-    .trustIcon{
-      width:34px;height:34px;border-radius:12px;
-      display:grid;place-items:center;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      flex:0 0 auto;
-    }
-    .trustIcon svg{width:18px;height:18px}
-    .trustIcon path{stroke: rgba(234,240,247,.92)}
-    .trustText b{
-      display:block;
-      font-weight:950;
-      letter-spacing:-.02em;
-      font-size:14px;
-    }
-    .trustText span{
-      display:block;
-      margin-top:4px;
-      color: rgba(234,240,247,.72);
-      font-weight:650;
-      line-height:1.45;
-      font-size:13px;
-    }
-
-    .miniRule{
-      margin-top: auto;         /* pousse en bas = “remplit” la hauteur */
-      border-radius: 16px;
-      padding: 12px 12px;
-      background: rgba(0,0,0,.22);
-      border: 1px solid rgba(255,255,255,.10);
-      color: rgba(234,240,247,.78);
-      font-weight:650;
-      line-height:1.55;
-      font-size:12.5px;
-    }
-    .goldDot{
-      display:inline-block;
-      width:8px;height:8px;border-radius:99px;
-      background: var(--gold);
-      box-shadow: 0 0 0 4px rgba(216,178,85,.10);
-      transform: translateY(-1px);
-      margin-right:8px;
-    }
-
-    /* ===== Comment ça marche (timeline premium) ===== */
+    /* ===== Comment ça marche (timeline) ===== */
     .timeline{
       margin-top: 28px;
       max-width: 980px;
@@ -671,7 +689,6 @@
 
     /* ===== Responsive ===== */
     @media (max-width: 980px){
-      :root{ --headerH: 58px; }
       section{ padding: 64px 0; }
 
       .hero{
@@ -683,14 +700,12 @@
       .heroGrid{
         grid-template-columns:1fr;
         gap: 18px;
-        align-items: start;
       }
       h1,.sub{text-align:center}
       .kicker{justify-content:center}
       .cityZone{margin-left:auto;margin-right:auto}
       .timelineLine{display:none;}
       .tGrid{grid-template-columns:1fr;gap:12px;}
-      .heroBottom{justify-content:center}
     }
 
     @media (max-width: 420px){
@@ -713,7 +728,7 @@
       <div class="inner">
         <div class="top-left">
           <div class="logo" aria-hidden="true">
-            <img src="media/logob.png" alt="">
+            <img src="media/logob.png" alt="Logo TrouverUnPlombier.ca">
           </div>
         </div>
 
@@ -745,7 +760,7 @@
         <div class="leftCol">
           <div class="kicker">Plomberie d’urgence</div>
           <h1>Trouve un plombier <span class="accent">dans ta ville</span>.</h1>
-          <p class="sub">Active ta localisation, puis appelle immédiatement le bon numéro.</p>
+          <p class="sub">Active ta localisation (optionnel), puis appelle immédiatement le bon numéro.</p>
 
           <div class="cityZone">
             <div id="switchZone" class="suggest" role="status" aria-live="polite">
@@ -796,68 +811,61 @@
               </span>
             </div>
           </div>
-
-          <!-- petit remplissage de hauteur (visuellement ça “occupe” la zone sombre) -->
-          <div class="heroBottom" aria-label="Infos rapides">
-            <span class="hbPill"><span class="hbDot"></span>Localisation seulement après ton clic</span>
-            <span class="hbPill">Appel direct (pas de formulaire)</span>
-          </div>
         </div>
 
-        <!-- DROITE -->
+        <!-- DROITE (s'arrête au niveau de ton trait rouge) -->
         <aside class="sideCard" aria-label="Infos confiance">
           <div class="sideInner">
-            <div>
-              <p class="miniTitle">Service simple, sans détour</p>
-              <p class="miniSub">Tu actives la localisation (si tu veux), on affiche la bonne option, et tu appelles.</p>
+            <p class="miniTitle">Service simple, sans détour</p>
+            <p class="miniSub">Tu actives la localisation (si tu veux), on affiche la bonne option, et tu appelles.</p>
 
-              <div class="trustList" aria-label="Points de confiance">
-                <div class="trustItem">
-                  <span class="trustIcon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                      <path d="M20 6L9 17l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </span>
-                  <div class="trustText">
-                    <b>Action immédiate</b>
-                    <span>Pas de formulaire. Tu passes directement à l’appel.</span>
-                  </div>
-                </div>
-
-                <div class="trustItem">
-                  <span class="trustIcon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                      <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke-width="2"/>
-                      <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" stroke-width="2"/>
-                    </svg>
-                  </span>
-                  <div class="trustText">
-                    <b>Localisation après ton clic</b>
-                    <span>Aucune demande automatique. C’est toi qui déclenche.</span>
-                  </div>
-                </div>
-
-                <div class="trustItem">
-                  <span class="trustIcon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                      <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke-width="2"/>
-                    </svg>
-                  </span>
-                  <div class="trustText">
-                    <b>Service indépendant</b>
-                    <span>Tu payes directement le professionnel (pas le site).</span>
-                  </div>
+            <div class="trustList" aria-label="Points de confiance">
+              <div class="trustItem">
+                <span class="trustIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M20 6L9 17l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <div class="trustText">
+                  <b>Action immédiate</b>
+                  <span>Pas de formulaire. Tu passes directement à l’appel.</span>
                 </div>
               </div>
-            </div>
 
-            <div class="miniRule">
-              <span class="goldDot"></span>
-              <b style="font-weight:900">Important</b> : nous n’effectuons aucune réparation et ne facturons aucun travail.
+              <div class="trustItem">
+                <span class="trustIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke-width="2"/>
+                    <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" stroke-width="2"/>
+                  </svg>
+                </span>
+                <div class="trustText">
+                  <b>Localisation après ton clic</b>
+                  <span>Aucune demande automatique. C’est toi qui déclenche.</span>
+                </div>
+              </div>
+
+              <div class="trustItem">
+                <span class="trustIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke-width="2"/>
+                  </svg>
+                </span>
+                <div class="trustText">
+                  <b>Service indépendant</b>
+                  <span>Tu payes directement le professionnel (pas le site).</span>
+                </div>
+              </div>
             </div>
           </div>
         </aside>
 
+      </div>
+
+      <!-- Notice alignée sous les 2 colonnes (à la place du gros bloc à droite) -->
+      <div class="heroNotice" role="note" aria-label="Important">
+        <span class="dot" aria-hidden="true"></span>
+        <div><b>Important :</b> nous n’effectuons aucune réparation et ne facturons aucun travail. Vous contractez et payez directement le professionnel.</div>
       </div>
     </div>
   </section>
@@ -866,7 +874,7 @@
   <section class="light">
     <div class="wrap">
       <h2 class="h2">Comment ça <span class="blue">marche</span></h2>
-      <p class="pCenter">3 étapes. Zéro blabla. Juste l’action.</p>
+      <p class="pCenter">3 étapes. Zéro détour. Juste l’appel.</p>
 
       <div class="timeline" aria-label="Étapes">
         <div class="timelineLine" aria-hidden="true"></div>
@@ -879,7 +887,7 @@
               <span class="tNum">01</span>
             </div>
             <h3>Autorise la localisation</h3>
-            <p>Uniquement après ton clic. Aucun tracking automatique.</p>
+            <p>Uniquement après ton clic. Rien d’automatique.</p>
           </div>
 
           <div class="tStep">
@@ -889,7 +897,7 @@
               <span class="tNum">02</span>
             </div>
             <h3>On détecte ta ville</h3>
-            <p>On choisit le numéro qui correspond (ou un numéro général).</p>
+            <p>On affiche le bon numéro (ou un numéro général).</p>
           </div>
 
           <div class="tStep">
@@ -899,10 +907,16 @@
               <span class="tNum">03</span>
             </div>
             <h3>Tu appelles</h3>
-            <p>Appel immédiat. Si Trois-Rivières : lien vers la page locale.</p>
+            <p>Appel immédiat, sans formulaire.</p>
           </div>
         </div>
       </div>
+
+      <!-- SEO content (court, utile, keywords) -->
+      <p class="pCenter" style="max-width:78ch">
+        Pour une <b>urgence plomberie</b> (fuite d’eau, toilette bouchée, chauffe-eau en panne), l’objectif est simple :
+        trouver rapidement un <b>plombier d’urgence</b> disponible près de vous et l’appeler sans perdre de temps.
+      </p>
     </div>
   </section>
 
@@ -912,10 +926,10 @@
     <div class="glow" aria-hidden="true"></div>
 
     <div class="wrap">
-      <h2 class="h2" style="color:#eaf0f7">Problèmes <span class="accent">fréquents</span>.</h2>
+      <h2 class="h2" style="color:#eaf0f7">Problèmes <span class="accent">fréquents</span></h2>
       <p class="pCenter" style="color:rgba(234,240,247,.70)">Courant. Clair. Sans blabla.</p>
 
-      <div class="rows" aria-label="Services">
+      <div class="rows" aria-label="Services de plomberie">
         <div class="row"><b>Fuite d’eau</b><small>tuyau • valve • dégâts</small></div>
         <div class="row"><b>Toilette bouchée</b><small>déblocage</small></div>
         <div class="row"><b>Chauffe-eau</b><small>panne • remplacement</small></div>
