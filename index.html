@@ -10,7 +10,7 @@
   <link rel="icon" type="image/png" href="media/logob.png">
   <link rel="apple-touch-icon" href="media/logob.png">
 
-  <!-- PARTAGE (mets ton domaine réel) -->
+  <!-- PARTAGE -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Trouver un plombier d’urgence | TrouverUnPlombier.ca">
   <meta property="og:description" content="Service indépendant de mise en relation avec des plombiers locaux. Urgence 24/7 selon disponibilité.">
@@ -40,14 +40,15 @@
       --paper:#f6f8fb;
       --ink:#0b1220;
 
-      --max:1100px;
+      --max:1120px;
       --r:26px;
 
-      /* bouton phone (identique à ta page TR) */
       --btnTop:#ffffff;
       --btnMid:#fbfbfd;
       --btnBot:#eeeeF2;
       --btnInk:#0b0f14;
+
+      --headerH: 58px; /* approx. hauteur topbar (sert au hero) */
     }
 
     *{box-sizing:border-box}
@@ -74,7 +75,7 @@
       display:grid;
       grid-template-columns: 1fr auto 1fr;
       align-items:center;
-      padding: 14px 0;
+      padding: 12px 0;
       gap:12px;
     }
     .top-left{display:flex;align-items:center;gap:10px;min-width:0}
@@ -83,6 +84,7 @@
       background: rgba(255,255,255,.08);
       border:1px solid rgba(255,255,255,.12);
       overflow:hidden; flex:0 0 auto;
+      display:grid;place-items:center;
     }
     .logo img{width:100%;height:100%;object-fit:cover;display:block}
     .titleCenter{
@@ -110,13 +112,14 @@
     /* ===== Sections ===== */
     section{
       position:relative;
-      padding: clamp(84px,8vw,120px) 0;
+      padding: clamp(64px,6.5vw,96px) 0;
       overflow:hidden;
       isolation:isolate;
     }
     .dark{
-      background: radial-gradient(1200px 700px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
-                  linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
+      background:
+        radial-gradient(1200px 700px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
+        linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
       color:#eaf0f7;
     }
     .light{
@@ -151,18 +154,31 @@
     @keyframes glowDrift{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 
     /* ===== Hero ===== */
+    /* IMPORTANT: le hero “remplit” la zone sombre (plus de vide) */
     .hero{
-      min-height: 92svh;
+      min-height: calc(100svh - var(--headerH));
       display:grid;
-      align-items:center;
-      padding-top: 22px; /* desktop */
+      align-items:center;          /* centre vertical = moins de vide */
+      padding-top: 0;
+      padding-bottom: 0;
     }
+
+    /* Desktop: gauche = droite */
     .heroGrid{
       display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap: clamp(18px,4vw,44px);
-      align-items:center;
+      grid-template-columns: 1fr 1fr;  /* égal */
+      gap: 28px;
+      align-items: stretch;            /* les 2 colonnes prennent la même hauteur */
     }
+
+    /* Colonne gauche en layout vertical */
+    .leftCol{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      min-height: 100%;
+    }
+
     .kicker{
       text-transform:uppercase;
       letter-spacing:.18em;
@@ -170,43 +186,45 @@
       font-size:12px;
       color: rgba(234,240,247,.72);
       display:flex;align-items:center;gap:10px;
+      opacity:.86;
+      margin-top: 0;
     }
     .kicker:before{
       content:"";
-      width:28px;height:2px;
+      width:26px;height:2px;
       background: linear-gradient(90deg, transparent, rgba(82,172,217,.95), transparent);
       opacity:.9;
     }
     h1{
-      margin: 14px 0 0 0;
+      margin: 10px 0 0 0;
       font-weight:950;
-      letter-spacing:-.07em;
+      letter-spacing:-.06em;
       line-height:.98;
-      font-size: clamp(44px, 5.6vw, 86px);
+      font-size: clamp(46px, 4.7vw, 78px);
     }
     .accent{
       color: var(--blue);
       text-shadow: 0 18px 70px rgba(82,172,217,.20);
     }
     .sub{
-      margin: 14px 0 0 0;
+      margin: 10px 0 0 0;
       color: rgba(234,240,247,.70);
       font-weight:600;
       line-height:1.7;
-      max-width: 62ch;
+      max-width: 54ch;
     }
 
-    /* ===== Zone ===== */
+    /* ===== Zone localisation (plus large + plus “présente”) ===== */
     .cityZone{
-      margin-top: 22px;
-      width:min(560px, 100%);
-      border-radius: 22px;
-      padding: 18px;
-      background: linear-gradient(180deg, rgba(82,172,217,.18), rgba(82,172,217,.10));
-      border: 1px solid rgba(82,172,217,.28);
+      margin-top: 16px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 16px;
+      background: linear-gradient(180deg, rgba(82,172,217,.16), rgba(82,172,217,.08));
+      border: 1px solid rgba(82,172,217,.26);
       box-shadow:
-        0 30px 90px rgba(0,0,0,.65),
-        0 18px 65px rgba(82,172,217,.20),
+        0 22px 70px rgba(0,0,0,.55),
+        0 14px 40px rgba(82,172,217,.16),
         0 0 0 1px rgba(82,172,217,.08) inset;
       position:relative;
       animation: zonePulse 2.2s ease-in-out infinite;
@@ -218,8 +236,8 @@
     .cityZone:before{
       content:"";
       position:absolute; inset:-2px;
-      border-radius: 24px;
-      background: radial-gradient(420px 220px at 20% 30%, rgba(82,172,217,.35), transparent 60%);
+      border-radius: 22px;
+      background: radial-gradient(420px 220px at 20% 30%, rgba(82,172,217,.28), transparent 60%);
       opacity:.75;
       pointer-events:none;
     }
@@ -229,7 +247,7 @@
       border-radius: 16px;
       overflow:hidden;
       border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.55);
+      background: rgba(0,0,0,.42);
       backdrop-filter: blur(10px);
       display:block;
       position:relative;
@@ -252,17 +270,17 @@
       white-space:nowrap;
     }
 
-    /* ===== Bouton “Activer ma localisation” (super visible) ===== */
+    /* ===== Bouton localisation ===== */
     .locBtn{
       margin-top: 12px;
       width:100%;
       border:0;
-      border-radius: 20px;
-      padding: 18px 16px;
+      border-radius: 18px;
+      padding: 16px 16px;
       cursor:pointer;
       font-weight:980;
       letter-spacing:-.02em;
-      font-size:16px;
+      font-size:15.5px;
       color: rgba(8,10,12,.92);
       display:flex;
       align-items:center;
@@ -272,13 +290,13 @@
       overflow:hidden;
 
       background:
-        radial-gradient(900px 160px at 50% -15%, rgba(255,255,255,.60), transparent 65%),
+        radial-gradient(900px 160px at 50% -15%, rgba(255,255,255,.55), transparent 65%),
         linear-gradient(180deg, rgba(115,210,255,1), rgba(47,134,179,1));
 
       box-shadow:
-        0 34px 140px rgba(0,0,0,.72),
+        0 24px 90px rgba(0,0,0,.60),
         0 0 0 1px rgba(255,255,255,.16) inset,
-        0 18px 70px rgba(82,172,217,.25);
+        0 16px 55px rgba(82,172,217,.22);
 
       transform: translateY(0);
       transition: transform .15s ease, filter .15s ease;
@@ -287,21 +305,18 @@
     .locBtn:after{
       content:"";
       position:absolute; inset:0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.50), transparent);
       transform: translateX(-70%);
       animation: sheen 2.2s ease-in-out infinite;
-      opacity:.75;
+      opacity:.7;
     }
     @keyframes sheen{
       0%{transform:translateX(-70%);opacity:0}
-      25%{opacity:.85}
-      65%{opacity:.85}
+      25%{opacity:.8}
+      65%{opacity:.8}
       100%{transform:translateX(70%);opacity:0}
     }
-    @keyframes locPulse{
-      0%,100%{transform: translateY(0)}
-      50%{transform: translateY(-3px)}
-    }
+    @keyframes locPulse{0%,100%{transform: translateY(0)}50%{transform: translateY(-3px)}}
     .locBtn:not(.disabled){ animation: locPulse 1.35s ease-in-out infinite; }
     .locBtn:hover{ transform: translateY(-4px); filter: saturate(1.06) brightness(1.02); }
     .locBtn:active{ transform: translateY(0); }
@@ -327,7 +342,7 @@
     }
     .locIcon svg{width:18px;height:18px;opacity:.95}
 
-    /* ===== Bouton téléphone IDENTIQUE (dans la zone “suggest”) ===== */
+    /* ===== Bouton téléphone ===== */
     .callBtn{
       width:100%;
       border: 1px solid rgba(0,0,0,.10);
@@ -388,16 +403,10 @@
       65%{opacity:.85}
       100%{transform:translateX(70%);opacity:0}
     }
-    .callBtn:hover{
-      transform: translateY(-4px);
-      filter: contrast(1.08) saturate(1.02);
-    }
+    .callBtn:hover{ transform: translateY(-4px); filter: contrast(1.08) saturate(1.02); }
     .callBtn:active{transform: translateY(0)}
 
-    .callLeft{
-      display:flex; align-items:center; gap:12px;
-      min-width:0;
-    }
+    .callLeft{display:flex; align-items:center; gap:12px; min-width:0;}
     .callIcon{
       width:44px;height:44px;border-radius:14px;
       background: rgba(11,15,20,.05);
@@ -408,21 +417,11 @@
     }
     .callIcon svg{width:20px;height:20px;opacity:.95}
     .callText{min-width:0}
-    .callText b{
-      display:block;
-      font-size: 15px;
-      letter-spacing:-.02em;
-      line-height:1.1;
-    }
+    .callText b{display:block;font-size:15px;letter-spacing:-.02em;line-height:1.1;}
     .callText span{
-      display:block;
-      margin-top:4px;
-      font-size: 19px;
-      font-weight:980;
-      letter-spacing:-.03em;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      display:block;margin-top:4px;
+      font-size: 19px;font-weight:980;letter-spacing:-.03em;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
     }
     .callArrow{
       width:46px;height:46px;border-radius:16px;
@@ -435,23 +434,11 @@
     .callBtn:hover .callArrow{transform: translateX(2px)}
     .callArrow svg{width:18px;height:18px;opacity:.95}
 
-    .localLinkWrap{
-      margin-top: 10px;
-      text-align:center;
-      display:none;
-      position:relative;
-      z-index:2;
-    }
+    .localLinkWrap{margin-top: 10px;text-align:center;display:none;position:relative;z-index:2;}
     .localLink{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      font-weight:850;
-      font-size:13px;
-      color: rgba(234,240,247,.82);
-      opacity:.95;
-      padding: 10px 12px;
-      border-radius: 999px;
+      display:inline-flex;align-items:center;gap:8px;
+      font-weight:850;font-size:13px;color: rgba(234,240,247,.82);
+      opacity:.95;padding: 10px 12px;border-radius: 999px;
       background: rgba(255,255,255,.07);
       border: 1px solid rgba(255,255,255,.10);
       transition: transform .15s ease, background .15s ease;
@@ -459,35 +446,47 @@
     .localLink:hover{transform: translateY(-1px); background: rgba(82,172,217,.14)}
     .localLink svg{width:16px;height:16px;opacity:.9}
 
-    .hint{
-      margin-top: 10px;
-      color: rgba(234,240,247,.75);
-      font-weight:600;
-      line-height:1.6;
-      text-align:center;
-    }
+    .hint{margin-top: 10px;color: rgba(234,240,247,.75);font-weight:600;line-height:1.6;text-align:center;}
 
-    .chips{
-      margin-top: 14px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:center;
-    }
+    /* chips + un petit “footer” du hero pour remplir la hauteur */
+    .chips{margin-top: 14px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
     .chip{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      padding: 10px 12px;
-      border-radius: 999px;
+      display:inline-flex;gap:10px;align-items:center;
+      padding: 10px 12px;border-radius: 999px;
       background: rgba(255,255,255,.07);
       border: 1px solid rgba(255,255,255,.10);
       color: rgba(234,240,247,.84);
-      font-weight:850;
-      font-size:13px;
+      font-weight:850;font-size:13px;
     }
     .chip svg{width:16px;height:16px;opacity:.9}
 
+    .heroBottom{
+      margin-top: 18px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-start;
+      color: rgba(234,240,247,.72);
+      font-weight:700;
+      font-size:13px;
+    }
+    .hbPill{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.26);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .hbDot{
+      width:8px;height:8px;border-radius:99px;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(216,178,85,.10);
+    }
+
+    /* ===== TITRES SECTIONS ===== */
     .h2{
       margin:0;
       font-size: clamp(32px, 4vw, 52px);
@@ -499,7 +498,7 @@
     .h2 .blue{color: var(--blue)}
     .pCenter{
       margin: 12px auto 0;
-      max-width: 70ch;
+      max-width: 72ch;
       text-align:center;
       color: rgba(11,18,32,.65);
       font-weight:600;
@@ -507,57 +506,158 @@
       font-size:16px;
     }
 
-    .stepStack{margin-top: 28px; display:grid; gap:18px; max-width: 780px; margin-left:auto; margin-right:auto;}
-    .step{
-      border-radius: 26px;
+    /* ===== SIDE CARD (stretch hauteur = remplit la zone) ===== */
+    .sideCard{
+      border-radius: 22px;
+      padding: 16px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 22px 70px rgba(0,0,0,.50);
       overflow:hidden;
-      border: 1px solid rgba(11,18,32,.10);
-      box-shadow: 0 26px 90px rgba(0,0,0,.10);
-      background: #fff;
-    }
-    .stepTop{
-      height: 82px;
-      background: linear-gradient(90deg, rgba(47,134,179,1), rgba(82,172,217,1));
       position:relative;
-    }
-    .stepTop:after{
-      content:"";
-      position:absolute; left:0; right:0; bottom:-1px;
-      height: 34px;
-      background: #fff;
-      transform: skewY(-3deg);
-      transform-origin:left;
-    }
-    .stepBody{
-      padding: 18px 18px 20px;
+
       display:flex;
-      gap:14px;
-      align-items:flex-start;
+      flex-direction:column;
+      justify-content:space-between;  /* prend toute la hauteur dispo */
+      min-height: 100%;
     }
-    .num{
-      width:40px;height:40px;border-radius:999px;
-      display:grid;place-items:center;
-      background: rgba(82,172,217,.16);
-      border: 1px solid rgba(82,172,217,.35);
+    .sideCard:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(420px 220px at 30% 10%, rgba(82,172,217,.16), transparent 62%),
+        radial-gradient(420px 220px at 70% 40%, rgba(216,178,85,.08), transparent 62%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .sideInner{position:relative;z-index:2; display:flex; flex-direction:column; min-height:100%;}
+    .miniTitle{
       font-weight:950;
-      color: rgba(11,18,32,.85);
-      flex:0 0 auto;
-    }
-    .stepBody h3{
-      margin:0;
+      letter-spacing:-.04em;
       font-size:18px;
-      letter-spacing:-.03em;
-      font-weight:950;
-      color: rgba(11,18,32,.92);
+      margin:0;
     }
-    .stepBody p{
+    .miniSub{
       margin:8px 0 0 0;
-      color: rgba(11,18,32,.70);
+      color: rgba(234,240,247,.72);
       font-weight:600;
-      line-height:1.7;
+      line-height:1.65;
+      font-size:14px;
+      max-width: 46ch;
     }
 
-    .rows{margin-top:24px; display:grid; gap:12px; max-width: 860px; margin-left:auto; margin-right:auto;}
+    .trustList{
+      margin-top: 14px;
+      display:grid;
+      gap:10px;
+    }
+    .trustItem{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding: 12px 12px;
+      border-radius: 16px;
+      background: rgba(0,0,0,.28);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .trustIcon{
+      width:34px;height:34px;border-radius:12px;
+      display:grid;place-items:center;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      flex:0 0 auto;
+    }
+    .trustIcon svg{width:18px;height:18px}
+    .trustIcon path{stroke: rgba(234,240,247,.92)}
+    .trustText b{
+      display:block;
+      font-weight:950;
+      letter-spacing:-.02em;
+      font-size:14px;
+    }
+    .trustText span{
+      display:block;
+      margin-top:4px;
+      color: rgba(234,240,247,.72);
+      font-weight:650;
+      line-height:1.45;
+      font-size:13px;
+    }
+
+    .miniRule{
+      margin-top: auto;         /* pousse en bas = “remplit” la hauteur */
+      border-radius: 16px;
+      padding: 12px 12px;
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(234,240,247,.78);
+      font-weight:650;
+      line-height:1.55;
+      font-size:12.5px;
+    }
+    .goldDot{
+      display:inline-block;
+      width:8px;height:8px;border-radius:99px;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(216,178,85,.10);
+      transform: translateY(-1px);
+      margin-right:8px;
+    }
+
+    /* ===== Comment ça marche (timeline premium) ===== */
+    .timeline{
+      margin-top: 28px;
+      max-width: 980px;
+      margin-left:auto;
+      margin-right:auto;
+      position:relative;
+    }
+    .timelineLine{
+      position:absolute;
+      left: 24px;
+      right: 24px;
+      top: 26px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(47,134,179,.18), rgba(47,134,179,.55), rgba(47,134,179,.18));
+      border-radius: 999px;
+    }
+    .tGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      position:relative;
+    }
+    .tStep{
+      border-radius: 22px;
+      padding: 16px 16px 18px;
+      background: #fff;
+      border: 1px solid rgba(11,18,32,.10);
+      box-shadow: 0 22px 70px rgba(0,0,0,.10);
+      overflow:hidden;
+      position:relative;
+    }
+    .tTop{display:flex;align-items:center;gap:10px;margin-bottom: 10px;}
+    .tDot{
+      width:14px;height:14px;border-radius:999px;
+      background: var(--blue);
+      box-shadow: 0 0 0 6px rgba(82,172,217,.14);
+      flex:0 0 auto;
+      border: 1px solid rgba(47,134,179,.30);
+    }
+    .tNum{font-weight:950;letter-spacing:-.03em;color: rgba(11,18,32,.80);}
+    .tStep h3{margin:0;font-size:18px;letter-spacing:-.03em;font-weight:950;color: rgba(11,18,32,.92);}
+    .tStep p{margin:8px 0 0 0;color: rgba(11,18,32,.70);font-weight:600;line-height:1.7;}
+    .tAccent{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(500px 160px at 20% -10%, rgba(82,172,217,.10), transparent 60%),
+        radial-gradient(500px 160px at 80% 10%, rgba(216,178,85,.08), transparent 62%);
+      opacity:.9;
+      pointer-events:none;
+    }
+
+    /* ===== Problèmes fréquents ===== */
+    .rows{margin-top:24px; display:grid; gap:12px; max-width: 920px; margin-left:auto; margin-right:auto;}
     .row{
       display:flex;justify-content:space-between;align-items:center;gap:14px;
       padding: 16px 16px;
@@ -571,33 +671,31 @@
 
     /* ===== Responsive ===== */
     @media (max-width: 980px){
-      .heroGrid{grid-template-columns:1fr}
+      :root{ --headerH: 58px; }
+      section{ padding: 64px 0; }
+
+      .hero{
+        min-height: 0;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        align-items: start;
+      }
+      .heroGrid{
+        grid-template-columns:1fr;
+        gap: 18px;
+        align-items: start;
+      }
       h1,.sub{text-align:center}
       .kicker{justify-content:center}
       .cityZone{margin-left:auto;margin-right:auto}
+      .timelineLine{display:none;}
+      .tGrid{grid-template-columns:1fr;gap:12px;}
+      .heroBottom{justify-content:center}
     }
 
-    /* ===== MOBILE FIX: réduire l’espace entre header et “Plomberie d’urgence” ===== */
-    @media (max-width: 980px){
-      section{ padding: 64px 0; }  /* moins haut que 84px+ */
-      .hero{ padding-top: 6px; }  /* réduit l’espace sous le header sticky */
-      .kicker{ margin-top: 0; }
-    }
     @media (max-width: 420px){
       section{ padding: 56px 0; }
       .hero{ padding-top: 2px; }
-    }
-
-    /* ===== DESKTOP FIX (GROS ÉCRAN) : MONTE LE CONTENU, RIEN D’AUTRE ===== */
-    @media (min-width: 981px){
-      body > section.dark:first-of-type{
-        padding-top: 54px;     /* AVANT: clamp(84px...) -> trop de vide */
-        padding-bottom: 110px; /* garde du souffle en bas */
-      }
-      body > section.dark:first-of-type .hero{
-        padding-top: 0;        /* enlève le 22px du hero */
-        min-height: 88svh;     /* remplit mieux la zone sombre sans trop de vide */
-      }
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -642,13 +740,14 @@
 
     <div class="wrap hero">
       <div class="heroGrid">
-        <div>
+
+        <!-- GAUCHE -->
+        <div class="leftCol">
           <div class="kicker">Plomberie d’urgence</div>
           <h1>Trouve un plombier <span class="accent">dans ta ville</span>.</h1>
           <p class="sub">Active ta localisation, puis appelle immédiatement le bon numéro.</p>
 
           <div class="cityZone">
-            <!-- ZONE QUI SE TRANSFORME -->
             <div id="switchZone" class="suggest" role="status" aria-live="polite">
               <div class="sItem">
                 <div id="statusLine">Ville détectée (après activation)</div>
@@ -656,7 +755,6 @@
               </div>
             </div>
 
-            <!-- Bouton visible -->
             <button id="locBtn" class="locBtn" type="button">
               <span class="locIcon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none">
@@ -698,9 +796,68 @@
               </span>
             </div>
           </div>
+
+          <!-- petit remplissage de hauteur (visuellement ça “occupe” la zone sombre) -->
+          <div class="heroBottom" aria-label="Infos rapides">
+            <span class="hbPill"><span class="hbDot"></span>Localisation seulement après ton clic</span>
+            <span class="hbPill">Appel direct (pas de formulaire)</span>
+          </div>
         </div>
 
-        <div></div>
+        <!-- DROITE -->
+        <aside class="sideCard" aria-label="Infos confiance">
+          <div class="sideInner">
+            <div>
+              <p class="miniTitle">Service simple, sans détour</p>
+              <p class="miniSub">Tu actives la localisation (si tu veux), on affiche la bonne option, et tu appelles.</p>
+
+              <div class="trustList" aria-label="Points de confiance">
+                <div class="trustItem">
+                  <span class="trustIcon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M20 6L9 17l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <div class="trustText">
+                    <b>Action immédiate</b>
+                    <span>Pas de formulaire. Tu passes directement à l’appel.</span>
+                  </div>
+                </div>
+
+                <div class="trustItem">
+                  <span class="trustIcon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke-width="2"/>
+                      <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" stroke-width="2"/>
+                    </svg>
+                  </span>
+                  <div class="trustText">
+                    <b>Localisation après ton clic</b>
+                    <span>Aucune demande automatique. C’est toi qui déclenche.</span>
+                  </div>
+                </div>
+
+                <div class="trustItem">
+                  <span class="trustIcon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke-width="2"/>
+                    </svg>
+                  </span>
+                  <div class="trustText">
+                    <b>Service indépendant</b>
+                    <span>Tu payes directement le professionnel (pas le site).</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="miniRule">
+              <span class="goldDot"></span>
+              <b style="font-weight:900">Important</b> : nous n’effectuons aucune réparation et ne facturons aucun travail.
+            </div>
+          </div>
+        </aside>
+
       </div>
     </div>
   </section>
@@ -709,39 +866,40 @@
   <section class="light">
     <div class="wrap">
       <h2 class="h2">Comment ça <span class="blue">marche</span></h2>
-      <p class="pCenter">1) Tu actives ta localisation. 2) On détecte ta ville. 3) Tu appelles.</p>
+      <p class="pCenter">3 étapes. Zéro blabla. Juste l’action.</p>
 
-      <div class="stepStack" aria-label="Étapes">
-        <div class="step">
-          <div class="stepTop"></div>
-          <div class="stepBody">
-            <div class="num">1</div>
-            <div>
-              <h3>Activer</h3>
-              <p>La localisation est demandée seulement après ton clic.</p>
+      <div class="timeline" aria-label="Étapes">
+        <div class="timelineLine" aria-hidden="true"></div>
+
+        <div class="tGrid">
+          <div class="tStep">
+            <div class="tAccent" aria-hidden="true"></div>
+            <div class="tTop">
+              <span class="tDot" aria-hidden="true"></span>
+              <span class="tNum">01</span>
             </div>
+            <h3>Autorise la localisation</h3>
+            <p>Uniquement après ton clic. Aucun tracking automatique.</p>
           </div>
-        </div>
 
-        <div class="step">
-          <div class="stepTop"></div>
-          <div class="stepBody">
-            <div class="num">2</div>
-            <div>
-              <h3>Détection</h3>
-              <p>On détecte ta ville et on choisit le bon numéro.</p>
+          <div class="tStep">
+            <div class="tAccent" aria-hidden="true"></div>
+            <div class="tTop">
+              <span class="tDot" aria-hidden="true"></span>
+              <span class="tNum">02</span>
             </div>
+            <h3>On détecte ta ville</h3>
+            <p>On choisit le numéro qui correspond (ou un numéro général).</p>
           </div>
-        </div>
 
-        <div class="step">
-          <div class="stepTop"></div>
-          <div class="stepBody">
-            <div class="num">3</div>
-            <div>
-              <h3>Appeler</h3>
-              <p>Appel immédiat.</p>
+          <div class="tStep">
+            <div class="tAccent" aria-hidden="true"></div>
+            <div class="tTop">
+              <span class="tDot" aria-hidden="true"></span>
+              <span class="tNum">03</span>
             </div>
+            <h3>Tu appelles</h3>
+            <p>Appel immédiat. Si Trois-Rivières : lien vers la page locale.</p>
           </div>
         </div>
       </div>
@@ -870,7 +1028,6 @@
         cityNorm.includes("trois rivieres") ||
         cityNorm.includes("trois-rivieres");
 
-      // cache le bouton de localisation
       locBtn.style.display = "none";
 
       if(isTrois){
