@@ -43,11 +43,12 @@
       --max:1120px;
       --r:26px;
 
-      /* bouton phone */
       --btnTop:#ffffff;
       --btnMid:#fbfbfd;
       --btnBot:#eeeeF2;
       --btnInk:#0b0f14;
+
+      --headerH: 58px; /* approx. hauteur topbar (sert au hero) */
     }
 
     *{box-sizing:border-box}
@@ -111,7 +112,7 @@
     /* ===== Sections ===== */
     section{
       position:relative;
-      padding: clamp(72px,7vw,108px) 0;
+      padding: clamp(64px,6.5vw,96px) 0;
       overflow:hidden;
       isolation:isolate;
     }
@@ -153,19 +154,31 @@
     @keyframes glowDrift{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 
     /* ===== Hero ===== */
+    /* IMPORTANT: le hero “remplit” la zone sombre (plus de vide) */
     .hero{
-      min-height: 78svh; /* moins de vide */
+      min-height: calc(100svh - var(--headerH));
       display:grid;
-      align-items:center;
-      padding-top: 18px;
-      padding-bottom: 18px;
+      align-items:center;          /* centre vertical = moins de vide */
+      padding-top: 0;
+      padding-bottom: 0;
     }
+
+    /* Desktop: gauche = droite */
     .heroGrid{
       display:grid;
-      grid-template-columns: 1.18fr .82fr;
-      gap: 32px;
-      align-items:center;
+      grid-template-columns: 1fr 1fr;  /* égal */
+      gap: 28px;
+      align-items: stretch;            /* les 2 colonnes prennent la même hauteur */
     }
+
+    /* Colonne gauche en layout vertical */
+    .leftCol{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      min-height: 100%;
+    }
+
     .kicker{
       text-transform:uppercase;
       letter-spacing:.18em;
@@ -174,6 +187,7 @@
       color: rgba(234,240,247,.72);
       display:flex;align-items:center;gap:10px;
       opacity:.86;
+      margin-top: 0;
     }
     .kicker:before{
       content:"";
@@ -182,28 +196,28 @@
       opacity:.9;
     }
     h1{
-      margin: 14px 0 0 0;
+      margin: 10px 0 0 0;
       font-weight:950;
       letter-spacing:-.06em;
       line-height:.98;
-      font-size: clamp(46px, 4.6vw, 76px);
+      font-size: clamp(46px, 4.7vw, 78px);
     }
     .accent{
       color: var(--blue);
       text-shadow: 0 18px 70px rgba(82,172,217,.20);
     }
     .sub{
-      margin: 12px 0 0 0;
+      margin: 10px 0 0 0;
       color: rgba(234,240,247,.70);
       font-weight:600;
       line-height:1.7;
       max-width: 54ch;
     }
 
-    /* ===== Zone ===== */
+    /* ===== Zone localisation (plus large + plus “présente”) ===== */
     .cityZone{
-      margin-top: 16px; /* remonte le CTA */
-      width:min(600px, 100%);
+      margin-top: 16px;
+      width: 100%;
       border-radius: 20px;
       padding: 16px;
       background: linear-gradient(180deg, rgba(82,172,217,.16), rgba(82,172,217,.08));
@@ -434,6 +448,7 @@
 
     .hint{margin-top: 10px;color: rgba(234,240,247,.75);font-weight:600;line-height:1.6;text-align:center;}
 
+    /* chips + un petit “footer” du hero pour remplir la hauteur */
     .chips{margin-top: 14px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
     .chip{
       display:inline-flex;gap:10px;align-items:center;
@@ -444,6 +459,32 @@
       font-weight:850;font-size:13px;
     }
     .chip svg{width:16px;height:16px;opacity:.9}
+
+    .heroBottom{
+      margin-top: 18px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-start;
+      color: rgba(234,240,247,.72);
+      font-weight:700;
+      font-size:13px;
+    }
+    .hbPill{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.26);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .hbDot{
+      width:8px;height:8px;border-radius:99px;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(216,178,85,.10);
+    }
 
     /* ===== TITRES SECTIONS ===== */
     .h2{
@@ -465,7 +506,7 @@
       font-size:16px;
     }
 
-    /* ===== SIDE CARD (refait: pas d'emoji, plus trust) ===== */
+    /* ===== SIDE CARD (stretch hauteur = remplit la zone) ===== */
     .sideCard{
       border-radius: 22px;
       padding: 16px;
@@ -474,6 +515,11 @@
       box-shadow: 0 22px 70px rgba(0,0,0,.50);
       overflow:hidden;
       position:relative;
+
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;  /* prend toute la hauteur dispo */
+      min-height: 100%;
     }
     .sideCard:before{
       content:"";
@@ -484,7 +530,7 @@
       pointer-events:none;
       opacity:.9;
     }
-    .sideInner{position:relative;z-index:2}
+    .sideInner{position:relative;z-index:2; display:flex; flex-direction:column; min-height:100%;}
     .miniTitle{
       font-weight:950;
       letter-spacing:-.04em;
@@ -539,7 +585,7 @@
     }
 
     .miniRule{
-      margin-top: 12px;
+      margin-top: auto;         /* pousse en bas = “remplit” la hauteur */
       border-radius: 16px;
       padding: 12px 12px;
       background: rgba(0,0,0,.22);
@@ -590,12 +636,7 @@
       overflow:hidden;
       position:relative;
     }
-    .tTop{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom: 10px;
-    }
+    .tTop{display:flex;align-items:center;gap:10px;margin-bottom: 10px;}
     .tDot{
       width:14px;height:14px;border-radius:999px;
       background: var(--blue);
@@ -603,24 +644,9 @@
       flex:0 0 auto;
       border: 1px solid rgba(47,134,179,.30);
     }
-    .tNum{
-      font-weight:950;
-      letter-spacing:-.03em;
-      color: rgba(11,18,32,.80);
-    }
-    .tStep h3{
-      margin:0;
-      font-size:18px;
-      letter-spacing:-.03em;
-      font-weight:950;
-      color: rgba(11,18,32,.92);
-    }
-    .tStep p{
-      margin:8px 0 0 0;
-      color: rgba(11,18,32,.70);
-      font-weight:600;
-      line-height:1.7;
-    }
+    .tNum{font-weight:950;letter-spacing:-.03em;color: rgba(11,18,32,.80);}
+    .tStep h3{margin:0;font-size:18px;letter-spacing:-.03em;font-weight:950;color: rgba(11,18,32,.92);}
+    .tStep p{margin:8px 0 0 0;color: rgba(11,18,32,.70);font-weight:600;line-height:1.7;}
     .tAccent{
       position:absolute; inset:0;
       background:
@@ -645,20 +671,28 @@
 
     /* ===== Responsive ===== */
     @media (max-width: 980px){
-      .heroGrid{grid-template-columns:1fr;gap: 18px;}
+      :root{ --headerH: 58px; }
+      section{ padding: 64px 0; }
+
+      .hero{
+        min-height: 0;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        align-items: start;
+      }
+      .heroGrid{
+        grid-template-columns:1fr;
+        gap: 18px;
+        align-items: start;
+      }
       h1,.sub{text-align:center}
       .kicker{justify-content:center}
       .cityZone{margin-left:auto;margin-right:auto}
       .timelineLine{display:none;}
       .tGrid{grid-template-columns:1fr;gap:12px;}
+      .heroBottom{justify-content:center}
     }
 
-    /* Mobile fix */
-    @media (max-width: 980px){
-      section{ padding: 64px 0; }
-      .hero{ min-height: 0; padding-top: 6px; padding-bottom: 6px; }
-      .kicker{ margin-top: 0; }
-    }
     @media (max-width: 420px){
       section{ padding: 56px 0; }
       .hero{ padding-top: 2px; }
@@ -708,7 +742,7 @@
       <div class="heroGrid">
 
         <!-- GAUCHE -->
-        <div>
+        <div class="leftCol">
           <div class="kicker">Plomberie d’urgence</div>
           <h1>Trouve un plombier <span class="accent">dans ta ville</span>.</h1>
           <p class="sub">Active ta localisation, puis appelle immédiatement le bon numéro.</p>
@@ -762,49 +796,57 @@
               </span>
             </div>
           </div>
+
+          <!-- petit remplissage de hauteur (visuellement ça “occupe” la zone sombre) -->
+          <div class="heroBottom" aria-label="Infos rapides">
+            <span class="hbPill"><span class="hbDot"></span>Localisation seulement après ton clic</span>
+            <span class="hbPill">Appel direct (pas de formulaire)</span>
+          </div>
         </div>
 
-        <!-- DROITE (trust, pas "gadget") -->
+        <!-- DROITE -->
         <aside class="sideCard" aria-label="Infos confiance">
           <div class="sideInner">
-            <p class="miniTitle">Service simple, sans détour</p>
-            <p class="miniSub">Tu actives la localisation (si tu veux), on affiche la bonne option, et tu appelles.</p>
+            <div>
+              <p class="miniTitle">Service simple, sans détour</p>
+              <p class="miniSub">Tu actives la localisation (si tu veux), on affiche la bonne option, et tu appelles.</p>
 
-            <div class="trustList" aria-label="Points de confiance">
-              <div class="trustItem">
-                <span class="trustIcon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M20 6L9 17l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
-                <div class="trustText">
-                  <b>Action immédiate</b>
-                  <span>Pas de formulaire. Tu passes directement à l’appel.</span>
+              <div class="trustList" aria-label="Points de confiance">
+                <div class="trustItem">
+                  <span class="trustIcon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M20 6L9 17l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <div class="trustText">
+                    <b>Action immédiate</b>
+                    <span>Pas de formulaire. Tu passes directement à l’appel.</span>
+                  </div>
                 </div>
-              </div>
 
-              <div class="trustItem">
-                <span class="trustIcon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke-width="2"/>
-                    <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" stroke-width="2"/>
-                  </svg>
-                </span>
-                <div class="trustText">
-                  <b>Localisation après ton clic</b>
-                  <span>Aucune demande automatique. C’est toi qui déclenche.</span>
+                <div class="trustItem">
+                  <span class="trustIcon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke-width="2"/>
+                      <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" stroke-width="2"/>
+                    </svg>
+                  </span>
+                  <div class="trustText">
+                    <b>Localisation après ton clic</b>
+                    <span>Aucune demande automatique. C’est toi qui déclenche.</span>
+                  </div>
                 </div>
-              </div>
 
-              <div class="trustItem">
-                <span class="trustIcon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke-width="2"/>
-                  </svg>
-                </span>
-                <div class="trustText">
-                  <b>Service indépendant</b>
-                  <span>Tu payes directement le professionnel (pas le site).</span>
+                <div class="trustItem">
+                  <span class="trustIcon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke-width="2"/>
+                    </svg>
+                  </span>
+                  <div class="trustText">
+                    <b>Service indépendant</b>
+                    <span>Tu payes directement le professionnel (pas le site).</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1074,6 +1116,4 @@
   </script>
 </body>
 </html>
-
-
 
