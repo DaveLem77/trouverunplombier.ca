@@ -3,14 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>Trouver un plombier d’urgence dans votre ville | TrouverUnPlombier.ca</title>
-  <meta name="description" content="Trouver rapidement un plombier d’urgence dans votre ville. Localisation uniquement après votre clic, puis appel immédiat. Service indépendant de mise en relation." />
-
-  <!-- SEO -->
-  <link rel="canonical" href="https://trouverunplombier.ca/">
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="theme-color" content="#07090c">
+  <title>Trouver un plombier d’urgence | TrouverUnPlombier.ca</title>
+  <meta name="description" content="Service indépendant de mise en relation avec des plombiers locaux. Urgence 24/7 selon disponibilité.">
 
   <!-- FAVICON -->
   <link rel="icon" type="image/png" href="media/logob.png">
@@ -18,43 +12,21 @@
 
   <!-- PARTAGE -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Trouver un plombier d’urgence dans votre ville | TrouverUnPlombier.ca">
-  <meta property="og:description" content="Localisation uniquement après votre clic, puis appel immédiat. Service indépendant de mise en relation.">
+  <meta property="og:title" content="Trouver un plombier d’urgence | TrouverUnPlombier.ca">
+  <meta property="og:description" content="Service indépendant de mise en relation avec des plombiers locaux. Urgence 24/7 selon disponibilité.">
   <meta property="og:image" content="https://trouverunplombier.ca/media/share.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:url" content="https://trouverunplombier.ca/">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Trouver un plombier d’urgence dans votre ville | TrouverUnPlombier.ca">
-  <meta name="twitter:description" content="Localisation uniquement après votre clic, puis appel immédiat. Service indépendant de mise en relation.">
+  <meta name="twitter:title" content="Trouver un plombier d’urgence | TrouverUnPlombier.ca">
+  <meta name="twitter:description" content="Service indépendant de mise en relation avec des plombiers locaux. Urgence 24/7 selon disponibilité.">
   <meta name="twitter:image" content="https://trouverunplombier.ca/media/share.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebSite",
-    "name":"TrouverUnPlombier.ca",
-    "url":"https://trouverunplombier.ca/",
-    "inLanguage":"fr-CA"
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Organization",
-    "name":"TrouverUnPlombier.ca",
-    "url":"https://trouverunplombier.ca/",
-    "logo":"https://trouverunplombier.ca/media/logob.png",
-    "description":"Service indépendant de mise en relation pour trouver un plombier d’urgence local. Localisation uniquement après clic, puis appel immédiat."
-  }
-  </script>
 
   <style>
     :root{
@@ -62,14 +34,13 @@
       --blue2:#2f86b3;
       --gold:#d8b255;
 
-      --bg0:#05070a;
-      --bg1:#07090c;
-      --bg2:#0b0f14;
+      --dark:#07090c;
+      --dark2:#0b0f14;
 
       --paper:#f6f8fb;
       --ink:#0b1220;
 
-      --max:1160px;
+      --max:1120px;
       --r:26px;
 
       --btnTop:#ffffff;
@@ -77,10 +48,7 @@
       --btnBot:#eeeeF2;
       --btnInk:#0b0f14;
 
-      --hair: rgba(255,255,255,.10);
-      --glass: rgba(255,255,255,.06);
-      --glass2: rgba(255,255,255,.04);
-      --shadow: 0 26px 80px rgba(0,0,0,.60);
+      --headerH: 58px; /* approx. hauteur topbar (sert au hero) */
     }
 
     *{box-sizing:border-box}
@@ -88,22 +56,20 @@
     body{
       margin:0;
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background: radial-gradient(1000px 520px at 18% 15%, rgba(82,172,217,.18), transparent 60%),
-                  radial-gradient(820px 520px at 78% 30%, rgba(255,255,255,.06), transparent 62%),
-                  linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 30%, var(--bg2) 100%);
+      background: var(--dark);
       color:#eaf0f7;
       overflow-x:hidden;
     }
     a{color:inherit;text-decoration:none}
     button{font-family:inherit}
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(18px,4vw,44px);}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(18px,4vw,44px);position:relative;z-index:2}
 
     /* ===== Header ===== */
     .topbar{
       position:sticky; top:0; z-index:50;
       background: rgba(0,0,0,.55);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--hair);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,.10);
     }
     .topbar .inner{
       display:grid;
@@ -112,16 +78,18 @@
       padding: 12px 0;
       gap:12px;
     }
+    .top-left{display:flex;align-items:center;gap:10px;min-width:0}
     .logo{
-      width:32px;height:32px;border-radius:12px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      overflow:hidden;
+      width:30px;height:30px;border-radius:10px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      overflow:hidden; flex:0 0 auto;
+      display:grid;place-items:center;
     }
     .logo img{width:100%;height:100%;object-fit:cover;display:block}
     .titleCenter{
       text-align:center;
-      font-weight:950;
+      font-weight:900;
       letter-spacing:-.03em;
       font-size:15px;
       opacity:.95;
@@ -142,60 +110,84 @@
     .score span{opacity:.7}
 
     /* ===== Sections ===== */
-    section{padding: 34px 0 70px;}
-
-    /* ===== HERO SHELL ===== */
-    .heroShell{
-      margin-top: 18px; /* MOINS d'espace en haut */
-      border-radius: 30px;
-      border: 1px solid rgba(255,255,255,.12);
-      background:
-        radial-gradient(900px 360px at 22% 10%, rgba(82,172,217,.12), transparent 62%),
-        radial-gradient(900px 360px at 78% 30%, rgba(255,255,255,.06), transparent 64%),
-        linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.03) 100%);
-      box-shadow: var(--shadow);
+    section{
+      position:relative;
+      padding: clamp(64px,6.5vw,96px) 0;
       overflow:hidden;
-      position:relative;
+      isolation:isolate;
     }
-    .heroShell:before{
-      content:"";
-      position:absolute; inset:0;
+    .dark{
       background:
-        radial-gradient(1px 1px at 12% 20%, rgba(255,255,255,.28), transparent 44%),
-        radial-gradient(1px 1px at 70% 30%, rgba(255,255,255,.18), transparent 44%),
-        radial-gradient(1px 1px at 80% 70%, rgba(255,255,255,.14), transparent 44%),
-        radial-gradient(1px 1px at 30% 75%, rgba(255,255,255,.12), transparent 44%),
-        radial-gradient(1px 1px at 48% 44%, rgba(255,255,255,.12), transparent 44%);
-      opacity:.35;
+        radial-gradient(1200px 700px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
+        linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
+      color:#eaf0f7;
+    }
+    .light{
+      background: linear-gradient(180deg, #ffffff 0%, var(--paper) 100%);
+      color: var(--ink);
+    }
+
+    /* dust + glow */
+    .dust{
+      position:absolute; inset:-40px;
       pointer-events:none;
+      opacity:.25;
+      background:
+        radial-gradient(2px 2px at 12% 20%, rgba(255,255,255,.35) 40%, transparent 42%),
+        radial-gradient(2px 2px at 70% 30%, rgba(255,255,255,.18) 40%, transparent 42%),
+        radial-gradient(2px 2px at 80% 70%, rgba(255,255,255,.14) 40%, transparent 42%),
+        radial-gradient(2px 2px at 30% 75%, rgba(255,255,255,.12) 40%, transparent 42%),
+        radial-gradient(2px 2px at 48% 44%, rgba(255,255,255,.12) 40%, transparent 42%);
+      animation: dustMove 10s ease-in-out infinite;
     }
+    @keyframes dustMove{0%,100%{transform:translateY(0)}50%{transform:translateY(16px)}}
 
-    .heroGrid{
-      position:relative;
-      z-index:2;
+    .glow{
+      position:absolute; inset:-80px;
+      pointer-events:none;
+      background:
+        radial-gradient(700px 420px at 20% 20%, rgba(82,172,217,.20), transparent 60%),
+        radial-gradient(620px 420px at 80% 40%, rgba(82,172,217,.14), transparent 62%);
+      opacity:.9;
+      animation: glowDrift 9s ease-in-out infinite;
+    }
+    @keyframes glowDrift{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+    /* ===== Hero ===== */
+    /* IMPORTANT: le hero “remplit” la zone sombre (plus de vide) */
+    .hero{
+      min-height: calc(100svh - var(--headerH));
       display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap:0;
-      align-items:stretch; /* les deux côtés ont la même hauteur */
+      align-items:center;          /* centre vertical = moins de vide */
+      padding-top: 0;
+      padding-bottom: 0;
     }
 
-    .pane{
-      padding: clamp(18px, 2.6vw, 28px);
-    }
-    .paneRight{
-      border-left: 1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.04) 100%);
+    /* Desktop: gauche = droite */
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;  /* égal */
+      gap: 28px;
+      align-items: stretch;            /* les 2 colonnes prennent la même hauteur */
     }
 
-    /* ===== Left ===== */
+    /* Colonne gauche en layout vertical */
+    .leftCol{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      min-height: 100%;
+    }
+
     .kicker{
       text-transform:uppercase;
       letter-spacing:.18em;
       font-weight:900;
       font-size:12px;
-      color: rgba(234,240,247,.70);
+      color: rgba(234,240,247,.72);
       display:flex;align-items:center;gap:10px;
-      margin:0;
+      opacity:.86;
+      margin-top: 0;
     }
     .kicker:before{
       content:"";
@@ -204,40 +196,62 @@
       opacity:.9;
     }
     h1{
-      margin: 12px 0 0 0;
+      margin: 10px 0 0 0;
       font-weight:950;
       letter-spacing:-.06em;
       line-height:.98;
-      font-size: clamp(46px, 4.6vw, 78px);
+      font-size: clamp(46px, 4.7vw, 78px);
     }
     .accent{
       color: var(--blue);
-      text-shadow: 0 16px 60px rgba(82,172,217,.20);
+      text-shadow: 0 18px 70px rgba(82,172,217,.20);
     }
     .sub{
       margin: 10px 0 0 0;
-      color: rgba(234,240,247,.72);
-      font-weight:650;
-      line-height:1.65;
-      max-width: 60ch;
-      font-size: 15.5px;
+      color: rgba(234,240,247,.70);
+      font-weight:600;
+      line-height:1.7;
+      max-width: 54ch;
     }
 
-    /* ===== Zone localisation (plus clean / moins “gros bloc”) ===== */
+    /* ===== Zone localisation (plus large + plus “présente”) ===== */
     .cityZone{
       margin-top: 16px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 16px;
+      background: linear-gradient(180deg, rgba(82,172,217,.16), rgba(82,172,217,.08));
+      border: 1px solid rgba(82,172,217,.26);
+      box-shadow:
+        0 22px 70px rgba(0,0,0,.55),
+        0 14px 40px rgba(82,172,217,.16),
+        0 0 0 1px rgba(82,172,217,.08) inset;
+      position:relative;
+      animation: zonePulse 2.2s ease-in-out infinite;
+    }
+    @keyframes zonePulse{
+      0%,100%{transform:translateY(0); filter:saturate(1)}
+      50%{transform:translateY(-2px); filter:saturate(1.05)}
+    }
+    .cityZone:before{
+      content:"";
+      position:absolute; inset:-2px;
       border-radius: 22px;
-      padding: 14px;
-      background: linear-gradient(180deg, rgba(0,0,0,.26), rgba(0,0,0,.18));
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: 0 18px 60px rgba(0,0,0,.45);
+      background: radial-gradient(420px 220px at 20% 30%, rgba(82,172,217,.28), transparent 60%);
+      opacity:.75;
+      pointer-events:none;
     }
 
     .suggest{
+      margin-top: 2px;
       border-radius: 16px;
       overflow:hidden;
       border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
+      background: rgba(0,0,0,.42);
+      backdrop-filter: blur(10px);
+      display:block;
+      position:relative;
+      z-index:2;
     }
     .sItem{
       padding: 12px 14px;
@@ -245,15 +259,18 @@
       justify-content:space-between;
       align-items:center;
       gap:12px;
+      border-top:1px solid rgba(255,255,255,.08);
       font-weight:900;
     }
+    .sItem:first-child{border-top:0}
     .sMeta{
       font-size:12px;
       font-weight:800;
-      opacity:.70;
+      opacity:.75;
       white-space:nowrap;
     }
 
+    /* ===== Bouton localisation ===== */
     .locBtn{
       margin-top: 12px;
       width:100%;
@@ -263,7 +280,7 @@
       cursor:pointer;
       font-weight:980;
       letter-spacing:-.02em;
-      font-size:16px;
+      font-size:15.5px;
       color: rgba(8,10,12,.92);
       display:flex;
       align-items:center;
@@ -277,21 +294,43 @@
         linear-gradient(180deg, rgba(115,210,255,1), rgba(47,134,179,1));
 
       box-shadow:
-        0 20px 60px rgba(0,0,0,.50),
-        0 0 0 1px rgba(255,255,255,.14) inset;
+        0 24px 90px rgba(0,0,0,.60),
+        0 0 0 1px rgba(255,255,255,.16) inset,
+        0 16px 55px rgba(82,172,217,.22);
+
+      transform: translateY(0);
       transition: transform .15s ease, filter .15s ease;
+      z-index:2;
     }
-    .locBtn:hover{ transform: translateY(-2px); filter:saturate(1.05) brightness(1.02); }
+    .locBtn:after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.50), transparent);
+      transform: translateX(-70%);
+      animation: sheen 2.2s ease-in-out infinite;
+      opacity:.7;
+    }
+    @keyframes sheen{
+      0%{transform:translateX(-70%);opacity:0}
+      25%{opacity:.8}
+      65%{opacity:.8}
+      100%{transform:translateX(70%);opacity:0}
+    }
+    @keyframes locPulse{0%,100%{transform: translateY(0)}50%{transform: translateY(-3px)}}
+    .locBtn:not(.disabled){ animation: locPulse 1.35s ease-in-out infinite; }
+    .locBtn:hover{ transform: translateY(-4px); filter: saturate(1.06) brightness(1.02); }
     .locBtn:active{ transform: translateY(0); }
 
     .locBtn.disabled{
       cursor:not-allowed;
-      opacity:.92;
-      background: rgba(255,255,255,.08);
-      color: rgba(255,255,255,.78);
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: 0 16px 48px rgba(0,0,0,.28);
+      opacity:.95;
+      background: rgba(255,255,255,.10);
+      color: rgba(255,255,255,.80);
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 22px 70px rgba(0,0,0,.35);
+      animation:none;
     }
+    .locBtn.disabled:after{display:none}
 
     .locIcon{
       width:22px;height:22px;
@@ -299,40 +338,11 @@
       border-radius: 12px;
       background: rgba(11,15,20,.06);
       border:1px solid rgba(11,15,20,.10);
+      box-shadow: 0 16px 40px rgba(0,0,0,.06) inset;
     }
     .locIcon svg{width:18px;height:18px;opacity:.95}
 
-    .hint{
-      margin-top: 10px;
-      color: rgba(234,240,247,.72);
-      font-weight:600;
-      line-height:1.55;
-      text-align:center;
-      font-size: 13px;
-    }
-
-    .chips{
-      margin-top: 12px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:center;
-    }
-    .chip{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      padding: 9px 11px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.10);
-      color: rgba(234,240,247,.84);
-      font-weight:850;
-      font-size:13px;
-    }
-    .chip svg{width:16px;height:16px;opacity:.9}
-
-    /* ===== Call button (identique style) ===== */
+    /* ===== Bouton téléphone ===== */
     .callBtn{
       width:100%;
       border: 1px solid rgba(0,0,0,.10);
@@ -355,11 +365,45 @@
       overflow:hidden;
 
       box-shadow:
-        0 24px 90px rgba(0,0,0,.55),
-        0 0 0 1px rgba(255,255,255,.75) inset;
+        0 34px 140px rgba(0,0,0,.72),
+        0 0 0 1px rgba(255,255,255,.75) inset,
+        0 18px 60px rgba(255,255,255,.12);
+
+      animation: callPulse 1.25s ease-in-out infinite;
+      transform: translateY(0);
       transition: transform .15s ease, filter .15s ease;
     }
-    .callBtn:hover{ transform: translateY(-2px); filter: contrast(1.06) saturate(1.02); }
+    @keyframes callPulse{
+      0%,100%{
+        transform: translateY(0);
+        box-shadow:
+          0 34px 140px rgba(0,0,0,.72),
+          0 0 0 1px rgba(255,255,255,.75) inset,
+          0 18px 60px rgba(255,255,255,.12);
+      }
+      50%{
+        transform: translateY(-4px);
+        box-shadow:
+          0 46px 170px rgba(0,0,0,.78),
+          0 0 0 1px rgba(255,255,255,.85) inset,
+          0 26px 80px rgba(255,255,255,.16);
+      }
+    }
+    .callBtn:after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent);
+      transform: translateX(-70%);
+      animation: sheen2 2.0s ease-in-out infinite;
+      opacity:.75;
+    }
+    @keyframes sheen2{
+      0%{transform:translateX(-70%);opacity:0}
+      25%{opacity:.85}
+      65%{opacity:.85}
+      100%{transform:translateX(70%);opacity:0}
+    }
+    .callBtn:hover{ transform: translateY(-4px); filter: contrast(1.08) saturate(1.02); }
     .callBtn:active{transform: translateY(0)}
 
     .callLeft{display:flex; align-items:center; gap:12px; min-width:0;}
@@ -368,6 +412,7 @@
       background: rgba(11,15,20,.05);
       border: 1px solid rgba(11,15,20,.10);
       display:grid;place-items:center;
+      box-shadow: 0 16px 40px rgba(0,0,0,.06) inset;
       flex:0 0 auto;
     }
     .callIcon svg{width:20px;height:20px;opacity:.95}
@@ -389,107 +434,229 @@
     .callBtn:hover .callArrow{transform: translateX(2px)}
     .callArrow svg{width:18px;height:18px;opacity:.95}
 
-    /* ===== Right ===== */
-    .rightTitle{
-      margin: 2px 0 0 0;
-      font-weight:950;
-      letter-spacing:-.04em;
-      font-size: 18px;
+    .localLinkWrap{margin-top: 10px;text-align:center;display:none;position:relative;z-index:2;}
+    .localLink{
+      display:inline-flex;align-items:center;gap:8px;
+      font-weight:850;font-size:13px;color: rgba(234,240,247,.82);
+      opacity:.95;padding: 10px 12px;border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.10);
+      transition: transform .15s ease, background .15s ease;
     }
-    .rightSub{
-      margin: 10px 0 0 0;
-      color: rgba(234,240,247,.72);
-      font-weight:650;
-      line-height:1.55;
-      font-size: 13.5px;
-      max-width: 52ch;
-    }
+    .localLink:hover{transform: translateY(-1px); background: rgba(82,172,217,.14)}
+    .localLink svg{width:16px;height:16px;opacity:.9}
 
-    .stepList{
-      margin-top: 14px;
-      display:grid;
-      gap:10px;
+    .hint{margin-top: 10px;color: rgba(234,240,247,.75);font-weight:600;line-height:1.6;text-align:center;}
+
+    /* chips + un petit “footer” du hero pour remplir la hauteur */
+    .chips{margin-top: 14px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+    .chip{
+      display:inline-flex;gap:10px;align-items:center;
+      padding: 10px 12px;border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(234,240,247,.84);
+      font-weight:850;font-size:13px;
     }
-    .stepRow{
+    .chip svg{width:16px;height:16px;opacity:.9}
+
+    .heroBottom{
+      margin-top: 18px;
       display:flex;
       gap:12px;
-      align-items:flex-start;
-      padding: 12px 12px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-    }
-    .badge{
-      width:30px;height:30px;border-radius:12px;
-      display:grid;place-items:center;
-      background: rgba(82,172,217,.14);
-      border: 1px solid rgba(82,172,217,.26);
-      font-weight:950;
-      color: rgba(234,240,247,.92);
-      flex: 0 0 auto;
-    }
-    .stepRow b{
-      display:block;
-      font-weight:950;
-      letter-spacing:-.02em;
-      font-size: 14px;
-    }
-    .stepRow span{
-      display:block;
-      margin-top:4px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-start;
       color: rgba(234,240,247,.72);
-      font-weight:650;
-      line-height:1.45;
-      font-size: 13px;
+      font-weight:700;
+      font-size:13px;
     }
-
-    .note{
-      margin-top: 12px;
-      display:flex;
+    .hbPill{
+      display:inline-flex;
+      align-items:center;
       gap:10px;
-      align-items:flex-start;
-      padding: 12px 12px;
-      border-radius: 16px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.26);
       border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
-      color: rgba(234,240,247,.80);
-      font-weight:650;
-      line-height:1.55;
-      font-size: 12.8px;
     }
-    .dot{
+    .hbDot{
       width:8px;height:8px;border-radius:99px;
       background: var(--gold);
       box-shadow: 0 0 0 4px rgba(216,178,85,.10);
-      margin-top: 6px;
-      flex:0 0 auto;
     }
 
-    /* ===== Light sections ===== */
-    .light{
-      background: linear-gradient(180deg, #ffffff 0%, var(--paper) 100%);
-      color: var(--ink);
-      border-top: 1px solid rgba(255,255,255,.06);
-    }
+    /* ===== TITRES SECTIONS ===== */
     .h2{
       margin:0;
-      font-size: clamp(30px, 3.6vw, 46px);
+      font-size: clamp(32px, 4vw, 52px);
       letter-spacing:-.06em;
       line-height:1.05;
       font-weight:950;
       text-align:center;
     }
-    .h2 .blue{color: var(--blue2)}
+    .h2 .blue{color: var(--blue)}
     .pCenter{
       margin: 12px auto 0;
-      max-width: 78ch;
+      max-width: 72ch;
       text-align:center;
-      color: rgba(11,18,32,.66);
+      color: rgba(11,18,32,.65);
       font-weight:600;
       line-height:1.75;
       font-size:16px;
     }
 
+    /* ===== SIDE CARD (stretch hauteur = remplit la zone) ===== */
+    .sideCard{
+      border-radius: 22px;
+      padding: 16px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 22px 70px rgba(0,0,0,.50);
+      overflow:hidden;
+      position:relative;
+
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;  /* prend toute la hauteur dispo */
+      min-height: 100%;
+    }
+    .sideCard:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(420px 220px at 30% 10%, rgba(82,172,217,.16), transparent 62%),
+        radial-gradient(420px 220px at 70% 40%, rgba(216,178,85,.08), transparent 62%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .sideInner{position:relative;z-index:2; display:flex; flex-direction:column; min-height:100%;}
+    .miniTitle{
+      font-weight:950;
+      letter-spacing:-.04em;
+      font-size:18px;
+      margin:0;
+    }
+    .miniSub{
+      margin:8px 0 0 0;
+      color: rgba(234,240,247,.72);
+      font-weight:600;
+      line-height:1.65;
+      font-size:14px;
+      max-width: 46ch;
+    }
+
+    .trustList{
+      margin-top: 14px;
+      display:grid;
+      gap:10px;
+    }
+    .trustItem{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding: 12px 12px;
+      border-radius: 16px;
+      background: rgba(0,0,0,.28);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .trustIcon{
+      width:34px;height:34px;border-radius:12px;
+      display:grid;place-items:center;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      flex:0 0 auto;
+    }
+    .trustIcon svg{width:18px;height:18px}
+    .trustIcon path{stroke: rgba(234,240,247,.92)}
+    .trustText b{
+      display:block;
+      font-weight:950;
+      letter-spacing:-.02em;
+      font-size:14px;
+    }
+    .trustText span{
+      display:block;
+      margin-top:4px;
+      color: rgba(234,240,247,.72);
+      font-weight:650;
+      line-height:1.45;
+      font-size:13px;
+    }
+
+    .miniRule{
+      margin-top: auto;         /* pousse en bas = “remplit” la hauteur */
+      border-radius: 16px;
+      padding: 12px 12px;
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(234,240,247,.78);
+      font-weight:650;
+      line-height:1.55;
+      font-size:12.5px;
+    }
+    .goldDot{
+      display:inline-block;
+      width:8px;height:8px;border-radius:99px;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(216,178,85,.10);
+      transform: translateY(-1px);
+      margin-right:8px;
+    }
+
+    /* ===== Comment ça marche (timeline premium) ===== */
+    .timeline{
+      margin-top: 28px;
+      max-width: 980px;
+      margin-left:auto;
+      margin-right:auto;
+      position:relative;
+    }
+    .timelineLine{
+      position:absolute;
+      left: 24px;
+      right: 24px;
+      top: 26px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(47,134,179,.18), rgba(47,134,179,.55), rgba(47,134,179,.18));
+      border-radius: 999px;
+    }
+    .tGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      position:relative;
+    }
+    .tStep{
+      border-radius: 22px;
+      padding: 16px 16px 18px;
+      background: #fff;
+      border: 1px solid rgba(11,18,32,.10);
+      box-shadow: 0 22px 70px rgba(0,0,0,.10);
+      overflow:hidden;
+      position:relative;
+    }
+    .tTop{display:flex;align-items:center;gap:10px;margin-bottom: 10px;}
+    .tDot{
+      width:14px;height:14px;border-radius:999px;
+      background: var(--blue);
+      box-shadow: 0 0 0 6px rgba(82,172,217,.14);
+      flex:0 0 auto;
+      border: 1px solid rgba(47,134,179,.30);
+    }
+    .tNum{font-weight:950;letter-spacing:-.03em;color: rgba(11,18,32,.80);}
+    .tStep h3{margin:0;font-size:18px;letter-spacing:-.03em;font-weight:950;color: rgba(11,18,32,.92);}
+    .tStep p{margin:8px 0 0 0;color: rgba(11,18,32,.70);font-weight:600;line-height:1.7;}
+    .tAccent{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(500px 160px at 20% -10%, rgba(82,172,217,.10), transparent 60%),
+        radial-gradient(500px 160px at 80% 10%, rgba(216,178,85,.08), transparent 62%);
+      opacity:.9;
+      pointer-events:none;
+    }
+
+    /* ===== Problèmes fréquents ===== */
     .rows{margin-top:24px; display:grid; gap:12px; max-width: 920px; margin-left:auto; margin-right:auto;}
     .row{
       display:flex;justify-content:space-between;align-items:center;gap:14px;
@@ -497,22 +664,44 @@
       border-radius: 20px;
       background: rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.10);
-      box-shadow: 0 18px 60px rgba(0,0,0,.28);
+      box-shadow: 0 22px 70px rgba(0,0,0,.35);
     }
     .row b{font-weight:950;letter-spacing:-.02em}
     .row small{opacity:.7;font-weight:750}
 
     /* ===== Responsive ===== */
     @media (max-width: 980px){
-      section{padding: 18px 0 56px;}
-      .heroGrid{grid-template-columns:1fr;}
-      .paneRight{border-left:0;border-top: 1px solid rgba(255,255,255,.10);}
+      :root{ --headerH: 58px; }
+      section{ padding: 64px 0; }
+
+      .hero{
+        min-height: 0;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        align-items: start;
+      }
+      .heroGrid{
+        grid-template-columns:1fr;
+        gap: 18px;
+        align-items: start;
+      }
       h1,.sub{text-align:center}
       .kicker{justify-content:center}
+      .cityZone{margin-left:auto;margin-right:auto}
+      .timelineLine{display:none;}
+      .tGrid{grid-template-columns:1fr;gap:12px;}
+      .heroBottom{justify-content:center}
+    }
+
+    @media (max-width: 420px){
+      section{ padding: 56px 0; }
+      .hero{ padding-top: 2px; }
     }
 
     @media (prefers-reduced-motion: reduce){
-      *{scroll-behavior:auto!important}
+      .dust,.glow,.cityZone{animation:none!important}
+      .callBtn,.callBtn:after{animation:none!important}
+      .locBtn:not(.disabled),.locBtn:after{animation:none!important}
     }
   </style>
 </head>
@@ -524,10 +713,12 @@
       <div class="inner">
         <div class="top-left">
           <div class="logo" aria-hidden="true">
-            <img src="media/logob.png" alt="Logo TrouverUnPlombier.ca">
+            <img src="media/logob.png" alt="">
           </div>
         </div>
+
         <div class="titleCenter">TrouverUnPlombier.ca</div>
+
         <div class="top-right" aria-label="Note 4.9 sur 5">
           <span class="stars" aria-hidden="true">
             <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
@@ -542,94 +733,131 @@
     </div>
   </div>
 
-  <section>
-    <div class="wrap">
-      <div class="heroShell">
-        <div class="heroGrid">
+  <!-- HERO -->
+  <section class="dark">
+    <div class="dust" aria-hidden="true"></div>
+    <div class="glow" aria-hidden="true"></div>
 
-          <!-- GAUCHE -->
-          <div class="pane">
-            <p class="kicker">Plomberie d’urgence</p>
-            <h1>Trouve un plombier <span class="accent">dans ta ville</span>.</h1>
-            <p class="sub">Active ta localisation (optionnel), puis appelle immédiatement le bon numéro.</p>
+    <div class="wrap hero">
+      <div class="heroGrid">
 
-            <div class="cityZone">
-              <div id="switchZone" class="suggest" role="status" aria-live="polite">
-                <div class="sItem">
-                  <div id="statusLine">Ville détectée (après activation)</div>
-                  <div class="sMeta" id="statusMeta">On affichera le bon numéro</div>
-                </div>
+        <!-- GAUCHE -->
+        <div class="leftCol">
+          <div class="kicker">Plomberie d’urgence</div>
+          <h1>Trouve un plombier <span class="accent">dans ta ville</span>.</h1>
+          <p class="sub">Active ta localisation, puis appelle immédiatement le bon numéro.</p>
+
+          <div class="cityZone">
+            <div id="switchZone" class="suggest" role="status" aria-live="polite">
+              <div class="sItem">
+                <div id="statusLine">Ville détectée (après activation)</div>
+                <div class="sMeta" id="statusMeta">On affichera le bon numéro</div>
               </div>
+            </div>
 
-              <button id="locBtn" class="locBtn" type="button">
-                <span class="locIcon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke="rgba(11,15,20,.92)" stroke-width="2"/>
-                    <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="rgba(11,15,20,.20)"/>
-                  </svg>
-                </span>
-                <span id="locLabel">Activer ma localisation</span>
-              </button>
+            <button id="locBtn" class="locBtn" type="button">
+              <span class="locIcon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke="rgba(11,15,20,.92)" stroke-width="2"/>
+                  <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="rgba(11,15,20,.20)"/>
+                </svg>
+              </span>
+              <span id="locLabel">Activer ma localisation</span>
+            </button>
 
-              <div class="hint" id="hintLine">Aucune demande de localisation sans ton clic.</div>
+            <div class="localLinkWrap" id="localLinkWrap">
+              <a class="localLink" id="localLink" href="trois-rivieres/" aria-label="Accéder à la page de Trois-Rivières">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M14 7l5 5-5 5" stroke="rgba(234,240,247,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M19 12H5" stroke="rgba(234,240,247,.92)" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Accéder à la page de Trois-Rivières
+              </a>
+            </div>
 
-              <div class="chips" aria-label="Atouts">
-                <span class="chip">
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M20 6L9 17l-5-5" stroke="rgba(234,240,247,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg> Appel direct
-                </span>
-                <span class="chip">
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke="rgba(234,240,247,.92)" stroke-width="2"/>
-                  </svg> Indépendant
-                </span>
-                <span class="chip">
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M12 8v5l3 2" stroke="rgba(234,240,247,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="rgba(234,240,247,.92)" stroke-width="2"/>
-                  </svg> Selon dispo
-                </span>
-              </div>
+            <div class="hint" id="hintLine">Aucune demande de localisation sans ton clic.</div>
+
+            <div class="chips" aria-label="Atouts">
+              <span class="chip">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M20 6L9 17l-5-5" stroke="rgba(234,240,247,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg> Appel direct
+              </span>
+              <span class="chip">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke="rgba(234,240,247,.92)" stroke-width="2"/>
+                </svg> Service indépendant
+              </span>
+              <span class="chip">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 8v5l3 2" stroke="rgba(234,240,247,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="rgba(234,240,247,.92)" stroke-width="2"/>
+                </svg> Selon dispo
+              </span>
             </div>
           </div>
 
-          <!-- DROITE -->
-          <aside class="pane paneRight" aria-label="Résumé">
-            <p class="rightTitle">En 10 secondes</p>
-            <p class="rightSub">Le but : te faire arriver au bon numéro, rapidement, sans formulaire.</p>
-
-            <div class="stepList" aria-label="Étapes">
-              <div class="stepRow">
-                <div class="badge">1</div>
-                <div>
-                  <b>Tu cliques pour autoriser</b>
-                  <span>La localisation n’est demandée qu’après ton clic.</span>
-                </div>
-              </div>
-              <div class="stepRow">
-                <div class="badge">2</div>
-                <div>
-                  <b>On détecte ta ville</b>
-                  <span>On choisit le bon numéro (ou un numéro général).</span>
-                </div>
-              </div>
-              <div class="stepRow">
-                <div class="badge">3</div>
-                <div>
-                  <b>Tu appelles</b>
-                  <span>Appel immédiat, sans attendre.</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="note" role="note" aria-label="Important">
-              <span class="dot" aria-hidden="true"></span>
-              <div><b>Important :</b> nous n’effectuons aucune réparation et ne facturons aucun travail. Vous contractez et payez directement le professionnel.</div>
-            </div>
-          </aside>
-
+          <!-- petit remplissage de hauteur (visuellement ça “occupe” la zone sombre) -->
+          <div class="heroBottom" aria-label="Infos rapides">
+            <span class="hbPill"><span class="hbDot"></span>Localisation seulement après ton clic</span>
+            <span class="hbPill">Appel direct (pas de formulaire)</span>
+          </div>
         </div>
+
+        <!-- DROITE -->
+        <aside class="sideCard" aria-label="Infos confiance">
+          <div class="sideInner">
+            <div>
+              <p class="miniTitle">Service simple, sans détour</p>
+              <p class="miniSub">Tu actives la localisation (si tu veux), on affiche la bonne option, et tu appelles.</p>
+
+              <div class="trustList" aria-label="Points de confiance">
+                <div class="trustItem">
+                  <span class="trustIcon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M20 6L9 17l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <div class="trustText">
+                    <b>Action immédiate</b>
+                    <span>Pas de formulaire. Tu passes directement à l’appel.</span>
+                  </div>
+                </div>
+
+                <div class="trustItem">
+                  <span class="trustIcon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke-width="2"/>
+                      <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" stroke-width="2"/>
+                    </svg>
+                  </span>
+                  <div class="trustText">
+                    <b>Localisation après ton clic</b>
+                    <span>Aucune demande automatique. C’est toi qui déclenche.</span>
+                  </div>
+                </div>
+
+                <div class="trustItem">
+                  <span class="trustIcon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke-width="2"/>
+                    </svg>
+                  </span>
+                  <div class="trustText">
+                    <b>Service indépendant</b>
+                    <span>Tu payes directement le professionnel (pas le site).</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="miniRule">
+              <span class="goldDot"></span>
+              <b style="font-weight:900">Important</b> : nous n’effectuons aucune réparation et ne facturons aucun travail.
+            </div>
+          </div>
+        </aside>
+
       </div>
     </div>
   </section>
@@ -637,21 +865,57 @@
   <!-- LIGHT -->
   <section class="light">
     <div class="wrap">
-      <h2 class="h2">Urgence plomberie : <span class="blue">quoi faire</span> ?</h2>
-      <p class="pCenter">
-        Pour une <b>fuite d’eau</b>, une <b>toilette bouchée</b>, un <b>chauffe-eau en panne</b> ou un problème de <b>drain / égout</b>,
-        l’important est de joindre rapidement un <b>plombier d’urgence</b> disponible près de vous.
-      </p>
+      <h2 class="h2">Comment ça <span class="blue">marche</span></h2>
+      <p class="pCenter">3 étapes. Zéro blabla. Juste l’action.</p>
+
+      <div class="timeline" aria-label="Étapes">
+        <div class="timelineLine" aria-hidden="true"></div>
+
+        <div class="tGrid">
+          <div class="tStep">
+            <div class="tAccent" aria-hidden="true"></div>
+            <div class="tTop">
+              <span class="tDot" aria-hidden="true"></span>
+              <span class="tNum">01</span>
+            </div>
+            <h3>Autorise la localisation</h3>
+            <p>Uniquement après ton clic. Aucun tracking automatique.</p>
+          </div>
+
+          <div class="tStep">
+            <div class="tAccent" aria-hidden="true"></div>
+            <div class="tTop">
+              <span class="tDot" aria-hidden="true"></span>
+              <span class="tNum">02</span>
+            </div>
+            <h3>On détecte ta ville</h3>
+            <p>On choisit le numéro qui correspond (ou un numéro général).</p>
+          </div>
+
+          <div class="tStep">
+            <div class="tAccent" aria-hidden="true"></div>
+            <div class="tTop">
+              <span class="tDot" aria-hidden="true"></span>
+              <span class="tNum">03</span>
+            </div>
+            <h3>Tu appelles</h3>
+            <p>Appel immédiat. Si Trois-Rivières : lien vers la page locale.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- DARK -->
-  <section>
+  <section class="dark">
+    <div class="dust" aria-hidden="true"></div>
+    <div class="glow" aria-hidden="true"></div>
+
     <div class="wrap">
-      <h2 class="h2" style="color:#eaf0f7">Problèmes <span class="accent">fréquents</span></h2>
+      <h2 class="h2" style="color:#eaf0f7">Problèmes <span class="accent">fréquents</span>.</h2>
       <p class="pCenter" style="color:rgba(234,240,247,.70)">Courant. Clair. Sans blabla.</p>
 
-      <div class="rows" aria-label="Services de plomberie">
+      <div class="rows" aria-label="Services">
         <div class="row"><b>Fuite d’eau</b><small>tuyau • valve • dégâts</small></div>
         <div class="row"><b>Toilette bouchée</b><small>déblocage</small></div>
         <div class="row"><b>Chauffe-eau</b><small>panne • remplacement</small></div>
@@ -682,6 +946,8 @@
     const PHONE_OTHER_TEL = "+1-873-339-1815";
     const PHONE_OTHER_UI  = "+1 (873) 339-1815";
 
+    const SLUG_TR = "trois-rivieres/";
+
     // =========================
     // UI
     // =========================
@@ -692,6 +958,9 @@
 
     const locBtn    = document.getElementById("locBtn");
     const locLabel  = document.getElementById("locLabel");
+
+    const localLinkWrap = document.getElementById("localLinkWrap");
+    const localLink     = document.getElementById("localLink");
 
     const norm = (s) => (s||"")
       .toLowerCase()
@@ -763,9 +1032,16 @@
 
       if(isTrois){
         mountPhoneButton(PHONE_TR_UI, PHONE_TR_TEL);
+
+        localLinkWrap.style.display = "block";
+        localLink.href = SLUG_TR;
+
         hintLine.textContent = `Ville détectée : ${cityClean || "Trois-Rivières"}`;
       }else{
         mountPhoneButton(PHONE_OTHER_UI, PHONE_OTHER_TEL);
+
+        localLinkWrap.style.display = "none";
+
         hintLine.textContent = cityClean ? `Ville détectée : ${cityClean}` : "Ville détectée.";
       }
     }
@@ -775,6 +1051,7 @@
       statusMeta.textContent = metaLine;
       hintLine.textContent = "Localisation non disponible → numéro général affiché.";
       locBtn.style.display = "none";
+      localLinkWrap.style.display = "none";
       mountPhoneButton(PHONE_OTHER_UI, PHONE_OTHER_TEL);
     }
 
@@ -839,5 +1116,3 @@
   </script>
 </body>
 </html>
-
-
