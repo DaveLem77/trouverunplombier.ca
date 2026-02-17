@@ -40,7 +40,7 @@
       --paper:#f6f8fb;
       --ink:#0b1220;
 
-      --max:1100px;
+      --max:1120px;
       --r:26px;
 
       /* bouton phone (identique à ta page TR) */
@@ -61,7 +61,14 @@
     }
     a{color:inherit;text-decoration:none}
     button{font-family:inherit}
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(18px,4vw,44px);position:relative;z-index:2}
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 clamp(18px,4vw,44px);
+      position:relative;
+      z-index:2;
+    }
 
     /* ===== Header ===== */
     .topbar{
@@ -107,16 +114,17 @@
     .score{opacity:.9}
     .score span{opacity:.7}
 
-    /* ===== Sections ===== */
+    /* ===== Sections (rythme cohérent) ===== */
     section{
       position:relative;
-      padding: clamp(84px,8vw,120px) 0;
+      padding: clamp(72px,7vw,108px) 0;
       overflow:hidden;
       isolation:isolate;
     }
     .dark{
-      background: radial-gradient(1200px 700px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
-                  linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
+      background:
+        radial-gradient(1200px 700px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
+        linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
       color:#eaf0f7;
     }
     .light{
@@ -152,17 +160,18 @@
 
     /* ===== Hero ===== */
     .hero{
-      min-height: 92svh;
+      min-height: 90svh;
       display:grid;
       align-items:center;
-      padding-top: 22px; /* desktop */
+      padding-top: 16px;
     }
     .heroGrid{
       display:grid;
-      grid-template-columns: 1.25fr .75fr;
+      grid-template-columns: 1.15fr .85fr; /* vrai équilibre desktop */
       gap: clamp(18px,4vw,44px);
-      align-items:center;
+      align-items:start;
     }
+
     .kicker{
       text-transform:uppercase;
       letter-spacing:.18em;
@@ -182,7 +191,7 @@
       font-weight:950;
       letter-spacing:-.07em;
       line-height:.98;
-      font-size: clamp(44px, 5.6vw, 86px);
+      font-size: clamp(44px, 5.5vw, 86px);
     }
     .accent{
       color: var(--blue);
@@ -196,10 +205,10 @@
       max-width: 62ch;
     }
 
-    /* ===== Zone ===== */
+    /* ===== Zone localisation ===== */
     .cityZone{
       margin-top: 22px;
-      width:min(560px, 100%);
+      width:min(580px, 100%);
       border-radius: 22px;
       padding: 18px;
       background: linear-gradient(180deg, rgba(82,172,217,.18), rgba(82,172,217,.10));
@@ -327,7 +336,7 @@
     }
     .locIcon svg{width:18px;height:18px;opacity:.95}
 
-    /* ===== Bouton téléphone IDENTIQUE (dans la zone “suggest”) ===== */
+    /* ===== Bouton téléphone IDENTIQUE ===== */
     .callBtn{
       width:100%;
       border: 1px solid rgba(0,0,0,.10);
@@ -394,10 +403,7 @@
     }
     .callBtn:active{transform: translateY(0)}
 
-    .callLeft{
-      display:flex; align-items:center; gap:12px;
-      min-width:0;
-    }
+    .callLeft{display:flex; align-items:center; gap:12px; min-width:0;}
     .callIcon{
       width:44px;height:44px;border-radius:14px;
       background: rgba(11,15,20,.05);
@@ -408,21 +414,11 @@
     }
     .callIcon svg{width:20px;height:20px;opacity:.95}
     .callText{min-width:0}
-    .callText b{
-      display:block;
-      font-size: 15px;
-      letter-spacing:-.02em;
-      line-height:1.1;
-    }
+    .callText b{display:block;font-size:15px;letter-spacing:-.02em;line-height:1.1;}
     .callText span{
-      display:block;
-      margin-top:4px;
-      font-size: 19px;
-      font-weight:980;
-      letter-spacing:-.03em;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      display:block;margin-top:4px;
+      font-size: 19px;font-weight:980;letter-spacing:-.03em;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
     }
     .callArrow{
       width:46px;height:46px;border-radius:16px;
@@ -435,23 +431,11 @@
     .callBtn:hover .callArrow{transform: translateX(2px)}
     .callArrow svg{width:18px;height:18px;opacity:.95}
 
-    .localLinkWrap{
-      margin-top: 10px;
-      text-align:center;
-      display:none;
-      position:relative;
-      z-index:2;
-    }
+    .localLinkWrap{margin-top: 10px;text-align:center;display:none;position:relative;z-index:2;}
     .localLink{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      font-weight:850;
-      font-size:13px;
-      color: rgba(234,240,247,.82);
-      opacity:.95;
-      padding: 10px 12px;
-      border-radius: 999px;
+      display:inline-flex;align-items:center;gap:8px;
+      font-weight:850;font-size:13px;color: rgba(234,240,247,.82);
+      opacity:.95;padding: 10px 12px;border-radius: 999px;
       background: rgba(255,255,255,.07);
       border: 1px solid rgba(255,255,255,.10);
       transition: transform .15s ease, background .15s ease;
@@ -459,13 +443,7 @@
     .localLink:hover{transform: translateY(-1px); background: rgba(82,172,217,.14)}
     .localLink svg{width:16px;height:16px;opacity:.9}
 
-    .hint{
-      margin-top: 10px;
-      color: rgba(234,240,247,.75);
-      font-weight:600;
-      line-height:1.6;
-      text-align:center;
-    }
+    .hint{margin-top: 10px;color: rgba(234,240,247,.75);font-weight:600;line-height:1.6;text-align:center;}
 
     .chips{
       margin-top: 14px;
@@ -488,6 +466,7 @@
     }
     .chip svg{width:16px;height:16px;opacity:.9}
 
+    /* ===== TITRES ===== */
     .h2{
       margin:0;
       font-size: clamp(32px, 4vw, 52px);
@@ -499,7 +478,7 @@
     .h2 .blue{color: var(--blue)}
     .pCenter{
       margin: 12px auto 0;
-      max-width: 70ch;
+      max-width: 72ch;
       text-align:center;
       color: rgba(11,18,32,.65);
       font-weight:600;
@@ -507,57 +486,167 @@
       font-size:16px;
     }
 
-    .stepStack{margin-top: 28px; display:grid; gap:18px; max-width: 780px; margin-left:auto; margin-right:auto;}
-    .step{
-      border-radius: 26px;
+    /* ===== NOUVEAU: Colonne droite du hero (plus de vide) ===== */
+    .sideCard{
+      border-radius: 28px;
+      padding: 18px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 34px 140px rgba(0,0,0,.55);
+      position:sticky;
+      top: 86px; /* sous la topbar */
+      align-self:start;
       overflow:hidden;
-      border: 1px solid rgba(11,18,32,.10);
-      box-shadow: 0 26px 90px rgba(0,0,0,.10);
-      background: #fff;
     }
-    .stepTop{
-      height: 82px;
-      background: linear-gradient(90deg, rgba(47,134,179,1), rgba(82,172,217,1));
+    .sideCard:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(420px 220px at 30% 10%, rgba(82,172,217,.18), transparent 62%),
+        radial-gradient(420px 220px at 70% 40%, rgba(216,178,85,.10), transparent 62%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .sideInner{position:relative;z-index:2}
+    .miniTitle{
+      font-weight:950;
+      letter-spacing:-.04em;
+      font-size:18px;
+      margin:0;
+    }
+    .miniSub{
+      margin:8px 0 0 0;
+      color: rgba(234,240,247,.70);
+      font-weight:600;
+      line-height:1.65;
+      font-size:14px;
+    }
+    .factGrid{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    .fact{
+      border-radius: 18px;
+      padding: 12px 12px;
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .fact b{
+      display:block;
+      font-weight:950;
+      letter-spacing:-.02em;
+      font-size:14px;
+    }
+    .fact small{
+      display:block;
+      margin-top:4px;
+      opacity:.72;
+      font-weight:700;
+      line-height:1.35;
+    }
+    .miniRule{
+      margin-top: 12px;
+      border-radius: 18px;
+      padding: 12px 12px;
+      background: rgba(0,0,0,.28);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(234,240,247,.78);
+      font-weight:650;
+      line-height:1.55;
+      font-size:13px;
+    }
+    .goldDot{
+      display:inline-block;
+      width:8px;height:8px;border-radius:99px;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(216,178,85,.10);
+      transform: translateY(-1px);
+      margin-right:8px;
+    }
+
+    /* ===== NOUVEAU: Comment ça marche (timeline premium, pas bulles) ===== */
+    .timeline{
+      margin-top: 28px;
+      max-width: 980px;
+      margin-left:auto;
+      margin-right:auto;
       position:relative;
     }
-    .stepTop:after{
-      content:"";
-      position:absolute; left:0; right:0; bottom:-1px;
-      height: 34px;
+    .timelineLine{
+      position:absolute;
+      left: 24px;
+      right: 24px;
+      top: 26px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(47,134,179,.18), rgba(47,134,179,.55), rgba(47,134,179,.18));
+      border-radius: 999px;
+    }
+    .tGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      position:relative;
+    }
+    .tStep{
+      border-radius: 26px;
+      padding: 16px 16px 18px;
       background: #fff;
-      transform: skewY(-3deg);
-      transform-origin:left;
+      border: 1px solid rgba(11,18,32,.10);
+      box-shadow: 0 26px 90px rgba(0,0,0,.10);
+      overflow:hidden;
+      position:relative;
     }
-    .stepBody{
-      padding: 18px 18px 20px;
+    .tTop{
       display:flex;
-      gap:14px;
-      align-items:flex-start;
+      align-items:center;
+      gap:10px;
+      margin-bottom: 10px;
     }
-    .num{
-      width:40px;height:40px;border-radius:999px;
-      display:grid;place-items:center;
-      background: rgba(82,172,217,.16);
-      border: 1px solid rgba(82,172,217,.35);
-      font-weight:950;
-      color: rgba(11,18,32,.85);
+    .tDot{
+      width:16px;height:16px;border-radius:999px;
+      background: var(--blue);
+      box-shadow: 0 0 0 6px rgba(82,172,217,.14);
       flex:0 0 auto;
+      border: 1px solid rgba(47,134,179,.30);
     }
-    .stepBody h3{
+    .tNum{
+      font-weight:950;
+      letter-spacing:-.03em;
+      color: rgba(11,18,32,.82);
+    }
+    .tStep h3{
       margin:0;
       font-size:18px;
       letter-spacing:-.03em;
       font-weight:950;
       color: rgba(11,18,32,.92);
     }
-    .stepBody p{
+    .tStep p{
       margin:8px 0 0 0;
       color: rgba(11,18,32,.70);
       font-weight:600;
       line-height:1.7;
     }
+    .tAccent{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(500px 160px at 20% -10%, rgba(82,172,217,.10), transparent 60%),
+        radial-gradient(500px 160px at 80% 10%, rgba(216,178,85,.08), transparent 62%);
+      opacity:.9;
+      pointer-events:none;
+    }
 
-    .rows{margin-top:24px; display:grid; gap:12px; max-width: 860px; margin-left:auto; margin-right:auto;}
+    /* ===== Problèmes fréquents ===== */
+    .rows{
+      margin-top:24px;
+      display:grid;
+      gap:12px;
+      max-width: 920px;
+      margin-left:auto;
+      margin-right:auto;
+    }
     .row{
       display:flex;justify-content:space-between;align-items:center;gap:14px;
       padding: 16px 16px;
@@ -575,12 +664,15 @@
       h1,.sub{text-align:center}
       .kicker{justify-content:center}
       .cityZone{margin-left:auto;margin-right:auto}
+      .sideCard{position:relative; top:auto}
+      .timelineLine{display:none;}
+      .tGrid{grid-template-columns:1fr;gap:12px;}
     }
 
     /* ===== MOBILE FIX: réduire l’espace entre header et “Plomberie d’urgence” ===== */
     @media (max-width: 980px){
-      section{ padding: 64px 0; }  /* moins haut que 84px+ */
-      .hero{ padding-top: 6px; }  /* réduit l’espace sous le header sticky */
+      section{ padding: 64px 0; }
+      .hero{ padding-top: 6px; }
       .kicker{ margin-top: 0; }
     }
     @media (max-width: 420px){
@@ -630,6 +722,7 @@
 
     <div class="wrap hero">
       <div class="heroGrid">
+        <!-- Colonne gauche -->
         <div>
           <div class="kicker">Plomberie d’urgence</div>
           <h1>Trouve un plombier <span class="accent">dans ta ville</span>.</h1>
@@ -688,7 +781,37 @@
           </div>
         </div>
 
-        <div></div>
+        <!-- Colonne droite (remplit le vide) -->
+        <aside class="sideCard" aria-label="Infos rapides">
+          <div class="sideInner">
+            <p class="miniTitle">Ce que tu fais ici</p>
+            <p class="miniSub">Une page simple pour aller au bon numéro, sans perdre de temps.</p>
+
+            <div class="factGrid">
+              <div class="fact">
+                <b>⏱️ Rapide</b>
+                <small>Détection de ville + appel immédiat</small>
+              </div>
+              <div class="fact">
+                <b>🧭 Local</b>
+                <small>Page dédiée si ta ville existe</small>
+              </div>
+              <div class="fact">
+                <b>🔒 Transparent</b>
+                <small>Localisation seulement après ton clic</small>
+              </div>
+              <div class="fact">
+                <b>📞 Simple</b>
+                <small>Pas de formulaire, pas d’attente</small>
+              </div>
+            </div>
+
+            <div class="miniRule">
+              <span class="goldDot"></span>
+              <b style="font-weight:900">Rappel</b> : tu paies directement le professionnel. Le site ne fait aucune réparation.
+            </div>
+          </div>
+        </aside>
       </div>
     </div>
   </section>
@@ -697,39 +820,40 @@
   <section class="light">
     <div class="wrap">
       <h2 class="h2">Comment ça <span class="blue">marche</span></h2>
-      <p class="pCenter">1) Tu actives ta localisation. 2) On détecte ta ville. 3) Tu appelles.</p>
+      <p class="pCenter">3 étapes. Zéro blabla. Juste l’action.</p>
 
-      <div class="stepStack" aria-label="Étapes">
-        <div class="step">
-          <div class="stepTop"></div>
-          <div class="stepBody">
-            <div class="num">1</div>
-            <div>
-              <h3>Activer</h3>
-              <p>La localisation est demandée seulement après ton clic.</p>
+      <div class="timeline" aria-label="Étapes">
+        <div class="timelineLine" aria-hidden="true"></div>
+
+        <div class="tGrid">
+          <div class="tStep">
+            <div class="tAccent" aria-hidden="true"></div>
+            <div class="tTop">
+              <span class="tDot" aria-hidden="true"></span>
+              <span class="tNum">01</span>
             </div>
+            <h3>Autorise la localisation</h3>
+            <p>Uniquement après ton clic. Aucun tracking automatique.</p>
           </div>
-        </div>
 
-        <div class="step">
-          <div class="stepTop"></div>
-          <div class="stepBody">
-            <div class="num">2</div>
-            <div>
-              <h3>Détection</h3>
-              <p>On détecte ta ville et on choisit le bon numéro.</p>
+          <div class="tStep">
+            <div class="tAccent" aria-hidden="true"></div>
+            <div class="tTop">
+              <span class="tDot" aria-hidden="true"></span>
+              <span class="tNum">02</span>
             </div>
+            <h3>On détecte ta ville</h3>
+            <p>On choisit le numéro qui correspond (ou un numéro général).</p>
           </div>
-        </div>
 
-        <div class="step">
-          <div class="stepTop"></div>
-          <div class="stepBody">
-            <div class="num">3</div>
-            <div>
-              <h3>Appeler</h3>
-              <p>Appel immédiat (page locale si Trois-Rivières).</p>
+          <div class="tStep">
+            <div class="tAccent" aria-hidden="true"></div>
+            <div class="tTop">
+              <span class="tDot" aria-hidden="true"></span>
+              <span class="tNum">03</span>
             </div>
+            <h3>Tu appelles</h3>
+            <p>Appel immédiat. Si Trois-Rivières : lien vers la page locale.</p>
           </div>
         </div>
       </div>
@@ -861,8 +985,6 @@
       // cache le bouton de localisation
       locBtn.style.display = "none";
 
-      // IMPORTANT: le bouton “Activer ma localisation” devient le nom de ville
-      // (mais on l’a caché; on met la ville dans le hint)
       if(isTrois){
         mountPhoneButton(PHONE_TR_UI, PHONE_TR_TEL);
 
@@ -949,6 +1071,7 @@
   </script>
 </body>
 </html>
+
 
 
 
