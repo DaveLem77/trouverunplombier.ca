@@ -1,1118 +1,857 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Trouver un plombier d’urgence | TrouverUnPlombier.ca</title>
-  <meta name="description" content="Service indépendant de mise en relation avec des plombiers locaux. Urgence 24/7 selon disponibilité.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELOX</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --k:#080808;
+  --k2:#111;
+  --k3:#181818;
+  --w:#F0EEE9;
+  --a:#C8FF00;
+  --a2:#AADD00;
+  --mid:#666;
+  --ln:rgba(240,238,233,.08);
+}
+html{scroll-behavior:smooth}
+body{background:var(--k);color:var(--w);font-family:'Inter',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-  <!-- FAVICON -->
-  <link rel="icon" type="image/png" href="media/logob.png">
-  <link rel="apple-touch-icon" href="media/logob.png">
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px;
+  transition:background .3s,backdrop-filter .3s;
+}
+nav.stuck{background:rgba(8,8,8,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--ln)}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:5px;color:var(--w);text-decoration:none}
+.logo em{color:var(--a);font-style:normal}
+.nav-r{display:flex;align-items:center;gap:16px}
+.nav-links{display:none}
+@media(min-width:900px){
+  nav{padding:24px 56px}
+  .nav-links{display:flex;gap:40px;list-style:none}
+  .nav-links a{font-size:11px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:rgba(240,238,233,.4);text-decoration:none;transition:color .2s}
+  .nav-links a:hover{color:var(--w)}
+}
+.nav-cta{
+  padding:10px 22px;border:1.5px solid var(--a);color:var(--a);
+  font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;
+  background:transparent;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;
+  white-space:nowrap;
+}
+.nav-cta:hover{background:var(--a);color:var(--k)}
 
-  <!-- PARTAGE -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Trouver un plombier d’urgence | TrouverUnPlombier.ca">
-  <meta property="og:description" content="Service indépendant de mise en relation avec des plombiers locaux. Urgence 24/7 selon disponibilité.">
-  <meta property="og:image" content="https://trouverunplombier.ca/media/share.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:url" content="https://trouverunplombier.ca/">
+/* ── HERO ── */
+.hero{
+  min-height:100svh;position:relative;display:flex;flex-direction:column;
+  justify-content:flex-end;overflow:hidden;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Trouver un plombier d’urgence | TrouverUnPlombier.ca">
-  <meta name="twitter:description" content="Service indépendant de mise en relation avec des plombiers locaux. Urgence 24/7 selon disponibilité.">
-  <meta name="twitter:image" content="https://trouverunplombier.ca/media/share.png">
+/* BG */
+.hbg{position:absolute;inset:0;background:var(--k)}
+.hbg::after{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 120% 60% at 50% 80%,rgba(200,255,0,.07) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 20%,rgba(200,255,0,.03) 0%,transparent 50%);
+}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+/* GHOST TEXT */
+.hghost{
+  position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-58%);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(120px,34vw,420px);
+  line-height:.85;letter-spacing:-4px;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(200,255,0,.06);
+  white-space:nowrap;pointer-events:none;user-select:none;
+  animation:gIn 1.2s cubic-bezier(.16,1,.3,1) .1s both;
+}
+@keyframes gIn{from{opacity:0;transform:translate(-50%,-58%) scale(1.06)}to{opacity:1;transform:translate(-50%,-58%) scale(1)}}
 
-  <style>
-    :root{
-      --blue:#52acd9;
-      --blue2:#2f86b3;
-      --gold:#d8b255;
+/* CAR */
+.hcar{
+  position:absolute;
+  bottom:-2%;left:50%;transform:translateX(-50%);
+  width:min(900px,100vw);
+  pointer-events:none;
+  animation:cIn 1.1s cubic-bezier(.16,1,.3,1) .35s both;
+  filter:drop-shadow(0 30px 80px rgba(200,255,0,.12));
+}
+@keyframes cIn{from{opacity:0;transform:translateX(-50%) translateY(48px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 
-      --dark:#07090c;
-      --dark2:#0b0f14;
+.hglow{
+  position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);
+  width:min(700px,90vw);height:200px;
+  background:radial-gradient(ellipse,rgba(200,255,0,.15) 0%,transparent 70%);
+  pointer-events:none;
+}
 
-      --paper:#f6f8fb;
-      --ink:#0b1220;
+/* CONTENT */
+.hcontent{
+  position:relative;z-index:10;
+  padding:0 24px 40px;
+}
+@media(min-width:900px){.hcontent{padding:0 56px 64px;display:grid;grid-template-columns:1fr 1fr;align-items:flex-end;gap:40px}}
 
-      --max:1120px;
-      --r:26px;
+.h-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 14px;border:1px solid rgba(200,255,0,.2);
+  font-size:10px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:rgba(200,255,0,.5);
+  margin-bottom:16px;
+  animation:fUp .8s ease .5s both;
+}
+.h-dot{width:5px;height:5px;background:var(--a);border-radius:50%;animation:blink 2s ease infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 
-      --btnTop:#ffffff;
-      --btnMid:#fbfbfd;
-      --btnBot:#eeeeF2;
-      --btnInk:#0b0f14;
+.h-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(72px,20vw,140px);
+  line-height:.86;letter-spacing:-1px;
+  animation:fUp .9s ease .65s both;
+}
+.h-title .ol{color:transparent;-webkit-text-stroke:2px var(--w);display:block}
+.h-title .ac{color:var(--a);display:block}
 
-      --headerH: 58px; /* approx. hauteur topbar (sert au hero) */
-    }
+@keyframes fUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background: var(--dark);
-      color:#eaf0f7;
-      overflow-x:hidden;
-    }
-    a{color:inherit;text-decoration:none}
-    button{font-family:inherit}
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(18px,4vw,44px);position:relative;z-index:2}
+.h-right{
+  margin-top:24px;
+  animation:fUp .9s ease .8s both;
+}
+@media(min-width:900px){.h-right{margin-top:0;text-align:right}}
 
-    /* ===== Header ===== */
-    .topbar{
-      position:sticky; top:0; z-index:50;
-      background: rgba(0,0,0,.55);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255,255,255,.10);
-    }
-    .topbar .inner{
-      display:grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items:center;
-      padding: 12px 0;
-      gap:12px;
-    }
-    .top-left{display:flex;align-items:center;gap:10px;min-width:0}
-    .logo{
-      width:30px;height:30px;border-radius:10px;
-      background: rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.12);
-      overflow:hidden; flex:0 0 auto;
-      display:grid;place-items:center;
-    }
-    .logo img{width:100%;height:100%;object-fit:cover;display:block}
-    .titleCenter{
-      text-align:center;
-      font-weight:900;
-      letter-spacing:-.03em;
-      font-size:15px;
-      opacity:.95;
-      white-space:nowrap;
-    }
-    .top-right{
-      justify-self:end;
-      display:flex;align-items:center;gap:10px;
-      white-space:nowrap;
-      color: rgba(255,255,255,.86);
-      font-weight:800;
-      font-size:13px;
-    }
-    .stars{display:inline-flex;gap:3px;transform:translateY(1px)}
-    .star{width:14px;height:14px;display:block}
-    .star path{fill:var(--gold)}
-    .score{opacity:.9}
-    .score span{opacity:.7}
+.h-desc{font-size:14px;font-weight:300;line-height:1.75;color:rgba(240,238,233,.45);max-width:300px;margin-bottom:24px}
+@media(min-width:900px){.h-desc{margin-left:auto}}
 
-    /* ===== Sections ===== */
-    section{
-      position:relative;
-      padding: clamp(64px,6.5vw,96px) 0;
-      overflow:hidden;
-      isolation:isolate;
-    }
-    .dark{
-      background:
-        radial-gradient(1200px 700px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
-        linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
-      color:#eaf0f7;
-    }
-    .light{
-      background: linear-gradient(180deg, #ffffff 0%, var(--paper) 100%);
-      color: var(--ink);
-    }
+.h-price-row{display:flex;align-items:flex-end;gap:12px;margin-bottom:20px}
+@media(min-width:900px){.h-price-row{justify-content:flex-end}}
+.h-from{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:6px}
+.h-amt{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,14vw,88px);line-height:1;color:var(--a);letter-spacing:-1px}
+.h-unit{font-size:11px;color:var(--mid);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
 
-    /* dust + glow */
-    .dust{
-      position:absolute; inset:-40px;
-      pointer-events:none;
-      opacity:.25;
-      background:
-        radial-gradient(2px 2px at 12% 20%, rgba(255,255,255,.35) 40%, transparent 42%),
-        radial-gradient(2px 2px at 70% 30%, rgba(255,255,255,.18) 40%, transparent 42%),
-        radial-gradient(2px 2px at 80% 70%, rgba(255,255,255,.14) 40%, transparent 42%),
-        radial-gradient(2px 2px at 30% 75%, rgba(255,255,255,.12) 40%, transparent 42%),
-        radial-gradient(2px 2px at 48% 44%, rgba(255,255,255,.12) 40%, transparent 42%);
-      animation: dustMove 10s ease-in-out infinite;
-    }
-    @keyframes dustMove{0%,100%{transform:translateY(0)}50%{transform:translateY(16px)}}
+.h-ctas{display:flex;gap:12px;flex-wrap:wrap}
+@media(min-width:900px){.h-ctas{justify-content:flex-end}}
+.btn-ac{
+  padding:14px 32px;background:var(--a);color:var(--k);
+  font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;
+  border:none;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;
+  flex:1;text-align:center;
+}
+@media(min-width:480px){.btn-ac{flex:none}}
+.btn-ac:hover{background:var(--a2);transform:translateY(-2px)}
+.btn-ol{
+  padding:14px 32px;background:transparent;color:var(--w);
+  font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;
+  border:1.5px solid rgba(240,238,233,.2);cursor:pointer;transition:all .2s;
+  text-decoration:none;display:inline-block;flex:1;text-align:center;
+}
+@media(min-width:480px){.btn-ol{flex:none}}
+.btn-ol:hover{border-color:var(--a);color:var(--a)}
 
-    .glow{
-      position:absolute; inset:-80px;
-      pointer-events:none;
-      background:
-        radial-gradient(700px 420px at 20% 20%, rgba(82,172,217,.20), transparent 60%),
-        radial-gradient(620px 420px at 80% 40%, rgba(82,172,217,.14), transparent 62%);
-      opacity:.9;
-      animation: glowDrift 9s ease-in-out infinite;
-    }
-    @keyframes glowDrift{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+/* scroll indicator */
+.h-scroll{
+  position:absolute;bottom:24px;right:24px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  animation:fUp .9s ease 1.1s both;
+}
+@media(min-width:900px){.h-scroll{right:56px;bottom:64px}}
+.h-scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,var(--a),transparent)}
+.h-scroll-txt{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(200,255,0,.3);writing-mode:vertical-rl;transform:rotate(180deg)}
 
-    /* ===== Hero ===== */
-    /* IMPORTANT: le hero “remplit” la zone sombre (plus de vide) */
-    .hero{
-      min-height: calc(100svh - var(--headerH));
-      display:grid;
-      align-items:center;          /* centre vertical = moins de vide */
-      padding-top: 0;
-      padding-bottom: 0;
-    }
+/* ── TICKER ── */
+.ticker{border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);overflow:hidden;padding:14px 0;background:var(--k2)}
+.ticker-t{display:flex;white-space:nowrap;animation:tick 30s linear infinite;width:max-content}
+.ti{
+  display:inline-flex;align-items:center;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;
+  color:rgba(240,238,233,.18);padding:0 28px;flex-shrink:0;gap:0;
+}
+.ti .s{color:var(--a);margin:0 6px;font-size:12px}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-    /* Desktop: gauche = droite */
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;  /* égal */
-      gap: 28px;
-      align-items: stretch;            /* les 2 colonnes prennent la même hauteur */
-    }
+/* ── FLEET ── */
+#fleet{padding:80px 0 0}
+@media(min-width:900px){#fleet{padding:120px 0 0}}
 
-    /* Colonne gauche en layout vertical */
-    .leftCol{
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      min-height: 100%;
-    }
+.fleet-hd{padding:0 24px;margin-bottom:48px}
+@media(min-width:900px){.fleet-hd{padding:0 56px;margin-bottom:72px;display:grid;grid-template-columns:auto 1fr;gap:0 60px;align-items:flex-end}}
 
-    .kicker{
-      text-transform:uppercase;
-      letter-spacing:.18em;
-      font-weight:900;
-      font-size:12px;
-      color: rgba(234,240,247,.72);
-      display:flex;align-items:center;gap:10px;
-      opacity:.86;
-      margin-top: 0;
-    }
-    .kicker:before{
-      content:"";
-      width:26px;height:2px;
-      background: linear-gradient(90deg, transparent, rgba(82,172,217,.95), transparent);
-      opacity:.9;
-    }
-    h1{
-      margin: 10px 0 0 0;
-      font-weight:950;
-      letter-spacing:-.06em;
-      line-height:.98;
-      font-size: clamp(46px, 4.7vw, 78px);
-    }
-    .accent{
-      color: var(--blue);
-      text-shadow: 0 18px 70px rgba(82,172,217,.20);
-    }
-    .sub{
-      margin: 10px 0 0 0;
-      color: rgba(234,240,247,.70);
-      font-weight:600;
-      line-height:1.7;
-      max-width: 54ch;
-    }
+.fn{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(100px,25vw,200px);
+  line-height:.8;color:var(--a);opacity:.12;
+  pointer-events:none;user-select:none;
+}
+.fleet-r{display:flex;flex-direction:column;gap:20px}
+.fleet-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(48px,12vw,96px);
+  line-height:.88;letter-spacing:-1px;
+}
+.fleet-sub{font-size:14px;font-weight:300;color:var(--mid);line-height:1.7;max-width:360px}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.fl{
+  padding:9px 20px;background:transparent;border:1px solid var(--ln);
+  color:var(--mid);font-family:'Inter',sans-serif;font-size:10px;
+  font-weight:500;letter-spacing:2.5px;text-transform:uppercase;
+  cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent;
+}
+.fl.on,.fl:hover{background:var(--a);color:var(--k);border-color:var(--a)}
 
-    /* ===== Zone localisation (plus large + plus “présente”) ===== */
-    .cityZone{
-      margin-top: 16px;
-      width: 100%;
-      border-radius: 20px;
-      padding: 16px;
-      background: linear-gradient(180deg, rgba(82,172,217,.16), rgba(82,172,217,.08));
-      border: 1px solid rgba(82,172,217,.26);
-      box-shadow:
-        0 22px 70px rgba(0,0,0,.55),
-        0 14px 40px rgba(82,172,217,.16),
-        0 0 0 1px rgba(82,172,217,.08) inset;
-      position:relative;
-      animation: zonePulse 2.2s ease-in-out infinite;
-    }
-    @keyframes zonePulse{
-      0%,100%{transform:translateY(0); filter:saturate(1)}
-      50%{transform:translateY(-2px); filter:saturate(1.05)}
-    }
-    .cityZone:before{
-      content:"";
-      position:absolute; inset:-2px;
-      border-radius: 22px;
-      background: radial-gradient(420px 220px at 20% 30%, rgba(82,172,217,.28), transparent 60%);
-      opacity:.75;
-      pointer-events:none;
-    }
+/* GRID */
+.fgrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2px;background:var(--k);
+}
+@media(min-width:700px){.fgrid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1100px){.fgrid{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1100px){.fgrid .cc:nth-child(1){grid-column:span 2}}
 
-    .suggest{
-      margin-top: 2px;
-      border-radius: 16px;
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.42);
-      backdrop-filter: blur(10px);
-      display:block;
-      position:relative;
-      z-index:2;
-    }
-    .sItem{
-      padding: 12px 14px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      border-top:1px solid rgba(255,255,255,.08);
-      font-weight:900;
-    }
-    .sItem:first-child{border-top:0}
-    .sMeta{
-      font-size:12px;
-      font-weight:800;
-      opacity:.75;
-      white-space:nowrap;
-    }
+.cc{
+  background:var(--k2);cursor:pointer;position:relative;overflow:hidden;
+  opacity:0;transform:translateY(18px);transition:opacity .45s,transform .45s,background .25s;
+  -webkit-tap-highlight-color:transparent;
+}
+.cc.vis{opacity:1;transform:translateY(0)}
+.cc:hover,.cc:active{background:var(--k3)}
+.cc.sel{outline:2px solid var(--a);outline-offset:-2px}
+.cc.sel::after{content:'✓ SÉLECTIONNÉ';position:absolute;top:0;right:0;
+  padding:6px 12px;background:var(--a);color:var(--k);
+  font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px}
 
-    /* ===== Bouton localisation ===== */
-    .locBtn{
-      margin-top: 12px;
-      width:100%;
-      border:0;
-      border-radius: 18px;
-      padding: 16px 16px;
-      cursor:pointer;
-      font-weight:980;
-      letter-spacing:-.02em;
-      font-size:15.5px;
-      color: rgba(8,10,12,.92);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      position:relative;
-      overflow:hidden;
+.cc-img{
+  height:180px;display:flex;align-items:center;justify-content:center;padding:20px;
+  position:relative;overflow:hidden;
+  background:radial-gradient(ellipse 70% 50% at 50% 70%,rgba(200,255,0,.04) 0%,transparent 80%);
+}
+@media(min-width:700px){.cc-img{height:220px}}
+@media(min-width:1100px){
+  .cc-img{height:240px}
+  .fgrid .cc:nth-child(1) .cc-img{height:360px}
+}
+.cc-img img{
+  max-width:100%;max-height:100%;object-fit:contain;
+  transition:transform .5s cubic-bezier(.16,1,.3,1),filter .3s;
+  filter:drop-shadow(0 10px 32px rgba(0,0,0,.5));
+}
+.cc:hover .cc-img img{transform:scale(1.06) translateY(-5px);filter:drop-shadow(0 16px 48px rgba(200,255,0,.14))}
 
-      background:
-        radial-gradient(900px 160px at 50% -15%, rgba(255,255,255,.55), transparent 65%),
-        linear-gradient(180deg, rgba(115,210,255,1), rgba(47,134,179,1));
+.cc-badge{
+  position:absolute;top:12px;left:12px;
+  padding:4px 10px;background:var(--a);color:var(--k);
+  font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;
+}
 
-      box-shadow:
-        0 24px 90px rgba(0,0,0,.60),
-        0 0 0 1px rgba(255,255,255,.16) inset,
-        0 16px 55px rgba(82,172,217,.22);
+.cc-info{padding:16px 18px 20px;border-top:1px solid var(--ln)}
+@media(min-width:700px){.cc-info{padding:20px 22px 24px}}
+.cc-cat{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--a);opacity:.7;margin-bottom:6px}
+.cc-name{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(20px,5vw,28px);
+  letter-spacing:.5px;line-height:1;margin-bottom:14px;
+}
+@media(min-width:1100px){.fgrid .cc:nth-child(1) .cc-name{font-size:36px}}
+.cc-specs{display:flex;gap:16px;padding:12px 0;border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);margin-bottom:14px}
+.sp{display:flex;flex-direction:column;gap:2px}
+.spv{font-size:12px;font-weight:500;color:var(--w)}
+.spk{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--mid)}
+.cc-foot{display:flex;align-items:center;justify-content:space-between}
+.cc-price{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,7vw,36px);letter-spacing:-0.5px;line-height:1}
+.cc-price sub{font-family:'Inter',sans-serif;font-size:9px;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);vertical-align:baseline}
+.cc-btn{
+  padding:9px 16px;border:1px solid rgba(200,255,0,.2);background:transparent;
+  color:var(--a);font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1px;
+  cursor:pointer;transition:all .2s;
+}
+.cc:hover .cc-btn,.cc.sel .cc-btn{background:var(--a);color:var(--k);border-color:var(--a)}
 
-      transform: translateY(0);
-      transition: transform .15s ease, filter .15s ease;
-      z-index:2;
-    }
-    .locBtn:after{
-      content:"";
-      position:absolute; inset:0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.50), transparent);
-      transform: translateX(-70%);
-      animation: sheen 2.2s ease-in-out infinite;
-      opacity:.7;
-    }
-    @keyframes sheen{
-      0%{transform:translateX(-70%);opacity:0}
-      25%{opacity:.8}
-      65%{opacity:.8}
-      100%{transform:translateX(70%);opacity:0}
-    }
-    @keyframes locPulse{0%,100%{transform: translateY(0)}50%{transform: translateY(-3px)}}
-    .locBtn:not(.disabled){ animation: locPulse 1.35s ease-in-out infinite; }
-    .locBtn:hover{ transform: translateY(-4px); filter: saturate(1.06) brightness(1.02); }
-    .locBtn:active{ transform: translateY(0); }
+/* ── BOOKING ── */
+#booking{
+  background:var(--w);color:var(--k);
+  padding:72px 24px;margin-top:2px;position:relative;overflow:hidden;
+}
+@media(min-width:900px){#booking{padding:120px 56px}}
 
-    .locBtn.disabled{
-      cursor:not-allowed;
-      opacity:.95;
-      background: rgba(255,255,255,.10);
-      color: rgba(255,255,255,.80);
-      border: 1px solid rgba(255,255,255,.12);
-      box-shadow: 0 22px 70px rgba(0,0,0,.35);
-      animation:none;
-    }
-    .locBtn.disabled:after{display:none}
+#booking::before{
+  content:'BOOK';position:absolute;right:-30px;top:20px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(80px,20vw,200px);
+  line-height:1;color:transparent;
+  -webkit-text-stroke:1px rgba(8,8,8,.05);
+  pointer-events:none;white-space:nowrap;
+}
 
-    .locIcon{
-      width:22px;height:22px;
-      display:grid;place-items:center;
-      border-radius: 12px;
-      background: rgba(11,15,20,.06);
-      border:1px solid rgba(11,15,20,.10);
-      box-shadow: 0 16px 40px rgba(0,0,0,.06) inset;
-    }
-    .locIcon svg{width:18px;height:18px;opacity:.95}
+.bk-wrap{max-width:1100px;margin:0 auto}
+@media(min-width:900px){.bk-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px}}
 
-    /* ===== Bouton téléphone ===== */
-    .callBtn{
-      width:100%;
-      border: 1px solid rgba(0,0,0,.10);
-      border-radius: 18px;
-      padding: 18px 16px;
-      cursor:pointer;
+.bk-tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--a);margin-bottom:16px;
+  /* force green visible on white bg */
+  color:#5a7a00}
+.bk-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(48px,12vw,80px);
+  line-height:.88;letter-spacing:-1px;color:var(--k);margin-bottom:28px;
+}
+.bk-title em{font-style:normal;color:var(--a);/* on white */color:#6b9200}
 
-      background:
-        radial-gradient(900px 140px at 50% -10%, rgba(255,255,255,.95), transparent 62%),
-        linear-gradient(180deg, var(--btnTop) 0%, var(--btnMid) 55%, var(--btnBot) 100%);
+.sel-pill{
+  display:none;align-items:center;gap:14px;
+  padding:14px 16px;background:#edecea;border-left:3px solid #6b9200;
+  margin-bottom:28px;
+}
+.sel-pill.show{display:flex}
+.sel-pill img{width:80px;height:44px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.15))}
+.sm{flex:1}
+.sm-cat{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#6b9200;margin-bottom:2px}
+.sm-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.5px;color:var(--k)}
+.sm-p{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:-0.5px;color:var(--k);text-align:right;white-space:nowrap}
+.sm-p span{display:block;font-family:'Inter',sans-serif;font-size:9px;font-weight:400;color:#888;letter-spacing:1px;text-transform:uppercase}
 
-      color: var(--btnInk);
-      font-weight:950;
-      letter-spacing:-.02em;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      position:relative;
-      overflow:hidden;
+.fform{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+.fg{display:flex;flex-direction:column;gap:6px}
+.fg.full{grid-column:1/-1}
+.fg label{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:#888}
+.fg input,.fg select{
+  padding:14px 14px;background:#edecea;border:1.5px solid transparent;
+  color:var(--k);font-family:'Inter',sans-serif;font-size:14px;font-weight:300;
+  outline:none;transition:border-color .2s;appearance:none;-webkit-appearance:none;
+  border-radius:0;font-size:16px; /* prevent iOS zoom */
+}
+.fg input:focus,.fg select:focus{border-color:#6b9200}
+.fg select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  background-color:#edecea;padding-right:36px;
+}
 
-      box-shadow:
-        0 34px 140px rgba(0,0,0,.72),
-        0 0 0 1px rgba(255,255,255,.75) inset,
-        0 18px 60px rgba(255,255,255,.12);
+.summ{display:none;grid-column:1/-1;background:#edecea;padding:20px}
+.summ.show{display:block}
+.sr{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(8,8,8,.06)}
+.sr:last-of-type{border-bottom:none}
+.sl2{font-size:13px;color:#666}
+.sv2{font-size:13px;font-weight:500}
+.stot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:14px;border-top:2px solid var(--k)}
+.stl{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px}
+.stv{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:-0.5px;color:#6b9200}
 
-      animation: callPulse 1.25s ease-in-out infinite;
-      transform: translateY(0);
-      transition: transform .15s ease, filter .15s ease;
-    }
-    @keyframes callPulse{
-      0%,100%{
-        transform: translateY(0);
-        box-shadow:
-          0 34px 140px rgba(0,0,0,.72),
-          0 0 0 1px rgba(255,255,255,.75) inset,
-          0 18px 60px rgba(255,255,255,.12);
-      }
-      50%{
-        transform: translateY(-4px);
-        box-shadow:
-          0 46px 170px rgba(0,0,0,.78),
-          0 0 0 1px rgba(255,255,255,.85) inset,
-          0 26px 80px rgba(255,255,255,.16);
-      }
-    }
-    .callBtn:after{
-      content:"";
-      position:absolute; inset:0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent);
-      transform: translateX(-70%);
-      animation: sheen2 2.0s ease-in-out infinite;
-      opacity:.75;
-    }
-    @keyframes sheen2{
-      0%{transform:translateX(-70%);opacity:0}
-      25%{opacity:.85}
-      65%{opacity:.85}
-      100%{transform:translateX(70%);opacity:0}
-    }
-    .callBtn:hover{ transform: translateY(-4px); filter: contrast(1.08) saturate(1.02); }
-    .callBtn:active{transform: translateY(0)}
+.bk-sub{
+  grid-column:1/-1;margin-top:4px;
+  padding:20px;background:var(--k);color:var(--w);border:none;
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(18px,4vw,22px);letter-spacing:3px;
+  cursor:pointer;transition:all .25s;width:100%;
+}
+.bk-sub:hover{background:#6b9200;transform:translateY(-2px)}
+.bk-sub:active{transform:translateY(0)}
 
-    .callLeft{display:flex; align-items:center; gap:12px; min-width:0;}
-    .callIcon{
-      width:44px;height:44px;border-radius:14px;
-      background: rgba(11,15,20,.05);
-      border: 1px solid rgba(11,15,20,.10);
-      display:grid;place-items:center;
-      box-shadow: 0 16px 40px rgba(0,0,0,.06) inset;
-      flex:0 0 auto;
-    }
-    .callIcon svg{width:20px;height:20px;opacity:.95}
-    .callText{min-width:0}
-    .callText b{display:block;font-size:15px;letter-spacing:-.02em;line-height:1.1;}
-    .callText span{
-      display:block;margin-top:4px;
-      font-size: 19px;font-weight:980;letter-spacing:-.03em;
-      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-    }
-    .callArrow{
-      width:46px;height:46px;border-radius:16px;
-      background: rgba(11,15,20,.05);
-      border: 1px solid rgba(11,15,20,.10);
-      display:grid;place-items:center;
-      flex:0 0 auto;
-      transition: transform .15s ease;
-    }
-    .callBtn:hover .callArrow{transform: translateX(2px)}
-    .callArrow svg{width:18px;height:18px;opacity:.95}
+.bk-feats{display:flex;flex-direction:column;gap:0;margin-top:40px}
+@media(min-width:900px){.bk-feats{margin-top:0}}
+.bfeat{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid rgba(8,8,8,.08)}
+.bfeat:first-child{padding-top:0;border-top:1px solid rgba(8,8,8,.08)}
+.bfi{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:1px;color:rgba(8,8,8,.1);flex-shrink:0;width:44px;line-height:1}
+.bft h4{font-size:14px;font-weight:500;margin-bottom:3px;color:var(--k)}
+.bft p{font-size:12px;font-weight:300;color:#888;line-height:1.6}
 
-    .localLinkWrap{margin-top: 10px;text-align:center;display:none;position:relative;z-index:2;}
-    .localLink{
-      display:inline-flex;align-items:center;gap:8px;
-      font-weight:850;font-size:13px;color: rgba(234,240,247,.82);
-      opacity:.95;padding: 10px 12px;border-radius: 999px;
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.10);
-      transition: transform .15s ease, background .15s ease;
-    }
-    .localLink:hover{transform: translateY(-1px); background: rgba(82,172,217,.14)}
-    .localLink svg{width:16px;height:16px;opacity:.9}
+/* ── STEPS ── */
+#steps{padding:72px 24px;border-top:1px solid var(--ln)}
+@media(min-width:900px){#steps{padding:120px 56px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}}
+.st-eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--a);margin-bottom:16px}
+.st-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,12vw,88px);line-height:.88;letter-spacing:-1px;margin-bottom:24px}
+.st-body{font-size:14px;font-weight:300;color:var(--mid);line-height:1.8;margin-bottom:40px;max-width:360px}
+.steps-list{display:flex;flex-direction:column}
+.step{
+  display:flex;gap:20px;padding:20px 0;border-top:1px solid var(--ln);
+  opacity:0;transform:translateY(14px);transition:all .45s;
+}
+.step.vis{opacity:1;transform:translateY(0)}
+.step.vis .sn{color:var(--a)}
+.sn{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:-1px;color:rgba(240,238,233,.08);line-height:1;width:52px;flex-shrink:0;transition:color .4s}
+.sc h4{font-size:14px;font-weight:500;margin-bottom:4px}
+.sc p{font-size:13px;font-weight:300;color:var(--mid);line-height:1.6}
 
-    .hint{margin-top: 10px;color: rgba(234,240,247,.75);font-weight:600;line-height:1.6;text-align:center;}
+.st-img{position:relative;margin-top:40px}
+@media(min-width:900px){.st-img{margin-top:0}}
+.st-img img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;filter:grayscale(20%)}
+.st-badge{
+  position:absolute;bottom:0;right:0;
+  padding:20px 24px;background:var(--a);
+}
+.st-bn{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:-1px;line-height:1;color:var(--k)}
+.st-bl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(8,8,8,.6);margin-top:4px}
 
-    /* chips + un petit “footer” du hero pour remplir la hauteur */
-    .chips{margin-top: 14px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
-    .chip{
-      display:inline-flex;gap:10px;align-items:center;
-      padding: 10px 12px;border-radius: 999px;
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.10);
-      color: rgba(234,240,247,.84);
-      font-weight:850;font-size:13px;
-    }
-    .chip svg{width:16px;height:16px;opacity:.9}
+/* ── REVIEWS ── */
+#reviews{padding:72px 24px;border-top:1px solid var(--ln)}
+@media(min-width:900px){#reviews{padding:120px 56px}}
+.rv-hd{margin-bottom:48px}
+@media(min-width:700px){.rv-hd{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:64px}}
+.rv-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,14vw,110px);line-height:.88;letter-spacing:-2px}
+.rv-title .ac{color:var(--a)}
+.rv-score{margin-top:20px}
+@media(min-width:700px){.rv-score{text-align:right;margin-top:0}}
+.rv-big{font-family:'Bebas Neue',sans-serif;font-size:72px;letter-spacing:-2px;line-height:1;color:var(--a)}
+.rv-stars{font-size:16px;color:var(--a);letter-spacing:3px}
+.rv-ct{font-size:11px;color:var(--mid);margin-top:4px;letter-spacing:.5px}
 
-    .heroBottom{
-      margin-top: 18px;
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:flex-start;
-      color: rgba(234,240,247,.72);
-      font-weight:700;
-      font-size:13px;
-    }
-    .hbPill{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      background: rgba(0,0,0,.26);
-      border: 1px solid rgba(255,255,255,.10);
-    }
-    .hbDot{
-      width:8px;height:8px;border-radius:99px;
-      background: var(--gold);
-      box-shadow: 0 0 0 4px rgba(216,178,85,.10);
-    }
+.rv-grid{display:grid;grid-template-columns:1fr;gap:2px;background:var(--ln)}
+@media(min-width:700px){.rv-grid{grid-template-columns:repeat(3,1fr)}}
+.rc{
+  background:var(--k2);padding:28px 24px;position:relative;
+  opacity:0;transform:translateY(14px);transition:all .45s;
+}
+@media(min-width:700px){.rc{padding:36px}}
+.rc.vis{opacity:1;transform:translateY(0)}
+.rc-top{width:32px;height:2px;background:var(--k2);margin-bottom:20px;transition:background .3s}
+.rc:hover .rc-top{background:var(--a)}
+.rc-stars{font-size:13px;color:var(--a);letter-spacing:3px;margin-bottom:16px}
+.rc-text{font-size:15px;font-weight:300;line-height:1.7;color:rgba(240,238,233,.7);margin-bottom:24px;font-style:italic}
+.rc-auth{display:flex;align-items:center;gap:12px}
+.rc-av{width:34px;height:34px;border-radius:50%;background:var(--a);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--k);flex-shrink:0}
+.rc-name{font-size:13px;font-weight:500}
+.rc-loc{font-size:11px;color:var(--mid);margin-top:1px}
 
-    /* ===== TITRES SECTIONS ===== */
-    .h2{
-      margin:0;
-      font-size: clamp(32px, 4vw, 52px);
-      letter-spacing:-.06em;
-      line-height:1.05;
-      font-weight:950;
-      text-align:center;
-    }
-    .h2 .blue{color: var(--blue)}
-    .pCenter{
-      margin: 12px auto 0;
-      max-width: 72ch;
-      text-align:center;
-      color: rgba(11,18,32,.65);
-      font-weight:600;
-      line-height:1.75;
-      font-size:16px;
-    }
+/* ── CTA STRIP ── */
+.cstrip{
+  padding:60px 24px;background:var(--a);
+  display:flex;flex-direction:column;gap:28px;
+  align-items:flex-start;
+}
+@media(min-width:700px){.cstrip{padding:80px 56px;flex-direction:row;align-items:center;justify-content:space-between;gap:40px}}
+.cstrip-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,10vw,72px);line-height:.9;letter-spacing:-1px;color:var(--k)}
+.cstrip-sub{font-size:14px;font-weight:300;color:rgba(8,8,8,.6);margin-top:10px;max-width:320px}
+.cstrip-btn{
+  padding:18px 48px;background:var(--k);color:var(--w);border:none;
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(18px,4vw,22px);letter-spacing:3px;
+  cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;
+  white-space:nowrap;flex-shrink:0;
+}
+.cstrip-btn:hover{background:#111;transform:scale(1.03)}
 
-    /* ===== SIDE CARD (stretch hauteur = remplit la zone) ===== */
-    .sideCard{
-      border-radius: 22px;
-      padding: 16px;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: 0 22px 70px rgba(0,0,0,.50);
-      overflow:hidden;
-      position:relative;
+/* ── FOOTER ── */
+footer{padding:60px 24px 32px;background:var(--k);border-top:1px solid var(--ln)}
+@media(min-width:900px){footer{padding:80px 56px 40px}}
+.ft{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:48px}
+@media(min-width:700px){.ft{grid-template-columns:2fr 1fr 1fr 1fr;gap:56px}}
+.ft-logo{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:5px;color:var(--w);display:block;margin-bottom:12px}
+.ft-logo em{color:var(--a);font-style:normal}
+.ft-desc{font-size:12px;font-weight:300;color:rgba(240,238,233,.25);line-height:1.8}
+.ft-col h6{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(240,238,233,.18);margin-bottom:16px}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.ft-col a{font-size:13px;font-weight:300;color:rgba(240,238,233,.35);text-decoration:none;transition:color .2s}
+.ft-col a:hover{color:var(--w)}
+.ft-bot{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--ln);flex-wrap:wrap;gap:8px}
+.ft-bot p{font-size:11px;color:rgba(240,238,233,.15)}
 
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;  /* prend toute la hauteur dispo */
-      min-height: 100%;
-    }
-    .sideCard:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(420px 220px at 30% 10%, rgba(82,172,217,.16), transparent 62%),
-        radial-gradient(420px 220px at 70% 40%, rgba(216,178,85,.08), transparent 62%);
-      pointer-events:none;
-      opacity:.9;
-    }
-    .sideInner{position:relative;z-index:2; display:flex; flex-direction:column; min-height:100%;}
-    .miniTitle{
-      font-weight:950;
-      letter-spacing:-.04em;
-      font-size:18px;
-      margin:0;
-    }
-    .miniSub{
-      margin:8px 0 0 0;
-      color: rgba(234,240,247,.72);
-      font-weight:600;
-      line-height:1.65;
-      font-size:14px;
-      max-width: 46ch;
-    }
+/* ── MODAL ── */
+.mbg{
+  position:fixed;inset:0;z-index:800;
+  background:rgba(8,8,8,.88);backdrop-filter:blur(20px);
+  display:flex;align-items:flex-end;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media(min-width:600px){.mbg{align-items:center}}
+.mbg.on{opacity:1;pointer-events:all}
+.mbox{
+  background:var(--k2);padding:48px 28px;width:100%;max-width:480px;
+  transform:translateY(32px);transition:transform .35s cubic-bezier(.16,1,.3,1);
+  border-top:3px solid var(--a);
+}
+@media(min-width:600px){.mbox{padding:64px;border-top:none;border-left:3px solid var(--a)}}
+.mbg.on .mbox{transform:translateY(0)}
+.mline{width:40px;height:3px;background:var(--a);margin-bottom:24px}
+.mtitle{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:-1px;line-height:.9;margin-bottom:14px}
+.msub{font-size:14px;font-weight:300;color:var(--mid);line-height:1.7;margin-bottom:32px}
+.mclose{
+  padding:14px 40px;background:var(--a);color:var(--k);border:none;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;
+  cursor:pointer;transition:background .2s;width:100%;
+}
+@media(min-width:600px){.mclose{width:auto}}
+.mclose:hover{background:var(--a2)}
 
-    .trustList{
-      margin-top: 14px;
-      display:grid;
-      gap:10px;
-    }
-    .trustItem{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      padding: 12px 12px;
-      border-radius: 16px;
-      background: rgba(0,0,0,.28);
-      border: 1px solid rgba(255,255,255,.10);
-    }
-    .trustIcon{
-      width:34px;height:34px;border-radius:12px;
-      display:grid;place-items:center;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      flex:0 0 auto;
-    }
-    .trustIcon svg{width:18px;height:18px}
-    .trustIcon path{stroke: rgba(234,240,247,.92)}
-    .trustText b{
-      display:block;
-      font-weight:950;
-      letter-spacing:-.02em;
-      font-size:14px;
-    }
-    .trustText span{
-      display:block;
-      margin-top:4px;
-      color: rgba(234,240,247,.72);
-      font-weight:650;
-      line-height:1.45;
-      font-size:13px;
-    }
-
-    .miniRule{
-      margin-top: auto;         /* pousse en bas = “remplit” la hauteur */
-      border-radius: 16px;
-      padding: 12px 12px;
-      background: rgba(0,0,0,.22);
-      border: 1px solid rgba(255,255,255,.10);
-      color: rgba(234,240,247,.78);
-      font-weight:650;
-      line-height:1.55;
-      font-size:12.5px;
-    }
-    .goldDot{
-      display:inline-block;
-      width:8px;height:8px;border-radius:99px;
-      background: var(--gold);
-      box-shadow: 0 0 0 4px rgba(216,178,85,.10);
-      transform: translateY(-1px);
-      margin-right:8px;
-    }
-
-    /* ===== Comment ça marche (timeline premium) ===== */
-    .timeline{
-      margin-top: 28px;
-      max-width: 980px;
-      margin-left:auto;
-      margin-right:auto;
-      position:relative;
-    }
-    .timelineLine{
-      position:absolute;
-      left: 24px;
-      right: 24px;
-      top: 26px;
-      height: 2px;
-      background: linear-gradient(90deg, rgba(47,134,179,.18), rgba(47,134,179,.55), rgba(47,134,179,.18));
-      border-radius: 999px;
-    }
-    .tGrid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      position:relative;
-    }
-    .tStep{
-      border-radius: 22px;
-      padding: 16px 16px 18px;
-      background: #fff;
-      border: 1px solid rgba(11,18,32,.10);
-      box-shadow: 0 22px 70px rgba(0,0,0,.10);
-      overflow:hidden;
-      position:relative;
-    }
-    .tTop{display:flex;align-items:center;gap:10px;margin-bottom: 10px;}
-    .tDot{
-      width:14px;height:14px;border-radius:999px;
-      background: var(--blue);
-      box-shadow: 0 0 0 6px rgba(82,172,217,.14);
-      flex:0 0 auto;
-      border: 1px solid rgba(47,134,179,.30);
-    }
-    .tNum{font-weight:950;letter-spacing:-.03em;color: rgba(11,18,32,.80);}
-    .tStep h3{margin:0;font-size:18px;letter-spacing:-.03em;font-weight:950;color: rgba(11,18,32,.92);}
-    .tStep p{margin:8px 0 0 0;color: rgba(11,18,32,.70);font-weight:600;line-height:1.7;}
-    .tAccent{
-      position:absolute; inset:0;
-      background:
-        radial-gradient(500px 160px at 20% -10%, rgba(82,172,217,.10), transparent 60%),
-        radial-gradient(500px 160px at 80% 10%, rgba(216,178,85,.08), transparent 62%);
-      opacity:.9;
-      pointer-events:none;
-    }
-
-    /* ===== Problèmes fréquents ===== */
-    .rows{margin-top:24px; display:grid; gap:12px; max-width: 920px; margin-left:auto; margin-right:auto;}
-    .row{
-      display:flex;justify-content:space-between;align-items:center;gap:14px;
-      padding: 16px 16px;
-      border-radius: 20px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-      box-shadow: 0 22px 70px rgba(0,0,0,.35);
-    }
-    .row b{font-weight:950;letter-spacing:-.02em}
-    .row small{opacity:.7;font-weight:750}
-
-    /* ===== Responsive ===== */
-    @media (max-width: 980px){
-      :root{ --headerH: 58px; }
-      section{ padding: 64px 0; }
-
-      .hero{
-        min-height: 0;
-        padding-top: 6px;
-        padding-bottom: 6px;
-        align-items: start;
-      }
-      .heroGrid{
-        grid-template-columns:1fr;
-        gap: 18px;
-        align-items: start;
-      }
-      h1,.sub{text-align:center}
-      .kicker{justify-content:center}
-      .cityZone{margin-left:auto;margin-right:auto}
-      .timelineLine{display:none;}
-      .tGrid{grid-template-columns:1fr;gap:12px;}
-      .heroBottom{justify-content:center}
-    }
-
-    @media (max-width: 420px){
-      section{ padding: 56px 0; }
-      .hero{ padding-top: 2px; }
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      .dust,.glow,.cityZone{animation:none!important}
-      .callBtn,.callBtn:after{animation:none!important}
-      .locBtn:not(.disabled),.locBtn:after{animation:none!important}
-    }
-  </style>
+/* Mobile tap friendly */
+@media(hover:none){
+  .cc-img img{transform:none!important;filter:drop-shadow(0 10px 32px rgba(0,0,0,.5))!important}
+  .cc:active{background:var(--k3)}
+  .cc:active .cc-img img{transform:scale(1.03) translateY(-3px)!important}
+}
+</style>
 </head>
-
 <body>
 
-  <div class="topbar">
-    <div class="wrap">
-      <div class="inner">
-        <div class="top-left">
-          <div class="logo" aria-hidden="true">
-            <img src="media/logob.png" alt="">
-          </div>
-        </div>
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">VEL<em>O</em>X</a>
+  <ul class="nav-links">
+    <li><a href="#fleet">Flotte</a></li>
+    <li><a href="#booking">Réservation</a></li>
+    <li><a href="#steps">Expérience</a></li>
+    <li><a href="#reviews">Avis</a></li>
+  </ul>
+  <div class="nav-r">
+    <a href="#booking" class="nav-cta">Réserver</a>
+  </div>
+</nav>
 
-        <div class="titleCenter">TrouverUnPlombier.ca</div>
-
-        <div class="top-right" aria-label="Note 4.9 sur 5">
-          <span class="stars" aria-hidden="true">
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 17.3l-5.9 3.6 1.6-6.7-5.2-4.5 6.9-.6L12 2.8l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3z"/></svg>
-          </span>
-          <span class="score">4.9 <span>/ 5</span></span>
-        </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hbg"></div>
+  <div class="hghost">VELOX</div>
+  <div class="hglow"></div>
+  <div class="hcar">
+    <img src="https://www.pngplay.com/wp-content/uploads/13/Lamborghini-Huracan-PNG-Background.png"
+         alt="Lamborghini Huracán"
+         onerror="this.outerHTML='<div style=\'text-align:center;font-size:100px;padding:60px 0\'>🏎️</div>'">
+  </div>
+  <div class="hcontent">
+    <div>
+      <div class="h-pill"><span class="h-dot"></span> Location Premium · Québec</div>
+      <h1 class="h-title">
+        <span class="ol">CONDUIRE</span>
+        <span class="ol">SANS</span>
+        <span class="ac">LIMITES.</span>
+      </h1>
+    </div>
+    <div class="h-right">
+      <p class="h-desc">Des machines d'exception. Une expérience irréprochable. Choisissez votre bolide, vivez la route.</p>
+      <div>
+        <div class="h-from">À partir de</div>
+        <div class="h-amt">$490</div>
+        <div class="h-unit">par jour</div>
+      </div>
+      <div class="h-ctas" style="margin-top:20px">
+        <a href="#fleet" class="btn-ac">Voir la flotte</a>
+        <a href="#booking" class="btn-ol">Réserver</a>
       </div>
     </div>
   </div>
+  <div class="h-scroll">
+    <div class="h-scroll-line"></div>
+    <div class="h-scroll-txt">Défiler</div>
+  </div>
+</section>
 
-  <!-- HERO -->
-  <section class="dark">
-    <div class="dust" aria-hidden="true"></div>
-    <div class="glow" aria-hidden="true"></div>
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-t">
+    <div class="ti">LAMBORGHINI<span class="s">◆</span></div>
+    <div class="ti">FERRARI<span class="s">◆</span></div>
+    <div class="ti">ROLLS-ROYCE<span class="s">◆</span></div>
+    <div class="ti">BENTLEY<span class="s">◆</span></div>
+    <div class="ti">PORSCHE<span class="s">◆</span></div>
+    <div class="ti">MERCEDES<span class="s">◆</span></div>
+    <div class="ti">RANGE ROVER<span class="s">◆</span></div>
+    <div class="ti">MCLAREN<span class="s">◆</span></div>
+    <div class="ti">LAMBORGHINI<span class="s">◆</span></div>
+    <div class="ti">FERRARI<span class="s">◆</span></div>
+    <div class="ti">ROLLS-ROYCE<span class="s">◆</span></div>
+    <div class="ti">BENTLEY<span class="s">◆</span></div>
+    <div class="ti">PORSCHE<span class="s">◆</span></div>
+    <div class="ti">MERCEDES<span class="s">◆</span></div>
+    <div class="ti">RANGE ROVER<span class="s">◆</span></div>
+    <div class="ti">MCLAREN<span class="s">◆</span></div>
+  </div>
+</div>
 
-    <div class="wrap hero">
-      <div class="heroGrid">
+<!-- FLEET -->
+<section id="fleet">
+  <div class="fleet-hd">
+    <div class="fn">08</div>
+    <div class="fleet-r">
+      <h2 class="fleet-title">CHOISISSEZ<br>VOTRE<br>MACHINE.</h2>
+      <p class="fleet-sub">8 véhicules d'exception sélectionnés pour leur puissance et leur caractère.</p>
+      <div class="filters">
+        <button class="fl on" onclick="filterCars('all',this)">Tous</button>
+        <button class="fl" onclick="filterCars('sport',this)">Sport</button>
+        <button class="fl" onclick="filterCars('luxury',this)">Luxe</button>
+        <button class="fl" onclick="filterCars('suv',this)">SUV</button>
+      </div>
+    </div>
+  </div>
+  <div class="fgrid" id="grid"></div>
+</section>
 
-        <!-- GAUCHE -->
-        <div class="leftCol">
-          <div class="kicker">Plomberie d’urgence</div>
-          <h1>Trouve un plombier <span class="accent">dans ta ville</span>.</h1>
-          <p class="sub">Active ta localisation, puis appelle immédiatement le bon numéro.</p>
+<!-- BOOKING -->
+<section id="booking">
+  <div class="bk-wrap">
+    <div>
+      <div class="bk-tag">— Réservation</div>
+      <h2 class="bk-title">VOTRE<br>PROCHAINE<br><em>AVENTURE.</em></h2>
 
-          <div class="cityZone">
-            <div id="switchZone" class="suggest" role="status" aria-live="polite">
-              <div class="sItem">
-                <div id="statusLine">Ville détectée (après activation)</div>
-                <div class="sMeta" id="statusMeta">On affichera le bon numéro</div>
-              </div>
-            </div>
+      <div class="sel-pill" id="selD">
+        <img id="selImg" src="" alt="">
+        <div class="sm">
+          <div class="sm-cat" id="selCat"></div>
+          <div class="sm-name" id="selName"></div>
+        </div>
+        <div class="sm-p" id="selPrc"><span>/ jour</span></div>
+      </div>
 
-            <button id="locBtn" class="locBtn" type="button">
-              <span class="locIcon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke="rgba(11,15,20,.92)" stroke-width="2"/>
-                  <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="rgba(11,15,20,.20)"/>
-                </svg>
-              </span>
-              <span id="locLabel">Activer ma localisation</span>
-            </button>
+      <div class="fform">
+        <div class="fg"><label>Départ</label><input type="date" id="d1" onchange="calc()"></div>
+        <div class="fg"><label>Retour</label><input type="date" id="d2" onchange="calc()"></div>
+        <div class="fg">
+          <label>Prise en charge</label>
+          <select><option>Montréal — YUL</option><option>Montréal — Centre-Ville</option><option>Québec — YQB</option><option>Sherbrooke</option></select>
+        </div>
+        <div class="fg">
+          <label>Lieu de retour</label>
+          <select><option>Montréal — YUL</option><option>Montréal — Centre-Ville</option><option>Québec — YQB</option><option>Sherbrooke</option></select>
+        </div>
+        <div class="fg"><label>Prénom</label><input type="text" placeholder="Jean" inputmode="text"></div>
+        <div class="fg"><label>Nom</label><input type="text" placeholder="Tremblay" inputmode="text"></div>
+        <div class="fg full"><label>Courriel</label><input type="email" placeholder="jean@exemple.com" inputmode="email"></div>
 
-            <div class="localLinkWrap" id="localLinkWrap">
-              <a class="localLink" id="localLink" href="trois-rivieres/" aria-label="Accéder à la page de Trois-Rivières">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M14 7l5 5-5 5" stroke="rgba(234,240,247,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M19 12H5" stroke="rgba(234,240,247,.92)" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                Accéder à la page de Trois-Rivières
-              </a>
-            </div>
-
-            <div class="hint" id="hintLine">Aucune demande de localisation sans ton clic.</div>
-
-            <div class="chips" aria-label="Atouts">
-              <span class="chip">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M20 6L9 17l-5-5" stroke="rgba(234,240,247,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg> Appel direct
-              </span>
-              <span class="chip">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke="rgba(234,240,247,.92)" stroke-width="2"/>
-                </svg> Service indépendant
-              </span>
-              <span class="chip">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M12 8v5l3 2" stroke="rgba(234,240,247,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="rgba(234,240,247,.92)" stroke-width="2"/>
-                </svg> Selon dispo
-              </span>
-            </div>
-          </div>
-
-          <!-- petit remplissage de hauteur (visuellement ça “occupe” la zone sombre) -->
-          <div class="heroBottom" aria-label="Infos rapides">
-            <span class="hbPill"><span class="hbDot"></span>Localisation seulement après ton clic</span>
-            <span class="hbPill">Appel direct (pas de formulaire)</span>
-          </div>
+        <div class="summ" id="summ">
+          <div class="sr"><span class="sl2" id="sv">—</span><span class="sv2" id="spd">—</span></div>
+          <div class="sr"><span class="sl2" id="sdy">—</span><span class="sv2" id="ssub">—</span></div>
+          <div class="sr"><span class="sl2">Assurance incluse</span><span class="sv2" style="color:#6b9200">✓</span></div>
+          <div class="sr"><span class="sl2">Kilométrage illimité</span><span class="sv2" style="color:#6b9200">✓</span></div>
+          <div class="stot"><span class="stl">TOTAL</span><span class="stv" id="stot">—</span></div>
         </div>
 
-        <!-- DROITE -->
-        <aside class="sideCard" aria-label="Infos confiance">
-          <div class="sideInner">
-            <div>
-              <p class="miniTitle">Service simple, sans détour</p>
-              <p class="miniSub">Tu actives la localisation (si tu veux), on affiche la bonne option, et tu appelles.</p>
-
-              <div class="trustList" aria-label="Points de confiance">
-                <div class="trustItem">
-                  <span class="trustIcon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                      <path d="M20 6L9 17l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </span>
-                  <div class="trustText">
-                    <b>Action immédiate</b>
-                    <span>Pas de formulaire. Tu passes directement à l’appel.</span>
-                  </div>
-                </div>
-
-                <div class="trustItem">
-                  <span class="trustIcon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                      <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z" stroke-width="2"/>
-                      <path d="M12 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" stroke-width="2"/>
-                    </svg>
-                  </span>
-                  <div class="trustText">
-                    <b>Localisation après ton clic</b>
-                    <span>Aucune demande automatique. C’est toi qui déclenche.</span>
-                  </div>
-                </div>
-
-                <div class="trustItem">
-                  <span class="trustIcon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                      <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke-width="2"/>
-                    </svg>
-                  </span>
-                  <div class="trustText">
-                    <b>Service indépendant</b>
-                    <span>Tu payes directement le professionnel (pas le site).</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="miniRule">
-              <span class="goldDot"></span>
-              <b style="font-weight:900">Important</b> : nous n’effectuons aucune réparation et ne facturons aucun travail.
-            </div>
-          </div>
-        </aside>
-
+        <button class="bk-sub" onclick="doBook()">CONFIRMER LA RÉSERVATION →</button>
       </div>
     </div>
-  </section>
 
-  <!-- LIGHT -->
-  <section class="light">
-    <div class="wrap">
-      <h2 class="h2">Comment ça <span class="blue">marche</span></h2>
-      <p class="pCenter">3 étapes. Zéro blabla. Juste l’action.</p>
+    <div class="bk-feats">
+      <div class="bfeat"><div class="bfi">01</div><div class="bft"><h4>Entretien quotidien</h4><p>Inspection complète et détailing avant chaque location.</p></div></div>
+      <div class="bfeat"><div class="bfi">02</div><div class="bft"><h4>Confirmation immédiate</h4><p>Réservation validée en moins de 3 minutes.</p></div></div>
+      <div class="bfeat"><div class="bfi">03</div><div class="bft"><h4>Livraison à domicile</h4><p>On amène la voiture là où vous êtes.</p></div></div>
+      <div class="bfeat"><div class="bfi">04</div><div class="bft"><h4>Annulation flexible</h4><p>Remboursement complet jusqu'à 48h avant.</p></div></div>
+      <div class="bfeat"><div class="bfi">05</div><div class="bft"><h4>Assistance 24h/24</h4><p>Notre équipe disponible à toute heure.</p></div></div>
+    </div>
+  </div>
+</section>
 
-      <div class="timeline" aria-label="Étapes">
-        <div class="timelineLine" aria-hidden="true"></div>
+<!-- STEPS -->
+<section id="steps">
+  <div>
+    <div class="st-eyebrow">Comment ça marche</div>
+    <h2 class="st-title">SIMPLE.<br>RAPIDE.<br>INOUBLIABLE.</h2>
+    <p class="st-body">De la sélection à la remise des clés, VELOX s'occupe de tout. Vous, concentrez-vous sur la route.</p>
+    <div class="steps-list">
+      <div class="step"><div class="sn">01</div><div class="sc"><h4>Choisissez votre véhicule</h4><p>Parcourez notre collection et sélectionnez la machine qui vous appelle.</p></div></div>
+      <div class="step"><div class="sn">02</div><div class="sc"><h4>Indiquez vos dates</h4><p>Sélectionnez dates et lieu de prise en charge. Prix total affiché en temps réel.</p></div></div>
+      <div class="step"><div class="sn">03</div><div class="sc"><h4>On s'occupe du reste</h4><p>Confirmation instantanée. Livraison où vous voulez. Route ouverte.</p></div></div>
+    </div>
+  </div>
+  <div class="st-img">
+    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&q=90" alt="Voiture sport">
+    <div class="st-badge">
+      <div class="st-bn">★ 4.9</div>
+      <div class="st-bl">1 200+ Avis Google</div>
+    </div>
+  </div>
+</section>
 
-        <div class="tGrid">
-          <div class="tStep">
-            <div class="tAccent" aria-hidden="true"></div>
-            <div class="tTop">
-              <span class="tDot" aria-hidden="true"></span>
-              <span class="tNum">01</span>
-            </div>
-            <h3>Autorise la localisation</h3>
-            <p>Uniquement après ton clic. Aucun tracking automatique.</p>
-          </div>
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="rv-hd">
+    <h2 class="rv-title">ILS ONT<br>VÉCU <span class="ac">VELOX.</span></h2>
+    <div class="rv-score">
+      <div class="rv-big">4.9</div>
+      <div class="rv-stars">★★★★★</div>
+      <div class="rv-ct">Basé sur 1 247 avis</div>
+    </div>
+  </div>
+  <div class="rv-grid">
+    <div class="rc">
+      <div class="rc-top"></div>
+      <div class="rc-stars">★★★★★</div>
+      <p class="rc-text">« La Lamborghini était dans un état impeccable. Livraison à l'hôtel à l'heure pile. Une expérience que je ne suis pas prêt d'oublier. »</p>
+      <div class="rc-auth"><div class="rc-av">AL</div><div><div class="rc-name">Alexandre L.</div><div class="rc-loc">Montréal, QC</div></div></div>
+    </div>
+    <div class="rc">
+      <div class="rc-top"></div>
+      <div class="rc-stars">★★★★★</div>
+      <p class="rc-text">« Ferrari 488 pour notre anniversaire — parfait du premier au dernier kilomètre. Le service VELOX est dans une classe à part. »</p>
+      <div class="rc-auth"><div class="rc-av" style="background:#555">MG</div><div><div class="rc-name">Mathieu G.</div><div class="rc-loc">Sherbrooke, QC</div></div></div>
+    </div>
+    <div class="rc">
+      <div class="rc-top"></div>
+      <div class="rc-stars">★★★★★</div>
+      <p class="rc-text">« Le Rolls-Royce pour notre mariage : un rêve total. Je recommande VELOX sans la moindre hésitation. »</p>
+      <div class="rc-auth"><div class="rc-av" style="background:#333">SC</div><div><div class="rc-name">Sophie C.</div><div class="rc-loc">Québec, QC</div></div></div>
+    </div>
+  </div>
+</section>
 
-          <div class="tStep">
-            <div class="tAccent" aria-hidden="true"></div>
-            <div class="tTop">
-              <span class="tDot" aria-hidden="true"></span>
-              <span class="tNum">02</span>
-            </div>
-            <h3>On détecte ta ville</h3>
-            <p>On choisit le numéro qui correspond (ou un numéro général).</p>
-          </div>
+<!-- CTA -->
+<div class="cstrip">
+  <div>
+    <h2 class="cstrip-title">PRÊT À<br>PRENDRE<br>LE VOLANT?</h2>
+    <p class="cstrip-sub">Réservez maintenant et vivez l'expérience VELOX dès demain.</p>
+  </div>
+  <a href="#booking" class="cstrip-btn">RÉSERVER →</a>
+</div>
 
-          <div class="tStep">
-            <div class="tAccent" aria-hidden="true"></div>
-            <div class="tTop">
-              <span class="tDot" aria-hidden="true"></span>
-              <span class="tNum">03</span>
-            </div>
-            <h3>Tu appelles</h3>
-            <p>Appel immédiat. Si Trois-Rivières : lien vers la page locale.</p>
-          </div>
+<!-- FOOTER -->
+<footer>
+  <div class="ft">
+    <div>
+      <span class="ft-logo">VEL<em>O</em>X</span>
+      <p class="ft-desc">Location de véhicules d'exception au Québec. L'excellence automobile, sans compromis.</p>
+    </div>
+    <div class="ft-col">
+      <h6>Navigation</h6>
+      <ul>
+        <li><a href="#fleet">Notre flotte</a></li>
+        <li><a href="#booking">Réservation</a></li>
+        <li><a href="#steps">Comment ça marche</a></li>
+        <li><a href="#reviews">Avis clients</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h6>Localisations</h6>
+      <ul>
+        <li><a href="#">Montréal</a></li>
+        <li><a href="#">Québec</a></li>
+        <li><a href="#">Sherbrooke</a></li>
+        <li><a href="#">Laval</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h6>Contact</h6>
+      <ul>
+        <li><a href="#">info@velox.ca</a></li>
+        <li><a href="#">819 555-0190</a></li>
+        <li><a href="#">Lun–Dim · 8h–20h</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <p>© 2026 VELOX Premium Car Rental. Tous droits réservés.</p>
+    <p>Confidentialité · Conditions</p>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="mbg" id="modal">
+  <div class="mbox">
+    <div class="mline"></div>
+    <h3 class="mtitle">RÉSERVATION<br>CONFIRMÉE.</h3>
+    <p class="msub">Votre réservation est enregistrée. Un courriel de confirmation arrive dans quelques minutes.</p>
+    <button class="mclose" onclick="document.getElementById('modal').classList.remove('on')">PARFAIT, MERCI</button>
+  </div>
+</div>
+
+<script>
+// NAV
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('stuck',scrollY>60);
+},{passive:true});
+
+// FLEET
+const CARS=[
+  {id:1,name:'Lamborghini Huracán',cat:'sport',cl:'Supersport',price:1290,badge:'POPULAIRE',hp:'640',s:'2',tr:'Auto',img:'https://www.pngplay.com/wp-content/uploads/13/Lamborghini-Huracan-PNG-Background.png'},
+  {id:2,name:'Ferrari 488 GTB',cat:'sport',cl:'Supersport',price:1450,badge:'EXCLUSIF',hp:'670',s:'2',tr:'Auto',img:'https://www.pngplay.com/wp-content/uploads/12/Ferrari-488-PNG-Background.png'},
+  {id:3,name:'Porsche 911 GT3',cat:'sport',cl:'Sport GT',price:890,badge:null,hp:'510',s:'2',tr:'Man.',img:'https://www.pngplay.com/wp-content/uploads/8/Porsche-911-GT3-PNG-Clipart-Background.png'},
+  {id:4,name:'Mercedes Classe S',cat:'luxury',cl:'Berline Luxe',price:590,badge:null,hp:'435',s:'5',tr:'Auto',img:'https://www.pngplay.com/wp-content/uploads/8/Mercedes-Benz-S-Class-PNG-Clipart-Background.png'},
+  {id:5,name:'Rolls-Royce Phantom',cat:'luxury',cl:'Ultra Luxe',price:2100,badge:'PRESTIGE',hp:'563',s:'5',tr:'Auto',img:'https://www.pngplay.com/wp-content/uploads/8/Rolls-Royce-Phantom-PNG-Background.png'},
+  {id:6,name:'Bentley Continental GT',cat:'luxury',cl:'Grand Tourisme',price:1190,badge:null,hp:'635',s:'4',tr:'Auto',img:'https://www.pngplay.com/wp-content/uploads/8/Bentley-Continental-GT-PNG-Background.png'},
+  {id:7,name:'Range Rover Sport',cat:'suv',cl:'SUV Premium',price:490,badge:null,hp:'395',s:'5',tr:'Auto',img:'https://www.pngplay.com/wp-content/uploads/8/Range-Rover-PNG-Background.png'},
+  {id:8,name:'Lamborghini Urus',cat:'suv',cl:'SUV Supersport',price:990,badge:'NOUVEAU',hp:'650',s:'5',tr:'Auto',img:'https://www.pngplay.com/wp-content/uploads/13/Lamborghini-Urus-PNG-Background.png'},
+];
+
+let picked=null;
+
+function render(f){
+  const g=document.getElementById('grid');
+  const list=f==='all'?CARS:CARS.filter(c=>c.cat===f);
+  g.innerHTML=list.map((c,i)=>`
+    <div class="cc${picked&&picked.id===c.id?' sel':''}" id="c${c.id}"
+         onclick="pick(${c.id})"
+         style="transition-delay:${i*45}ms">
+      ${c.badge?`<div class="cc-badge">${c.badge}</div>`:''}
+      <div class="cc-img">
+        <img src="${c.img}" alt="${c.name}"
+             onerror="this.outerHTML='<div style=\\'font-size:72px;padding:30px 0;text-align:center\\'>🏎️</div>'">
+      </div>
+      <div class="cc-info">
+        <div class="cc-cat">${c.cl}</div>
+        <div class="cc-name">${c.name}</div>
+        <div class="cc-specs">
+          <div class="sp"><span class="spv">${c.hp} ch</span><span class="spk">Puissance</span></div>
+          <div class="sp"><span class="spv">${c.s}</span><span class="spk">Places</span></div>
+          <div class="sp"><span class="spv">${c.tr}</span><span class="spk">Boîte</span></div>
+        </div>
+        <div class="cc-foot">
+          <div class="cc-price">$${c.price.toLocaleString()}<sub>/jr</sub></div>
+          <button class="cc-btn">Choisir</button>
         </div>
       </div>
     </div>
-  </section>
+  `).join('');
+  setTimeout(()=>document.querySelectorAll('.cc').forEach(el=>obs.observe(el)),10);
+}
 
-  <!-- DARK -->
-  <section class="dark">
-    <div class="dust" aria-hidden="true"></div>
-    <div class="glow" aria-hidden="true"></div>
+function filterCars(f,btn){
+  document.querySelectorAll('.fl').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  render(f);
+}
 
-    <div class="wrap">
-      <h2 class="h2" style="color:#eaf0f7">Problèmes <span class="accent">fréquents</span>.</h2>
-      <p class="pCenter" style="color:rgba(234,240,247,.70)">Courant. Clair. Sans blabla.</p>
+function pick(id){
+  const c=CARS.find(x=>x.id===id);
+  if(!c)return;
+  if(picked){const p=document.getElementById('c'+picked.id);if(p)p.classList.remove('sel')}
+  picked=c;
+  document.getElementById('c'+c.id).classList.add('sel');
+  const sd=document.getElementById('selD');
+  sd.classList.add('show');
+  document.getElementById('selImg').src=c.img;
+  document.getElementById('selCat').textContent=c.cl;
+  document.getElementById('selName').textContent=c.name;
+  document.getElementById('selPrc').innerHTML='$'+c.price.toLocaleString()+'<span>/ jour</span>';
+  calc();
+  setTimeout(()=>document.getElementById('booking').scrollIntoView({behavior:'smooth'}),220);
+}
 
-      <div class="rows" aria-label="Services">
-        <div class="row"><b>Fuite d’eau</b><small>tuyau • valve • dégâts</small></div>
-        <div class="row"><b>Toilette bouchée</b><small>déblocage</small></div>
-        <div class="row"><b>Chauffe-eau</b><small>panne • remplacement</small></div>
-        <div class="row"><b>Drain / égout</b><small>refoulement</small></div>
-        <div class="row"><b>Robinet / pression</b><small>cartouche • ajustement</small></div>
-      </div>
-    </div>
-  </section>
+function calc(){
+  if(!picked)return;
+  const s=document.getElementById('d1').value,e=document.getElementById('d2').value;
+  if(!s||!e)return;
+  const days=Math.max(1,Math.round((new Date(e)-new Date(s))/864e5));
+  const sub=picked.price*days;
+  const summ=document.getElementById('summ');
+  summ.classList.add('show');
+  document.getElementById('sv').textContent=picked.name;
+  document.getElementById('spd').textContent='$'+picked.price.toLocaleString()+' / jour';
+  document.getElementById('sdy').textContent=days+' jour'+(days>1?'s':'');
+  document.getElementById('ssub').textContent='$'+sub.toLocaleString();
+  document.getElementById('stot').textContent='$'+sub.toLocaleString();
+}
 
-  <!-- LIGHT -->
-  <section class="light">
-    <div class="wrap">
-      <h2 class="h2">Mentions <span class="blue">légales</span></h2>
-      <p class="pCenter">
-        TrouverUnPlombier.ca est un service indépendant de mise en relation. Nous n’effectuons aucune réparation.
-        Vous contractez et payez directement le professionnel.
-      </p>
-    </div>
-  </section>
+function doBook(){
+  if(!picked){
+    alert('Choisissez d\'abord un véhicule.');
+    document.getElementById('fleet').scrollIntoView({behavior:'smooth'});
+    return;
+  }
+  document.getElementById('modal').classList.add('on');
+}
 
-  <script>
-    // =========================
-    // NUMÉROS (mets tes vrais)
-    // =========================
-    const PHONE_TR_TEL = "+1-555-555-5555";
-    const PHONE_TR_UI  = "+1 (555) 555-5555";
+// Default dates
+const t=new Date(),r=new Date(t);r.setDate(t.getDate()+3);
+document.getElementById('d1').value=t.toISOString().split('T')[0];
+document.getElementById('d2').value=r.toISOString().split('T')[0];
 
-    const PHONE_OTHER_TEL = "+1-873-339-1815";
-    const PHONE_OTHER_UI  = "+1 (873) 339-1815";
+// Intersection observer
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}});
+},{threshold:.05,rootMargin:'0px 0px -16px 0px'});
+document.querySelectorAll('.step,.rc').forEach(el=>obs.observe(el));
 
-    const SLUG_TR = "trois-rivieres/";
-
-    // =========================
-    // UI
-    // =========================
-    const switchZone = document.getElementById("switchZone");
-    const statusLine = document.getElementById("statusLine");
-    const statusMeta = document.getElementById("statusMeta");
-    const hintLine   = document.getElementById("hintLine");
-
-    const locBtn    = document.getElementById("locBtn");
-    const locLabel  = document.getElementById("locLabel");
-
-    const localLinkWrap = document.getElementById("localLinkWrap");
-    const localLink     = document.getElementById("localLink");
-
-    const norm = (s) => (s||"")
-      .toLowerCase()
-      .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
-      .replace(/[-’'.,]/g," ")
-      .replace(/\s+/g," ")
-      .trim();
-
-    function qs(name){
-      return new URLSearchParams(location.search).get(name);
-    }
-
-    async function reverseGeocode(lat, lon){
-      const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}&accept-language=fr`;
-      const res = await fetch(url, { headers: { "Accept": "application/json" } });
-      if(!res.ok) throw new Error("Reverse geocode failed");
-      return await res.json();
-    }
-
-    function showLoading(){
-      locBtn.classList.add("disabled");
-      locBtn.setAttribute("aria-disabled","true");
-      locLabel.textContent = "Autorise la localisation…";
-      statusLine.textContent = "Demande de localisation…";
-      statusMeta.textContent = "Une permission peut apparaître en haut";
-      hintLine.textContent = "Si rien n’apparaît : vérifie HTTPS + permission du navigateur.";
-    }
-
-    function mountPhoneButton(phoneUI, phoneTel){
-      switchZone.innerHTML = `
-        <button class="callBtn" id="callBtn" type="button">
-          <span class="callLeft">
-            <span class="callIcon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M22 16.9v3a2 2 0 0 1-2.2 2c-9.1-.7-16.3-7.9-17-17A2 2 0 0 1 4.9 2h3a2 2 0 0 1 2 1.7c.1.8.3 1.7.6 2.4a2 2 0 0 1-.5 2.1L9 9.2c1.5 2.7 3.7 4.9 6.4 6.4l1-1a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.4.6A2 2 0 0 1 22 16.9z"
-                      stroke="rgba(11,15,20,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            <span class="callText">
-              <b>Appel immédiat</b>
-              <span>${phoneUI}</span>
-            </span>
-          </span>
-
-          <span class="callArrow" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M5 12h12" stroke="rgba(11,15,20,.92)" stroke-width="2" stroke-linecap="round"/>
-              <path d="M13 6l6 6-6 6" stroke="rgba(11,15,20,.92)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-        </button>
-      `;
-
-      const btn = document.getElementById("callBtn");
-      btn.addEventListener("click", () => {
-        window.location.href = `tel:${phoneTel}`;
-      });
-    }
-
-    function showResult(city){
-      const cityClean = (city || "").trim();
-      const cityNorm = norm(cityClean);
-
-      const isTrois =
-        cityNorm.includes("trois rivieres") ||
-        cityNorm.includes("trois-rivieres");
-
-      locBtn.style.display = "none";
-
-      if(isTrois){
-        mountPhoneButton(PHONE_TR_UI, PHONE_TR_TEL);
-
-        localLinkWrap.style.display = "block";
-        localLink.href = SLUG_TR;
-
-        hintLine.textContent = `Ville détectée : ${cityClean || "Trois-Rivières"}`;
-      }else{
-        mountPhoneButton(PHONE_OTHER_UI, PHONE_OTHER_TEL);
-
-        localLinkWrap.style.display = "none";
-
-        hintLine.textContent = cityClean ? `Ville détectée : ${cityClean}` : "Ville détectée.";
-      }
-    }
-
-    function failToGeneral(reasonLine, metaLine){
-      statusLine.textContent = reasonLine;
-      statusMeta.textContent = metaLine;
-      hintLine.textContent = "Localisation non disponible → numéro général affiché.";
-      locBtn.style.display = "none";
-      localLinkWrap.style.display = "none";
-      mountPhoneButton(PHONE_OTHER_UI, PHONE_OTHER_TEL);
-    }
-
-    async function requestLocation(){
-      const mockCity = qs("mock_city");
-      if(mockCity){
-        showResult(mockCity);
-        return;
-      }
-
-      if(location.protocol !== "https:" && location.hostname !== "localhost"){
-        failToGeneral("Localisation bloquée (pas en HTTPS).", "Utilise GitHub Pages / HTTPS");
-        return;
-      }
-
-      if(!navigator.geolocation){
-        failToGeneral("Localisation non supportée.", "Numéro général affiché");
-        return;
-      }
-
-      if(navigator.permissions && navigator.permissions.query){
-        try{
-          const p = await navigator.permissions.query({ name: "geolocation" });
-          if(p.state === "denied"){
-            failToGeneral("Localisation refusée dans le navigateur.", "Cadenas à gauche → Autoriser");
-            return;
-          }
-        }catch(e){}
-      }
-
-      showLoading();
-
-      navigator.geolocation.getCurrentPosition(async (pos) => {
-        try{
-          const { latitude, longitude } = pos.coords;
-
-          statusLine.textContent = "Localisation trouvée…";
-          statusMeta.textContent = "Détection de la ville";
-
-          const data = await reverseGeocode(latitude, longitude);
-          const addr = data.address || {};
-          const city =
-            addr.city || addr.town || addr.village || addr.municipality || addr.county || "";
-
-          showResult(city || "");
-        }catch(e){
-          failToGeneral("Impossible de détecter la ville.", "Numéro général affiché");
-        }
-      }, () => {
-        failToGeneral("Localisation refusée ou indisponible.", "Numéro général affiché");
-      }, {
-        enableHighAccuracy: false,
-        timeout: 9000,
-        maximumAge: 60000
-      });
-    }
-
-    locBtn.addEventListener("click", () => {
-      if(locBtn.classList.contains("disabled")) return;
-      requestLocation();
-    });
-  </script>
+render('all');
+</script>
 </body>
 </html>
