@@ -1,739 +1,432 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VibeCommerce</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Vibby — Sell your vibe</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --bg:#f6f7f8;
-  --white:#ffffff;
-  --border:#e5e7eb;
-  --border2:#d1d5db;
-  --text:#111827;
-  --text2:#6b7280;
-  --text3:#9ca3af;
-  --accent:#635bff;
-  --accent-hover:#5851e8;
-  --accent-light:#f0efff;
-  --accent-border:#c7c4fd;
-  --green:#16a34a;
-  --green-bg:#f0fdf4;
-  --green-border:#bbf7d0;
-  --red:#dc2626;
-  --red-bg:#fef2f2;
-  --amber:#d97706;
-  --amber-bg:#fffbeb;
-  --amber-border:#fde68a;
-  --radius:10px;
-  --radius-sm:7px;
-  --radius-xs:5px;
-  --shadow:0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md:0 4px 12px rgba(0,0,0,0.08),0 1px 3px rgba(0,0,0,0.04);
+  --g:#00C27C;--g2:#00a368;--g3:#00e890;
+  --gl:rgba(0,194,124,0.08);--glb:rgba(0,194,124,0.18);
+  --bg:#f7f8f7;--w:#ffffff;
+  --b1:#0d1410;--b2:#5a6b5f;--b3:#9eb3a3;
+  --bd:#e4ebe5;--bd2:#ccdace;
 }
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;font-size:14px;line-height:1.5;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--w);color:var(--b1);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 
-/* SIDEBAR */
-.sidebar{width:230px;min-height:100vh;background:var(--white);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;}
-.sidebar-logo{padding:20px 18px;border-bottom:1px solid var(--border);}
-.logo-mark{display:flex;align-items:center;gap:9px;}
-.logo-icon{width:30px;height:30px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;}
-.logo-icon svg{width:15px;height:15px;}
-.logo-name{font-size:15px;font-weight:600;color:var(--text);letter-spacing:-0.3px;}
-.logo-sub{font-size:11px;color:var(--text3);margin-top:1px;}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:54px;display:flex;align-items:center;padding:0 32px;border-bottom:1px solid var(--bd);background:rgba(255,255,255,0.92);backdrop-filter:blur(14px);}
+.nav-in{max-width:1080px;width:100%;margin:0 auto;display:flex;align-items:center;}
+.logo{display:flex;align-items:center;gap:9px;text-decoration:none;}
+.logo-ic{width:28px;height:28px;background:var(--g);border-radius:7px;display:flex;align-items:center;justify-content:center;}
+.logo-ic svg{width:14px;height:14px;}
+.logo-n{font-size:16px;font-weight:800;color:var(--b1);letter-spacing:-.5px;}
+.nav-r{margin-left:auto;display:flex;gap:10px;align-items:center;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:7px;font-size:13px;font-weight:500;cursor:pointer;border:1px solid transparent;font-family:'Inter',sans-serif;transition:all .15s;white-space:nowrap;text-decoration:none;line-height:1.2;}
+.btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
+.btn-g{background:var(--g);color:#fff;font-weight:600;}
+.btn-g:hover{background:var(--g2);box-shadow:0 4px 14px rgba(0,194,124,.25);}
+.btn-o{background:var(--w);color:var(--b2);border-color:var(--bd2);}
+.btn-o:hover{color:var(--b1);border-color:var(--b3);}
+.btn-lg{padding:13px 26px;font-size:15px;border-radius:9px;}
 
-.sidebar-nav{padding:10px 10px;flex:1;overflow-y:auto;}
-.nav-label{font-size:10px;font-weight:600;color:var(--text3);letter-spacing:0.7px;text-transform:uppercase;padding:14px 8px 5px;}
-.nav-item{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:var(--radius-xs);color:var(--text2);cursor:pointer;font-size:13px;font-weight:400;transition:all 0.12s;margin-bottom:1px;user-select:none;}
-.nav-item:hover{background:#f9fafb;color:var(--text);}
-.nav-item.active{background:var(--accent-light);color:var(--accent);font-weight:500;}
-.nav-item svg{width:15px;height:15px;flex-shrink:0;}
-.nav-item.active svg{stroke:var(--accent);}
+/* HERO */
+.hero{padding:130px 32px 0;text-align:center;}
+.hero-in{max-width:700px;margin:0 auto;}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--bd2);background:var(--gl);border-radius:100px;padding:5px 14px 5px 10px;font-size:12px;font-weight:500;color:var(--g2);margin-bottom:24px;}
+.ey-dot{width:6px;height:6px;border-radius:50%;background:var(--g);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+h1{font-size:60px;font-weight:800;letter-spacing:-2.5px;line-height:1.0;color:var(--b1);margin-bottom:20px;}
+h1 .g{color:var(--g);}
+.hero-sub{font-size:17px;color:var(--b2);line-height:1.65;max-width:460px;margin:0 auto 32px;font-weight:400;}
+.hero-ctas{display:flex;justify-content:center;gap:10px;margin-bottom:14px;}
+.hero-note{font-size:12px;color:var(--b3);}
 
-.sidebar-footer{padding:14px;border-top:1px solid var(--border);}
-.stripe-badge{display:flex;align-items:center;gap:8px;padding:9px 11px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-xs);font-size:12px;}
-.s-dot{width:7px;height:7px;border-radius:50%;background:var(--border2);flex-shrink:0;transition:all 0.3s;}
-.s-dot.on{background:var(--green);box-shadow:0 0 0 3px #dcfce7;}
-.s-label{color:var(--text2);}
-
-/* TOPBAR */
-.main{margin-left:230px;flex:1;display:flex;flex-direction:column;min-height:100vh;}
-.topbar{height:52px;background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:10px;position:sticky;top:0;z-index:50;}
-.page-title{font-size:14px;font-weight:500;color:var(--text);flex:1;}
-.topbar-actions{display:flex;gap:8px;align-items:center;}
-
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:var(--radius-xs);font-size:13px;font-weight:500;cursor:pointer;border:1px solid transparent;font-family:'Inter',sans-serif;transition:all 0.12s;white-space:nowrap;line-height:1;}
-.btn svg{width:13px;height:13px;flex-shrink:0;}
-.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent);}
-.btn-primary:hover{background:var(--accent-hover);border-color:var(--accent-hover);}
-.btn-white{background:var(--white);color:var(--text);border-color:var(--border2);box-shadow:var(--shadow);}
-.btn-white:hover{background:#f9fafb;border-color:var(--border2);}
-.btn-sm{padding:5px 10px;font-size:12px;}
-
-/* PAGE */
-.page{padding:24px;flex:1;}
-.section{display:none;}.section.active{display:block;}
-.section-inner{max-width:680px;}
-
-/* CARDS */
-.card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:14px;}
-.card-head{padding:18px 20px;border-bottom:1px solid var(--border);}
-.card-head.no-border{border-bottom:none;padding-bottom:0;}
-.card-body{padding:18px 20px;}
-.card-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px;}
-.card-desc{font-size:12px;color:var(--text3);}
-.card-row{display:flex;align-items:center;justify-content:space-between;}
-
-/* FORM */
-.form-group{margin-bottom:14px;}
-.form-group:last-child{margin-bottom:0;}
-.label{display:block;font-size:12px;font-weight:500;color:var(--text2);margin-bottom:5px;}
-.input{width:100%;background:var(--white);border:1px solid var(--border2);border-radius:var(--radius-xs);padding:8px 11px;font-size:13px;color:var(--text);font-family:'Inter',sans-serif;outline:none;transition:border 0.12s;line-height:1.4;}
-.input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,91,255,0.1);}
-.input::placeholder{color:var(--text3);}
-.input.mono{font-family:'SFMono-Regular',Consolas,monospace;font-size:12px;letter-spacing:0.2px;}
-textarea.input{min-height:170px;resize:vertical;line-height:1.6;}
-select.input{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:30px;}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
-
-/* BADGE */
-.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:100px;font-size:11px;font-weight:500;}
-.badge svg{width:5px;height:5px;}
-.badge-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);}
-.badge-amber{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border);}
-.badge-purple{background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-border);}
-.badge-gray{background:#f3f4f6;color:var(--text2);border:1px solid var(--border);}
-
-/* ALERT */
-.alert{display:none;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:var(--radius-xs);font-size:13px;margin-bottom:14px;}
-.alert.show{display:flex;}
-.alert svg{width:15px;height:15px;flex-shrink:0;margin-top:1px;}
-.alert-success{background:var(--green-bg);border:1px solid var(--green-border);color:var(--green);}
-.alert-error{background:var(--red-bg);border:1px solid #fecaca;color:var(--red);}
+/* PREVIEW */
+.preview{max-width:920px;margin:52px auto 0;padding:0 32px;}
+.browser{background:var(--w);border:1px solid var(--bd);border-radius:14px;overflow:hidden;box-shadow:0 2px 4px rgba(0,0,0,.04),0 12px 40px rgba(0,0,0,.08),0 40px 80px rgba(0,0,0,.06);}
+.bbar{height:36px;background:var(--bg);border-bottom:1px solid var(--bd);display:flex;align-items:center;padding:0 14px;gap:6px;}
+.bd_{width:10px;height:10px;border-radius:50%;}
+.burl{flex:1;background:var(--w);border:1px solid var(--bd);border-radius:5px;height:22px;margin:0 14px;display:flex;align-items:center;padding:0 10px;gap:6px;}
+.burl-dot{width:7px;height:7px;border-radius:50%;background:var(--g);}
+.burl-t{font-size:11px;color:var(--b3);font-family:monospace;}
+.app{display:flex;height:400px;}
+.rail{width:50px;background:var(--w);border-right:1px solid var(--bd);display:flex;flex-direction:column;align-items:center;padding:12px 0;gap:6px;flex-shrink:0;}
+.r-logo{width:26px;height:26px;background:var(--g);border-radius:6px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;}
+.r-logo svg{width:12px;height:12px;}
+.r-ic{width:30px;height:30px;border-radius:6px;background:var(--bg);}
+.r-ic.on{background:var(--gl);border:1px solid var(--bd2);}
+.app-main{flex:1;background:var(--bg);display:flex;flex-direction:column;}
+.app-top{height:42px;background:var(--w);border-bottom:1px solid var(--bd);display:flex;align-items:center;padding:0 18px;gap:8px;flex-shrink:0;}
+.app-top-t{font-size:13px;font-weight:600;color:var(--b1);flex:1;}
+.live-badge{display:flex;align-items:center;gap:5px;background:var(--gl);border:1px solid var(--bd2);color:var(--g2);font-size:10px;font-weight:600;padding:3px 9px;border-radius:100px;}
+.live-d{width:5px;height:5px;border-radius:50%;background:var(--g);animation:blink 2s infinite;}
+.app-body{flex:1;padding:16px;overflow:hidden;}
 
 /* METRICS */
-.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;}
-.metric{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);}
-.metric-label{font-size:11px;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
-.metric-value{font-size:24px;font-weight:600;color:var(--text);letter-spacing:-0.5px;line-height:1;}
-.metric-trend{font-size:11px;color:var(--text3);margin-top:5px;}
-.metric-trend.up{color:var(--green);}
+.mets{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;}
+.met{background:var(--w);border:1px solid var(--bd);border-radius:8px;padding:11px 13px;}
+.met-l{font-size:9px;font-weight:600;color:var(--b3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+.met-v{font-size:19px;font-weight:700;color:var(--b1);letter-spacing:-.5px;line-height:1;}
+.met-v.g{color:var(--g);}
+.met-s{font-size:10px;color:var(--g);margin-top:3px;font-weight:500;}
 
-/* TABLE */
-.table-wrap{overflow:auto;}
-table{width:100%;border-collapse:collapse;}
-thead th{text-align:left;font-size:11px;font-weight:600;color:var(--text3);letter-spacing:0.4px;text-transform:uppercase;padding:9px 16px;border-bottom:1px solid var(--border);background:#fafafa;}
-tbody td{padding:12px 16px;font-size:13px;color:var(--text);border-bottom:1px solid var(--border);}
-tbody tr:last-child td{border-bottom:none;}
-tbody tr:hover td{background:#fafafa;}
+/* CHART CARD */
+.chart-card{background:var(--w);border:1px solid var(--bd);border-radius:8px;padding:13px;margin-bottom:10px;}
+.chart-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
+.chart-lbl{font-size:10px;font-weight:600;color:var(--b3);text-transform:uppercase;letter-spacing:.4px;}
+.chart-big{font-size:22px;font-weight:700;color:var(--b1);letter-spacing:-.5px;line-height:1;}
+.chart-up{font-size:10px;color:var(--g);font-weight:600;margin-top:2px;}
+.chart-area{height:72px;}
+svg.ch{width:100%;height:100%;}
 
-/* PRODUCTS */
-.product-row{display:flex;align-items:center;gap:13px;padding:13px 0;border-bottom:1px solid var(--border);}
-.product-row:last-child{border-bottom:none;}
-.product-thumb{width:42px;height:42px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-xs);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
-.product-name{font-size:13px;font-weight:500;color:var(--text);}
-.product-sub{font-size:12px;color:var(--text3);margin-top:2px;}
+/* ORDERS */
+.ord-card{background:var(--w);border:1px solid var(--bd);border-radius:8px;padding:11px 13px;}
+.ord-lbl{font-size:9px;font-weight:600;color:var(--b3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
+.ord-row{display:flex;align-items:center;gap:9px;padding:4px 0;border-bottom:1px solid var(--bd);}
+.ord-row:last-child{border-bottom:none;}
+.ord-av{width:20px;height:20px;border-radius:50%;background:var(--gl);border:1px solid var(--bd2);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:var(--g2);flex-shrink:0;}
+.ord-n{font-size:11px;font-weight:500;color:var(--b1);flex:1;}
+.ord-p{font-size:10px;color:var(--b3);}
+.ord-a{font-size:12px;font-weight:700;color:var(--b1);}
+.ord-b{font-size:9px;font-weight:600;background:var(--gl);color:var(--g2);border:1px solid var(--bd2);padding:2px 6px;border-radius:100px;}
+.ord-new{animation:drop .35s ease forwards;}
+@keyframes drop{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
 
-/* STEPS */
-.step{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid var(--border);}
+/* LOGOS STRIP */
+.strip{padding:28px 32px;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.strip-in{max-width:700px;margin:0 auto;text-align:center;}
+.strip-lbl{font-size:11px;color:var(--b3);font-weight:500;letter-spacing:.4px;text-transform:uppercase;margin-bottom:16px;}
+.strip-row{display:flex;justify-content:center;align-items:center;gap:36px;}
+.strip-item{font-size:13px;font-weight:600;color:var(--b3);}
+
+/* HOW */
+.how{padding:88px 32px;background:var(--bg);border-bottom:1px solid var(--bd);}
+.how-in{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.sec-ey{font-size:11px;font-weight:600;color:var(--g);text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px;}
+.sec-h{font-size:38px;font-weight:800;letter-spacing:-1.5px;line-height:1.05;margin-bottom:12px;}
+.sec-sub{font-size:15px;color:var(--b2);line-height:1.65;margin-bottom:36px;}
+.steps{display:flex;flex-direction:column;}
+.step{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid var(--bd);}
 .step:last-child{border-bottom:none;}
-.step-num{width:26px;height:26px;border-radius:50%;background:var(--accent-light);border:1px solid var(--accent-border);color:var(--accent);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
-.step-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;}
-.step-desc{font-size:12px;color:var(--text2);line-height:1.6;}
+.sn{width:24px;height:24px;border-radius:50%;background:var(--w);border:1px solid var(--bd2);color:var(--b2);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.st{font-size:13px;font-weight:600;color:var(--b1);margin-bottom:3px;}
+.sd{font-size:12px;color:var(--b2);line-height:1.6;}
+.code-box{background:var(--w);border:1px solid var(--bd);border-radius:10px;overflow:hidden;}
+.code-top{padding:11px 14px;border-bottom:1px solid var(--bd);font-size:10px;font-weight:600;color:var(--b3);text-transform:uppercase;letter-spacing:.4px;}
+.code-body{padding:14px 16px;}
+.cl{font-family:'SFMono-Regular',Consolas,monospace;font-size:12px;color:var(--b2);line-height:1.8;}
+.cl .kw{color:#0077cc;}
+.cl .str{color:var(--g2);}
+.arr{text-align:center;padding:10px 0;font-size:16px;color:var(--g);}
+.tag{display:inline-flex;align-items:center;gap:5px;background:var(--gl);border:1px solid var(--bd2);border-radius:5px;padding:4px 10px;font-size:11px;font-weight:600;color:var(--g2);margin-bottom:5px;display:block;}
+.live-tag{margin-top:8px;background:rgba(0,194,124,.15);border:1px solid var(--bd2);border-radius:7px;padding:9px 12px;font-size:12px;font-weight:600;color:var(--g2);}
 
-/* CODE */
-.code{background:#f8fafc;border:1px solid var(--border);border-radius:var(--radius-xs);padding:13px 15px;font-family:'SFMono-Regular',Consolas,monospace;font-size:11.5px;color:#374151;line-height:1.7;overflow-x:auto;white-space:pre;margin-top:10px;}
+/* COMPARE */
+.cmp{padding:88px 32px;}
+.cmp-in{max-width:820px;margin:0 auto;text-align:center;}
+.cmp-t{margin-top:40px;border:1px solid var(--bd);border-radius:10px;overflow:hidden;}
+.ch_{display:grid;grid-template-columns:1.6fr 1fr 1fr;background:var(--bg);border-bottom:1px solid var(--bd);}
+.ch_ div{padding:11px 18px;font-size:11px;font-weight:600;color:var(--b3);text-transform:uppercase;letter-spacing:.4px;}
+.ch_ .hl{color:var(--g2);}
+.cr{display:grid;grid-template-columns:1.6fr 1fr 1fr;border-bottom:1px solid var(--bd);}
+.cr:last-child{border-bottom:none;}
+.cr div{padding:11px 18px;font-size:13px;color:var(--b2);}
+.cr div:first-child{font-weight:500;color:var(--b1);}
+.cr .ok{color:var(--g2);font-weight:600;}
+.cr .no{color:var(--b3);}
 
-/* DEPLOY OPTIONS */
-.deploy-options{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;}
-.deploy-opt{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius-xs);padding:13px 14px;cursor:pointer;transition:all 0.12s;display:flex;align-items:center;gap:10px;}
-.deploy-opt:hover{border-color:var(--border2);}
-.deploy-opt.sel{border-color:var(--accent);background:var(--accent-light);}
-.deploy-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
-.deploy-name{font-size:13px;font-weight:500;color:var(--text);}
-.deploy-sub{font-size:11px;color:var(--text3);margin-top:1px;}
+/* CTA */
+.cta{padding:110px 32px;text-align:center;border-top:1px solid var(--bd);}
+.cta-in{max-width:540px;margin:0 auto;}
+.cta h2{font-size:48px;font-weight:800;letter-spacing:-2px;line-height:1.0;margin-bottom:14px;}
+.cta h2 .g{color:var(--g);}
+.cta p{font-size:16px;color:var(--b2);margin-bottom:28px;}
+.cta-note{font-size:12px;color:var(--b3);margin-top:14px;}
 
-/* MODAL */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:200;display:none;align-items:center;justify-content:center;backdrop-filter:blur(2px);}
-.overlay.open{display:flex;}
-.modal{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-md);padding:24px;width:440px;max-width:90vw;}
-.modal-title{font-size:16px;font-weight:600;margin-bottom:18px;color:var(--text);}
-.modal-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:18px;}
-
-/* TOAST */
-.toast{position:fixed;bottom:20px;right:20px;background:var(--text);color:#fff;border-radius:var(--radius-xs);padding:11px 15px;font-size:13px;z-index:999;display:flex;align-items:center;gap:8px;opacity:0;transform:translateY(6px);transition:all 0.18s;pointer-events:none;box-shadow:var(--shadow-md);}
-.toast.show{opacity:1;transform:translateY(0);}
-.toast svg{width:14px;height:14px;color:#4ade80;}
-
-/* EMPTY */
-.empty{text-align:center;padding:40px 20px;color:var(--text3);}
-.empty svg{width:28px;height:28px;margin:0 auto 10px;display:block;opacity:0.25;}
-.empty-title{font-size:13px;font-weight:500;color:var(--text2);margin-bottom:4px;}
-.empty-sub{font-size:12px;}
-
-/* DIVIDER */
-.divider{height:1px;background:var(--border);margin:18px 0;}
-
-/* INJECT PREVIEW */
-.inject-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0;}
-.inject-item{text-align:center;padding:14px 10px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-xs);}
-.inject-icon{width:32px;height:32px;background:var(--accent-light);border-radius:var(--radius-xs);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;}
-.inject-icon svg{width:15px;height:15px;stroke:var(--accent);}
-.inject-name{font-size:12px;font-weight:500;color:var(--text);}
-.inject-sub{font-size:11px;color:var(--text3);margin-top:2px;}
-
-/* STRIPE BOX */
-.stripe-info-box{display:flex;align-items:center;gap:12px;background:#fafaff;border:1px solid var(--accent-border);border-radius:var(--radius-xs);padding:12px 14px;margin-top:14px;}
-.stripe-logo-text{font-size:20px;font-weight:700;color:var(--accent);letter-spacing:-1px;}
-
-/* SCROLLBAR */
-::-webkit-scrollbar{width:4px;height:4px;}
-::-webkit-scrollbar-track{background:transparent;}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px;}
+/* FOOTER */
+footer{border-top:1px solid var(--bd);padding:22px 32px;}
+.foot-in{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.foot-logo{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:var(--b1);}
+.foot-logo-ic{width:20px;height:20px;background:var(--g);border-radius:5px;display:flex;align-items:center;justify-content:center;}
+.foot-logo-ic svg{width:10px;height:10px;}
+.foot-copy{font-size:12px;color:var(--b3);}
+.foot-links{display:flex;gap:18px;}
+.foot-links a{font-size:12px;color:var(--b3);text-decoration:none;transition:color .12s;}
+.foot-links a:hover{color:var(--b1);}
 </style>
 </head>
 <body>
 
-<aside class="sidebar">
-  <div class="sidebar-logo">
-    <div class="logo-mark">
-      <div class="logo-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-      </div>
-      <div>
-        <div class="logo-name">VibeCommerce</div>
-        <div class="logo-sub">ecommerce sans friction</div>
-      </div>
+<nav>
+  <div class="nav-in">
+    <a class="logo" href="#">
+      <div class="logo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"><path d="M5 8L12 16L19 8"/></svg></div>
+      <span class="logo-n">vibby</span>
+    </a>
+    <div class="nav-r">
+      <a href="vibby.html" class="btn btn-o">Log in</a>
+      <a href="vibby.html" class="btn btn-g">Start for free →</a>
     </div>
   </div>
+</nav>
 
-  <nav class="sidebar-nav">
-    <div class="nav-label">Store</div>
-    <div class="nav-item active" onclick="go('setup',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
-      Configuration
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-in">
+    <div class="eyebrow"><span class="ey-dot"></span> Built for vibecoder</div>
+    <h1>Your site.<br><span class="g">Real money.</span><br>60 seconds.</h1>
+    <p class="hero-sub">Paste your vibecoded HTML. Vibby injects Stripe. Drop it anywhere. No backend, no server, no headaches.</p>
+    <div class="hero-ctas">
+      <a href="vibby.html" class="btn btn-g btn-lg">Get started free →</a>
+      <a href="#how" class="btn btn-o btn-lg">See how it works</a>
     </div>
-    <div class="nav-item" onclick="go('products',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
-      Produits
-    </div>
-    <div class="nav-item" onclick="go('generate',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-      Générer le site
-    </div>
-    <div class="nav-label">Gestion</div>
-    <div class="nav-item" onclick="go('orders',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-      Commandes
-    </div>
-    <div class="nav-item" onclick="go('deploy',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      Déploiement
-    </div>
-  </nav>
-
-  <div class="sidebar-footer">
-    <div class="stripe-badge">
-      <div class="s-dot" id="s-dot"></div>
-      <div class="s-label" id="s-label">Stripe non connecté</div>
-    </div>
-  </div>
-</aside>
-
-<main class="main">
-  <div class="topbar">
-    <div class="page-title" id="page-title">Configuration</div>
-    <div class="topbar-actions">
-      <button class="btn btn-white" onclick="go('generate',document.querySelectorAll('.nav-item')[2])">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        Générer
-      </button>
-      <button class="btn btn-primary" onclick="go('deploy',document.querySelectorAll('.nav-item')[4])">Déployer →</button>
-    </div>
+    <div class="hero-note">Free to start · No credit card required</div>
   </div>
 
-  <div class="page">
-
-    <!-- SETUP -->
-    <div class="section active section-inner" id="sec-setup">
-      <div class="card">
-        <div class="card-head">
-          <div class="card-row">
-            <div>
-              <div class="card-title">Connexion Stripe</div>
-              <div class="card-desc">Copie tes clés depuis dashboard.stripe.com → Developers → API keys</div>
-            </div>
-            <div class="stripe-logo-text">stripe</div>
-          </div>
-        </div>
-        <div class="card-body">
-          <div id="al-ok" class="alert alert-success">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            <div><strong>Stripe connecté.</strong> Tes paiements sont actifs.</div>
-          </div>
-          <div id="al-err" class="alert alert-error">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <div id="err-msg">Format invalide.</div>
-          </div>
-          <div class="form-group">
-            <label class="label">Clé publique</label>
-            <input class="input mono" id="pk" placeholder="pk_test_51..." />
-          </div>
-          <div class="form-group">
-            <label class="label">Clé secrète</label>
-            <input class="input mono" id="sk" type="password" placeholder="sk_test_51..." />
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;">
-            <button class="btn btn-primary" onclick="connectStripe()">Valider les clés</button>
-            <span style="font-size:12px;color:var(--text3);">Utilise pk_test_ / sk_test_ pour tester</span>
-          </div>
-          <div class="stripe-info-box">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-            <div>
-              <div style="font-size:12px;font-weight:500;color:var(--text);">Paiements via Stripe Checkout</div>
-              <div style="font-size:11px;color:var(--text3);margin-top:1px;">TLS · PCI-DSS · 3D Secure automatique</div>
-            </div>
-          </div>
+  <!-- BROWSER PREVIEW -->
+  <div class="preview">
+    <div class="browser">
+      <div class="bbar">
+        <div class="bd_" style="background:#ff5f57;"></div>
+        <div class="bd_" style="background:#ffbd2e;"></div>
+        <div class="bd_" style="background:#28c840;"></div>
+        <div class="burl">
+          <div class="burl-dot"></div>
+          <span class="burl-t">app.vibby.io/dashboard</span>
         </div>
       </div>
-
-      <div class="card">
-        <div class="card-head no-border"><div class="card-title">Infos du store</div></div>
-        <div class="card-body">
-          <div class="grid2" style="margin-bottom:14px;">
-            <div class="form-group"><label class="label">Nom du store</label><input class="input" id="sname" placeholder="Mon Store" /></div>
-            <div class="form-group"><label class="label">Email de contact</label><input class="input" id="semail" placeholder="hello@monstore.com" /></div>
-          </div>
-          <div class="form-group">
-            <label class="label">Devise</label>
-            <select class="input" id="scurrency" style="width:200px;">
-              <option value="cad">CAD — Dollar canadien</option>
-              <option value="usd">USD — Dollar américain</option>
-              <option value="eur">EUR — Euro</option>
-            </select>
-          </div>
+      <div class="app">
+        <div class="rail">
+          <div class="r-logo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"><path d="M5 8L12 16L19 8"/></svg></div>
+          <div class="r-ic"></div>
+          <div class="r-ic"></div>
+          <div class="r-ic on"></div>
+          <div style="flex:1;"></div>
+          <div class="r-ic"></div>
         </div>
-      </div>
-    </div>
-
-    <!-- PRODUCTS -->
-    <div class="section" id="sec-products" style="max-width:700px;">
-      <div class="card">
-        <div class="card-head">
-          <div class="card-row">
-            <div>
-              <div class="card-title">Produits</div>
-              <div class="card-desc" id="prod-count">0 produit</div>
-            </div>
-            <button class="btn btn-primary" onclick="openModal()">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              Ajouter un produit
-            </button>
+        <div class="app-main">
+          <div class="app-top">
+            <div class="app-top-t">Orders — October 2026</div>
+            <div class="live-badge"><span class="live-d"></span>Live Stripe</div>
           </div>
-        </div>
-        <div class="card-body" style="padding-top:4px;padding-bottom:4px;">
-          <div id="prod-list">
-            <div class="empty" id="prod-empty">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
-              <div class="empty-title">Aucun produit</div>
-              <div class="empty-sub">Clique sur "Ajouter un produit" pour commencer</div>
+          <div class="app-body">
+            <div class="mets">
+              <div class="met">
+                <div class="met-l">Revenue this month</div>
+                <div class="met-v g" id="rev">$10,847</div>
+                <div class="met-s">↑ +34% vs last month</div>
+              </div>
+              <div class="met">
+                <div class="met-l">Orders</div>
+                <div class="met-v" id="ord">89</div>
+                <div class="met-s">↑ +12 this week</div>
+              </div>
+              <div class="met">
+                <div class="met-l">Avg. order</div>
+                <div class="met-v">$121</div>
+                <div class="met-s">↑ vs $98 last mo.</div>
+              </div>
+              <div class="met">
+                <div class="met-l">Success rate</div>
+                <div class="met-v g">98.2%</div>
+                <div class="met-s">Stripe payments</div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- GENERATE -->
-    <div class="section section-inner" id="sec-generate">
-      <div id="gen-success" class="alert alert-success">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        <div style="flex:1;">
-          <strong>Site généré avec succès.</strong> Stripe injecté · Checkout actif · Page confirmation créée.
-          <div style="margin-top:8px;">
-            <button class="btn btn-white btn-sm" onclick="downloadHTML()">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Télécharger index.html
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-head no-border"><div class="card-title">Colle ton HTML ici</div><div class="card-desc">Le système injecte Stripe automatiquement sur chaque bouton d'achat.</div></div>
-        <div class="card-body">
-          <div class="form-group">
-            <textarea class="input mono" id="html-in" placeholder="<!DOCTYPE html>&#10;<html>&#10;  <body>&#10;    <h1>Mon produit</h1>&#10;    <!-- Ajoute data-product et data-price sur tes boutons -->&#10;    <button class=&quot;buy-btn&quot; data-product=&quot;sneaker&quot; data-price=&quot;14900&quot;>Acheter — 149$</button>&#10;  </body>&#10;</html>"></textarea>
-          </div>
-          <div class="inject-grid">
-            <div class="inject-item">
-              <div class="inject-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-              <div class="inject-name">Checkout Stripe</div>
-              <div class="inject-sub">Sur chaque bouton buy</div>
+            <div class="chart-card">
+              <div class="chart-top">
+                <div>
+                  <div class="chart-lbl">Revenue — last 30 days</div>
+                </div>
+                <div style="text-align:right;">
+                  <div class="chart-big">$10,847</div>
+                  <div class="chart-up">↑ +34% this month</div>
+                </div>
+              </div>
+              <div class="chart-area">
+                <svg class="ch" viewBox="0 0 560 72" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#00C27C" stop-opacity="0.18"/>
+                      <stop offset="100%" stop-color="#00C27C" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0,62 C30,58 60,55 90,52 C120,49 150,50 180,44 C210,38 240,35 270,30 C300,25 330,27 360,21 C390,15 420,17 450,11 C475,6 500,7 530,4 C542,3 550,2 560,2" fill="none" stroke="#00C27C" stroke-width="1.8" stroke-linecap="round"/>
+                  <path d="M0,62 C30,58 60,55 90,52 C120,49 150,50 180,44 C210,38 240,35 270,30 C300,25 330,27 360,21 C390,15 420,17 450,11 C475,6 500,7 530,4 C542,3 550,2 560,2 L560,72 L0,72 Z" fill="url(#cg)"/>
+                  <circle cx="558" cy="2" r="3.5" fill="#00C27C"/>
+                  <circle cx="558" cy="2" r="3.5" fill="none" stroke="#00C27C" stroke-opacity=".4">
+                    <animate attributeName="r" from="3.5" to="11" dur="2s" repeatCount="indefinite"/>
+                    <animate attributeName="stroke-opacity" from=".4" to="0" dur="2s" repeatCount="indefinite"/>
+                  </circle>
+                </svg>
+              </div>
             </div>
-            <div class="inject-item">
-              <div class="inject-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-              <div class="inject-name">Email confirmation</div>
-              <div class="inject-sub">Automatique post-achat</div>
-            </div>
-            <div class="inject-item">
-              <div class="inject-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-              <div class="inject-name">Page succès</div>
-              <div class="inject-sub">Générée automatiquement</div>
-            </div>
-          </div>
-          <button class="btn btn-primary" style="width:100%;justify-content:center;padding:10px;" onclick="generateSite()" id="gen-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            Générer mon site ecommerce
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ORDERS -->
-    <div class="section" id="sec-orders">
-      <div class="metrics">
-        <div class="metric"><div class="metric-label">Revenus (30j)</div><div class="metric-value" id="m-rev">—</div><div class="metric-trend" id="m-rev-sub">Connecte Stripe</div></div>
-        <div class="metric"><div class="metric-label">Commandes</div><div class="metric-value" id="m-ord">—</div><div class="metric-trend">Total du mois</div></div>
-        <div class="metric"><div class="metric-label">Panier moyen</div><div class="metric-value" id="m-avg">—</div><div class="metric-trend">Par transaction</div></div>
-        <div class="metric"><div class="metric-label">Taux succès</div><div class="metric-value" id="m-rate">—</div><div class="metric-trend">Paiements réussis</div></div>
-      </div>
-      <div class="card">
-        <div class="card-head">
-          <div class="card-row">
-            <div><div class="card-title">Commandes récentes</div><div class="card-desc">Synchronisé via Stripe API</div></div>
-            <button class="btn btn-white btn-sm" onclick="loadOrders()">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
-              Actualiser
-            </button>
-          </div>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>ID</th><th>Client</th><th>Montant</th><th>Date</th><th>Statut</th></tr></thead>
-            <tbody id="orders-body">
-              <tr><td colspan="5"><div class="empty" style="padding:28px 0;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><div class="empty-title">Connecte Stripe pour voir tes commandes</div><div class="empty-sub">Entre tes clés dans Configuration</div></div></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- DEPLOY -->
-    <div class="section section-inner" id="sec-deploy">
-      <div class="card">
-        <div class="card-head no-border"><div class="card-title">Déploie ton store en 3 étapes</div><div class="card-desc">Choisis ta plateforme et suis les instructions.</div></div>
-        <div class="card-body">
-          <div class="deploy-options">
-            <div class="deploy-opt sel" onclick="selDeploy(this)">
-              <div class="deploy-dot" style="background:#7c3aed;"></div>
-              <div><div class="deploy-name">Railway</div><div class="deploy-sub">Recommandé · Gratuit</div></div>
-            </div>
-            <div class="deploy-opt" onclick="selDeploy(this)">
-              <div class="deploy-dot" style="background:#111;border:1px solid #ccc;"></div>
-              <div><div class="deploy-name">Vercel</div><div class="deploy-sub">Serverless · Gratuit</div></div>
-            </div>
-            <div class="deploy-opt" onclick="selDeploy(this)">
-              <div class="deploy-dot" style="background:#46e3b7;"></div>
-              <div><div class="deploy-name">Render</div><div class="deploy-sub">Simple · Gratuit</div></div>
-            </div>
-          </div>
-
-          <div class="step">
-            <div class="step-num">1</div>
-            <div style="flex:1;">
-              <div class="step-title">Télécharge le projet complet</div>
-              <div class="step-desc">Un fichier zip avec ton HTML modifié + serveur Node.js + variables d'environnement déjà configurés.</div>
-              <button class="btn btn-primary btn-sm" style="margin-top:10px;" onclick="downloadProject()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Télécharger project.zip
-              </button>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-num">2</div>
-            <div>
-              <div class="step-title">Pousse sur GitHub</div>
-              <div class="step-desc">Crée un repo privé GitHub et dépose le contenu du zip. Railway se connecte directement à ton repo.</div>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-num">3</div>
-            <div style="flex:1;">
-              <div class="step-title">1 clic sur Railway</div>
-              <div class="step-desc">Railway détecte le serveur Node.js automatiquement. Ton store est live en moins de 2 minutes.</div>
-              <div style="display:flex;align-items:center;gap:12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-xs);padding:12px 14px;margin-top:10px;">
-                <div style="width:9px;height:9px;border-radius:50%;background:#7c3aed;flex-shrink:0;"></div>
-                <div style="flex:1;"><div style="font-size:13px;font-weight:500;">railway.app</div><div style="font-size:11px;color:var(--text3);margin-top:1px;">Gratuit jusqu'à 5$/mois</div></div>
-                <button class="btn btn-white btn-sm" onclick="window.open('https://railway.app','_blank')">Ouvrir →</button>
+            <div class="ord-card">
+              <div class="ord-lbl">Recent orders</div>
+              <div id="ord-list">
+                <div class="ord-row"><div class="ord-av">ML</div><div style="flex:1;"><div class="ord-n">Marie L.</div><div class="ord-p">Limited sneaker</div></div><div class="ord-a">$149</div><div class="ord-b">Paid</div></div>
+                <div class="ord-row"><div class="ord-av">JB</div><div style="flex:1;"><div class="ord-n">Jean B.</div><div class="ord-p">Oversized hoodie</div></div><div class="ord-a">$89</div><div class="ord-b">Paid</div></div>
+                <div class="ord-row"><div class="ord-av">SC</div><div style="flex:1;"><div class="ord-n">Sophie C.</div><div class="ord-p">Full pack</div></div><div class="ord-a">$240</div><div class="ord-b">Paid</div></div>
               </div>
             </div>
           </div>
-
-          <div class="divider"></div>
-          <div style="font-size:12px;font-weight:500;color:var(--text2);margin-bottom:8px;">Contenu de server.js (inclus dans le zip)</div>
-          <div class="code">const express = require('express');
-const stripe = require('stripe')(process.env.STRIPE_SK);
-const app = express();
-
-app.use(express.json());
-app.use(express.static('public'));
-
-app.post('/api/checkout', async (req, res) => {
-  const { items, origin } = req.body;
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
-    line_items: items,
-    mode: 'payment',
-    success_url: origin + '/success.html',
-    cancel_url: origin,
-  });
-  res.json({ url: session.url });
-});
-
-app.listen(process.env.PORT || 3000, () => console.log('Live ✓'));</div>
         </div>
       </div>
     </div>
-
   </div>
-</main>
+</section>
 
-<!-- MODAL -->
-<div class="overlay" id="modal">
-  <div class="modal">
-    <div class="modal-title">Nouveau produit</div>
-    <div class="grid2" style="margin-bottom:12px;">
-      <div class="form-group"><label class="label">Nom</label><input class="input" id="p-name" placeholder="Sneaker édition limitée"/></div>
-      <div class="form-group"><label class="label">Emoji</label><input class="input" id="p-emoji" placeholder="👟" style="font-size:17px;"/></div>
-    </div>
-    <div class="grid2" style="margin-bottom:12px;">
-      <div class="form-group"><label class="label">Prix ($)</label><input class="input" id="p-price" type="number" min="0" step="0.01" placeholder="49.99"/></div>
-      <div class="form-group"><label class="label">Stock</label><input class="input" id="p-stock" type="number" min="0" placeholder="100"/></div>
-    </div>
-    <div class="form-group"><label class="label">Description</label><input class="input" id="p-desc" placeholder="Description courte..."/></div>
-    <div class="modal-footer">
-      <button class="btn btn-white" onclick="closeModal()">Annuler</button>
-      <button class="btn btn-primary" onclick="saveProduct()">Ajouter</button>
+<!-- LOGOS -->
+<div class="strip" style="margin-top:56px;">
+  <div class="strip-in">
+    <div class="strip-lbl">Works everywhere you deploy</div>
+    <div class="strip-row">
+      <span class="strip-item">Netlify</span>
+      <span class="strip-item">Vercel</span>
+      <span class="strip-item">GitHub Pages</span>
+      <span class="strip-item">Claude · Cursor · Bolt</span>
     </div>
   </div>
 </div>
 
-<!-- TOAST -->
-<div class="toast" id="toast">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-  <span id="toast-msg"></span>
-</div>
-
-<script>
-const state={pk:'',sk:'',connected:false,products:[],generatedHTML:''};
-const titles={setup:'Configuration',products:'Produits',generate:'Générer le site',orders:'Commandes',deploy:'Déploiement'};
-
-function go(name,el){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  document.getElementById('sec-'+name).classList.add('active');
-  if(el)el.classList.add('active');
-  document.getElementById('page-title').textContent=titles[name];
-  if(name==='orders'&&state.connected)loadOrders();
-}
-
-function connectStripe(){
-  const pk=document.getElementById('pk').value.trim();
-  const sk=document.getElementById('sk').value.trim();
-  document.getElementById('al-ok').classList.remove('show');
-  document.getElementById('al-err').classList.remove('show');
-  if(!pk||!sk){showErr('Entre les deux clés API.');return;}
-  if(!pk.startsWith('pk_')){showErr('La clé publique doit commencer par pk_test_ ou pk_live_');return;}
-  if(!sk.startsWith('sk_')){showErr('La clé secrète doit commencer par sk_test_ ou sk_live_');return;}
-  state.pk=pk;state.sk=sk;state.connected=true;
-  document.getElementById('al-ok').classList.add('show');
-  document.getElementById('s-dot').classList.add('on');
-  document.getElementById('s-label').textContent='Stripe connecté';
-  toast('Stripe connecté ✓');
-}
-
-function showErr(m){document.getElementById('err-msg').textContent=m;document.getElementById('al-err').classList.add('show');}
-
-let products=[];
-function openModal(){document.getElementById('modal').classList.add('open');document.getElementById('p-name').focus();}
-function closeModal(){
-  document.getElementById('modal').classList.remove('open');
-  ['p-name','p-emoji','p-price','p-stock','p-desc'].forEach(id=>document.getElementById(id).value='');
-}
-
-function saveProduct(){
-  const name=document.getElementById('p-name').value.trim();
-  const price=parseFloat(document.getElementById('p-price').value);
-  if(!name||isNaN(price)){toast('Remplis le nom et le prix');return;}
-  products.push({id:Date.now(),name,price,stock:parseInt(document.getElementById('p-stock').value)||0,emoji:document.getElementById('p-emoji').value.trim()||'📦',desc:document.getElementById('p-desc').value.trim()});
-  renderProducts();closeModal();toast('Produit ajouté');
-}
-
-function deleteProduct(id){
-  products=products.filter(p=>p.id!==id);
-  renderProducts();toast('Produit supprimé');
-}
-
-function renderProducts(){
-  document.getElementById('prod-count').textContent=products.length+' produit'+(products.length!==1?'s':'');
-  const list=document.getElementById('prod-list');
-  if(!products.length){
-    list.innerHTML='<div class="empty" id="prod-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg><div class="empty-title">Aucun produit</div><div class="empty-sub">Clique sur "Ajouter un produit" pour commencer</div></div>';
-    return;
-  }
-  list.innerHTML=products.map(p=>`
-    <div class="product-row">
-      <div class="product-thumb">${p.emoji}</div>
-      <div style="flex:1;">
-        <div class="product-name">${p.name}</div>
-        <div class="product-sub">${p.desc||'Aucune description'}</div>
+<!-- HOW -->
+<section class="how" id="how">
+  <div class="how-in">
+    <div>
+      <div class="sec-ey">How it works</div>
+      <h2 class="sec-h">3 steps.<br>You're live.</h2>
+      <p class="sec-sub">Vibby does in 60 seconds what used to take days of Stripe config, webhooks, and backend setup.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="sn">1</div>
+          <div><div class="st">Paste your HTML</div><div class="sd">Built something beautiful with Claude, Cursor or Bolt? Copy the code, paste it in Vibby.</div></div>
+        </div>
+        <div class="step">
+          <div class="sn">2</div>
+          <div><div class="st">Stripe injects automatically</div><div class="sd">We detect your buy buttons and inject Stripe Checkout. Zero code, zero backend.</div></div>
+        </div>
+        <div class="step">
+          <div class="sn">3</div>
+          <div><div class="st">Drop it. It's live.</div><div class="sd">Drag your HTML onto Netlify Drop. Your store is online in 30 seconds.</div></div>
+        </div>
       </div>
-      <div style="font-size:14px;font-weight:600;margin-right:14px;">$${p.price.toFixed(2)}</div>
-      <span class="badge ${p.stock>0?'badge-green':'badge-amber'}" style="margin-right:10px;">
-        <svg viewBox="0 0 10 10" width="5" height="5"><circle cx="5" cy="5" r="5" fill="currentColor"/></svg>
-        ${p.stock>0?p.stock+' en stock':'Épuisé'}
-      </span>
-      <button class="btn btn-white btn-sm" onclick="deleteProduct(${p.id})">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
-      </button>
     </div>
-  `).join('');
-}
+    <div class="code-box">
+      <div class="code-top">Your vibecoded HTML</div>
+      <div class="code-body">
+        <div class="cl"><span class="kw">&lt;button</span> <span class="str">class</span>=<span class="str">"buy-btn"</span></div>
+        <div class="cl">&nbsp;&nbsp;<span class="str">data-product</span>=<span class="str">"sneaker"</span></div>
+        <div class="cl">&nbsp;&nbsp;<span class="str">data-price</span>=<span class="str">"14900"</span><span class="kw">&gt;</span></div>
+        <div class="cl">&nbsp;&nbsp;Buy — $149</div>
+        <div class="cl"><span class="kw">&lt;/button&gt;</span></div>
+        <div class="arr">↓ Vibby injects</div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <div class="tag">✓ &nbsp;Stripe Checkout injected</div>
+          <div class="tag">✓ &nbsp;Confirmation email configured</div>
+          <div class="tag">✓ &nbsp;Success page generated</div>
+          <div class="tag">✓ &nbsp;Live orders dashboard</div>
+        </div>
+        <div class="live-tag">🟢 &nbsp;yourstore.com — Live</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-function generateSite(){
-  const html=document.getElementById('html-in').value.trim();
-  if(!html){toast('Colle ton HTML en premier');return;}
-  const btn=document.getElementById('gen-btn');
-  btn.textContent='Génération en cours...';btn.disabled=true;
-  setTimeout(()=>{
-    const pk=state.pk||'pk_test_VOTRE_CLE';
-    const currency=document.getElementById('scurrency').value;
-    const inject=`
-<script src="https://js.stripe.com/v3/"><\/script>
+<!-- COMPARE -->
+<section class="cmp" id="compare">
+  <div class="cmp-in">
+    <div class="sec-ey">Vibby vs the rest</div>
+    <h2 class="sec-h" style="font-size:38px;letter-spacing:-1.5px;font-weight:800;line-height:1.05;margin-bottom:8px;">Why fight Shopify?</h2>
+    <p style="font-size:15px;color:var(--b2);margin-bottom:0;">Sell in 60 seconds or spend 2 days setting up templates you didn't design.</p>
+    <div class="cmp-t">
+      <div class="ch_">
+        <div></div>
+        <div class="hl">✦ Vibby</div>
+        <div>Shopify</div>
+      </div>
+      <div class="cr"><div>Setup time</div><div class="ok">60 seconds</div><div class="no">2–8 hours</div></div>
+      <div class="cr"><div>Backend required</div><div class="ok">None</div><div class="no">Hosted server</div></div>
+      <div class="cr"><div>Your own design</div><div class="ok">100%</div><div class="no">Templates only</div></div>
+      <div class="cr"><div>Starting price</div><div class="ok">Free</div><div class="no">$39/month</div></div>
+      <div class="cr"><div>Built for vibecoding</div><div class="ok">Made for it</div><div class="no">Not at all</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-in">
+    <h2>Start selling<br><span class="g">your vibe.</span></h2>
+    <p>Free to start. No backend. No server. Just your HTML and Stripe.</p>
+    <a href="vibby.html" class="btn btn-g btn-lg">Get started free →</a>
+    <div class="cta-note">No credit card · Live in 60 seconds · Stripe included</div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <div class="foot-logo">
+      <div class="foot-logo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"><path d="M5 8L12 16L19 8"/></svg></div>
+      vibby
+    </div>
+    <div class="foot-copy">© 2026 Vibby</div>
+    <div class="foot-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="vibby.html">App →</a>
+    </div>
+  </div>
+</footer>
+
 <script>
-const _s=Stripe('${pk}');
-document.querySelectorAll('[data-product],[data-price],[class*="buy"],[class*="acheter"],[class*="order"]').forEach(b=>{
-  b.addEventListener('click',async()=>{
-    const price=parseInt(b.dataset.price||'999');
-    const name=b.dataset.product||b.textContent.trim()||'Produit';
-    const r=await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({items:[{price_data:{currency:'${currency}',product_data:{name},unit_amount:price},quantity:1}],origin:location.origin})});
-    const d=await r.json();if(d.url)location.href=d.url;
-  });
+function countUp(el, target, prefix, dur) {
+  const from = Math.round(target * 0.65);
+  const t0 = performance.now();
+  const tick = now => {
+    const p = Math.min((now - t0) / dur, 1);
+    const e = 1 - Math.pow(1 - p, 3);
+    el.textContent = prefix + Math.round(from + (target - from) * e).toLocaleString('en-US');
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+setTimeout(() => {
+  const r = document.getElementById('rev');
+  const o = document.getElementById('ord');
+  if (r) countUp(r, 10847, '$', 1600);
+  if (o) countUp(o, 89, '', 1200);
+}, 500);
+
+const fakeOrders = [
+  {i:'TK',n:'Thomas K.',p:'Leather jacket',a:'$320'},
+  {i:'AL',n:'Alex L.',p:'White sneaker',a:'$149'},
+  {i:'CM',n:'Clara M.',p:'Summer pack',a:'$189'},
+  {i:'NP',n:'Nina P.',p:'Black hoodie',a:'$89'},
+  {i:'RB',n:'Rémi B.',p:'Logo cap',a:'$45'},
+];
+let oi = 0;
+setInterval(() => {
+  const list = document.getElementById('ord-list');
+  if (!list) return;
+  const o = fakeOrders[oi++ % fakeOrders.length];
+  const row = document.createElement('div');
+  row.className = 'ord-row ord-new';
+  row.innerHTML = `<div class="ord-av">${o.i}</div><div style="flex:1;"><div class="ord-n">${o.n}</div><div class="ord-p">${o.p}</div></div><div class="ord-a">${o.a}</div><div class="ord-b">Paid</div>`;
+  list.insertBefore(row, list.firstChild);
+  if (list.children.length > 3) list.lastChild.remove();
+}, 3000);
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }});
+}, {threshold:.1});
+document.querySelectorAll('.step,.cr,.feat').forEach(el => {
+  el.style.opacity='0'; el.style.transform='translateY(12px)';
+  el.style.transition='opacity .35s ease,transform .35s ease';
+  obs.observe(el);
 });
-<\/script>`;
-    state.generatedHTML=html.replace('</body>',inject+'\n</body>');
-    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Regénérer';
-    btn.disabled=false;
-    document.getElementById('gen-success').classList.add('show');
-    toast('Site généré — Stripe injecté ✓');
-  },1600);
-}
-
-function downloadHTML(){
-  if(!state.generatedHTML){toast('Génère le site en premier');return;}
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([state.generatedHTML],{type:'text/html'}));
-  a.download='index.html';a.click();toast('index.html téléchargé');
-}
-
-async function loadOrders(){
-  if(!state.sk){toast('Connecte Stripe en premier');return;}
-  const tbody=document.getElementById('orders-body');
-  tbody.innerHTML='<tr><td colspan="5" style="text-align:center;padding:24px;color:var(--text3);">Chargement...</td></tr>';
-  try{
-    const res=await fetch('https://api.stripe.com/v1/charges?limit=10',{headers:{Authorization:'Bearer '+state.sk}});
-    if(!res.ok){tbody.innerHTML='<tr><td colspan="5"><div class="empty" style="padding:24px 0;"><div class="empty-title">Clé invalide ou sans permission</div><div class="empty-sub">Vérifie ta clé secrète</div></div></td></tr>';return;}
-    const data=await res.json();
-    const charges=data.data;
-    if(!charges.length){tbody.innerHTML='<tr><td colspan="5"><div class="empty" style="padding:24px 0;"><div class="empty-title">Aucune commande encore</div></div></td></tr>';return;}
-    let total=0;charges.forEach(c=>{if(c.paid)total+=c.amount;});
-    const paid=charges.filter(c=>c.paid);
-    document.getElementById('m-rev').textContent='$'+(total/100).toFixed(2);
-    document.getElementById('m-ord').textContent=charges.length;
-    document.getElementById('m-avg').textContent=paid.length?'$'+(total/paid.length/100).toFixed(2):'$0';
-    document.getElementById('m-rate').textContent=Math.round(paid.length/charges.length*100)+'%';
-    document.getElementById('m-rev-sub').textContent='↑ Données live Stripe';
-    document.getElementById('m-rev-sub').classList.add('up');
-    tbody.innerHTML=charges.map(c=>{
-      const date=new Date(c.created*1000).toLocaleDateString('fr-CA');
-      const email=c.billing_details?.email||c.receipt_email||'—';
-      const badge=c.paid?'<span class="badge badge-green"><svg viewBox="0 0 10 10" width="5" height="5"><circle cx="5" cy="5" r="5" fill="currentColor"/></svg>Payé</span>':'<span class="badge badge-amber"><svg viewBox="0 0 10 10" width="5" height="5"><circle cx="5" cy="5" r="5" fill="currentColor"/></svg>Échoué</span>';
-      return`<tr><td style="font-family:monospace;font-size:12px;color:var(--text3);">${c.id.slice(-8)}</td><td>${email}</td><td style="font-weight:600;">$${(c.amount/100).toFixed(2)}</td><td style="color:var(--text3);">${date}</td><td>${badge}</td></tr>`;
-    }).join('');
-  }catch(e){tbody.innerHTML=`<tr><td colspan="5"><div class="empty" style="padding:24px 0;"><div class="empty-title">Erreur</div><div class="empty-sub">${e.message}</div></div></td></tr>`;}
-}
-
-function downloadProject(){
-  const sk=state.sk||'sk_test_VOTRE_CLE_SECRETE';
-  const pk=state.pk||'pk_test_VOTRE_CLE_PUBLIQUE';
-  const currency=document.getElementById('scurrency')?.value||'cad';
-  const content=`# VibeCommerce — Instructions de déploiement
-
-## Structure du projet à créer:
-/project
-  ├── server.js
-  ├── package.json
-  ├── .env
-  └── public/
-      ├── index.html  (ton HTML généré)
-      └── success.html
-
-## server.js
-const express = require('express');
-const stripe = require('stripe')(process.env.STRIPE_SK);
-const app = express();
-app.use(express.json());
-app.use(express.static('public'));
-app.post('/api/checkout', async (req, res) => {
-  const { items, origin } = req.body;
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
-    line_items: items,
-    mode: 'payment',
-    success_url: origin + '/success.html',
-    cancel_url: origin,
-  });
-  res.json({ url: session.url });
-});
-app.listen(process.env.PORT || 3000, () => console.log('Live!'));
-
-## package.json
-{
-  "name": "vibecommerce",
-  "scripts": { "start": "node server.js" },
-  "dependencies": { "express": "^4.18.2", "stripe": "^14.0.0" }
-}
-
-## .env
-STRIPE_SK=${sk}
-STRIPE_PK=${pk}
-CURRENCY=${currency}
-
-## Déploiement Railway:
-1. npm install
-2. Pousse sur GitHub
-3. Connecte railway.app à ton repo
-4. Ajoute STRIPE_SK et STRIPE_PK en variables d'env
-5. Deploy ✓
-`;
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([content],{type:'text/plain'}));
-  a.download='vibecommerce-setup.txt';a.click();toast('Instructions téléchargées');
-}
-
-function selDeploy(el){document.querySelectorAll('.deploy-opt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');}
-document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeModal();});
-
-function toast(msg){
-  const t=document.getElementById('toast');
-  document.getElementById('toast-msg').textContent=msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2600);
-}
 </script>
 </body>
 </html>
