@@ -4,290 +4,327 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vibby — Sell your vibe</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+*{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --g:#00C27C;--g2:#00a368;--g3:#00e890;
-  --gl:rgba(0,194,124,0.08);--glb:rgba(0,194,124,0.18);
-  --bg:#f7f8f7;--w:#ffffff;
-  --b1:#0d1410;--b2:#5a6b5f;--b3:#9eb3a3;
-  --bd:#e4ebe5;--bd2:#ccdace;
+  --g:#00C27C;--gd:#009960;--gs:#b3ecd4;--gl:#f0fdf7;
+  --ink:#0a0f0b;--ink2:#4a5e51;--ink3:#8fa898;
+  --line:#e2ebe4;--bg:#f7faf7;--w:#fff;
 }
-html{scroll-behavior:smooth;}
-body{font-family:'Inter',sans-serif;background:var(--w);color:var(--b1);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+html,body{font-family:'Inter',sans-serif;background:var(--w);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:54px;display:flex;align-items:center;padding:0 32px;border-bottom:1px solid var(--bd);background:rgba(255,255,255,0.92);backdrop-filter:blur(14px);}
-.nav-in{max-width:1080px;width:100%;margin:0 auto;display:flex;align-items:center;}
-.logo{display:flex;align-items:center;gap:9px;text-decoration:none;}
-.logo-ic{width:28px;height:28px;background:var(--g);border-radius:7px;display:flex;align-items:center;justify-content:center;}
-.logo-ic svg{width:14px;height:14px;}
-.logo-n{font-size:16px;font-weight:800;color:var(--b1);letter-spacing:-.5px;}
-.nav-r{margin-left:auto;display:flex;gap:10px;align-items:center;}
-.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:7px;font-size:13px;font-weight:500;cursor:pointer;border:1px solid transparent;font-family:'Inter',sans-serif;transition:all .15s;white-space:nowrap;text-decoration:none;line-height:1.2;}
-.btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
-.btn-g{background:var(--g);color:#fff;font-weight:600;}
-.btn-g:hover{background:var(--g2);box-shadow:0 4px 14px rgba(0,194,124,.25);}
-.btn-o{background:var(--w);color:var(--b2);border-color:var(--bd2);}
-.btn-o:hover{color:var(--b1);border-color:var(--b3);}
-.btn-lg{padding:13px 26px;font-size:15px;border-radius:9px;}
+/* ─ NAV ─ */
+.nav{position:fixed;inset:0 0 auto;z-index:100;height:56px;padding:0 24px;display:flex;align-items:center;background:rgba(255,255,255,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--line);}
+.nav-logo{display:flex;align-items:center;gap:9px;font-size:17px;font-weight:800;letter-spacing:-.5px;}
+.nlogo-ic{width:30px;height:30px;background:var(--g);border-radius:8px;display:grid;place-items:center;flex-shrink:0;}
+.nlogo-ic svg{width:15px;height:15px;}
+.nav-r{margin-left:auto;display:flex;gap:8px;align-items:center;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid transparent;font-family:inherit;transition:all .14s;white-space:nowrap;text-decoration:none;line-height:1;}
+.btn-g{background:var(--g);color:#fff;}
+.btn-g:hover{background:var(--gd);box-shadow:0 4px 16px rgba(0,194,124,.3);}
+.btn-out{color:var(--ink2);border-color:var(--line);background:var(--w);}
+.btn-out:hover{color:var(--ink);border-color:var(--ink3);}
+.btn-xl{padding:15px 32px;font-size:16px;border-radius:10px;}
+.btn-xl-out{padding:15px 32px;font-size:16px;border-radius:10px;color:var(--ink2);border:1.5px solid var(--line);background:transparent;}
+.btn-xl-out:hover{color:var(--ink);border-color:var(--ink3);}
 
-/* HERO */
-.hero{padding:130px 32px 0;text-align:center;}
-.hero-in{max-width:700px;margin:0 auto;}
-.eyebrow{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--bd2);background:var(--gl);border-radius:100px;padding:5px 14px 5px 10px;font-size:12px;font-weight:500;color:var(--g2);margin-bottom:24px;}
-.ey-dot{width:6px;height:6px;border-radius:50%;background:var(--g);animation:blink 2s infinite;}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
-h1{font-size:60px;font-weight:800;letter-spacing:-2.5px;line-height:1.0;color:var(--b1);margin-bottom:20px;}
-h1 .g{color:var(--g);}
-.hero-sub{font-size:17px;color:var(--b2);line-height:1.65;max-width:460px;margin:0 auto 32px;font-weight:400;}
-.hero-ctas{display:flex;justify-content:center;gap:10px;margin-bottom:14px;}
-.hero-note{font-size:12px;color:var(--b3);}
+/* ─ HERO ─ */
+.hero{padding:100px 24px 80px;text-align:center;position:relative;overflow:hidden;background:linear-gradient(180deg,#edfaf3 0%,#fff 60%);}
+.hero-bg-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,194,124,.12) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black,transparent);}
+.hero-in{position:relative;z-index:1;max-width:800px;margin:0 auto;}
+.chip{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--gs);border-radius:100px;padding:6px 16px 6px 10px;font-size:12px;font-weight:600;color:var(--gd);margin-bottom:28px;box-shadow:0 2px 8px rgba(0,194,124,.1);}
+.chip-dot{width:7px;height:7px;border-radius:50%;background:var(--g);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,194,124,.5);}50%{box-shadow:0 0 0 5px rgba(0,194,124,0);}}
+.hero h1{font-size:clamp(52px,8vw,100px);font-weight:900;letter-spacing:-5px;line-height:.92;color:var(--ink);margin-bottom:24px;}
+.hero h1 .g{color:var(--g);}
+.hero-sub{font-size:19px;color:var(--ink2);line-height:1.6;max-width:440px;margin:0 auto 36px;font-weight:400;}
+.hero-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+.hero-fine{font-size:12px;color:var(--ink3);}
 
-/* PREVIEW */
-.preview{max-width:920px;margin:52px auto 0;padding:0 32px;}
-.browser{background:var(--w);border:1px solid var(--bd);border-radius:14px;overflow:hidden;box-shadow:0 2px 4px rgba(0,0,0,.04),0 12px 40px rgba(0,0,0,.08),0 40px 80px rgba(0,0,0,.06);}
-.bbar{height:36px;background:var(--bg);border-bottom:1px solid var(--bd);display:flex;align-items:center;padding:0 14px;gap:6px;}
-.bd_{width:10px;height:10px;border-radius:50%;}
-.burl{flex:1;background:var(--w);border:1px solid var(--bd);border-radius:5px;height:22px;margin:0 14px;display:flex;align-items:center;padding:0 10px;gap:6px;}
-.burl-dot{width:7px;height:7px;border-radius:50%;background:var(--g);}
-.burl-t{font-size:11px;color:var(--b3);font-family:monospace;}
-.app{display:flex;height:400px;}
-.rail{width:50px;background:var(--w);border-right:1px solid var(--bd);display:flex;flex-direction:column;align-items:center;padding:12px 0;gap:6px;flex-shrink:0;}
-.r-logo{width:26px;height:26px;background:var(--g);border-radius:6px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;}
-.r-logo svg{width:12px;height:12px;}
-.r-ic{width:30px;height:30px;border-radius:6px;background:var(--bg);}
-.r-ic.on{background:var(--gl);border:1px solid var(--bd2);}
-.app-main{flex:1;background:var(--bg);display:flex;flex-direction:column;}
-.app-top{height:42px;background:var(--w);border-bottom:1px solid var(--bd);display:flex;align-items:center;padding:0 18px;gap:8px;flex-shrink:0;}
-.app-top-t{font-size:13px;font-weight:600;color:var(--b1);flex:1;}
-.live-badge{display:flex;align-items:center;gap:5px;background:var(--gl);border:1px solid var(--bd2);color:var(--g2);font-size:10px;font-weight:600;padding:3px 9px;border-radius:100px;}
-.live-d{width:5px;height:5px;border-radius:50%;background:var(--g);animation:blink 2s infinite;}
-.app-body{flex:1;padding:16px;overflow:hidden;}
+/* ─ PAYMENT FEED ─ */
+.feed-outer{max-width:680px;margin:60px auto 0;position:relative;}
+.feed-glow{position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);width:400px;height:200px;background:radial-gradient(ellipse,rgba(0,194,124,.15),transparent 70%);pointer-events:none;}
+.feed-frame{background:var(--w);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,20,8,.07),0 24px 60px rgba(0,20,8,.06);}
+.feed-bar{height:40px;background:var(--bg);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 16px;gap:8px;}
+.fb-dots{display:flex;gap:5px;}
+.fb-dot{width:10px;height:10px;border-radius:50%;}
+.fb-pill{display:flex;align-items:center;gap:6px;background:var(--gl);border:1px solid var(--gs);border-radius:100px;padding:3px 10px;margin-left:auto;}
+.fb-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--g);animation:pulse 2s infinite;}
+.fb-pill-t{font-size:11px;font-weight:600;color:var(--gd);}
 
-/* METRICS */
-.mets{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;}
-.met{background:var(--w);border:1px solid var(--bd);border-radius:8px;padding:11px 13px;}
-.met-l{font-size:9px;font-weight:600;color:var(--b3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
-.met-v{font-size:19px;font-weight:700;color:var(--b1);letter-spacing:-.5px;line-height:1;}
-.met-v.g{color:var(--g);}
-.met-s{font-size:10px;color:var(--g);margin-top:3px;font-weight:500;}
+/* stats row */
+.feed-stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line);}
+.fstat{padding:16px 20px;border-right:1px solid var(--line);}
+.fstat:last-child{border-right:none;}
+.fstat-l{font-size:9px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px;}
+.fstat-v{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.8px;line-height:1;}
+.fstat-v.g{color:var(--g);}
+.fstat-t{font-size:10px;font-weight:600;color:var(--g);margin-top:4px;}
 
-/* CHART CARD */
-.chart-card{background:var(--w);border:1px solid var(--bd);border-radius:8px;padding:13px;margin-bottom:10px;}
-.chart-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
-.chart-lbl{font-size:10px;font-weight:600;color:var(--b3);text-transform:uppercase;letter-spacing:.4px;}
-.chart-big{font-size:22px;font-weight:700;color:var(--b1);letter-spacing:-.5px;line-height:1;}
-.chart-up{font-size:10px;color:var(--g);font-weight:600;margin-top:2px;}
-.chart-area{height:72px;}
-svg.ch{width:100%;height:100%;}
+/* chart mini */
+.feed-chart{padding:16px 20px 0;border-bottom:1px solid var(--line);}
+.fc-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
+.fc-lbl{font-size:10px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.6px;}
+.fc-big{font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-.8px;line-height:1;}
+.fc-up{font-size:11px;font-weight:600;color:var(--g);margin-top:3px;}
+.fc-svg{display:block;width:100%;height:72px;overflow:visible;}
 
-/* ORDERS */
-.ord-card{background:var(--w);border:1px solid var(--bd);border-radius:8px;padding:11px 13px;}
-.ord-lbl{font-size:9px;font-weight:600;color:var(--b3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
-.ord-row{display:flex;align-items:center;gap:9px;padding:4px 0;border-bottom:1px solid var(--bd);}
-.ord-row:last-child{border-bottom:none;}
-.ord-av{width:20px;height:20px;border-radius:50%;background:var(--gl);border:1px solid var(--bd2);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:var(--g2);flex-shrink:0;}
-.ord-n{font-size:11px;font-weight:500;color:var(--b1);flex:1;}
-.ord-p{font-size:10px;color:var(--b3);}
-.ord-a{font-size:12px;font-weight:700;color:var(--b1);}
-.ord-b{font-size:9px;font-weight:600;background:var(--gl);color:var(--g2);border:1px solid var(--bd2);padding:2px 6px;border-radius:100px;}
-.ord-new{animation:drop .35s ease forwards;}
-@keyframes drop{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
+/* payments live list */
+.feed-list{padding:12px 0;}
+.fl-head{padding:0 20px 10px;display:flex;align-items:center;justify-content:space-between;}
+.fl-label{font-size:9px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.6px;}
+.fl-live{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:600;color:var(--gd);}
+.fl-live-dot{width:5px;height:5px;border-radius:50%;background:var(--g);animation:pulse 2s infinite;}
+.fl-row{display:flex;align-items:center;gap:12px;padding:10px 20px;border-top:1px solid var(--line);transition:background .12s;}
+.fl-row:hover{background:var(--bg);}
+.fl-av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:800;color:#fff;flex-shrink:0;}
+.fl-info{flex:1;}
+.fl-name{font-size:13px;font-weight:600;color:var(--ink);}
+.fl-prod{font-size:11px;color:var(--ink3);margin-top:1px;}
+.fl-right{text-align:right;}
+.fl-amt{font-size:14px;font-weight:800;color:var(--ink);}
+.fl-time{font-size:10px;color:var(--ink3);margin-top:1px;}
+.fl-badge{font-size:10px;font-weight:700;background:var(--gl);color:var(--gd);border:1px solid var(--gs);padding:3px 9px;border-radius:100px;margin-left:8px;flex-shrink:0;}
+.fl-new{animation:flIn .35s cubic-bezier(.16,1,.3,1);}
+@keyframes flIn{from{opacity:0;transform:translateY(-12px)scale(.97);}to{opacity:1;transform:none;}}
 
-/* LOGOS STRIP */
-.strip{padding:28px 32px;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
-.strip-in{max-width:700px;margin:0 auto;text-align:center;}
-.strip-lbl{font-size:11px;color:var(--b3);font-weight:500;letter-spacing:.4px;text-transform:uppercase;margin-bottom:16px;}
-.strip-row{display:flex;justify-content:center;align-items:center;gap:36px;}
-.strip-item{font-size:13px;font-weight:600;color:var(--b3);}
+/* ─ MARQUEE ─ */
+.mq-sec{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:24px 0;overflow:hidden;}
+.mq-lbl{text-align:center;font-size:10px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:18px;}
+.mq-wr{overflow:hidden;position:relative;}
+.mq-wr::before,.mq-wr::after{content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none;}
+.mq-wr::before{left:0;background:linear-gradient(90deg,var(--w),transparent);}
+.mq-wr::after{right:0;background:linear-gradient(-90deg,var(--w),transparent);}
+.mq{display:flex;gap:8px;width:max-content;animation:mqs 24s linear infinite;}
+.mq:hover{animation-play-state:paused;}
+@keyframes mqs{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.mq-t{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--line);border-radius:100px;padding:7px 16px;white-space:nowrap;}
+.mq-ic{width:18px;height:18px;border-radius:5px;flex-shrink:0;}
+.mq-n{font-size:12px;font-weight:600;color:var(--ink2);}
 
-/* HOW */
-.how{padding:88px 32px;background:var(--bg);border-bottom:1px solid var(--bd);}
-.how-in{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
-.sec-ey{font-size:11px;font-weight:600;color:var(--g);text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px;}
-.sec-h{font-size:38px;font-weight:800;letter-spacing:-1.5px;line-height:1.05;margin-bottom:12px;}
-.sec-sub{font-size:15px;color:var(--b2);line-height:1.65;margin-bottom:36px;}
-.steps{display:flex;flex-direction:column;}
-.step{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid var(--bd);}
-.step:last-child{border-bottom:none;}
-.sn{width:24px;height:24px;border-radius:50%;background:var(--w);border:1px solid var(--bd2);color:var(--b2);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
-.st{font-size:13px;font-weight:600;color:var(--b1);margin-bottom:3px;}
-.sd{font-size:12px;color:var(--b2);line-height:1.6;}
-.code-box{background:var(--w);border:1px solid var(--bd);border-radius:10px;overflow:hidden;}
-.code-top{padding:11px 14px;border-bottom:1px solid var(--bd);font-size:10px;font-weight:600;color:var(--b3);text-transform:uppercase;letter-spacing:.4px;}
-.code-body{padding:14px 16px;}
-.cl{font-family:'SFMono-Regular',Consolas,monospace;font-size:12px;color:var(--b2);line-height:1.8;}
-.cl .kw{color:#0077cc;}
-.cl .str{color:var(--g2);}
-.arr{text-align:center;padding:10px 0;font-size:16px;color:var(--g);}
-.tag{display:inline-flex;align-items:center;gap:5px;background:var(--gl);border:1px solid var(--bd2);border-radius:5px;padding:4px 10px;font-size:11px;font-weight:600;color:var(--g2);margin-bottom:5px;display:block;}
-.live-tag{margin-top:8px;background:rgba(0,194,124,.15);border:1px solid var(--bd2);border-radius:7px;padding:9px 12px;font-size:12px;font-weight:600;color:var(--g2);}
+/* ─ HOW ─ */
+.how{padding:72px 24px;border-bottom:1px solid var(--line);background:var(--bg);}
+.how-in{max-width:1040px;margin:0 auto;}
+.sec-ey{font-size:11px;font-weight:700;color:var(--g);text-transform:uppercase;letter-spacing:.9px;margin-bottom:8px;}
+.how-head{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:end;margin-bottom:36px;}
+.how-h2{font-size:clamp(36px,5vw,64px);font-weight:900;letter-spacing:-2.5px;line-height:.97;}
+.how-p{font-size:16px;color:var(--ink2);line-height:1.7;padding-bottom:4px;}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+.hg-col{background:var(--w);padding:32px 28px;border-right:1px solid var(--line);transition:background .15s;}
+.hg-col:last-child{border-right:none;}
+.hg-col:hover{background:#f0fdf7;}
+.hg-n{font-size:36px;font-weight:900;color:var(--g);letter-spacing:-2px;opacity:.25;line-height:1;margin-bottom:16px;}
+.hg-ic{width:42px;height:42px;border:1px solid var(--line);border-radius:10px;background:var(--w);display:grid;place-items:center;margin-bottom:16px;}
+.hg-ic svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:1.8;stroke-linecap:round;}
+.hg-t{font-size:20px;font-weight:800;letter-spacing:-.4px;margin-bottom:10px;color:var(--ink);}
+.hg-d{font-size:14px;color:var(--ink2);line-height:1.65;}
+.hg-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:18px;}
+.hg-tag{font-size:11px;font-weight:500;color:var(--ink2);background:var(--bg);border:1px solid var(--line);border-radius:100px;padding:3px 10px;}
 
-/* COMPARE */
-.cmp{padding:88px 32px;}
-.cmp-in{max-width:820px;margin:0 auto;text-align:center;}
-.cmp-t{margin-top:40px;border:1px solid var(--bd);border-radius:10px;overflow:hidden;}
-.ch_{display:grid;grid-template-columns:1.6fr 1fr 1fr;background:var(--bg);border-bottom:1px solid var(--bd);}
-.ch_ div{padding:11px 18px;font-size:11px;font-weight:600;color:var(--b3);text-transform:uppercase;letter-spacing:.4px;}
-.ch_ .hl{color:var(--g2);}
-.cr{display:grid;grid-template-columns:1.6fr 1fr 1fr;border-bottom:1px solid var(--bd);}
-.cr:last-child{border-bottom:none;}
-.cr div{padding:11px 18px;font-size:13px;color:var(--b2);}
-.cr div:first-child{font-weight:500;color:var(--b1);}
-.cr .ok{color:var(--g2);font-weight:600;}
-.cr .no{color:var(--b3);}
+/* ─ COMPARE ─ */
+.cmp{padding:96px 24px;border-bottom:1px solid var(--line);}
+.cmp-in{max-width:700px;margin:0 auto;}
+.cmp-hd{margin-bottom:40px;}
+.cmp-h2{font-size:clamp(34px,4.5vw,52px);font-weight:900;letter-spacing:-2.5px;line-height:.97;margin-bottom:10px;}
+.cmp-p{font-size:16px;color:var(--ink2);max-width:380px;line-height:1.6;}
+.cmp-table{border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+.cmp-th{display:grid;grid-template-columns:1.6fr 1fr 1fr;background:var(--bg);border-bottom:1px solid var(--line);}
+.cmp-th div{padding:12px 20px;font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;}
+.cmp-th .hi{color:var(--g);}
+.cmp-tr{display:grid;grid-template-columns:1.6fr 1fr 1fr;border-bottom:1px solid var(--line);transition:background .1s;}
+.cmp-tr:last-child{border-bottom:none;}
+.cmp-tr:hover{background:var(--bg);}
+.cmp-tr div{padding:14px 20px;font-size:14px;color:var(--ink2);display:flex;align-items:center;}
+.cmp-tr div:first-child{font-weight:600;color:var(--ink);}
+.yes{color:var(--g);font-weight:700;}
+.nope{color:var(--ink3);}
 
-/* CTA */
-.cta{padding:110px 32px;text-align:center;border-top:1px solid var(--bd);}
-.cta-in{max-width:540px;margin:0 auto;}
-.cta h2{font-size:48px;font-weight:800;letter-spacing:-2px;line-height:1.0;margin-bottom:14px;}
+/* ─ CTA ─ */
+.cta{padding:120px 24px;text-align:center;background:linear-gradient(180deg,#fff 0%,#edfaf3 100%);}
+.cta-in{max-width:560px;margin:0 auto;}
+.cta h2{font-size:clamp(40px,6vw,64px);font-weight:900;letter-spacing:-3px;line-height:.96;margin-bottom:18px;color:var(--ink);}
 .cta h2 .g{color:var(--g);}
-.cta p{font-size:16px;color:var(--b2);margin-bottom:28px;}
-.cta-note{font-size:12px;color:var(--b3);margin-top:14px;}
+.cta p{font-size:17px;color:var(--ink2);margin-bottom:34px;line-height:1.6;}
+.cta-fine{font-size:12px;color:var(--ink3);margin-top:14px;}
 
-/* FOOTER */
-footer{border-top:1px solid var(--bd);padding:22px 32px;}
-.foot-in{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
-.foot-logo{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:var(--b1);}
-.foot-logo-ic{width:20px;height:20px;background:var(--g);border-radius:5px;display:flex;align-items:center;justify-content:center;}
-.foot-logo-ic svg{width:10px;height:10px;}
-.foot-copy{font-size:12px;color:var(--b3);}
-.foot-links{display:flex;gap:18px;}
-.foot-links a{font-size:12px;color:var(--b3);text-decoration:none;transition:color .12s;}
-.foot-links a:hover{color:var(--b1);}
+/* ─ FOOTER ─ */
+footer{border-top:1px solid var(--line);padding:22px 24px;}
+.fi{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.fl{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:800;color:var(--ink);}
+.fl-ic{width:22px;height:22px;background:var(--g);border-radius:6px;display:grid;place-items:center;}
+.fl-ic svg{width:11px;height:11px;}
+.fc{font-size:12px;color:var(--ink3);}
+.fls{display:flex;gap:20px;}
+.fls a{font-size:12px;color:var(--ink3);transition:color .12s;}
+.fls a:hover{color:var(--ink);}
+
+/* ─ REVEAL ─ */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;}
+.rv.in{opacity:1;transform:none;}
+
+/* ─ MOBILE ─ */
+@media(max-width:700px){
+  .hero h1{letter-spacing:-2.5px;}
+  .hero-sub{font-size:16px;}
+  .btn-xl,.btn-xl-out{padding:13px 22px;font-size:14px;}
+  .feed-stats{grid-template-columns:1fr 1fr;}
+  .fstat:nth-child(2){border-right:none;}
+  .fstat:nth-child(3),.fstat:nth-child(4){border-top:1px solid var(--line);}
+  .how-head{grid-template-columns:1fr;gap:16px;margin-bottom:28px;}
+  .how-grid{grid-template-columns:1fr;}
+  .hg-col{border-right:none;border-bottom:1px solid var(--line);}
+  .hg-col:last-child{border-bottom:none;}
+  .cmp-th,.cmp-tr{grid-template-columns:1.3fr 1fr 1fr;}
+  .cmp-th div,.cmp-tr div{padding:10px 12px;font-size:12px;}
+  .cta h2{font-size:44px;letter-spacing:-2px;}
+  .fi{flex-direction:column;gap:12px;text-align:center;}
+}
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-in">
-    <a class="logo" href="#">
-      <div class="logo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"><path d="M5 8L12 16L19 8"/></svg></div>
-      <span class="logo-n">vibby</span>
-    </a>
-    <div class="nav-r">
-      <a href="vibby.html" class="btn btn-o">Log in</a>
-      <a href="vibby.html" class="btn btn-g">Start for free →</a>
-    </div>
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">
+    <div class="nlogo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M5 8L12 16L19 8"/></svg></div>
+    vibby
+  </div>
+  <div class="nav-r">
+    <a href="vibby.html" class="btn btn-out">Log in</a>
+    <a href="vibby.html" class="btn btn-g">Start free →</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-bg-dots"></div>
   <div class="hero-in">
-    <div class="eyebrow"><span class="ey-dot"></span> Built for vibecoder</div>
-    <h1>Your site.<br><span class="g">Real money.</span><br>60 seconds.</h1>
-    <p class="hero-sub">Paste your vibecoded HTML. Vibby injects Stripe. Drop it anywhere. No backend, no server, no headaches.</p>
-    <div class="hero-ctas">
-      <a href="vibby.html" class="btn btn-g btn-lg">Get started free →</a>
-      <a href="#how" class="btn btn-o btn-lg">See how it works</a>
+    <div class="chip"><span class="chip-dot"></span>Built for vibecoder</div>
+    <h1>Your site.<br><span class="g">Real cash.</span><br>60 seconds.</h1>
+    <p class="hero-sub">Paste your vibecoded HTML. Vibby injects Stripe automatically. Drop it anywhere. No backend, no server, no headaches.</p>
+    <div class="hero-btns">
+      <a href="vibby.html" class="btn btn-g btn-xl">Start for free →</a>
+      <a href="#how" class="btn-xl-out">How it works</a>
     </div>
-    <div class="hero-note">Free to start · No credit card required</div>
+    <div class="hero-fine">Free · No credit card · Stripe included</div>
   </div>
 
-  <!-- BROWSER PREVIEW -->
-  <div class="preview">
-    <div class="browser">
-      <div class="bbar">
-        <div class="bd_" style="background:#ff5f57;"></div>
-        <div class="bd_" style="background:#ffbd2e;"></div>
-        <div class="bd_" style="background:#28c840;"></div>
-        <div class="burl">
-          <div class="burl-dot"></div>
-          <span class="burl-t">app.vibby.io/dashboard</span>
+  <!-- PAYMENT FEED -->
+  <div class="feed-outer">
+    <div class="feed-glow"></div>
+    <div class="feed-frame">
+      <!-- bar -->
+      <div class="feed-bar">
+        <div class="fb-dots">
+          <div class="fb-dot" style="background:#ff5f57;"></div>
+          <div class="fb-dot" style="background:#ffbd2e;"></div>
+          <div class="fb-dot" style="background:#28c840;"></div>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:var(--ink2);margin-left:12px;">app.vibby.io</span>
+        <div class="fb-pill">
+          <span class="fb-pill-dot"></span>
+          <span class="fb-pill-t">Live Stripe</span>
         </div>
       </div>
-      <div class="app">
-        <div class="rail">
-          <div class="r-logo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"><path d="M5 8L12 16L19 8"/></svg></div>
-          <div class="r-ic"></div>
-          <div class="r-ic"></div>
-          <div class="r-ic on"></div>
-          <div style="flex:1;"></div>
-          <div class="r-ic"></div>
+
+      <!-- stats -->
+      <div class="feed-stats">
+        <div class="fstat">
+          <div class="fstat-l">Revenue</div>
+          <div class="fstat-v g" id="rev">$10,847</div>
+          <div class="fstat-t">↑ +34% this month</div>
         </div>
-        <div class="app-main">
-          <div class="app-top">
-            <div class="app-top-t">Orders — October 2026</div>
-            <div class="live-badge"><span class="live-d"></span>Live Stripe</div>
+        <div class="fstat">
+          <div class="fstat-l">Orders</div>
+          <div class="fstat-v" id="ord">89</div>
+          <div class="fstat-t">↑ +12 this week</div>
+        </div>
+        <div class="fstat">
+          <div class="fstat-l">Avg. order</div>
+          <div class="fstat-v">$121</div>
+          <div class="fstat-t">↑ vs $98 last mo.</div>
+        </div>
+        <div class="fstat">
+          <div class="fstat-l">Success</div>
+          <div class="fstat-v g">98.2%</div>
+          <div class="fstat-t" style="color:var(--ink3);">Stripe powered</div>
+        </div>
+      </div>
+
+      <!-- chart -->
+      <div class="feed-chart">
+        <div class="fc-head">
+          <div>
+            <div class="fc-lbl">Revenue — last 30 days</div>
           </div>
-          <div class="app-body">
-            <div class="mets">
-              <div class="met">
-                <div class="met-l">Revenue this month</div>
-                <div class="met-v g" id="rev">$10,847</div>
-                <div class="met-s">↑ +34% vs last month</div>
-              </div>
-              <div class="met">
-                <div class="met-l">Orders</div>
-                <div class="met-v" id="ord">89</div>
-                <div class="met-s">↑ +12 this week</div>
-              </div>
-              <div class="met">
-                <div class="met-l">Avg. order</div>
-                <div class="met-v">$121</div>
-                <div class="met-s">↑ vs $98 last mo.</div>
-              </div>
-              <div class="met">
-                <div class="met-l">Success rate</div>
-                <div class="met-v g">98.2%</div>
-                <div class="met-s">Stripe payments</div>
-              </div>
-            </div>
-            <div class="chart-card">
-              <div class="chart-top">
-                <div>
-                  <div class="chart-lbl">Revenue — last 30 days</div>
-                </div>
-                <div style="text-align:right;">
-                  <div class="chart-big">$10,847</div>
-                  <div class="chart-up">↑ +34% this month</div>
-                </div>
-              </div>
-              <div class="chart-area">
-                <svg class="ch" viewBox="0 0 560 72" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="#00C27C" stop-opacity="0.18"/>
-                      <stop offset="100%" stop-color="#00C27C" stop-opacity="0"/>
-                    </linearGradient>
-                  </defs>
-                  <path d="M0,62 C30,58 60,55 90,52 C120,49 150,50 180,44 C210,38 240,35 270,30 C300,25 330,27 360,21 C390,15 420,17 450,11 C475,6 500,7 530,4 C542,3 550,2 560,2" fill="none" stroke="#00C27C" stroke-width="1.8" stroke-linecap="round"/>
-                  <path d="M0,62 C30,58 60,55 90,52 C120,49 150,50 180,44 C210,38 240,35 270,30 C300,25 330,27 360,21 C390,15 420,17 450,11 C475,6 500,7 530,4 C542,3 550,2 560,2 L560,72 L0,72 Z" fill="url(#cg)"/>
-                  <circle cx="558" cy="2" r="3.5" fill="#00C27C"/>
-                  <circle cx="558" cy="2" r="3.5" fill="none" stroke="#00C27C" stroke-opacity=".4">
-                    <animate attributeName="r" from="3.5" to="11" dur="2s" repeatCount="indefinite"/>
-                    <animate attributeName="stroke-opacity" from=".4" to="0" dur="2s" repeatCount="indefinite"/>
-                  </circle>
-                </svg>
-              </div>
-            </div>
-            <div class="ord-card">
-              <div class="ord-lbl">Recent orders</div>
-              <div id="ord-list">
-                <div class="ord-row"><div class="ord-av">ML</div><div style="flex:1;"><div class="ord-n">Marie L.</div><div class="ord-p">Limited sneaker</div></div><div class="ord-a">$149</div><div class="ord-b">Paid</div></div>
-                <div class="ord-row"><div class="ord-av">JB</div><div style="flex:1;"><div class="ord-n">Jean B.</div><div class="ord-p">Oversized hoodie</div></div><div class="ord-a">$89</div><div class="ord-b">Paid</div></div>
-                <div class="ord-row"><div class="ord-av">SC</div><div style="flex:1;"><div class="ord-n">Sophie C.</div><div class="ord-p">Full pack</div></div><div class="ord-a">$240</div><div class="ord-b">Paid</div></div>
-              </div>
-            </div>
+          <div style="text-align:right;">
+            <div class="fc-big">$10,847</div>
+            <div class="fc-up">↑ +34% this month</div>
           </div>
+        </div>
+        <svg class="fc-svg" viewBox="0 0 640 72" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#00C27C" stop-opacity=".18"/>
+              <stop offset="100%" stop-color="#00C27C" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <line x1="0" y1="18" x2="640" y2="18" stroke="#e2ebe4" stroke-width="1"/>
+          <line x1="0" y1="36" x2="640" y2="36" stroke="#e2ebe4" stroke-width="1"/>
+          <line x1="0" y1="54" x2="640" y2="54" stroke="#e2ebe4" stroke-width="1"/>
+          <path d="M0,62 C40,58 80,55 130,50 C180,45 220,47 270,41 C320,35 360,32 410,26 C460,20 500,22 550,14 C585,8 610,6 640,3" fill="none" stroke="#00C27C" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M0,62 C40,58 80,55 130,50 C180,45 220,47 270,41 C320,35 360,32 410,26 C460,20 500,22 550,14 C585,8 610,6 640,3 L640,72 L0,72Z" fill="url(#cg)"/>
+          <circle cx="638" cy="3.5" r="4.5" fill="#00C27C"/>
+          <circle cx="638" cy="3.5" r="4.5" fill="none" stroke="#00C27C" stroke-opacity=".25">
+            <animate attributeName="r" from="4.5" to="14" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="stroke-opacity" from=".25" to="0" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+      </div>
+
+      <!-- live payments list -->
+      <div class="feed-list">
+        <div class="fl-head">
+          <span class="fl-label">Live payments</span>
+          <div class="fl-live"><span class="fl-live-dot"></span>Updating now</div>
+        </div>
+        <div id="fl-rows">
+          <div class="fl-row"><div class="fl-av" style="background:#7c3aed;">ML</div><div class="fl-info"><div class="fl-name">Marie L.</div><div class="fl-prod">Limited sneaker</div></div><div class="fl-right"><div class="fl-amt">$149</div><div class="fl-time">just now</div></div><div class="fl-badge">Paid</div></div>
+          <div class="fl-row"><div class="fl-av" style="background:#0891b2;">JB</div><div class="fl-info"><div class="fl-name">Jean B.</div><div class="fl-prod">Oversized hoodie</div></div><div class="fl-right"><div class="fl-amt">$89</div><div class="fl-time">2 min ago</div></div><div class="fl-badge">Paid</div></div>
+          <div class="fl-row"><div class="fl-av" style="background:#d97706;">SC</div><div class="fl-info"><div class="fl-name">Sophie C.</div><div class="fl-prod">Full pack</div></div><div class="fl-right"><div class="fl-amt">$240</div><div class="fl-time">5 min ago</div></div><div class="fl-badge">Paid</div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- LOGOS -->
-<div class="strip" style="margin-top:56px;">
-  <div class="strip-in">
-    <div class="strip-lbl">Works everywhere you deploy</div>
-    <div class="strip-row">
-      <span class="strip-item">Netlify</span>
-      <span class="strip-item">Vercel</span>
-      <span class="strip-item">GitHub Pages</span>
-      <span class="strip-item">Claude · Cursor · Bolt</span>
+<!-- MARQUEE -->
+<div class="mq-sec">
+  <div class="mq-lbl">Works with every tool you already use</div>
+  <div class="mq-wr">
+    <div class="mq">
+      <div class="mq-t"><div class="mq-ic" style="background:#635bff;border-radius:5px;"></div><span class="mq-n">Stripe</span></div>
+      <div class="mq-t"><div class="mq-ic" style="background:#cc785c;border-radius:5px;"></div><span class="mq-n">Claude</span></div>
+      <div class="mq-t"><div class="mq-ic" style="background:#10a37f;border-radius:5px;"></div><span class="mq-n">ChatGPT</span></div>
+      <div class="mq-t"><div class="mq-ic" style="background:#1a1a1a;border-radius:5px;"></div><span class="mq-n">Cursor</span></div>
+      <div class="mq-t"><div class="mq-ic" style="background:#7c3aed;border-radius:5px;"></div><span class="mq-n">Bolt</span></div>
+      <div class="mq-t"><div class="mq-ic" style="background:#00C7B7;border-radius:5px;"></div><span class="mq-n">Netlify</span></div>
+      <div class="mq-t"><div class="mq-ic" style="background:#24292e;border-radius:5px;"></div><span class="mq-n">GitHub</span></div>
+      <div class="mq-t"><div class="mq-ic" style="background:#000;border-radius:5px;"></div><span class="mq-n">Vercel</span></div>
+      <div class="mq-t"><div class="mq-ic" style="background:#f59e0b;border-radius:5px;"></div><span class="mq-n">Lovable</span></div>
+      <div class="mq-t"><div class="mq-ic" style="background:#3b82f6;border-radius:5px;"></div><span class="mq-n">Replit</span></div>
+      <div class="mq-t"><div class="mq-ic" style="background:#635bff;border-radius:5px;"></div><span class="mq-n">Stripe</span></div>
+      <div class="mq-t"><div class="mq-ic" style="background:#cc785c;border-radius:5px;"></div><span class="mq-n">Claude</span></div>
+      <div class="mq-t"><div class="mq-ic" style="background:#10a37f;border-radius:5px;"></div><span class="mq-n">ChatGPT</span></div>
+      <div class="mq-t"><div class="mq-ic" style="background:#1a1a1a;border-radius:5px;"></div><span class="mq-n">Cursor</span></div>
+      <div class="mq-t"><div class="mq-ic" style="background:#7c3aed;border-radius:5px;"></div><span class="mq-n">Bolt</span></div>
+      <div class="mq-t"><div class="mq-ic" style="background:#00C7B7;border-radius:5px;"></div><span class="mq-n">Netlify</span></div>
+      <div class="mq-t"><div class="mq-ic" style="background:#24292e;border-radius:5px;"></div><span class="mq-n">GitHub</span></div>
+      <div class="mq-t"><div class="mq-ic" style="background:#000;border-radius:5px;"></div><span class="mq-n">Vercel</span></div>
+      <div class="mq-t"><div class="mq-ic" style="background:#f59e0b;border-radius:5px;"></div><span class="mq-n">Lovable</span></div>
+      <div class="mq-t"><div class="mq-ic" style="background:#3b82f6;border-radius:5px;"></div><span class="mq-n">Replit</span></div>
     </div>
   </div>
 </div>
@@ -295,41 +332,34 @@ footer{border-top:1px solid var(--bd);padding:22px 32px;}
 <!-- HOW -->
 <section class="how" id="how">
   <div class="how-in">
-    <div>
-      <div class="sec-ey">How it works</div>
-      <h2 class="sec-h">3 steps.<br>You're live.</h2>
-      <p class="sec-sub">Vibby does in 60 seconds what used to take days of Stripe config, webhooks, and backend setup.</p>
-      <div class="steps">
-        <div class="step">
-          <div class="sn">1</div>
-          <div><div class="st">Paste your HTML</div><div class="sd">Built something beautiful with Claude, Cursor or Bolt? Copy the code, paste it in Vibby.</div></div>
-        </div>
-        <div class="step">
-          <div class="sn">2</div>
-          <div><div class="st">Stripe injects automatically</div><div class="sd">We detect your buy buttons and inject Stripe Checkout. Zero code, zero backend.</div></div>
-        </div>
-        <div class="step">
-          <div class="sn">3</div>
-          <div><div class="st">Drop it. It's live.</div><div class="sd">Drag your HTML onto Netlify Drop. Your store is online in 30 seconds.</div></div>
-        </div>
+    <div class="how-head rv">
+      <div>
+        <div class="sec-ey">How it works</div>
+        <h2 class="how-h2">Paste. Inject. Sell.</h2>
       </div>
+      <p class="how-p">Vibby does in 60 seconds what used to take days of Stripe config, webhooks and backend setup. No code, no server, zero headaches.</p>
     </div>
-    <div class="code-box">
-      <div class="code-top">Your vibecoded HTML</div>
-      <div class="code-body">
-        <div class="cl"><span class="kw">&lt;button</span> <span class="str">class</span>=<span class="str">"buy-btn"</span></div>
-        <div class="cl">&nbsp;&nbsp;<span class="str">data-product</span>=<span class="str">"sneaker"</span></div>
-        <div class="cl">&nbsp;&nbsp;<span class="str">data-price</span>=<span class="str">"14900"</span><span class="kw">&gt;</span></div>
-        <div class="cl">&nbsp;&nbsp;Buy — $149</div>
-        <div class="cl"><span class="kw">&lt;/button&gt;</span></div>
-        <div class="arr">↓ Vibby injects</div>
-        <div style="display:flex;flex-direction:column;gap:5px;">
-          <div class="tag">✓ &nbsp;Stripe Checkout injected</div>
-          <div class="tag">✓ &nbsp;Confirmation email configured</div>
-          <div class="tag">✓ &nbsp;Success page generated</div>
-          <div class="tag">✓ &nbsp;Live orders dashboard</div>
-        </div>
-        <div class="live-tag">🟢 &nbsp;yourstore.com — Live</div>
+    <div class="how-grid rv">
+      <div class="hg-col">
+        <div class="hg-n">01</div>
+        <div class="hg-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div class="hg-t">Paste your HTML</div>
+        <div class="hg-d">Built something with Claude, Cursor or Bolt? Copy the code and paste it into Vibby. That's literally it.</div>
+        <div class="hg-tags"><span class="hg-tag">Claude</span><span class="hg-tag">Cursor</span><span class="hg-tag">Bolt</span><span class="hg-tag">Any HTML</span></div>
+      </div>
+      <div class="hg-col">
+        <div class="hg-n">02</div>
+        <div class="hg-ic"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+        <div class="hg-t">Stripe injects</div>
+        <div class="hg-d">We scan your buy buttons and wire Stripe Checkout on each one automatically. Zero code, zero backend, zero config.</div>
+        <div class="hg-tags"><span class="hg-tag">Checkout</span><span class="hg-tag">Emails auto</span><span class="hg-tag">Success page</span></div>
+      </div>
+      <div class="hg-col">
+        <div class="hg-n">03</div>
+        <div class="hg-ic"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <div class="hg-t">Drop. You're live.</div>
+        <div class="hg-d">Drag your HTML onto Netlify Drop or push to GitHub Pages. Your store is online in 30 seconds, anywhere.</div>
+        <div class="hg-tags"><span class="hg-tag">Netlify</span><span class="hg-tag">GitHub Pages</span><span class="hg-tag">Vercel</span></div>
       </div>
     </div>
   </div>
@@ -338,93 +368,80 @@ footer{border-top:1px solid var(--bd);padding:22px 32px;}
 <!-- COMPARE -->
 <section class="cmp" id="compare">
   <div class="cmp-in">
-    <div class="sec-ey">Vibby vs the rest</div>
-    <h2 class="sec-h" style="font-size:38px;letter-spacing:-1.5px;font-weight:800;line-height:1.05;margin-bottom:8px;">Why fight Shopify?</h2>
-    <p style="font-size:15px;color:var(--b2);margin-bottom:0;">Sell in 60 seconds or spend 2 days setting up templates you didn't design.</p>
-    <div class="cmp-t">
-      <div class="ch_">
-        <div></div>
-        <div class="hl">✦ Vibby</div>
-        <div>Shopify</div>
-      </div>
-      <div class="cr"><div>Setup time</div><div class="ok">60 seconds</div><div class="no">2–8 hours</div></div>
-      <div class="cr"><div>Backend required</div><div class="ok">None</div><div class="no">Hosted server</div></div>
-      <div class="cr"><div>Your own design</div><div class="ok">100%</div><div class="no">Templates only</div></div>
-      <div class="cr"><div>Starting price</div><div class="ok">Free</div><div class="no">$39/month</div></div>
-      <div class="cr"><div>Built for vibecoding</div><div class="ok">Made for it</div><div class="no">Not at all</div></div>
+    <div class="cmp-hd rv">
+      <div class="sec-ey">Vibby vs the rest</div>
+      <h2 class="cmp-h2">Why fight Shopify?</h2>
+      <p class="cmp-p">Sell in 60 seconds or spend 2 days on templates you didn't design.</p>
+    </div>
+    <div class="cmp-table rv">
+      <div class="cmp-th"><div></div><div class="hi">✦ Vibby</div><div>Shopify</div></div>
+      <div class="cmp-tr"><div>Setup time</div><div class="yes">60 seconds</div><div class="nope">2–8 hours</div></div>
+      <div class="cmp-tr"><div>Backend required</div><div class="yes">None</div><div class="nope">Hosted server</div></div>
+      <div class="cmp-tr"><div>Your own design</div><div class="yes">100% yours</div><div class="nope">Templates only</div></div>
+      <div class="cmp-tr"><div>Starting price</div><div class="yes">Free</div><div class="nope">$39/month</div></div>
+      <div class="cmp-tr"><div>Built for vibecoding</div><div class="yes">Made for it</div><div class="nope">Not at all</div></div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
 <section class="cta">
-  <div class="cta-in">
+  <div class="cta-in rv">
     <h2>Start selling<br><span class="g">your vibe.</span></h2>
-    <p>Free to start. No backend. No server. Just your HTML and Stripe.</p>
-    <a href="vibby.html" class="btn btn-g btn-lg">Get started free →</a>
-    <div class="cta-note">No credit card · Live in 60 seconds · Stripe included</div>
+    <p>Free to start. No backend. No server.<br>Just paste and sell.</p>
+    <a href="vibby.html" class="btn btn-g btn-xl">Get started free →</a>
+    <div class="cta-fine">No credit card · Live in 60 seconds · Stripe included</div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <div class="foot-in">
-    <div class="foot-logo">
-      <div class="foot-logo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"><path d="M5 8L12 16L19 8"/></svg></div>
-      vibby
-    </div>
-    <div class="foot-copy">© 2026 Vibby</div>
-    <div class="foot-links">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-      <a href="vibby.html">App →</a>
-    </div>
+  <div class="fi">
+    <div class="fl"><div class="fl-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M5 8L12 16L19 8"/></svg></div>vibby</div>
+    <div class="fc">© 2026 Vibby · Made for vibecoder</div>
+    <div class="fls"><a href="#">Privacy</a><a href="#">Terms</a><a href="vibby.html">App →</a></div>
   </div>
 </footer>
 
 <script>
-function countUp(el, target, prefix, dur) {
-  const from = Math.round(target * 0.65);
-  const t0 = performance.now();
-  const tick = now => {
-    const p = Math.min((now - t0) / dur, 1);
-    const e = 1 - Math.pow(1 - p, 3);
-    el.textContent = prefix + Math.round(from + (target - from) * e).toLocaleString('en-US');
-    if (p < 1) requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
+// count up
+function cu(el,to,pre,dur){
+  const from=Math.round(to*.55),t0=performance.now();
+  const f=n=>{const p=Math.min((n-t0)/dur,1),e=1-Math.pow(1-p,3);el.textContent=pre+Math.round(from+(to-from)*e).toLocaleString('en-US');if(p<1)requestAnimationFrame(f);};
+  requestAnimationFrame(f);
 }
-setTimeout(() => {
-  const r = document.getElementById('rev');
-  const o = document.getElementById('ord');
-  if (r) countUp(r, 10847, '$', 1600);
-  if (o) countUp(o, 89, '', 1200);
-}, 500);
+setTimeout(()=>{
+  const r=document.getElementById('rev'),o=document.getElementById('ord');
+  if(r)cu(r,10847,'$',2000);
+  if(o)cu(o,89,'',1400);
+},400);
 
-const fakeOrders = [
-  {i:'TK',n:'Thomas K.',p:'Leather jacket',a:'$320'},
-  {i:'AL',n:'Alex L.',p:'White sneaker',a:'$149'},
-  {i:'CM',n:'Clara M.',p:'Summer pack',a:'$189'},
-  {i:'NP',n:'Nina P.',p:'Black hoodie',a:'$89'},
-  {i:'RB',n:'Rémi B.',p:'Logo cap',a:'$45'},
+// live payments
+const pmt=[
+  {i:'TK',c:'#7c3aed',n:'Thomas K.',p:'Leather jacket',a:'$320'},
+  {i:'AL',c:'#0891b2',n:'Alex L.',p:'White sneaker',a:'$149'},
+  {i:'CM',c:'#d97706',n:'Clara M.',p:'Summer pack',a:'$189'},
+  {i:'NP',c:'#dc2626',n:'Nina P.',p:'Black hoodie',a:'$89'},
+  {i:'RB',c:'#16a34a',n:'Rémi B.',p:'Logo cap',a:'$45'},
+  {i:'LG',c:'#9333ea',n:'Lucie G.',p:'Premium tee',a:'$65'},
 ];
-let oi = 0;
-setInterval(() => {
-  const list = document.getElementById('ord-list');
-  if (!list) return;
-  const o = fakeOrders[oi++ % fakeOrders.length];
-  const row = document.createElement('div');
-  row.className = 'ord-row ord-new';
-  row.innerHTML = `<div class="ord-av">${o.i}</div><div style="flex:1;"><div class="ord-n">${o.n}</div><div class="ord-p">${o.p}</div></div><div class="ord-a">${o.a}</div><div class="ord-b">Paid</div>`;
-  list.insertBefore(row, list.firstChild);
-  if (list.children.length > 3) list.lastChild.remove();
-}, 3000);
+let pi=0;
+const times=['just now','1 min ago','2 min ago'];
+setInterval(()=>{
+  const list=document.getElementById('fl-rows');if(!list)return;
+  const p=pmt[pi++%pmt.length];
+  const row=document.createElement('div');row.className='fl-row fl-new';
+  row.innerHTML=`<div class="fl-av" style="background:${p.c};">${p.i}</div><div class="fl-info"><div class="fl-name">${p.n}</div><div class="fl-prod">${p.p}</div></div><div class="fl-right"><div class="fl-amt">${p.a}</div><div class="fl-time">just now</div></div><div class="fl-badge">Paid</div>`;
+  list.insertBefore(row,list.firstChild);
+  // update times
+  list.querySelectorAll('.fl-time').forEach((t,i)=>{t.textContent=times[i]||'5 min ago';});
+  if(list.children.length>3)list.lastChild.remove();
+},2800);
 
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }});
-}, {threshold:.1});
-document.querySelectorAll('.step,.cr,.feat').forEach(el => {
-  el.style.opacity='0'; el.style.transform='translateY(12px)';
-  el.style.transition='opacity .35s ease,transform .35s ease';
+// reveal
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');});},{threshold:.1});
+document.querySelectorAll('.rv,.hg-col,.cmp-tr').forEach(el=>{
+  if(!el.classList.contains('rv')){el.classList.add('rv');}
   obs.observe(el);
 });
 </script>
