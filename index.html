@@ -3,123 +3,117 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vibby — The commerce platform for AI-built websites</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>Vibby — The commerce layer for the AI internet</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --g:#00C27C;--gd:#009960;
-  --ink:#09110a;--ink2:#4a5e51;--ink3:#8fa898;
-  --line:#eaeeed;--line2:#d4ddd6;--w:#fff;--bg:#f6f7f6;
+  --g:#00C27C;--gd:#009960;--gl:rgba(0,194,124,.12);
+  --ink:#08100a;--ink2:#3d5445;--ink3:#7a9880;
+  --line:#e6ece7;--line2:#cddacf;--w:#fff;--bg:#f5f7f5;
 }
 html,body{font-family:'Inter',sans-serif;background:var(--w);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 a{text-decoration:none;color:inherit;}
 
 /* NAV */
-.nav{position:fixed;inset:0 0 auto;z-index:100;height:56px;padding:0 28px;display:flex;align-items:center;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--line);}
-.nlogo{display:flex;align-items:center;gap:9px;font-size:17px;font-weight:800;letter-spacing:-.5px;color:var(--ink);}
+.nav{position:fixed;inset:0 0 auto;z-index:200;height:56px;padding:0 28px;display:flex;align-items:center;background:rgba(255,255,255,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--line);}
+.nlogo{display:flex;align-items:center;gap:9px;font-size:17px;font-weight:800;letter-spacing:-.5px;}
 .nlogo-ic{width:30px;height:30px;background:var(--g);border-radius:8px;display:grid;place-items:center;}
 .nlogo-ic svg{width:15px;height:15px;}
 .nav-r{margin-left:auto;display:flex;gap:8px;}
 .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid transparent;font-family:inherit;transition:all .15s;white-space:nowrap;text-decoration:none;line-height:1;}
-.btn-out{color:var(--ink2);border-color:var(--line2);background:transparent;}
+.btn-out{color:var(--ink2);border-color:var(--line2);}
 .btn-out:hover{color:var(--ink);border-color:var(--ink3);}
 .btn-g{background:var(--g);color:#fff;}
-.btn-g:hover{background:var(--gd);box-shadow:0 4px 20px rgba(0,194,124,.3);}
+.btn-g:hover{background:var(--gd);box-shadow:0 4px 20px rgba(0,194,124,.35);}
 .btn-xl{padding:16px 36px;font-size:16px;border-radius:12px;font-weight:700;display:inline-flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer;border:none;font-family:inherit;}
-.btn-xl-ghost{padding:16px 32px;font-size:16px;border-radius:12px;font-weight:600;color:var(--ink2);border:1.5px solid var(--line2);background:transparent;display:inline-flex;align-items:center;gap:7px;cursor:pointer;font-family:inherit;transition:all .15s;text-decoration:none;}
-.btn-xl-ghost:hover{color:var(--ink);border-color:var(--ink3);}
+.btn-xl-out{padding:15px 32px;font-size:16px;border-radius:12px;font-weight:600;color:var(--ink2);border:1.5px solid var(--line2);background:transparent;display:inline-flex;align-items:center;gap:7px;cursor:pointer;font-family:inherit;transition:all .15s;text-decoration:none;}
+.btn-xl-out:hover{color:var(--ink);border-color:var(--ink3);}
 
 /* HERO */
-.hero{padding:112px 28px 0;text-align:center;background:var(--w);position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse at 50% 30%,rgba(0,194,124,.06) 0%,transparent 65%);pointer-events:none;}
-.hero-in{position:relative;z-index:1;max-width:900px;margin:0 auto;}
+.hero{padding:100px 28px 0;text-align:center;background:var(--w);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:900px;height:700px;background:radial-gradient(ellipse at 50% 30%,rgba(0,194,124,.07) 0%,rgba(0,194,124,.03) 40%,transparent 70%);pointer-events:none;}
+.hero-in{position:relative;z-index:1;max-width:920px;margin:0 auto;}
 
-.h-anim{opacity:0;transform:translateY(28px);animation:hIn .75s cubic-bezier(.16,1,.3,1) forwards;}
-.d1{animation-delay:.05s;}.d2{animation-delay:.18s;}.d3{animation-delay:.32s;}.d4{animation-delay:.44s;}.d5{animation-delay:.54s;}.d6{animation-delay:.62s;}
+.h-a{opacity:0;transform:translateY(28px);animation:hIn .8s cubic-bezier(.16,1,.3,1) forwards;}
+.d1{animation-delay:.05s;}.d2{animation-delay:.16s;}.d3{animation-delay:.28s;}.d4{animation-delay:.4s;}.d5{animation-delay:.5s;}.d6{animation-delay:.58s;}
 @keyframes hIn{to{opacity:1;transform:none;}}
 
-.chip{display:inline-flex;align-items:center;gap:7px;background:var(--w);border:1px solid var(--line2);border-radius:100px;padding:6px 16px 6px 10px;font-size:12px;font-weight:600;color:var(--ink2);margin-bottom:28px;}
+.chip{display:inline-flex;align-items:center;gap:7px;background:rgba(0,194,124,.08);border:1px solid rgba(0,194,124,.2);border-radius:100px;padding:6px 16px 6px 10px;font-size:12px;font-weight:600;color:var(--gd);margin-bottom:24px;}
 .chip-dot{width:7px;height:7px;border-radius:50%;background:var(--g);animation:glow 2s infinite;}
-@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(0,194,124,.5);}50%{box-shadow:0 0 0 5px rgba(0,194,124,0);}}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(0,194,124,.6);}50%{box-shadow:0 0 0 6px rgba(0,194,124,0);}}
 
-h1{font-size:clamp(52px,8.5vw,112px);font-weight:900;letter-spacing:-5px;line-height:.9;color:var(--ink);margin-bottom:26px;}
-h1 .g{background:linear-gradient(135deg,#00b36e 0%,#00C27C 40%,#34d399 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+h1{font-size:clamp(50px,8.5vw,112px);font-weight:900;letter-spacing:-5px;line-height:.9;color:var(--ink);margin-bottom:24px;}
+h1 .g{background:linear-gradient(135deg,#009960 0%,#00C27C 40%,#22d68d 70%,#00a36b 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
 
-.hero-sub{font-size:clamp(16px,1.8vw,20px);color:var(--ink2);line-height:1.6;max-width:520px;margin:0 auto 40px;font-weight:400;}
+.hero-sub{font-size:clamp(16px,1.8vw,20px);color:var(--ink2);line-height:1.65;max-width:540px;margin:0 auto 38px;font-weight:400;}
 .hero-sub strong{color:var(--ink);font-weight:700;}
 .hero-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
-.hero-fine{font-size:12px;color:var(--ink3);margin-bottom:60px;}
+.hero-fine{font-size:12px;color:var(--ink3);margin-bottom:56px;}
 
-/* DASHBOARD */
-.dash-outer{max-width:880px;margin:0 auto;}
-.dash-frame{background:var(--w);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 4px 8px rgba(0,0,0,.03),0 16px 48px rgba(0,20,8,.07),0 48px 96px rgba(0,20,8,.05);}
-.dash-bar{height:42px;background:var(--bg);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 16px;gap:6px;}
-.db-dots{display:flex;gap:5px;}
-.db-dot{width:11px;height:11px;border-radius:50%;}
-.db-url{flex:1;max-width:240px;margin:0 auto;height:23px;background:var(--w);border:1px solid var(--line);border-radius:6px;display:flex;align-items:center;padding:0 10px;gap:6px;}
-.db-url-g{width:7px;height:7px;border-radius:50%;background:var(--g);}
-.db-url-t{font-size:11px;color:var(--ink3);font-family:monospace;}
-.db-live{display:flex;align-items:center;gap:5px;background:rgba(0,194,124,.08);border:1px solid rgba(0,194,124,.2);border-radius:100px;padding:3px 10px;margin-left:auto;}
-.db-ld{width:5px;height:5px;border-radius:50%;background:var(--g);animation:glow 2s infinite;}
-.db-lt{font-size:10px;font-weight:600;color:var(--gd);}
+/* ── GLOBE DASHBOARD ── */
+.globe-dash{max-width:1000px;margin:0 auto;position:relative;}
+.globe-dash-frame{background:var(--ink);border-radius:20px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.06),0 24px 80px rgba(0,0,0,.25),0 80px 160px rgba(0,0,0,.15);}
+.gd-bar{height:40px;background:#0d1510;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;padding:0 16px;gap:6px;}
+.gd-dot{width:11px;height:11px;border-radius:50%;}
+.gd-url{flex:1;max-width:240px;margin:0 auto;height:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:6px;display:flex;align-items:center;padding:0 10px;gap:6px;}
+.gd-url-g{width:6px;height:6px;border-radius:50%;background:var(--g);}
+.gd-url-t{font-size:11px;color:rgba(255,255,255,.35);font-family:monospace;}
+.gd-live{display:flex;align-items:center;gap:5px;background:rgba(0,194,124,.12);border:1px solid rgba(0,194,124,.2);border-radius:100px;padding:3px 10px;margin-left:auto;}
+.gd-ld{width:5px;height:5px;border-radius:50%;background:var(--g);animation:glow 2s infinite;}
+.gd-lt{font-size:10px;font-weight:600;color:#4ade80;}
 
-/* DASH LAYOUT */
-.dash-layout{display:flex;height:420px;}
-.dash-side{width:200px;background:var(--bg);border-right:1px solid var(--line);padding:16px 12px;flex-shrink:0;display:flex;flex-direction:column;gap:2px;}
-.ds-logo{display:flex;align-items:center;gap:8px;padding:8px 10px;margin-bottom:12px;}
-.ds-logo-ic{width:24px;height:24px;background:var(--g);border-radius:6px;display:grid;place-items:center;}
-.ds-logo-ic svg{width:12px;height:12px;}
-.ds-logo-t{font-size:14px;font-weight:800;color:var(--ink);}
-.ds-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:7px;font-size:12px;font-weight:500;color:var(--ink2);cursor:default;}
-.ds-item.active{background:var(--w);color:var(--ink);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.06);}
-.ds-item svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;flex-shrink:0;}
-.ds-divider{height:1px;background:var(--line);margin:8px 0;}
+/* DASHBOARD LAYOUT */
+.gd-layout{display:grid;grid-template-columns:160px 1fr 220px;height:480px;}
 
-/* DASH MAIN */
-.dash-main{flex:1;overflow:hidden;display:flex;flex-direction:column;}
-.dash-top{height:48px;background:var(--w);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 20px;gap:12px;flex-shrink:0;}
-.dash-top-t{font-size:14px;font-weight:700;color:var(--ink);flex:1;}
-.dash-period{font-size:12px;color:var(--ink3);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:4px 10px;}
-.dash-body{flex:1;padding:16px;overflow:hidden;display:flex;flex-direction:column;gap:12px;background:var(--bg);}
+/* LEFT SIDEBAR */
+.gd-side{background:#0d1510;border-right:1px solid rgba(255,255,255,.06);padding:14px 10px;display:flex;flex-direction:column;gap:2px;}
+.gd-s-logo{display:flex;align-items:center;gap:7px;padding:7px 8px;margin-bottom:10px;}
+.gd-s-logo-ic{width:22px;height:22px;background:var(--g);border-radius:6px;display:grid;place-items:center;}
+.gd-s-logo-ic svg{width:11px;height:11px;}
+.gd-s-logo-t{font-size:13px;font-weight:800;color:#fff;}
+.gd-nav-item{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:6px;font-size:11px;font-weight:500;color:rgba(255,255,255,.4);cursor:default;transition:all .12s;}
+.gd-nav-item.on{background:rgba(255,255,255,.06);color:rgba(255,255,255,.9);}
+.gd-nav-item svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;flex-shrink:0;}
+.gd-metrics{margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;gap:8px;}
+.gd-mini-met{padding:8px 8px;}
+.gd-mini-l{font-size:8px;font-weight:700;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;}
+.gd-mini-v{font-size:16px;font-weight:800;color:#fff;letter-spacing:-.5px;}
+.gd-mini-v.g{color:var(--g);}
+.gd-mini-t{font-size:9px;color:var(--g);font-weight:600;margin-top:2px;}
 
-/* METRICS */
-.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
-.mc{background:var(--w);border:1px solid var(--line);border-radius:10px;padding:14px 16px;position:relative;}
-.mc.feat{border-top:2px solid var(--g);}
-.mc-l{font-size:9px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px;}
-.mc-v{font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.6px;line-height:1.1;}
-.mc-v.g{color:var(--g);}
-.mc-t{font-size:10px;font-weight:600;color:var(--g);margin-top:4px;}
-.mc-t.n{color:var(--ink3);}
+/* GLOBE CENTER */
+.gd-globe-area{position:relative;display:flex;flex-direction:column;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#0d2016 0%,#080c09 70%);}
+.gd-globe-top{height:40px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;padding:0 16px;gap:10px;flex-shrink:0;}
+.gd-globe-title{font-size:12px;font-weight:600;color:rgba(255,255,255,.6);}
+.gd-globe-sub{font-size:11px;color:rgba(255,255,255,.25);}
+.gd-globe-rev{margin-left:auto;font-size:18px;font-weight:800;color:#fff;letter-spacing:-.5px;display:flex;align-items:center;gap:6px;}
+.gd-globe-rev em{font-style:normal;color:var(--g);font-size:11px;font-weight:600;}
+.globe-wrap{flex:1;position:relative;display:flex;align-items:center;justify-content:center;}
+canvas#globe{display:block;}
+.sale-notif{position:absolute;background:rgba(13,21,16,.95);border:1px solid rgba(0,194,124,.3);border-radius:8px;padding:8px 12px;font-size:11px;color:#fff;white-space:nowrap;opacity:0;pointer-events:none;backdrop-filter:blur(8px);}
+.sale-notif .sn-amt{color:var(--g);font-weight:700;}
+.sale-notif .sn-loc{color:rgba(255,255,255,.5);font-size:10px;margin-top:1px;}
 
-/* CHART + ORDERS */
-.dash-row{display:grid;grid-template-columns:1.6fr 1fr;gap:10px;flex:1;min-height:0;}
+/* RIGHT FEED */
+.gd-feed{background:#0d1510;border-left:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;overflow:hidden;}
+.gd-feed-head{height:40px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;padding:0 14px;gap:8px;flex-shrink:0;}
+.gd-feed-t{font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px;flex:1;}
+.gd-feed-dot{width:5px;height:5px;border-radius:50%;background:var(--g);animation:glow 2s infinite;}
+.gd-feed-list{flex:1;overflow:hidden;padding:8px 0;display:flex;flex-direction:column;gap:0;}
+.gd-feed-item{padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.04);transition:background .12s;}
+.gd-feed-item:hover{background:rgba(255,255,255,.03);}
+.gd-feed-item.new{animation:feedIn .4s cubic-bezier(.16,1,.3,1);}
+@keyframes feedIn{from{opacity:0;transform:translateY(-12px);background:rgba(0,194,124,.08);}to{opacity:1;transform:none;background:transparent;}}
+.gfi-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;}
+.gfi-name{font-size:11px;font-weight:600;color:rgba(255,255,255,.8);}
+.gfi-amt{font-size:11px;font-weight:800;color:var(--g);}
+.gfi-desc{font-size:10px;color:rgba(255,255,255,.3);}
+.gfi-time{font-size:9px;color:rgba(255,255,255,.2);margin-top:2px;}
 
-.chart-card{background:var(--w);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;}
-.cc-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
-.cc-lbl{font-size:9px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;}
-.cc-val{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.8px;line-height:1;}
-.cc-up{font-size:10px;font-weight:600;color:var(--g);margin-top:3px;}
-.cc-svg-wrap{flex:1;min-height:0;}
-.cc-svg-wrap svg{width:100%;height:100%;display:block;}
-
-.orders-card{background:var(--w);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;overflow:hidden;}
-.oc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
-.oc-lbl{font-size:9px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.6px;}
-.oc-live{display:flex;align-items:center;gap:4px;font-size:9px;font-weight:600;color:var(--gd);}
-.oc-ld{width:5px;height:5px;border-radius:50%;background:var(--g);animation:glow 2s infinite;}
-.o-rows{flex:1;overflow:hidden;display:flex;flex-direction:column;}
-.o-r{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--line);}
-.o-r:last-child{border-bottom:none;}
-.o-av{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:9px;font-weight:800;color:#fff;flex-shrink:0;}
-.o-info{flex:1;min-width:0;}
-.o-name{font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.o-prod{font-size:10px;color:var(--ink3);margin-top:1px;}
-.o-amt{font-size:12px;font-weight:800;color:var(--ink);flex-shrink:0;margin-right:6px;}
-.o-bdg{font-size:9px;font-weight:700;background:rgba(0,194,124,.1);color:var(--gd);border:1px solid rgba(0,194,124,.2);padding:2px 7px;border-radius:100px;flex-shrink:0;}
-.o-new{animation:oIn .35s cubic-bezier(.16,1,.3,1);}
-@keyframes oIn{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:none;}}
+/* CHART BOTTOM */
+.gd-chart-bar{height:80px;border-top:1px solid rgba(255,255,255,.06);padding:10px 16px 8px;flex-shrink:0;}
+.gd-chart-bar svg{width:100%;height:100%;display:block;}
 
 /* MQ */
 .mq-sec{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0;overflow:hidden;}
@@ -128,147 +122,148 @@ h1 .g{background:linear-gradient(135deg,#00b36e 0%,#00C27C 40%,#34d399 100%);-we
 .mq-wr::before,.mq-wr::after{content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none;}
 .mq-wr::before{left:0;background:linear-gradient(90deg,#fff,transparent);}
 .mq-wr::after{right:0;background:linear-gradient(-90deg,#fff,transparent);}
-.mq{display:flex;gap:8px;width:max-content;animation:mqs 28s linear infinite;}
+.mq{display:flex;gap:8px;width:max-content;animation:mqs 30s linear infinite;}
 .mq:hover{animation-play-state:paused;}
 @keyframes mqs{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 .mq-t{display:flex;align-items:center;gap:9px;background:var(--bg);border:1px solid var(--line);border-radius:100px;padding:7px 18px 7px 10px;white-space:nowrap;transition:border-color .12s;}
 .mq-t:hover{border-color:var(--ink3);}
 .mq-n{font-size:13px;font-weight:600;color:var(--ink2);}
 
+/* DARK SECTION */
+.dark-sec{background:var(--ink);color:#fff;padding:96px 28px;border-top:1px solid rgba(255,255,255,.06);}
+.dark-sec .sec-ey{color:rgba(255,255,255,.3);}
+.dark-sec .sec-h{color:#fff;}
+
 /* SECTIONS */
-.sec{padding:88px 24px;border-bottom:1px solid var(--line);}
+.light-sec{padding:96px 28px;border-bottom:1px solid var(--line);}
+.gray-sec{padding:96px 28px;border-bottom:1px solid var(--line);background:var(--bg);}
 .sec-in{max-width:1040px;margin:0 auto;}
 .sec-in-sm{max-width:760px;margin:0 auto;}
-.sec-ey{font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.9px;margin-bottom:8px;}
-.sec-h{font-size:clamp(36px,5vw,60px);font-weight:900;letter-spacing:-2.5px;line-height:.97;}
-.sec-sub{font-size:16px;color:var(--ink2);line-height:1.65;max-width:440px;margin-top:12px;}
+.sec-ey{font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.9px;margin-bottom:10px;}
+.sec-h{font-size:clamp(34px,5vw,60px);font-weight:900;letter-spacing:-2.5px;line-height:.97;}
+.sec-sub{font-size:16px;color:var(--ink2);line-height:1.7;max-width:480px;margin-top:14px;}
 
 /* BEFORE/AFTER */
-.ba-sec{padding:88px 24px;border-bottom:1px solid var(--line);background:var(--bg);}
-.ba-in{max-width:860px;margin:0 auto;}
-.ba-header{text-align:center;margin-bottom:52px;}
-.ba-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:center;}
-.ba-col{background:var(--w);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
-.ba-col-head{padding:14px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;}
-.ba-col-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:3px 10px;border-radius:100px;}
-.ba-col-tag.before{background:#fef2f2;color:#dc2626;border:1px solid #fecaca;}
-.ba-col-tag.after{background:rgba(0,194,124,.1);color:var(--gd);border:1px solid rgba(0,194,124,.25);}
-.ba-col-body{padding:20px;}
-.ba-step{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);}
+.ba-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:center;margin-top:48px;}
+.ba-col{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;}
+.ba-head{padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:8px;}
+.ba-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:3px 10px;border-radius:100px;}
+.ba-tag.b{background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.25);}
+.ba-tag.a{background:rgba(0,194,124,.15);color:#4ade80;border:1px solid rgba(0,194,124,.25);}
+.ba-body{padding:20px;}
+.ba-step{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);}
 .ba-step:last-child{border-bottom:none;}
-.ba-step-ic{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;flex-shrink:0;font-size:14px;}
-.ba-step-t{font-size:13px;font-weight:500;color:var(--ink);}
-.ba-step-sub{font-size:11px;color:var(--ink3);margin-top:2px;}
-.ba-step.pain .ba-step-ic{background:#fef2f2;}
-.ba-step.good .ba-step-ic{background:rgba(0,194,124,.1);}
-.ba-arrow{display:flex;align-items:center;justify-content:center;padding:0 28px;}
-.ba-arrow-inner{width:48px;height:48px;background:var(--g);border-radius:50%;display:grid;place-items:center;box-shadow:0 4px 16px rgba(0,194,124,.3);}
-.ba-arrow-inner svg{width:20px;height:20px;}
+.ba-step-ic{font-size:16px;flex-shrink:0;margin-top:1px;width:24px;text-align:center;}
+.ba-step-t{font-size:13px;font-weight:500;color:rgba(255,255,255,.8);}
+.ba-step-sub{font-size:11px;color:rgba(255,255,255,.3);margin-top:2px;}
+.ba-arr{padding:0 32px;}
+.ba-arr-ic{width:52px;height:52px;background:var(--g);border-radius:50%;display:grid;place-items:center;box-shadow:0 0 30px rgba(0,194,124,.4),0 4px 16px rgba(0,194,124,.3);}
+.ba-arr-ic svg{width:22px;height:22px;}
 
 /* HOW */
 .how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:44px;}
 .how-col{background:var(--w);padding:28px 24px;position:relative;}
-.how-col::after{content:'→';position:absolute;right:-12px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--ink3);z-index:1;}
+.how-col::after{content:'→';position:absolute;right:-10px;top:40px;font-size:14px;color:var(--ink3);z-index:1;}
 .how-col:last-child::after{display:none;}
 .how-n{font-size:11px;font-weight:700;color:var(--g);text-transform:uppercase;letter-spacing:.6px;margin-bottom:16px;}
 .how-ic{width:40px;height:40px;border:1px solid var(--line);border-radius:10px;background:var(--bg);display:grid;place-items:center;margin-bottom:14px;}
 .how-ic svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:1.8;stroke-linecap:round;}
 .how-t{font-size:15px;font-weight:800;letter-spacing:-.3px;margin-bottom:6px;}
-.how-d{font-size:12px;color:var(--ink2);line-height:1.6;}
-.how-tools{display:flex;flex-wrap:wrap;gap:4px;margin-top:12px;}
-.how-tool{font-size:10px;font-weight:500;color:var(--ink2);background:var(--bg);border:1px solid var(--line);border-radius:100px;padding:2px 8px;}
+.how-d{font-size:12px;color:var(--ink2);line-height:1.65;}
+.how-pills{display:flex;flex-wrap:wrap;gap:4px;margin-top:12px;}
+.how-pill{font-size:10px;font-weight:500;color:var(--ink2);background:var(--bg);border:1px solid var(--line);border-radius:100px;padding:2px 8px;}
 
 /* BUILT WITH */
-.built-sec{padding:88px 24px;border-bottom:1px solid var(--line);background:var(--bg);}
-.built-in{max-width:860px;margin:0 auto;text-align:center;}
-.built-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:44px;}
-.built-card{background:var(--w);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;align-items:center;gap:16px;text-align:left;transition:border-color .15s,box-shadow .15s;}
-.built-card:hover{border-color:var(--ink3);box-shadow:0 4px 16px rgba(0,0,0,.06);}
-.built-logo{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;}
+.built-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:40px;}
+.built-card{background:var(--w);border:1px solid var(--line);border-radius:14px;padding:22px 20px;display:flex;align-items:center;gap:14px;transition:all .15s;}
+.built-card:hover{border-color:var(--g);box-shadow:0 4px 20px rgba(0,194,124,.1);}
+.built-ic{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;}
 .built-name{font-size:14px;font-weight:700;color:var(--ink);}
 .built-desc{font-size:12px;color:var(--ink3);margin-top:2px;}
 
-/* VISION */
-.vision-sec{padding:88px 24px;border-bottom:1px solid var(--line);}
-.vision-in{max-width:700px;margin:0 auto;text-align:center;}
-.vision-h{font-size:clamp(32px,4.5vw,52px);font-weight:900;letter-spacing:-2px;line-height:1.0;margin-bottom:16px;}
-.vision-p{font-size:17px;color:var(--ink2);line-height:1.7;margin-bottom:12px;}
-.vision-stat-row{display:flex;justify-content:center;gap:48px;margin-top:44px;}
-.vstat{text-align:center;}
-.vstat-n{font-size:clamp(32px,4vw,48px);font-weight:900;letter-spacing:-2px;color:var(--ink);}
-.vstat-n em{color:var(--g);font-style:normal;}
-.vstat-l{font-size:13px;color:var(--ink3);margin-top:4px;}
+/* MISSION DARK */
+.mission{text-align:center;max-width:700px;margin:0 auto;}
+.mission-h{font-size:clamp(32px,4.5vw,52px);font-weight:900;letter-spacing:-2px;line-height:1.0;margin-bottom:20px;color:#fff;}
+.mission-h em{color:var(--g);font-style:normal;}
+.mission-p{font-size:18px;color:rgba(255,255,255,.5);line-height:1.75;margin-bottom:16px;}
+.mission-p strong{color:rgba(255,255,255,.85);font-weight:600;}
+.mission-stats{display:flex;justify-content:center;gap:56px;margin-top:52px;padding-top:52px;border-top:1px solid rgba(255,255,255,.08);}
+.ms{text-align:center;}
+.ms-n{font-size:clamp(32px,4vw,52px);font-weight:900;letter-spacing:-2px;color:#fff;line-height:1;}
+.ms-n em{color:var(--g);font-style:normal;}
+.ms-l{font-size:13px;color:rgba(255,255,255,.35);margin-top:6px;}
 
 /* COMPARE */
-.cmp-table{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:36px;}
+.compare-philosophy{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:36px;margin-bottom:16px;}
+.cp-col{padding:36px 32px;background:var(--w);}
+.cp-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px;color:var(--ink3);}
+.cp-h{font-size:20px;font-weight:800;letter-spacing:-.4px;color:var(--ink);margin-bottom:10px;line-height:1.2;}
+.cp-p{font-size:14px;color:var(--ink2);line-height:1.65;}
+.cp-col.vibby{background:rgba(0,194,124,.04);}
+.cp-col.vibby .cp-tag{color:var(--gd);}
+.cp-col.vibby .cp-h{color:var(--ink);}
+.cmp-table{border:1px solid var(--line);border-radius:14px;overflow:hidden;}
 .cmp-th{display:grid;grid-template-columns:1.6fr 1fr 1fr;background:var(--bg);border-bottom:1px solid var(--line);}
 .cmp-th div{padding:12px 20px;font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;}
 .cmp-th .hi{color:var(--g);}
 .cmp-tr{display:grid;grid-template-columns:1.6fr 1fr 1fr;border-bottom:1px solid var(--line);transition:background .1s;}
 .cmp-tr:last-child{border-bottom:none;}
 .cmp-tr:hover{background:var(--bg);}
-.cmp-tr div{padding:14px 20px;font-size:14px;color:var(--ink2);display:flex;align-items:center;}
+.cmp-tr div{padding:13px 20px;font-size:13px;color:var(--ink2);display:flex;align-items:center;}
 .cmp-tr div:first-child{font-weight:600;color:var(--ink);}
 .yes{color:var(--g);font-weight:700;}
 .nope{color:var(--ink3);}
-.cmp-emotion{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:28px 32px;margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:24px;}
-.ce-col{}
-.ce-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;color:var(--ink3);}
-.ce-t{font-size:15px;font-weight:700;color:var(--ink);line-height:1.4;}
-.ce-sub{font-size:13px;color:var(--ink2);margin-top:6px;line-height:1.6;}
-.ce-divider{width:1px;background:var(--line);margin:0 -12px;}
 
 /* QUOTE */
-.quote{padding:64px 24px;border-bottom:1px solid var(--line);text-align:center;}
-.q-in{max-width:600px;margin:0 auto;}
-.q-t{font-size:clamp(18px,2.5vw,24px);font-weight:700;color:var(--ink);line-height:1.4;letter-spacing:-.3px;margin-bottom:20px;}
+.quote-dark{padding:80px 28px;text-align:center;background:var(--ink);border-top:1px solid rgba(255,255,255,.06);}
+.q-in{max-width:640px;margin:0 auto;}
+.q-t{font-size:clamp(18px,2.8vw,26px);font-weight:700;color:#fff;line-height:1.4;letter-spacing:-.3px;margin-bottom:20px;}
 .q-t em{color:var(--g);font-style:normal;}
-.q-a{font-size:13px;color:var(--ink3);}
+.q-a{font-size:13px;color:rgba(255,255,255,.3);}
 
-/* CTA */
-.cta{padding:120px 24px;text-align:center;background:var(--bg);border-top:1px solid var(--line);}
-.cta-in{max-width:560px;margin:0 auto;}
-.cta h2{font-size:clamp(40px,6vw,68px);font-weight:900;letter-spacing:-3px;line-height:.93;margin-bottom:14px;}
-.cta h2 .g{background:linear-gradient(135deg,#00b36e,#00C27C 40%,#34d399);-webkit-background-clip:text;background-clip:text;color:transparent;}
-.cta p{font-size:17px;color:var(--ink2);margin-bottom:36px;line-height:1.6;}
-.cta-fine{font-size:12px;color:var(--ink3);margin-top:14px;}
+/* CTA DARK */
+.cta-dark{padding:120px 28px;text-align:center;background:var(--ink);position:relative;overflow:hidden;}
+.cta-dark::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:700px;height:600px;background:radial-gradient(ellipse,rgba(0,194,124,.15) 0%,transparent 65%);pointer-events:none;}
+.cta-in{max-width:560px;margin:0 auto;position:relative;}
+.cta-in h2{font-size:clamp(40px,6.5vw,72px);font-weight:900;letter-spacing:-3.5px;line-height:.93;margin-bottom:16px;color:#fff;}
+.cta-in h2 .g{background:linear-gradient(135deg,#009960,#00C27C 40%,#22d68d);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.cta-in p{font-size:17px;color:rgba(255,255,255,.45);margin-bottom:36px;line-height:1.65;}
+.cta-fine{font-size:12px;color:rgba(255,255,255,.2);margin-top:14px;}
 
 /* FOOTER */
-footer{border-top:1px solid var(--line);padding:24px 28px;}
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:24px 28px;}
 .fi{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
-.fl{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:800;color:var(--ink);}
+.fl{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:800;color:#fff;}
 .flic{width:22px;height:22px;background:var(--g);border-radius:6px;display:grid;place-items:center;}
 .flic svg{width:11px;height:11px;}
-.fc_{font-size:12px;color:var(--ink3);}
+.fc_{font-size:12px;color:rgba(255,255,255,.2);}
 .fls{display:flex;gap:20px;}
-.fls a{font-size:12px;color:var(--ink3);transition:color .12s;}
-.fls a:hover{color:var(--ink);}
+.fls a{font-size:12px;color:rgba(255,255,255,.25);transition:color .12s;}
+.fls a:hover{color:rgba(255,255,255,.8);}
 
 /* REVEAL */
-.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease;}
 .rv.in{opacity:1;transform:none;}
 
 /* MOBILE */
 @media(max-width:700px){
   h1{letter-spacing:-3px;}
-  .btn-xl,.btn-xl-ghost{padding:13px 22px;font-size:14px;}
-  .dash-side{display:none;}
-  .metrics{grid-template-columns:1fr 1fr;}
-  .dash-row{grid-template-columns:1fr;}
-  .orders-card{display:none;}
+  .btn-xl,.btn-xl-out{padding:13px 22px;font-size:14px;}
+  .gd-layout{grid-template-columns:1fr;height:auto;}
+  .gd-side{display:none;}
+  .gd-feed{display:none;}
+  .gd-globe-area{height:320px;}
+  .ba-grid{grid-template-columns:1fr;gap:14px;}
+  .ba-arr{transform:rotate(90deg);padding:12px 0;display:flex;justify-content:center;}
   .how-grid{grid-template-columns:1fr 1fr;}
   .how-col::after{display:none;}
   .built-grid{grid-template-columns:1fr 1fr;}
   .built-card{padding:16px;}
-  .ba-grid{grid-template-columns:1fr;gap:16px;}
-  .ba-arrow{transform:rotate(90deg);padding:16px 0;}
-  .vision-stat-row{gap:24px;flex-wrap:wrap;}
+  .compare-philosophy{grid-template-columns:1fr;}
+  .mission-stats{flex-wrap:wrap;gap:32px;}
   .cmp-th,.cmp-tr{grid-template-columns:1.3fr 1fr 1fr;}
-  .cmp-th div,.cmp-tr div{padding:10px 12px;font-size:12px;}
-  .cmp-emotion{grid-template-columns:1fr;}
+  .cmp-th div,.cmp-tr div{padding:9px 10px;font-size:11px;}
   .fi{flex-direction:column;gap:12px;text-align:center;}
-  .dash-layout{height:auto;}
-  .dash-body{gap:10px;}
 }
 </style>
 </head>
@@ -289,130 +284,100 @@ footer{border-top:1px solid var(--line);padding:24px 28px;}
 <!-- HERO -->
 <section class="hero">
   <div class="hero-in">
-    <div class="chip h-anim d1"><span class="chip-dot"></span>The commerce platform for AI-built websites</div>
-    <h1 class="h-anim d2">Build anywhere.<br><span class="g">Sell everywhere.</span></h1>
-    <p class="hero-sub h-anim d3">You designed it with Claude or Cursor. Now sell from it. <strong>Vibby turns any AI-built website into a full commerce store</strong> — orders, products, customers, analytics.</p>
-    <div class="hero-btns h-anim d4">
+    <div class="chip h-a d1"><span class="chip-dot"></span>The commerce layer for the AI internet</div>
+    <h1 class="h-a d2">The commerce layer<br>for the <span class="g">AI internet.</span></h1>
+    <p class="hero-sub h-a d3">Millions of websites are now built with AI in hours. <strong>Vibby adds Shopify-level commerce to any of them</strong> — without templates, without restrictions, without the backend.</p>
+    <div class="hero-btns h-a d4">
       <a href="vibby.html" class="btn btn-g btn-xl">Launch your first product →</a>
-      <a href="#how" class="btn-xl-ghost">See how it works</a>
+      <a href="#how" class="btn-xl-out">See how it works</a>
     </div>
-    <div class="hero-fine h-anim d5">Free to start · No credit card · Works with any HTML</div>
+    <div class="hero-fine h-a d5">Free to start · No credit card · Works with Claude, Cursor, Bolt and more</div>
 
-    <!-- DASHBOARD -->
-    <div class="dash-outer h-anim d6">
-      <div class="dash-frame">
-        <div class="dash-bar">
-          <div class="db-dots">
-            <div class="db-dot" style="background:#ff5f57;"></div>
-            <div class="db-dot" style="background:#ffbd2e;"></div>
-            <div class="db-dot" style="background:#28c840;"></div>
+    <!-- GLOBE DASHBOARD -->
+    <div class="globe-dash h-a d6">
+      <div class="globe-dash-frame">
+        <div class="gd-bar">
+          <div style="display:flex;gap:5px;">
+            <div class="gd-dot" style="background:#ff5f57;"></div>
+            <div class="gd-dot" style="background:#ffbd2e;"></div>
+            <div class="gd-dot" style="background:#28c840;"></div>
           </div>
-          <div class="db-url"><div class="db-url-g"></div><span class="db-url-t">app.vibby.io/dashboard</span></div>
-          <div class="db-live"><span class="db-ld"></span><span class="db-lt">Live</span></div>
+          <div class="gd-url"><div class="gd-url-g"></div><span class="gd-url-t">app.vibby.io/live</span></div>
+          <div class="gd-live"><span class="gd-ld"></span><span class="gd-lt">Live Commerce</span></div>
         </div>
-        <div class="dash-layout">
-          <!-- SIDEBAR -->
-          <div class="dash-side">
-            <div class="ds-logo">
-              <div class="ds-logo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M5 8L12 16L19 8"/></svg></div>
-              <span class="ds-logo-t">vibby</span>
+        <div class="gd-layout">
+          <!-- LEFT SIDEBAR -->
+          <div class="gd-side">
+            <div class="gd-s-logo">
+              <div class="gd-s-logo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M5 8L12 16L19 8"/></svg></div>
+              <span class="gd-s-logo-t">vibby</span>
             </div>
-            <div class="ds-item active">
-              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-              Overview
+            <div class="gd-nav-item on">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+              Live Globe
             </div>
-            <div class="ds-item">
+            <div class="gd-nav-item">
               <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
               Orders
             </div>
-            <div class="ds-item">
+            <div class="gd-nav-item">
               <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
               Products
             </div>
-            <div class="ds-item">
-              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            <div class="gd-nav-item">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
               Customers
             </div>
-            <div class="ds-item">
+            <div class="gd-nav-item">
               <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
               Analytics
             </div>
-            <div class="ds-divider"></div>
-            <div class="ds-item">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
-              Settings
+            <div class="gd-metrics">
+              <div class="gd-mini-met">
+                <div class="gd-mini-l">Today's Revenue</div>
+                <div class="gd-mini-v g" id="today-rev">$0</div>
+                <div class="gd-mini-t">↑ Live</div>
+              </div>
+              <div class="gd-mini-met">
+                <div class="gd-mini-l">Active buyers</div>
+                <div class="gd-mini-v" id="active-buyers">0</div>
+              </div>
             </div>
           </div>
-          <!-- MAIN -->
-          <div class="dash-main">
-            <div class="dash-top">
-              <span class="dash-top-t">Overview</span>
-              <span class="dash-period">Last 30 days</span>
+
+          <!-- GLOBE CENTER -->
+          <div class="gd-globe-area">
+            <div class="gd-globe-top">
+              <span class="gd-globe-title">Live Commerce Globe</span>
+              <span class="gd-globe-sub">Sales happening right now</span>
+              <div class="gd-globe-rev" id="globe-rev">$0 <em>today</em></div>
             </div>
-            <div class="dash-body">
-              <div class="metrics">
-                <div class="mc feat">
-                  <div class="mc-l">Revenue</div>
-                  <div class="mc-v g" id="rev">$12,480</div>
-                  <div class="mc-t">↑ +28% vs last month</div>
-                </div>
-                <div class="mc">
-                  <div class="mc-l">Orders</div>
-                  <div class="mc-v" id="ord">143</div>
-                  <div class="mc-t">↑ +17 this week</div>
-                </div>
-                <div class="mc">
-                  <div class="mc-l">Customers</div>
-                  <div class="mc-v" id="cust">98</div>
-                  <div class="mc-t">↑ +12 new</div>
-                </div>
-                <div class="mc">
-                  <div class="mc-l">Avg. order</div>
-                  <div class="mc-v">$87</div>
-                  <div class="mc-t n">Across all products</div>
-                </div>
-              </div>
-              <div class="dash-row">
-                <div class="chart-card">
-                  <div class="cc-head">
-                    <div><div class="cc-lbl">Revenue trend</div></div>
-                    <div style="text-align:right;"><div class="cc-val">$12,480</div><div class="cc-up">↑ +28% this month</div></div>
-                  </div>
-                  <div class="cc-svg-wrap">
-                    <svg viewBox="0 0 420 80" preserveAspectRatio="none">
-                      <defs>
-                        <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stop-color="#00C27C" stop-opacity=".15"/>
-                          <stop offset="100%" stop-color="#00C27C" stop-opacity="0"/>
-                        </linearGradient>
-                      </defs>
-                      <line x1="0" y1="20" x2="420" y2="20" stroke="#eaeeed" stroke-width="1"/>
-                      <line x1="0" y1="40" x2="420" y2="40" stroke="#eaeeed" stroke-width="1"/>
-                      <line x1="0" y1="60" x2="420" y2="60" stroke="#eaeeed" stroke-width="1"/>
-                      <path d="M0,68 C30,64 60,62 90,57 C120,52 145,55 175,48 C205,41 230,38 260,30 C290,22 315,25 345,16 C365,9 390,7 420,3" fill="none" stroke="#00C27C" stroke-width="2" stroke-linecap="round"/>
-                      <path d="M0,68 C30,64 60,62 90,57 C120,52 145,55 175,48 C205,41 230,38 260,30 C290,22 315,25 345,16 C365,9 390,7 420,3 L420,80 L0,80Z" fill="url(#cg)"/>
-                      <circle cx="418" cy="3.5" r="4" fill="#00C27C"/>
-                      <circle cx="418" cy="3.5" r="4" fill="none" stroke="#00C27C" stroke-opacity=".25">
-                        <animate attributeName="r" from="4" to="13" dur="2s" repeatCount="indefinite"/>
-                        <animate attributeName="stroke-opacity" from=".25" to="0" dur="2s" repeatCount="indefinite"/>
-                      </circle>
-                    </svg>
-                  </div>
-                </div>
-                <div class="orders-card">
-                  <div class="oc-head">
-                    <span class="oc-lbl">Recent orders</span>
-                    <div class="oc-live"><span class="oc-ld"></span>Live</div>
-                  </div>
-                  <div class="o-rows" id="o-rows">
-                    <div class="o-r"><div class="o-av" style="background:#7c3aed;">ML</div><div class="o-info"><div class="o-name">Marie L.</div><div class="o-prod">Digital course</div></div><div class="o-amt">$97</div><div class="o-bdg">Paid</div></div>
-                    <div class="o-r"><div class="o-av" style="background:#0891b2;">JB</div><div class="o-info"><div class="o-name">Jean B.</div><div class="o-prod">UI Kit Pro</div></div><div class="o-amt">$49</div><div class="o-bdg">Paid</div></div>
-                    <div class="o-r"><div class="o-av" style="background:#d97706;">SC</div><div class="o-info"><div class="o-name">Sophie C.</div><div class="o-prod">Consulting</div></div><div class="o-amt">$299</div><div class="o-bdg">Paid</div></div>
-                    <div class="o-r"><div class="o-av" style="background:#9333ea;">TK</div><div class="o-info"><div class="o-name">Thomas K.</div><div class="o-prod">Templates pack</div></div><div class="o-amt">$67</div><div class="o-bdg">Paid</div></div>
-                  </div>
-                </div>
-              </div>
+            <div class="globe-wrap">
+              <canvas id="globe" width="540" height="380"></canvas>
+              <div id="notif-container" style="position:absolute;inset:0;pointer-events:none;"></div>
             </div>
+            <div class="gd-chart-bar">
+              <svg viewBox="0 0 560 56" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="cg2" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#00C27C" stop-opacity=".3"/>
+                    <stop offset="100%" stop-color="#00C27C" stop-opacity="0"/>
+                  </linearGradient>
+                  <filter id="glow2"><feGaussianBlur stdDeviation="2" result="blur"/><feComposite in="SourceGraphic" in2="blur" operator="over"/></filter>
+                </defs>
+                <path d="M0,48 C30,44 60,42 90,38 C120,34 145,36 175,30 C205,24 230,22 260,16 C290,10 315,13 345,7 C365,3 390,4 420,2 C440,1 480,2 560,1" fill="none" stroke="#00C27C" stroke-width="1.5" stroke-linecap="round" filter="url(#glow2)" opacity=".6"/>
+                <path d="M0,48 C30,44 60,42 90,38 C120,34 145,36 175,30 C205,24 230,22 260,16 C290,10 315,13 345,7 C365,3 390,4 420,2 C440,1 480,2 560,1 L560,56 L0,56Z" fill="url(#cg2)"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- RIGHT FEED -->
+          <div class="gd-feed">
+            <div class="gd-feed-head">
+              <span class="gd-feed-t">Live feed</span>
+              <span class="gd-feed-dot"></span>
+            </div>
+            <div class="gd-feed-list" id="gd-feed-list"></div>
           </div>
         </div>
       </div>
@@ -422,185 +387,152 @@ footer{border-top:1px solid var(--line);padding:24px 28px;}
 
 <!-- MARQUEE -->
 <div class="mq-sec">
-  <div class="mq-lbl">Built with the tools your customers use</div>
+  <div class="mq-lbl">Works with every AI tool you already use</div>
   <div class="mq-wr"><div class="mq" id="mq-inner"></div></div>
 </div>
 
-<!-- BEFORE / AFTER -->
-<section class="ba-sec rv">
-  <div class="ba-in">
-    <div class="ba-header">
-      <div class="sec-ey" style="text-align:center;">The difference</div>
-      <h2 class="sec-h" style="text-align:center;font-size:clamp(32px,4.5vw,52px);">Your design. Full commerce.</h2>
+<!-- BEFORE / AFTER (DARK) -->
+<section class="dark-sec rv">
+  <div class="sec-in">
+    <div style="text-align:center;margin-bottom:52px;">
+      <div class="sec-ey">The difference</div>
+      <h2 class="sec-h" style="color:#fff;font-size:clamp(32px,4.5vw,56px);">Your design.<br>Your rules.<br><span style="color:var(--g);">Your commerce.</span></h2>
     </div>
     <div class="ba-grid">
       <div class="ba-col">
-        <div class="ba-col-head">
-          <span class="ba-col-tag before">Without Vibby</span>
-        </div>
-        <div class="ba-col-body">
-          <div class="ba-step pain">
-            <div class="ba-step-ic">🎨</div>
-            <div><div class="ba-step-t">You build a beautiful site</div><div class="ba-step-sub">with Claude, Cursor, Bolt</div></div>
-          </div>
-          <div class="ba-step pain">
-            <div class="ba-step-ic">😩</div>
-            <div><div class="ba-step-t">You want to add a buy button</div><div class="ba-step-sub">Stripe setup, webhooks, backend...</div></div>
-          </div>
-          <div class="ba-step pain">
-            <div class="ba-step-ic">📚</div>
-            <div><div class="ba-step-t">3 days of config & docs</div><div class="ba-step-sub">Node.js, servers, deployment pipelines</div></div>
-          </div>
-          <div class="ba-step pain">
-            <div class="ba-step-ic">😤</div>
-            <div><div class="ba-step-t">You adapt your design to tools</div><div class="ba-step-sub">Shopify templates, WooCommerce themes</div></div>
-          </div>
+        <div class="ba-head"><span class="ba-tag b">Without Vibby</span></div>
+        <div class="ba-body">
+          <div class="ba-step"><div class="ba-step-ic">🎨</div><div><div class="ba-step-t">You build a beautiful site with AI</div><div class="ba-step-sub">Claude, Cursor, Bolt — hours, not months</div></div></div>
+          <div class="ba-step"><div class="ba-step-ic">😩</div><div><div class="ba-step-t">You want to add a buy button</div><div class="ba-step-sub">Stripe setup, webhooks, backend, Node.js...</div></div></div>
+          <div class="ba-step"><div class="ba-step-ic">📚</div><div><div class="ba-step-t">Days of docs & configuration</div><div class="ba-step-sub">Or you force your design into Shopify templates</div></div></div>
+          <div class="ba-step"><div class="ba-step-ic">😤</div><div><div class="ba-step-t">You build inside their box</div><div class="ba-step-sub">Your vision becomes what Shopify allows</div></div></div>
         </div>
       </div>
-
-      <div class="ba-arrow">
-        <div class="ba-arrow-inner">
-          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
+      <div class="ba-arr">
+        <div class="ba-arr-ic"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
       </div>
-
       <div class="ba-col">
-        <div class="ba-col-head">
-          <span class="ba-col-tag after">With Vibby</span>
-        </div>
-        <div class="ba-col-body">
-          <div class="ba-step good">
-            <div class="ba-step-ic">🎨</div>
-            <div><div class="ba-step-t">You build a beautiful site</div><div class="ba-step-sub">with Claude, Cursor, Bolt</div></div>
-          </div>
-          <div class="ba-step good">
-            <div class="ba-step-ic">⚡</div>
-            <div><div class="ba-step-t">Paste your HTML into Vibby</div><div class="ba-step-sub">Commerce layer injects automatically</div></div>
-          </div>
-          <div class="ba-step good">
-            <div class="ba-step-ic">🚀</div>
-            <div><div class="ba-step-t">Drop it anywhere, live in 60s</div><div class="ba-step-sub">Netlify, GitHub Pages, Vercel</div></div>
-          </div>
-          <div class="ba-step good">
-            <div class="ba-step-ic">💰</div>
-            <div><div class="ba-step-t">Your design. Your rules.</div><div class="ba-step-sub">Orders, customers, analytics — all in Vibby</div></div>
-          </div>
+        <div class="ba-head"><span class="ba-tag a">With Vibby</span></div>
+        <div class="ba-body">
+          <div class="ba-step"><div class="ba-step-ic">🎨</div><div><div class="ba-step-t">You build a beautiful site with AI</div><div class="ba-step-sub">Claude, Cursor, Bolt — your design, your vision</div></div></div>
+          <div class="ba-step"><div class="ba-step-ic">⚡</div><div><div class="ba-step-t">Paste your HTML into Vibby</div><div class="ba-step-sub">Commerce layer injects in one click</div></div></div>
+          <div class="ba-step"><div class="ba-step-ic">🚀</div><div><div class="ba-step-t">Drop anywhere — live in 60 seconds</div><div class="ba-step-sub">Netlify, GitHub Pages, Vercel — static host</div></div></div>
+          <div class="ba-step"><div class="ba-step-ic">💰</div><div><div class="ba-step-t">Orders, customers, analytics — yours</div><div class="ba-step-sub">A full commerce backend. No compromises.</div></div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="sec" id="how">
+<!-- HOW -->
+<section class="light-sec rv" id="how">
   <div class="sec-in">
-    <div class="rv">
-      <div class="sec-ey">How it works</div>
-      <h2 class="sec-h">Four steps to selling.</h2>
-      <p class="sec-sub">The simplest path from idea to income. No backend, no devops, no compromises on your design.</p>
-    </div>
-    <div class="how-grid rv">
+    <div class="sec-ey">How it works</div>
+    <h2 class="sec-h">Four steps to revenue.</h2>
+    <p class="sec-sub">The simplest path from AI-built idea to commerce infrastructure. No backend, no devops, no compromises.</p>
+    <div class="how-grid">
       <div class="how-col">
         <div class="how-n">01</div>
         <div class="how-ic"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
         <div class="how-t">Build your website</div>
-        <div class="how-d">Design anything with your favorite AI tool. Vibby works with any HTML output.</div>
-        <div class="how-tools"><span class="how-tool">Claude</span><span class="how-tool">Cursor</span><span class="how-tool">Bolt</span><span class="how-tool">Lovable</span></div>
+        <div class="how-d">Design anything with your AI tool of choice. Vibby works with any HTML output.</div>
+        <div class="how-pills"><span class="how-pill">Claude</span><span class="how-pill">Cursor</span><span class="how-pill">Bolt</span></div>
       </div>
       <div class="how-col">
         <div class="how-n">02</div>
-        <div class="how-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg></div>
+        <div class="how-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
         <div class="how-t">Connect Vibby</div>
-        <div class="how-d">Paste your HTML. Vibby adds the full commerce layer — products, checkout, emails — automatically.</div>
-        <div class="how-tools"><span class="how-tool">1 click</span><span class="how-tool">No code</span></div>
+        <div class="how-d">Paste your HTML. Vibby adds products, checkout, orders, and emails — automatically.</div>
+        <div class="how-pills"><span class="how-pill">1 click</span><span class="how-pill">No code</span></div>
       </div>
       <div class="how-col">
         <div class="how-n">03</div>
         <div class="how-ic"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
-        <div class="how-t">Start selling</div>
-        <div class="how-d">Drop your HTML anywhere. Your store goes live in 60 seconds on any static host.</div>
-        <div class="how-tools"><span class="how-tool">Netlify</span><span class="how-tool">GitHub Pages</span><span class="how-tool">Vercel</span></div>
+        <div class="how-t">Go live anywhere</div>
+        <div class="how-d">Drop your HTML on any static host. Your store goes live in 60 seconds, no server needed.</div>
+        <div class="how-pills"><span class="how-pill">Netlify</span><span class="how-pill">Vercel</span><span class="how-pill">GitHub</span></div>
       </div>
       <div class="how-col">
         <div class="how-n">04</div>
         <div class="how-ic"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
         <div class="how-t">Manage everything</div>
-        <div class="how-d">Orders, customers, products, analytics — all in one dashboard. Your own Shopify-level backend.</div>
-        <div class="how-tools"><span class="how-tool">Orders</span><span class="how-tool">Customers</span><span class="how-tool">Analytics</span></div>
+        <div class="how-d">Orders, customers, products, analytics — a Shopify-level backend for your AI-built business.</div>
+        <div class="how-pills"><span class="how-pill">Orders</span><span class="how-pill">Customers</span><span class="how-pill">Analytics</span></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- BUILT WITH -->
-<section class="built-sec rv">
-  <div class="built-in">
-    <div class="sec-ey">Built with</div>
-    <h2 class="sec-h" style="font-size:clamp(32px,4vw,48px);">Works with every AI tool you use</h2>
-    <p style="font-size:15px;color:var(--ink2);margin-top:10px;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.6;">Vibby doesn't care how you built your site. If it's HTML, it works.</p>
+<section class="gray-sec rv">
+  <div class="sec-in">
+    <div style="text-align:center;margin-bottom:44px;">
+      <div class="sec-ey">Built with</div>
+      <h2 class="sec-h">Works with every<br>AI tool you use</h2>
+    </div>
     <div class="built-grid" id="built-grid"></div>
   </div>
 </section>
 
-<!-- VISION -->
-<section class="vision-sec rv">
-  <div class="vision-in">
-    <div class="sec-ey">Our mission</div>
-    <h2 class="vision-h">The future of online commerce</h2>
-    <p class="vision-p">Millions of websites are now built by AI in hours, not months. But commerce infrastructure hasn't caught up — until now.</p>
-    <p class="vision-p"><strong style="color:var(--ink);">Vibby is building the commerce layer for the AI internet.</strong> Every AI-built website deserves Shopify-level commerce without the Shopify constraints.</p>
-    <div class="vision-stat-row">
-      <div class="vstat"><div class="vstat-n"><em>10M+</em></div><div class="vstat-l">AI-built sites created in 2025</div></div>
-      <div class="vstat"><div class="vstat-n"><em>0</em></div><div class="vstat-l">Commerce tools built for them</div></div>
-      <div class="vstat"><div class="vstat-n"><em>Vibby</em></div><div class="vstat-l">is changing that</div></div>
+<!-- MISSION (DARK) -->
+<section class="dark-sec rv">
+  <div class="sec-in">
+    <div class="mission">
+      <div class="sec-ey">Our mission</div>
+      <h2 class="mission-h">The AI internet<br>needs a commerce layer.<br><em>We're building it.</em></h2>
+      <p class="mission-p">In 2025, over 10 million websites were built with AI — in hours, not months. Claude, Cursor, Bolt and Lovable put the power of a dev team in anyone's hands.</p>
+      <p class="mission-p"><strong>But commerce infrastructure hasn't caught up.</strong> Shopify was built for a world where you hire developers. Wix was built for drag-and-drop. Neither was built for AI-generated HTML.</p>
+      <p class="mission-p">Vibby is the first commerce platform <strong>designed for the AI internet.</strong> Your design. Your brand. Your rules. Commerce is the layer — not the constraint.</p>
+      <div class="mission-stats">
+        <div class="ms"><div class="ms-n"><em>10M+</em></div><div class="ms-l">AI-built sites created in 2025</div></div>
+        <div class="ms"><div class="ms-n"><em>0</em></div><div class="ms-l">Commerce tools built for them</div></div>
+        <div class="ms"><div class="ms-n" style="color:var(--g);">Vibby</div><div class="ms-l">is changing that</div></div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- COMPARE -->
-<section class="sec" id="compare" style="background:var(--bg);">
+<section class="light-sec rv" id="compare">
   <div class="sec-in-sm">
-    <div class="rv">
-      <div class="sec-ey">Vibby vs Shopify</div>
-      <h2 class="sec-h" style="font-size:clamp(32px,4.5vw,52px);">Your design.<br>Not their templates.</h2>
-    </div>
-    <div class="cmp-emotion rv">
-      <div class="ce-col">
-        <div class="ce-tag">Shopify</div>
-        <div class="ce-t">You adapt your idea to fit Shopify's templates, themes, and restrictions.</div>
-        <div class="ce-sub">Your vision becomes what Shopify allows. You're building inside their box.</div>
+    <div class="sec-ey">Vibby vs Shopify</div>
+    <h2 class="sec-h">Two philosophies.<br>One winner.</h2>
+    <div class="compare-philosophy">
+      <div class="cp-col">
+        <div class="cp-tag">Shopify</div>
+        <div class="cp-h">You build inside their system.</div>
+        <div class="cp-p">Your vision adapts to their templates, their themes, their checkout. You're always working within Shopify's constraints. Your brand looks like thousands of other Shopify stores.</div>
       </div>
-      <div style="width:1px;background:var(--line);"></div>
-      <div class="ce-col">
-        <div class="ce-tag" style="color:var(--gd);">Vibby</div>
-        <div class="ce-t">You build exactly what you imagine. Vibby adds commerce to your vision.</div>
-        <div class="ce-sub">Your design, your brand, your experience. Commerce is the layer, not the constraint.</div>
+      <div class="cp-col vibby">
+        <div class="cp-tag">✦ Vibby</div>
+        <div class="cp-h">Your system. Your design. Your rules.</div>
+        <div class="cp-p">Build exactly what you imagine with AI. Vibby adds commerce to your vision — not the other way around. Your store looks like nothing else because it's genuinely yours.</div>
       </div>
     </div>
-    <div class="cmp-table rv">
+    <div class="cmp-table">
       <div class="cmp-th"><div></div><div class="hi">✦ Vibby</div><div>Shopify</div></div>
-      <div class="cmp-tr"><div>Design freedom</div><div class="yes">100% yours</div><div class="nope">Template-based</div></div>
+      <div class="cmp-tr"><div>Design freedom</div><div class="yes">Unlimited</div><div class="nope">Template-based</div></div>
       <div class="cmp-tr"><div>Setup time</div><div class="yes">60 seconds</div><div class="nope">Hours to days</div></div>
-      <div class="cmp-tr"><div>Backend required</div><div class="yes">None</div><div class="nope">Hosted server</div></div>
       <div class="cmp-tr"><div>Works with AI tools</div><div class="yes">Native</div><div class="nope">Not at all</div></div>
+      <div class="cmp-tr"><div>Backend required</div><div class="yes">None</div><div class="nope">Hosted server</div></div>
       <div class="cmp-tr"><div>Starting price</div><div class="yes">Free</div><div class="nope">$39/month</div></div>
     </div>
   </div>
 </section>
 
 <!-- QUOTE -->
-<section class="quote rv">
+<section class="quote-dark rv">
   <div class="q-in">
-    <div class="q-t">"I built my entire store in Claude in one afternoon. With Vibby, I was selling by evening. I never had to touch a template or learn Shopify."</div>
+    <div class="q-t">"I built my entire store in Claude in one afternoon. Vibby made it sellable by evening. I never touched a template. I never learned Shopify. <em>I just sold.</em>"</div>
     <div class="q-a">— Alex T., indie developer & maker</div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta">
+<section class="cta-dark">
   <div class="cta-in rv">
     <h2>Your design.<br><span class="g">Your commerce.</span></h2>
-    <p>The Shopify-level store your AI-built website deserves. Free to start, no backend required.</p>
+    <p>The Shopify-level store your AI-built website deserves. Free to start, no backend, no restrictions.</p>
     <a href="vibby.html" class="btn btn-g btn-xl">Launch your first product →</a>
     <div class="cta-fine">Free · No credit card · Works with Claude, Cursor, Bolt and more</div>
   </div>
@@ -609,84 +541,306 @@ footer{border-top:1px solid var(--line);padding:24px 28px;}
 <footer>
   <div class="fi">
     <div class="fl"><div class="flic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M5 8L12 16L19 8"/></svg></div>vibby</div>
-    <div class="fc_">© 2026 Vibby · The commerce platform for AI-built websites</div>
+    <div class="fc_">© 2026 Vibby · The commerce layer for the AI internet</div>
     <div class="fls"><a href="#">Privacy</a><a href="#">Terms</a><a href="vibby.html">App →</a></div>
   </div>
 </footer>
 
 <script>
-// COUNT UP
-function cu(el,to,pre,dur){
-  const from=Math.round(to*.55),t0=performance.now();
-  const f=n=>{const p=Math.min((n-t0)/dur,1),e=1-Math.pow(1-p,3);el.textContent=pre+Math.round(from+(to-from)*e).toLocaleString('en-US');if(p<1)requestAnimationFrame(f);};requestAnimationFrame(f);
+// ── GLOBE ──
+const canvas = document.getElementById('globe');
+const ctx = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+const cx = W/2, cy = H/2, R = Math.min(W,H)*0.42;
+
+let rotation = 0;
+let todayRevenue = 1847;
+let activeBuyers = 23;
+const saleDots = [];
+
+// city locations [lat,lon,name]
+const cities = [
+  [45.5,-73.6,'Montréal'],[40.7,-74,'New York'],[51.5,-0.1,'London'],
+  [48.8,2.3,'Paris'],[52.5,13.4,'Berlin'],[55.7,37.6,'Moscow'],
+  [35.7,139.7,'Tokyo'],[31.2,121.5,'Shanghai'],[28.6,77.2,'Delhi'],
+  [-33.9,18.4,'Cape Town'],[-33.8,151.2,'Sydney'],[-23.5,-46.6,'São Paulo'],
+  [19.4,-99.1,'Mexico City'],[37.8,-122.4,'San Francisco'],[34.1,-118.2,'Los Angeles'],
+  [1.3,103.8,'Singapore'],[25.2,55.3,'Dubai'],[41.0,28.9,'Istanbul'],
+  [59.9,10.7,'Oslo'],[47.4,8.5,'Zurich'],[-37.8,144.9,'Melbourne'],
+];
+
+const saleMessages = [
+  {city:'Montréal',product:'AI Template Pack',amt:89,type:'purchase'},
+  {city:'Berlin',product:'Design System Pro',amt:149,type:'purchase'},
+  {city:'Sydney',product:'Monthly Pro',amt:29,type:'subscription'},
+  {city:'Tokyo',product:'Commerce Kit',amt:299,type:'purchase'},
+  {city:'London',product:'UI Components',amt:79,type:'purchase'},
+  {city:'New York',product:'Full Stack Bundle',amt:199,type:'purchase'},
+  {city:'Paris',product:'Annual Plan',amt:299,type:'subscription'},
+  {city:'Singapore',product:'Starter Kit',amt:49,type:'purchase'},
+  {city:'Dubai',product:'Enterprise License',amt:499,type:'purchase'},
+  {city:'San Francisco',product:'Developer Tools',amt:129,type:'purchase'},
+];
+
+function latLonTo3D(lat,lon) {
+  const phi = (90-lat)*Math.PI/180;
+  const theta = (lon+180)*Math.PI/180;
+  return {
+    x: -Math.sin(phi)*Math.cos(theta),
+    y: Math.cos(phi),
+    z: Math.sin(phi)*Math.sin(theta)
+  };
 }
-setTimeout(()=>{
-  const r=document.getElementById('rev'),o=document.getElementById('ord'),c=document.getElementById('cust');
-  if(r)cu(r,12480,'$',2200);
-  if(o)cu(o,143,'',1600);
-  if(c)cu(c,98,'',1400);
-},700);
 
-// LIVE ORDERS
-const orders=[
-  {i:'NP',c:'#dc2626',n:'Nina P.',p:'Design system',a:'$149'},
-  {i:'AL',c:'#0891b2',n:'Alex L.',p:'Starter kit',a:'$79'},
-  {i:'CM',c:'#d97706',n:'Clara M.',p:'1:1 consulting',a:'$399'},
-  {i:'RB',c:'#16a34a',n:'Rémi B.',p:'Icon set',a:'$29'},
-  {i:'LG',c:'#9333ea',n:'Lucie G.',p:'Email templates',a:'$59'},
-  {i:'MF',c:'#0369a1',n:'Marc F.',p:'SaaS boilerplate',a:'$199'},
-];
-let oi=0;
-setInterval(()=>{
-  const list=document.getElementById('o-rows');if(!list)return;
-  const o=orders[oi++%orders.length];
-  const row=document.createElement('div');row.className='o-r o-new';
-  row.innerHTML=`<div class="o-av" style="background:${o.c};">${o.i}</div><div class="o-info"><div class="o-name">${o.n}</div><div class="o-prod">${o.p}</div></div><div class="o-amt">${o.a}</div><div class="o-bdg">Paid</div>`;
-  list.insertBefore(row,list.firstChild);
-  if(list.children.length>4)list.lastChild.remove();
-},2800);
+function project(x,y,z,rot) {
+  const cosR = Math.cos(rot), sinR = Math.sin(rot);
+  const rx = x*cosR - z*sinR;
+  const rz = x*sinR + z*cosR;
+  const scale = (rz + 2) / 3;
+  return { sx: cx + rx*R*scale, sy: cy - y*R*scale, visible: rz > -0.3, depth: rz };
+}
 
-// MARQUEE with real SVGs
+function drawGlobe(rot) {
+  ctx.clearRect(0,0,W,H);
+
+  // atmosphere glow
+  const atmo = ctx.createRadialGradient(cx,cy,R*0.9,cx,cy,R*1.15);
+  atmo.addColorStop(0,'rgba(0,194,124,0.04)');
+  atmo.addColorStop(1,'rgba(0,194,124,0)');
+  ctx.fillStyle = atmo;
+  ctx.beginPath();ctx.arc(cx,cy,R*1.15,0,Math.PI*2);ctx.fill();
+
+  // globe base
+  const grad = ctx.createRadialGradient(cx-R*0.3,cy-R*0.3,R*0.05,cx,cy,R);
+  grad.addColorStop(0,'#1a2e20');
+  grad.addColorStop(0.5,'#0f1e14');
+  grad.addColorStop(1,'#080c09');
+  ctx.fillStyle = grad;
+  ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.fill();
+
+  // grid lines
+  ctx.strokeStyle = 'rgba(0,194,124,0.06)';
+  ctx.lineWidth = 0.5;
+  // meridians
+  for(let lon=-180;lon<180;lon+=30) {
+    ctx.beginPath();
+    let first = true;
+    for(let lat=-90;lat<=90;lat+=5) {
+      const p3 = latLonTo3D(lat,lon);
+      const p = project(p3.x,p3.y,p3.z,rot);
+      if(!p.visible){first=true;continue;}
+      if(first){ctx.moveTo(p.sx,p.sy);first=false;}
+      else ctx.lineTo(p.sx,p.sy);
+    }
+    ctx.stroke();
+  }
+  // parallels
+  for(let lat=-60;lat<=60;lat+=30) {
+    ctx.beginPath();
+    let first = true;
+    for(let lon=-180;lon<=180;lon+=5) {
+      const p3 = latLonTo3D(lat,lon);
+      const p = project(p3.x,p3.y,p3.z,rot);
+      if(!p.visible){first=true;continue;}
+      if(first){ctx.moveTo(p.sx,p.sy);first=false;}
+      else ctx.lineTo(p.sx,p.sy);
+    }
+    ctx.stroke();
+  }
+
+  // globe edge glow
+  const edgeGlow = ctx.createRadialGradient(cx,cy,R*0.85,cx,cy,R);
+  edgeGlow.addColorStop(0,'rgba(0,194,124,0)');
+  edgeGlow.addColorStop(1,'rgba(0,194,124,0.12)');
+  ctx.fillStyle = edgeGlow;
+  ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.fill();
+
+  // specular highlight
+  const spec = ctx.createRadialGradient(cx-R*0.4,cy-R*0.4,0,cx-R*0.4,cy-R*0.4,R*0.6);
+  spec.addColorStop(0,'rgba(255,255,255,0.04)');
+  spec.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle = spec;
+  ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.fill();
+
+  // sale dots
+  saleDots.forEach(dot => {
+    const p3 = latLonTo3D(dot.lat,dot.lon);
+    const p = project(p3.x,p3.y,p3.z,rot);
+    if(!p.visible) return;
+    const age = (Date.now()-dot.born)/1000;
+    const alpha = Math.max(0,1-age/8);
+    const pulseR = 3 + (age%1)*8*alpha;
+
+    // outer pulse
+    ctx.beginPath();
+    ctx.arc(p.sx,p.sy,pulseR,0,Math.PI*2);
+    ctx.strokeStyle = `rgba(0,194,124,${alpha*0.4})`;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // core dot
+    ctx.beginPath();
+    ctx.arc(p.sx,p.sy,3.5,0,Math.PI*2);
+    ctx.fillStyle = `rgba(0,194,124,${alpha})`;
+    ctx.fill();
+
+    // inner bright
+    ctx.beginPath();
+    ctx.arc(p.sx,p.sy,1.5,0,Math.PI*2);
+    ctx.fillStyle = `rgba(130,255,200,${alpha})`;
+    ctx.fill();
+  });
+
+  // city dots (static dim)
+  cities.forEach(([lat,lon]) => {
+    const p3 = latLonTo3D(lat,lon);
+    const p = project(p3.x,p3.y,p3.z,rot);
+    if(!p.visible) return;
+    ctx.beginPath();
+    ctx.arc(p.sx,p.sy,1.2,0,Math.PI*2);
+    ctx.fillStyle = 'rgba(0,194,124,0.25)';
+    ctx.fill();
+  });
+
+  // clip to globe
+  ctx.save();
+  ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.clip();
+  ctx.restore();
+}
+
+let animFrame;
+function tick() {
+  rotation += 0.003;
+  saleDots.forEach((d,i) => { if(Date.now()-d.born > 8000) saleDots.splice(i,1); });
+  drawGlobe(rotation);
+  animFrame = requestAnimationFrame(tick);
+}
+tick();
+
+// ── LIVE FEED ──
+const feedEl = document.getElementById('gd-feed-list');
+let feedItems = [];
+let saleIdx = 0;
+let totalRev = 1847;
+
+function addSale() {
+  const s = saleMessages[saleIdx%saleMessages.length];
+  saleIdx++;
+  totalRev += s.amt;
+  todayRevenue = totalRev;
+
+  // find city coords
+  const cityData = cities.find(c=>c[2]===s.city) || [40,0,s.city];
+  const jLat = cityData[0] + (Math.random()-0.5)*5;
+  const jLon = cityData[1] + (Math.random()-0.5)*5;
+  saleDots.push({lat:jLat,lon:jLon,born:Date.now()});
+
+  // update counters
+  document.getElementById('today-rev').textContent = '$'+totalRev.toLocaleString('en-US');
+  document.getElementById('globe-rev').innerHTML = '$'+totalRev.toLocaleString('en-US')+' <em>today</em>';
+  activeBuyers = 20 + Math.floor(Math.random()*15);
+  document.getElementById('active-buyers').textContent = activeBuyers;
+
+  // notification bubble on globe
+  showGlobeNotif(s);
+
+  // feed item
+  if(!feedEl) return;
+  const now = new Date();
+  const timeStr = now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0')+':'+now.getSeconds().toString().padStart(2,'0');
+  const item = document.createElement('div');
+  item.className = 'gd-feed-item new';
+  const typeLabel = s.type==='subscription' ? '🔄 Subscribed' : '🛍 Purchased';
+  item.innerHTML = `<div class="gfi-top"><span class="gfi-name">${s.city}</span><span class="gfi-amt">$${s.amt}</span></div><div class="gfi-desc">${typeLabel} · ${s.product}</div><div class="gfi-time">${timeStr}</div>`;
+  feedEl.insertBefore(item, feedEl.firstChild);
+  feedItems.push(item);
+  if(feedItems.length > 8) { feedItems[feedItems.length-1].remove(); feedItems.pop(); }
+}
+
+function showGlobeNotif(s) {
+  const container = document.getElementById('notif-container');
+  if(!container) return;
+  const el = document.createElement('div');
+  el.className = 'sale-notif';
+  el.innerHTML = `<div>${s.city}</div><div class="sn-amt">+$${s.amt}</div><div class="sn-loc">${s.product}</div>`;
+  const side = Math.random() > 0.5;
+  el.style.cssText = `left:${side?'10%':'55%'};top:${20+Math.random()*50}%;`;
+  container.appendChild(el);
+  setTimeout(()=>{ el.style.transition='opacity .3s ease,transform .3s ease'; el.style.opacity='1'; el.style.transform='translateY(-4px)'; },10);
+  setTimeout(()=>{ el.style.opacity='0'; setTimeout(()=>el.remove(),300); },2200);
+}
+
+// Initial populate
+for(let i=0;i<4;i++) {
+  const s = saleMessages[i];
+  if(!feedEl) break;
+  const item = document.createElement('div');
+  item.className = 'gd-feed-item';
+  item.innerHTML = `<div class="gfi-top"><span class="gfi-name">${s.city}</span><span class="gfi-amt">$${s.amt}</span></div><div class="gfi-desc">🛍 Purchased · ${s.product}</div><div class="gfi-time">${(i+1)*2} min ago</div>`;
+  feedEl.appendChild(item);
+  feedItems.push(item);
+}
+
+// Count up today's rev
+const trEl = document.getElementById('today-rev');
+const grEl = document.getElementById('globe-rev');
+let startRev = 1000, t0 = performance.now();
+function countRev(now) {
+  const p = Math.min((now-t0)/2000,1), e = 1-Math.pow(1-p,3);
+  const v = Math.round(startRev+(1847-startRev)*e);
+  if(trEl) trEl.textContent = '$'+v.toLocaleString('en-US');
+  if(grEl) grEl.innerHTML = '$'+v.toLocaleString('en-US')+' <em>today</em>';
+  if(p<1) requestAnimationFrame(countRev);
+}
+setTimeout(()=>requestAnimationFrame(countRev),900);
+const abEl = document.getElementById('active-buyers');
+let ab0 = performance.now();
+function countAB(now){const p=Math.min((now-ab0)/1400,1),e=1-Math.pow(1-p,3);if(abEl)abEl.textContent=Math.round(23*e);if(p<1)requestAnimationFrame(countAB);}
+setTimeout(()=>requestAnimationFrame(countAB),1000);
+
+setInterval(addSale, 3200);
+setTimeout(addSale, 1500);
+
+// ── MARQUEE ──
 const logos=[
-  {name:'Claude',color:'#D97757',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 16.5l5-9 5 9M8.5 13.5h7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`},
-  {name:'Cursor',color:'#1a1a1a',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 3L3 21h18L12 3z" opacity=".9"/><path d="M12 10l-4 11h8L12 10z" fill="#1a1a1a"/></svg>`},
-  {name:'Bolt',color:'#7c3aed',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`},
-  {name:'Lovable',color:'#f43f5e',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 18s-7-4.5-7-9a4 4 0 018 0 4 4 0 018 0c0 4.5-7 9-7 9z" fill="white"/></svg>`},
-  {name:'ChatGPT',color:'#10a37f',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M22.28 9.82a6 6 0 00-.52-4.91 6.05 6.05 0 00-6.51-2.9 6.07 6.07 0 00-4.57-2.03A6.06 6.06 0 004.98 4.18a6 6 0 00-4 2.91 6.05 6.05 0 00.74 7.1A6 6 0 002.23 19a6.05 6.05 0 006.51 2.9A6.06 6.06 0 0013.26 24a6.06 6.06 0 005.77-4.21 6 6 0 004-2.9 6.06 6.06 0 00-.75-7.07z"/></svg>`},
-  {name:'Replit',color:'#3b82f6',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M2 2h9v7H2V2zm0 7h9v6H2V9zm0 6h9v7H2v-7zm10-13h10v6H12V2zm0 7h10v6H12V9z"/></svg>`},
-  {name:'Vercel',color:'#000',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M24 22.525H0l12-21.05 12 21.05z"/></svg>`},
-  {name:'Netlify',color:'#00C7B7',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M16.934 8.519a1.044 1.044 0 01.303.23l2.349-1.045-2.192-2.171-.491 2.954zM12.06 6.567L9.94 4.747 8.327 6.3l3.437 1.136-.706-1.083-1.28.81 2.282.947zm7.188 8.985a1.044 1.044 0 01-.652.324l-.45 2.695 2.516-2.493-.518-.948-.896.422z"/><path d="M16.01 15.387l-.51.476.338 4.473 3.014-2.985-.518-.948-2.324 1.095v-2.111zm4.67.15L24 12.15l-3.323-3.294-.303-.23-2.349 1.045a1.044 1.044 0 01.169.643l-.012.147 2.82 2.792-.896 2.113.573 1.048zm-15.1-6.527L0 12.15l3.695 3.662.537-1.268L1.63 12.15l3.95-1.659zM17.01 13.32l-5.01-4.96-5.01 4.96 5.01 4.96 5.01-4.96zm-5.01 3.07l-2.19-2.17 2.19-2.17 2.19 2.17-2.19 2.17z"/></svg>`},
-  {name:'GitHub',color:'#24292e',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>`},
-  {name:'Stripe',color:'#635bff',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z"/></svg>`},
+  {name:'Claude',c:'#D97757',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 16.5l5-9 5 9M8.5 13.5h7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`},
+  {name:'Cursor',c:'#1a1a1a',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 3L3 21h18L12 3z" opacity=".9"/><path d="M12 10l-4 11h8L12 10z" fill="#1a1a1a"/></svg>`},
+  {name:'Bolt',c:'#7c3aed',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`},
+  {name:'Lovable',c:'#f43f5e',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 18s-7-4.5-7-9a4 4 0 018 0 4 4 0 018 0c0 4.5-7 9-7 9z" fill="white"/></svg>`},
+  {name:'ChatGPT',c:'#10a37f',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="10"/></svg>`},
+  {name:'Replit',c:'#3b82f6',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M2 2h9v7H2V2zm0 7h9v6H2V9zm0 6h9v7H2v-7zm10-13h10v6H12V2zm0 7h10v6H12V9z"/></svg>`},
+  {name:'Vercel',c:'#000',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M24 22.525H0l12-21.05 12 21.05z"/></svg>`},
+  {name:'Netlify',c:'#00C7B7',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.01 13.32l-5.01-4.96-5.01 4.96 5.01 4.96 5.01-4.96z"/></svg>`},
+  {name:'GitHub',c:'#24292e',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>`},
+  {name:'Stripe',c:'#635bff',svg:`<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z"/></svg>`},
 ];
 
-// Marquee
 const mqEl=document.getElementById('mq-inner');
 if(mqEl){
   const doubled=[...logos,...logos];
-  mqEl.innerHTML=doubled.map(l=>`<div class="mq-t"><div style="width:28px;height:28px;border-radius:7px;background:${l.color};display:grid;place-items:center;flex-shrink:0;">${l.svg}</div><span class="mq-n">${l.name}</span></div>`).join('');
+  mqEl.innerHTML=doubled.map(l=>`<div class="mq-t"><div style="width:28px;height:28px;border-radius:7px;background:${l.c};display:grid;place-items:center;flex-shrink:0;">${l.svg}</div><span class="mq-n">${l.name}</span></div>`).join('');
 }
 
-// Built with grid
+// ── BUILT WITH ──
 const builtEl=document.getElementById('built-grid');
 const builtTools=[
-  {name:'Claude',color:'#D97757',desc:'AI writing & code'},
-  {name:'Cursor',color:'#1a1a1a',desc:'AI code editor'},
-  {name:'Bolt',color:'#7c3aed',desc:'Full-stack AI builder'},
-  {name:'Lovable',color:'#f43f5e',desc:'Visual AI builder'},
-  {name:'Replit',color:'#3b82f6',desc:'AI development platform'},
-  {name:'ChatGPT',color:'#10a37f',desc:'AI code generation'},
+  {name:'Claude',c:'#D97757',desc:'AI writing & code generation'},
+  {name:'Cursor',c:'#1a1a1a',desc:'AI-powered code editor'},
+  {name:'Bolt',c:'#7c3aed',desc:'Full-stack AI app builder'},
+  {name:'Lovable',c:'#f43f5e',desc:'Visual AI website builder'},
+  {name:'Replit',c:'#3b82f6',desc:'AI development platform'},
+  {name:'ChatGPT',c:'#10a37f',desc:'AI code & design generation'},
 ];
 if(builtEl){
   builtEl.innerHTML=builtTools.map(t=>`
     <div class="built-card">
-      <div class="built-logo" style="background:${t.color};">${logos.find(l=>l.name===t.name)?.svg||''}</div>
+      <div class="built-ic" style="background:${t.c};">${logos.find(l=>l.name===t.name)?.svg||''}</div>
       <div><div class="built-name">${t.name}</div><div class="built-desc">${t.desc}</div></div>
     </div>`).join('');
 }
 
-// REVEAL
-const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');});},{threshold:.08});
+// ── REVEAL ──
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');});},{threshold:.07});
 document.querySelectorAll('.rv,.how-col,.cmp-tr,.ba-step,.built-card').forEach(el=>{
   if(!el.classList.contains('rv'))el.classList.add('rv');
   obs.observe(el);
