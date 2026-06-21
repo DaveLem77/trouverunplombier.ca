@@ -135,8 +135,8 @@ h1 .g{background:linear-gradient(135deg,#009960,#00C27C 45%,#22d68d);-webkit-bac
 .d-bottom-row{display:grid;grid-template-columns:1fr 280px;gap:10px;flex:1;min-height:0;}
 
 /* globe panel */
-.globe-panel{background:#090e0b;border:1px solid rgba(255,255,255,.09);border-radius:8px;display:grid;grid-template-columns:1fr 130px;overflow:hidden;position:relative;min-height:0;}
-.globe-canvas-wrap{position:relative;background:#090e0b;overflow:hidden;min-width:0;}
+.globe-panel{background:#090e0b;border:1px solid rgba(255,255,255,.09);border-radius:8px;display:grid;grid-template-columns:1fr 130px;overflow:hidden;position:relative;min-height:160px;}
+.globe-canvas-wrap{position:relative;background:#090e0b;overflow:hidden;min-width:0;align-self:stretch;}
 .globe-canvas-wrap canvas{position:absolute;inset:0;width:100%;height:100%;display:block;}
 /* right info panel */
 .globe-info{border-left:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;overflow:hidden;}
@@ -755,23 +755,23 @@ setInterval(addSale,3400);
   const gc = document.getElementById('mini-globe');
   if(!gc) return;
   const ctx = gc.getContext('2d');
-  let W, H, CX, CY, R;
+  let W=0, H=0, CX=0, CY=0, R=0;
   let rot = 0;
   const dots = [];
   let salesCount = 0;
   const scEl = document.getElementById('globe-sales-count');
 
   function resize(){
-    const wrap = gc.parentElement; // globe-canvas-wrap
-    const panel = wrap.parentElement; // globe-panel
-    W = gc.width = Math.round(wrap.offsetWidth || panel.offsetWidth / 2) || 240;
-    H = gc.height = Math.round(panel.offsetHeight) || 180;
-    CY = H/2;
-    R = (H/2) * 0.9;
-    CX = R + 2;
+    const wrap = gc.parentElement;
+    const panel = wrap ? wrap.parentElement : null;
+    const pw = wrap ? wrap.offsetWidth : 0;
+    const ph = panel ? panel.offsetHeight : 0;
+    if(!pw || !ph) return;
+    W = gc.width  = pw;
+    H = gc.height = ph;
+    CX = W/2; CY = H/2;
+    R  = Math.min(W, H) / 2 - 1;
   }
-  resize();
-  window.addEventListener('resize', resize);
 
   function project(lat, lon){
     const phi   = (90 - lat) * Math.PI / 180;
@@ -780,43 +780,32 @@ setInterval(addSale,3400);
     const y =  Math.cos(phi);
     const z =  Math.sin(phi) * Math.sin(theta);
     const cr = Math.cos(rot), sr = Math.sin(rot);
-    const rx = x*cr - z*sr;
-    const rz = x*sr + z*cr;
+    const rx = x*cr - z*sr, rz = x*sr + z*cr;
     const sc = (rz + 2) / 3;
-    return { x: CX + rx*R*sc, y: CY - y*R*sc, vis: rz > -0.1, z: rz };
+    return { x: CX + rx*R*sc, y: CY - y*R*sc, vis: rz > -0.1 };
   }
 
-  // Clean continent polygons
   const continents = [
-    // North America
-    [[70,-140],[74,-100],[72,-80],[65,-65],[50,-55],[44,-66],[40,-74],[35,-77],[30,-81],[25,-80],[20,-87],[15,-85],[8,-77],[8,-78],[10,-75],[20,-90],[25,-90],[30,-94],[25,-97],[20,-104],[15,-92],[8,-77],[15,-85],[20,-88],[30,-94],[35,-120],[38,-123],[46,-124],[50,-125],[57,-136],[62,-140],[70,-140]],
-    // South America
-    [[10,-62],[10,-75],[5,-77],[0,-80],[-5,-81],[-15,-75],[-20,-70],[-30,-71],[-40,-73],[-55,-68],[-55,-64],[-50,-72],[-40,-62],[-35,-58],[-30,-50],[-20,-40],[-10,-37],[-5,-35],[0,-50],[5,-53],[8,-60],[10,-62]],
-    // Europe + UK rough
-    [[72,28],[70,25],[68,18],[65,13],[62,5],[58,5],[54,0],[51,2],[50,8],[47,8],[44,8],[44,3],[40,3],[38,-9],[36,-6],[36,3],[40,3],[44,8],[48,5],[50,2],[54,8],[58,25],[65,25],[68,30],[72,28]],
-    // Africa
+    [[70,-140],[74,-100],[72,-80],[65,-65],[50,-55],[44,-66],[40,-74],[35,-77],[30,-81],[25,-80],[20,-87],[15,-85],[8,-77],[10,-75],[20,-90],[30,-94],[25,-97],[20,-104],[15,-92],[8,-77],[35,-120],[38,-123],[46,-124],[50,-125],[57,-136],[62,-140],[70,-140]],
+    [[10,-62],[10,-75],[5,-77],[0,-80],[-5,-81],[-15,-75],[-20,-70],[-30,-71],[-40,-73],[-55,-68],[-55,-64],[-40,-62],[-35,-58],[-30,-50],[-20,-40],[-10,-37],[-5,-35],[0,-50],[5,-53],[8,-60],[10,-62]],
+    [[72,28],[70,25],[68,18],[65,13],[62,5],[58,5],[54,0],[51,2],[50,8],[47,8],[44,8],[44,3],[40,3],[38,-9],[36,-6],[36,3],[44,8],[48,5],[50,2],[54,8],[58,25],[65,25],[68,30],[72,28]],
     [[35,-5],[33,10],[32,25],[22,37],[12,45],[8,42],[2,41],[-5,40],[-12,40],[-20,35],[-27,33],[-35,27],[-35,20],[-30,17],[-20,13],[-10,14],[-5,10],[0,9],[5,-5],[10,-17],[20,-17],[30,-10],[35,-5]],
-    // Asia (simplified big blob)
-    [[72,28],[72,68],[70,100],[65,140],[55,160],[50,140],[45,135],[40,130],[35,120],[25,120],[20,110],[10,105],[5,103],[1,104],[5,100],[10,99],[15,100],[20,100],[25,97],[22,88],[20,87],[10,80],[8,77],[10,76],[22,68],[25,62],[28,57],[22,57],[12,45],[22,37],[32,25],[40,30],[45,35],[50,36],[55,38],[60,56],[65,58],[72,68],[72,28]],
-    // Australia
+    [[72,28],[72,68],[70,100],[65,140],[55,160],[50,140],[45,135],[40,130],[35,120],[25,120],[20,110],[10,105],[5,103],[1,104],[5,100],[15,100],[20,100],[25,97],[22,88],[20,87],[10,80],[8,77],[10,76],[22,68],[25,62],[28,57],[22,57],[12,45],[22,37],[32,25],[40,30],[50,36],[60,56],[72,68],[72,28]],
     [[-15,128],[-12,136],[-15,145],[-20,148],[-27,153],[-35,151],[-38,145],[-38,140],[-35,138],[-33,115],[-22,114],[-18,122],[-15,128]],
-    // Japan
     [[42,142],[38,141],[35,137],[34,131],[36,136],[40,140],[42,142]],
   ];
 
   const cityCoords = {
-    'Berlin':[52.5,13.4], 'Montréal':[45.5,-73.6], 'Tokyo':[35.7,139.7],
-    'Paris':[48.8,2.3], 'New York':[40.7,-74], 'Sydney':[-33.8,151.2],
-    'London':[51.5,-0.1], 'Singapore':[1.3,103.8], 'Dubai':[25.2,55.3],
-    'São Paulo':[-23.5,-46.6], 'Lagos':[6.5,3.4], 'Mumbai':[19.1,72.9],
+    'Berlin':[52.5,13.4],'Montréal':[45.5,-73.6],'Tokyo':[35.7,139.7],
+    'Paris':[48.8,2.3],'New York':[40.7,-74],'Sydney':[-33.8,151.2],
+    'London':[51.5,-0.1],'Singapore':[1.3,103.8],'Dubai':[25.2,55.3],
   };
 
   window.addGlobeDot = function(city, amt){
-    const coords = cityCoords[city] || [20, 0];
-    dots.push({ lat: coords[0], lon: coords[1], born: Date.now(), city, amt });
+    const c = cityCoords[city] || [20, 0];
+    dots.push({ lat:c[0], lon:c[1], born:Date.now(), city, amt });
     salesCount++;
     if(scEl) scEl.textContent = salesCount;
-    // update right panel live list
     const liveList = document.getElementById('gi-live-list');
     if(liveList && amt){
       const row = document.createElement('div');
@@ -828,122 +817,90 @@ setInterval(addSale,3400);
   };
 
   function draw(){
+    // Safety guard — never draw if dimensions invalid
+    if(!(R > 0) || !isFinite(CX) || !isFinite(CY)) return;
+
     ctx.clearRect(0, 0, W, H);
 
-    // Globe base - not too dark
-    const base = ctx.createRadialGradient(CX - R*.2, CY - R*.2, R*.05, CX, CY, R);
-    base.addColorStop(0, '#1e3828');
-    base.addColorStop(.6, '#122118');
-    base.addColorStop(1, '#0a1410');
-    ctx.fillStyle = base;
+    // Base sphere
+    const g0 = ctx.createRadialGradient(CX - R*.15, CY - R*.15, 1, CX, CY, R);
+    g0.addColorStop(0, '#162b1e');
+    g0.addColorStop(.7, '#0e1c14');
+    g0.addColorStop(1, '#090e0b');
+    ctx.fillStyle = g0;
     ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI*2); ctx.fill();
 
-    // Clip everything inside sphere
+    // Clip to sphere
     ctx.save();
     ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI*2); ctx.clip();
 
-    // Grid lines
-    ctx.lineWidth = .7;
+    // Grid
+    ctx.lineWidth = .6;
     for(let lon = -180; lon < 180; lon += 30){
-      ctx.beginPath(); ctx.strokeStyle = 'rgba(0,194,124,.1)';
-      let f = true;
-      for(let lat = -90; lat <= 90; lat += 4){
+      ctx.beginPath(); ctx.strokeStyle = 'rgba(0,194,124,.08)'; let f=true;
+      for(let lat = -90; lat <= 90; lat += 5){
         const p = project(lat, lon);
         if(!p.vis){ f=true; continue; }
-        f ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y); f = false;
-      }
-      ctx.stroke();
+        f ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y); f=false;
+      } ctx.stroke();
     }
     for(let lat = -60; lat <= 60; lat += 30){
-      ctx.beginPath(); ctx.strokeStyle = 'rgba(0,194,124,.07)';
-      let f = true;
-      for(let lon = -180; lon <= 180; lon += 4){
+      ctx.beginPath(); ctx.strokeStyle = 'rgba(0,194,124,.06)'; let f=true;
+      for(let lon = -180; lon <= 180; lon += 5){
         const p = project(lat, lon);
         if(!p.vis){ f=true; continue; }
-        f ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y); f = false;
-      }
-      ctx.stroke();
+        f ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y); f=false;
+      } ctx.stroke();
     }
 
-    // Continents — bright, clearly visible
+    // Continents
     continents.forEach(poly => {
-      const pts = poly.map(([la, lo]) => project(la, lo)).filter(p => p.vis);
-      if(pts.length < 3) return;
-      ctx.beginPath();
-      pts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+      ctx.beginPath(); let f=true;
+      poly.forEach(([la,lo]) => {
+        const p = project(la, lo);
+        if(!p.vis){ f=true; return; }
+        f ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y); f=false;
+      });
       ctx.closePath();
-      ctx.fillStyle = 'rgba(0,194,124,.22)';
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(0,220,140,.5)';
-      ctx.lineWidth = 1;
-      ctx.stroke();
+      ctx.fillStyle = 'rgba(0,194,124,.16)'; ctx.fill();
+      ctx.strokeStyle = 'rgba(0,194,124,.32)'; ctx.lineWidth = .8; ctx.stroke();
     });
 
     // Sale dots
     const now = Date.now();
-    for(let i = dots.length - 1; i >= 0; i--){
+    for(let i = dots.length-1; i >= 0; i--){
       const d = dots[i];
-      const age = (now - d.born) / 1000;
-      if(age > 6){ dots.splice(i, 1); continue; }
+      const age = (now - d.born)/1000;
+      if(age > 6){ dots.splice(i,1); continue; }
       const p = project(d.lat, d.lon);
       if(!p.vis) continue;
-      const alpha = Math.max(0, 1 - age / 6);
-      const pr = 3 + (age % 1) * 9 * alpha;
-
-      // Pulse ring
-      ctx.beginPath(); ctx.arc(p.x, p.y, pr, 0, Math.PI*2);
-      ctx.strokeStyle = `rgba(0,255,160,${alpha * .45})`; ctx.lineWidth = 1.5; ctx.stroke();
-
-      // Core dot — bright
-      ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(0,255,160,${alpha})`; ctx.fill();
-
-      // White center
-      ctx.beginPath(); ctx.arc(p.x, p.y, 1.8, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(255,255,255,${alpha * .9})`; ctx.fill();
+      const a = Math.max(0, 1 - age/6);
+      ctx.beginPath(); ctx.arc(p.x,p.y, 3+(age%1)*7*a, 0, Math.PI*2);
+      ctx.strokeStyle = `rgba(0,255,150,${a*.4})`; ctx.lineWidth=1.2; ctx.stroke();
+      ctx.beginPath(); ctx.arc(p.x,p.y,3.5,0,Math.PI*2);
+      ctx.fillStyle = `rgba(0,240,140,${a})`; ctx.fill();
+      ctx.beginPath(); ctx.arc(p.x,p.y,1.5,0,Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${a*.9})`; ctx.fill();
+      // label
+      if(a > .6 && d.city){
+        ctx.font='600 8px Inter,sans-serif';
+        ctx.fillStyle=`rgba(0,230,140,${a*.9})`;
+        ctx.fillText(d.city, Math.min(p.x+7, W-60), p.y-3);
+      }
     }
-
     ctx.restore();
-
-    // Thin crisp border on sphere edge only
-    ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI*2);
-    ctx.strokeStyle = 'rgba(0,194,124,.25)'; ctx.lineWidth = 1; ctx.stroke();
-
-    // Specular highlight top-left
-    const spec = ctx.createRadialGradient(CX - R*.38, CY - R*.38, 0, CX - R*.38, CY - R*.38, R * .55);
-    spec.addColorStop(0, 'rgba(255,255,255,.09)');
-    spec.addColorStop(1, 'rgba(255,255,255,0)');
-    ctx.fillStyle = spec;
-    ctx.beginPath(); ctx.arc(CX, CY, R, 0, Math.PI*2); ctx.fill();
-
-    // City labels OUTSIDE clip — drawn on top of sphere at dot position
-    const now2 = Date.now();
-    dots.forEach(d => {
-      const age = (now2 - d.born) / 1000;
-      const p = project(d.lat, d.lon);
-      if(!p.vis || age > 4) return;
-      const alpha = Math.max(0, 1 - age / 4);
-      if(!d.city || alpha < .3) return;
-
-      // Label badge
-      const label = d.city + '  +$' + d.amt;
-      ctx.font = `600 9px Inter,sans-serif`;
-      const tw = ctx.measureText(label).width;
-      const lx = Math.min(p.x + 8, W - tw - 6);
-      const ly = Math.max(p.y - 4, 12);
-
-      ctx.fillStyle = `rgba(10,20,14,${alpha * .85})`;
-      ctx.beginPath();
-      ctx.roundRect(lx - 3, ly - 10, tw + 6, 14, 3);
-      ctx.fill();
-
-      ctx.fillStyle = `rgba(0,255,160,${alpha})`;
-      ctx.fillText(label, lx, ly);
-    });
   }
 
   function tick(){ rot += .0022; draw(); requestAnimationFrame(tick); }
-  tick();
+
+  function init(){
+    resize();
+    tick();
+    window.addEventListener('resize', resize);
+  }
+
+  if(document.readyState === 'complete'){ init(); }
+  else { window.addEventListener('load', init); }
 })();
 
 // ── LOGO DATA ──
